@@ -1,0 +1,28 @@
+{
+	"name": "kdyby/fake-session",
+	"type": "library",
+	"description": "FakeSession class for Nette Framework",
+	"keywords": ["nette", "kdyby", "session", "http"],
+	"homepage": "http://kdyby.org",
+	"license": ["BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
+	"authors": [
+		{
+			"name": "Filip Procházka",
+			"homepage": "http://filip-prochazka.com",
+			"email": "filip@prochazka.su"
+		}
+	],
+	"support": {
+		"email": "filip@prochazka.su",
+		"issues": "https://github.com/Kdyby/FakeSession/issues"
+	},
+	"require": {
+		"nette/di": "~2.2@dev",
+		"nette/http": "~2.2@dev"
+	},
+	"autoload": {
+		"psr-4": {
+			"Kdyby\\FakeSession\\": "src/"
+		}
+	}
+}

@@ -1,0 +1,10 @@
+language: php
+
+php:
+  - hhvm
+
+script:
+  - vendor/bin/run-tests tests -p hhvm -s
+
+notifications:
+  email: false

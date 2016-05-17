@@ -1,0 +1,30 @@
+{
+  "name": "nette/web-project",
+  "description": "Nette: Standard Web Project",
+  "type": "project",
+  "license": ["MIT", "BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
+  "require": {
+    "nette/application": "^2.3.6",
+    "nette/bootstrap": "^2.3",
+    "nette/caching": "^2.3",
+    "nette/di": "dev-master",
+    "nette/forms": "^2.3",
+    "nette/http": "^2.3",
+    "nette/security": "^2.3",
+    "nette/utils": "^2.3",
+    "latte/latte": "^2.3",
+    "tracy/tracy": "^2.3"
+  },
+  "require-dev": {
+    "nette/tester": "^1.7",
+    "mrtnzlml/testbench": "^2.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": [
+        "app/"
+      ]
+    }
+  },
+  "minimum-stability": "RC"
+}
