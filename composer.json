@@ -7,7 +7,7 @@
     "nette/application": "^2.3.6",
     "nette/bootstrap": "^2.3",
     "nette/caching": "^2.3",
-    "nette/di": "dev-master",
+    "nette/di": "^2.3",
     "nette/forms": "^2.3",
     "nette/http": "^2.3",
     "nette/security": "^2.3",
@@ -25,6 +25,5 @@
         "app/"
       ]
     }
-  },
-  "minimum-stability": "RC"
+  }
 }

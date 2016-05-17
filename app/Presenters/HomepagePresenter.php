@@ -9,7 +9,11 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 
 	public function renderDefault(): void
 	{
-		['a', 'b'] |> dump($$);
+	}
+
+	public function renderError(): void
+	{
+		$this->error();
 	}
 
 }

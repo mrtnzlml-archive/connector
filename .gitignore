@@ -1,2 +1,4 @@
+/vendor/
+
 app/config/config.local.neon
 composer.lock
