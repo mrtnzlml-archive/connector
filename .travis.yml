@@ -3,6 +3,10 @@ language: php
 php:
   - hhvm
 
+before_script:
+  - composer selfupdate --no-progress
+  - travis_retry composer install --prefer-dist
+
 script:
   - vendor/bin/run-tests tests -p hhvm -s
 
