@@ -3,17 +3,8 @@
 namespace App\Presenters;
 
 use Nette;
+use Nette\Application\UI;
 
-class HomepagePresenter extends Nette\Application\UI\Presenter
+class HomepagePresenter extends UI\Presenter
 {
-
-	public function renderDefault(): void
-	{
-	}
-
-	public function renderError(): void
-	{
-		$this->error();
-	}
-
 }

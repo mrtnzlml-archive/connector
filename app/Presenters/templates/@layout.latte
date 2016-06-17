@@ -2,9 +2,50 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width">
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
 
 	<title>{ifset title}{include title|striptags} | {/ifset}Nette Web</title>
+
+	<script>
+		// setup Polymer options
+		window.Polymer = {
+			lazyRegister: true,
+			dom: 'shadow'
+		};
+
+		// load webcomponents polyfills
+		(function() {
+			if ('registerElement' in document
+				&& 'import' in document.createElement('link')
+				&& 'content' in document.createElement('template')) {
+				// browser has web components
+			} else {
+				// polyfill web components
+				var e = document.createElement('script');
+				e.src = '/components/webcomponentsjs/webcomponents-lite.min.js';
+				document.head.appendChild(e);
+		  	}
+		})();
+
+		// load pre-caching service worker
+		if ('serviceWorker' in navigator) {
+			window.addEventListener('load', function() {
+				navigator.serviceWorker.register('/service-worker.js');
+			});
+		}
+	</script>
+
+	{block webcomponents}{/block}
+
+	<style>
+		body {
+			margin: 0;
+			font-family: 'Roboto', 'Noto', sans-serif;
+			line-height: 1.5;
+			min-height: 100vh;
+			background-color: #eee;
+		}
+	</style>
 </head>
 
 <body>

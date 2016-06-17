@@ -21,3 +21,5 @@ session:
 
 services:
 	router: App\Router\RouterFactory::createRouter
+	- App\Forms\FormFactory
+	- App\Forms\ContactFormFactory

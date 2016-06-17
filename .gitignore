@@ -1,4 +1,7 @@
 /vendor/
+/www/components/
 
 app/config/config.local.neon
 composer.lock
+www.pid
+

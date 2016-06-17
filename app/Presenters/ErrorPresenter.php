@@ -1,21 +1,14 @@
-<?php
+<?hh
 
 namespace App\Presenters;
 
 use Nette;
 use Nette\Application\Responses;
-use Tracy\ILogger;
 
 class ErrorPresenter extends Nette\Object implements Nette\Application\IPresenter
 {
 
-	/** @var ILogger */
-	private $logger;
-
-	public function __construct(ILogger $logger)
-	{
-		$this->logger = $logger;
-	}
+	public function __construct(private \Tracy\ILogger $logger) {}
 
 	public function run(Nette\Application\Request $request): Responses\CallbackResponse
 	{

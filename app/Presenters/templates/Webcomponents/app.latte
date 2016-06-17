@@ -1,0 +1,56 @@
+<link rel="import" href="components/polymer/polymer.html">
+<link rel="import" href="components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="components/app-layout/app-header/app-header.html">
+<link rel="import" href="components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="components/app-layout/app-drawer/app-drawer.html">
+<!-- <link rel="import" href="components/paper-card/paper-card.html"> -->
+
+<dom-module id="app-root">
+
+	<template>
+		<style>
+			:host {
+				display: block;
+				--app-primary-color: #4285f4;
+				--app-secondary-color: black;
+			}
+
+			app-header, app-header a {
+				background-color: var(--app-primary-color);
+				color: #fff;
+				text-decoration: none;
+			}
+			app-header paper-icon-button {
+				--paper-icon-button-ink-color: white;
+			}
+		</style>
+
+		<app-drawer-layout>
+			<app-drawer>
+				drawer-content
+			</app-drawer>
+			<app-header-layout>
+				<app-header>
+					<app-toolbar>
+						<a n:href="Homepage:">
+							<div title>App name</div>
+						</a>
+					</app-toolbar>
+				</app-header>
+
+				{control contactForm}
+
+			</app-header-layout>
+		</app-drawer-layout>
+
+	</template>
+
+	<script>
+		Polymer({
+			is: 'app-root',
+		});
+	</script>
+
+</dom-module>
