@@ -5,13 +5,10 @@ namespace App\Forms;
 use Nette;
 use Nette\Application\UI;
 
-class FormFactory extends Nette\Object
+class FormFactory
 {
-	//use Nette\SmartObject;
+	use Nette\SmartObject;
 
-	/**
-	 * @return Form
-	 */
 	public function create(): UI\Form
 	{
 		return new UI\Form();

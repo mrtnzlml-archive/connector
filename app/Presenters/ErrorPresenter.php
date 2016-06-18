@@ -5,8 +5,9 @@ namespace App\Presenters;
 use Nette;
 use Nette\Application\Responses;
 
-class ErrorPresenter extends Nette\Object implements Nette\Application\IPresenter
+class ErrorPresenter implements Nette\Application\IPresenter
 {
+	use Nette\SmartObject;
 
 	public function __construct(private \Tracy\ILogger $logger) {}
 

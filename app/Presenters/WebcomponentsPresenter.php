@@ -10,7 +10,9 @@ class WebcomponentsPresenter extends Nette\Application\UI\Presenter
 
 	//FIXME: nemělo by být přístupné z webu mimo Polymer (?)
 
-	public function __construct(private \App\Forms\ContactFormFactory $factory) {}
+	public function __construct(private \App\Forms\ContactFormFactory $factory) {
+		parent::__construct();
+	}
 
 	public function createComponentContactForm(): UI\Form {
 		return $this->factory->create(function(UI\Form $form, $values) {

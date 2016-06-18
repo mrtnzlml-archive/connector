@@ -6,17 +6,15 @@ use Nette;
 use Nette\Application\UI;
 use Nette\Security\User;
 
-class ContactFormFactory extends Nette\Object
+class ContactFormFactory
 {
+	use Nette\SmartObject;
 
 	public function __construct(
 		private FormFactory $factory,
 		private User $user
  	) {}
 
-	/**
-	 * @return Form
-	 */
 	public function create((function (UI\Form, array): void) $onSuccess): UI\Form
 	{
 		$form = $this->factory->create();
