@@ -15,7 +15,7 @@ class ContactFormFactory
 		private User $user
  	) {}
 
-	public function create((function (UI\Form, array): void) $onSuccess): UI\Form
+	public function create((function (UI\Form, Nette\Utils\ArrayHash): void) $onSuccess): UI\Form
 	{
 		$form = $this->factory->create();
 		$form->addText('email')->setRequired();
