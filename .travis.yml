@@ -1,7 +1,10 @@
 language: php
-
+sudo: required
+dist: trusty
+group: edge
 php:
-  - hhvm
+  - hhvm-3.12
+  - hhvm-nightly
 
 before_script:
   - travis_retry composer install --prefer-dist
