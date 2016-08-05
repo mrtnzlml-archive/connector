@@ -1,4 +1,4 @@
-<?hh
+<?php declare(strict_types = 1);
 
 namespace App\Presenters;
 
@@ -10,15 +10,20 @@ class WebcomponentsPresenter extends Nette\Application\UI\Presenter
 
 	//FIXME: nemělo by být přístupné z webu mimo Polymer (?)
 
-	public function __construct(private \App\Forms\ContactFormFactory $factory) {
+	private $factory;
+
+	public function __construct(\App\Forms\ContactFormFactory $factory)
+	{
 		parent::__construct();
+		$this->factory = $factory;
 	}
 
 	public function createComponentContactForm(): UI\Form
 	{
-		return $this->factory->create(function(UI\Form $form, Nette\Utils\ArrayHash $values) {
+		return $this->factory->create(function (UI\Form $form, Nette\Utils\ArrayHash $values) {
 			dump($values->email);
-			dump($values);exit;
+			dump($values);
+			exit;
 			$this->flashMessage(json_encode($values));
 			$this->redirect('Homepage:default'); //FIXME: přesměruje na WebcomponentPresenter - ale chci na místo kde je komponenta použita
 		});

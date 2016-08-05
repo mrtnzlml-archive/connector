@@ -1,4 +1,4 @@
-<?hh
+<?php declare(strict_types = 1);
 
 $classLoader = require __DIR__ . '/../vendor/autoload.php';
 //\Tracy\Debugger::barDump($classLoader);
@@ -11,7 +11,5 @@ $configurator->setTempDirectory(__DIR__ . '/../temp');
 $configurator->addConfig(__DIR__ . '/config/config.neon');
 
 $container = $configurator->createContainer();
-
-error_reporting(E_ALL & ~E_USER_DEPRECATED); //FIXME
 
 return $container;

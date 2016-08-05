@@ -1,4 +1,4 @@
-<?hh
+<?php declare(strict_types = 1);
 
 namespace App\Forms;
 
@@ -8,14 +8,20 @@ use Nette\Security\User;
 
 class ContactFormFactory
 {
+
 	use Nette\SmartObject;
 
-	public function __construct(
-		private FormFactory $factory,
-		private User $user
- 	) {}
+	private $factory;
 
-	public function create((function (UI\Form, Nette\Utils\ArrayHash): void) $onSuccess): UI\Form
+	private $user;
+
+	public function __construct(FormFactory $factory, User $user)
+	{
+		$this->factory = $factory;
+		$this->user = $user;
+	}
+
+	public function create(\Closure $onSuccess): UI\Form
 	{
 		$form = $this->factory->create();
 		$form->addText('email')->setRequired();

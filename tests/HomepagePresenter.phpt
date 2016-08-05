@@ -1,4 +1,4 @@
-<?hh
+<?php declare(strict_types = 1);
 
 namespace Tests;
 
@@ -12,19 +12,19 @@ require __DIR__ . '/bootstrap.php';
 class HomepagePresenter extends \Tester\TestCase
 {
 
-  use \Testbench\TPresenter;
+	use \Testbench\TPresenter;
 
-  public function testHomepage()
-  {
-    $this->checkAction('Homepage:default');
-  }
+	public function testHomepage()
+	{
+		$this->checkAction('Homepage:default');
+	}
 
-  public function testHomepageError()
-  {
-    Assert::exception(function() {
-      $this->checkAction('Homepage:error');
-    }, 'Nette\Application\BadRequestException');
-  }
+	public function testHomepageError()
+	{
+		Assert::exception(function () {
+			$this->checkAction('Homepage:error');
+		}, 'Nette\Application\BadRequestException');
+	}
 
 }
 
