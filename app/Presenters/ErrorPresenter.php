@@ -17,7 +17,7 @@ class ErrorPresenter implements Nette\Application\IPresenter
 		$this->logger = $logger;
 	}
 
-	public function run(Nette\Application\Request $request): Responses\CallbackResponse
+	public function run(Nette\Application\Request $request): Nette\Application\IResponse
 	{
 		$exception = $request->getParameter('exception');
 
