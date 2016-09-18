@@ -4,4 +4,3 @@
 
 app/config/config.local.neon
 composer.lock
-www.pid
