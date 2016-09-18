@@ -8,4 +8,6 @@ use Nette\Application\UI;
 class HomepagePresenter extends UI\Presenter
 {
 
+	use \App\Components\TFlashMessage;
+
 }

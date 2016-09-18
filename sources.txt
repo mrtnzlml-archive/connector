@@ -1,0 +1,5 @@
+Introduction to Service Worker          http://www.html5rocks.com/en/tutorials/service-worker/introduction/
+Flexbox layout with iron-flex-layout    https://elements.polymer-project.org/guides/flex-layout
+HTML Imports                            http://www.html5rocks.com/en/tutorials/webcomponents/imports/
+Optimize for production                 https://www.polymer-project.org/1.0/docs/tools/optimize-for-production
+A Complete Guide to Flexbox             https://css-tricks.com/snippets/css/a-guide-to-flexbox/

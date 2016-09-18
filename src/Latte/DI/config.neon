@@ -1,0 +1,3 @@
+latte:
+    macros:
+        - App\Latte\Macros\Polyfile

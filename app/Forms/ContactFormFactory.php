@@ -24,8 +24,8 @@ class ContactFormFactory
 	public function create(\Closure $onSuccess): UI\Form
 	{
 		$form = $this->factory->create();
-		$form->addText('email')->setRequired();
-		$form->addSubmit('Send');
+		$form->addText('email');//->setRequired();
+		$form->addSubmit('send');
 		$form->onSuccess[] = function (UI\Form $form, $values) use ($onSuccess) {
 			$onSuccess($form, $values);
 		};

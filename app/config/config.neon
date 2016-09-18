@@ -1,7 +1,8 @@
 # WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
 # https://nette.org/security-warning
 
-parameters:
+includes:
+    - extensions.neon
 
 
 php:
@@ -23,3 +24,4 @@ services:
 	router: App\Router\RouterFactory::createRouter
 	- App\Forms\FormFactory
 	- App\Forms\ContactFormFactory
+	- App\Components\FlashMessage

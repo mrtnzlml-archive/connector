@@ -1,0 +1,2 @@
+extensions:
+    - App\Latte\DI\Extension

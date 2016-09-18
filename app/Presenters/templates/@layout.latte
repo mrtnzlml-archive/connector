@@ -28,13 +28,14 @@
 		})();
 
 		// load pre-caching service worker
-		if ('serviceWorker' in navigator) {
-			window.addEventListener('load', function() {
-				navigator.serviceWorker.register('/service-worker.js');
-			});
-		}
+//		if ('serviceWorker' in navigator) {
+//			window.addEventListener('load', function() {
+//				navigator.serviceWorker.register('/service-worker.js');
+//			});
+//		}
 	</script>
 
+	<link rel="import" href="{$basePath}/components/polymer/polymer.html">
 	{block webcomponents}{/block}
 
 	<style>
@@ -49,12 +50,15 @@
 </head>
 
 <body>
-	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+	{*{webcomponent flashMessage}*}
+	{control flashMessage}
 
 	{include content}
 
+	{control flashMessage-polyfile} {* FIXME: to není pěkné a navíc to musí být takto dole, (+vulcanize) *}
+
 	{block scripts}
-	<script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
+		<script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
 	{/block}
 </body>
 </html>
