@@ -1,0 +1,5 @@
+---
+- name: install latest apache2
+  apt: name=apache2 state=latest
+  notify:
+    - restart apache
