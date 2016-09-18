@@ -1,5 +1,4 @@
 /vendor/
-/node_modules/
 /www/components/
 
 app/config/config.local.neon

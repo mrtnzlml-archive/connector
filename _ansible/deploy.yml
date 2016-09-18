@@ -1,7 +1,7 @@
 ---
 - name: configure and deploy the webservers and application code
   hosts: amazon
-  sudo: yes
+  become: yes
   roles:
     - common
     - webservers

@@ -1,3 +1,6 @@
 ---
-- name: install vim
-  apt: name=vim state=latest
+- name: install utils
+  apt: name={{ item }} state=latest
+  with_items:
+    - vim
+    - curl

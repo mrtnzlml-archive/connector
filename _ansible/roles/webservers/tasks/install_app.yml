@@ -29,3 +29,9 @@
   when: git_result.changed
   composer:
     working_dir: '{{ install_dir }}'
+
+- name: create www/components directory for Bower components
+  file: state=directory path={{ install_dir }}/www/components
+
+- name: install Bower dependencies
+  bower: path={{ install_dir }}

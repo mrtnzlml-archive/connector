@@ -1,3 +1,5 @@
+ansible-playbook deploy.yml
+
 ansible-playbook --inventory-file=_ansible/production _ansible/deploy.yml [-t deploy]
 
 --check     (dry run)
