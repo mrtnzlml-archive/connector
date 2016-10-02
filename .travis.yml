@@ -5,8 +5,8 @@ php:
   - 7.1
 
 before_script:
-  - vendor/bin/parallel-lint . -e php,php3,php4,php5,phtml,phpt --exclude vendor --blame
   - travis_retry composer install --prefer-dist
+  - vendor/bin/parallel-lint . -e php,php3,php4,php5,phtml,phpt --exclude vendor --blame
 
 script:
   - vendor/bin/run-tests tests/ -C
