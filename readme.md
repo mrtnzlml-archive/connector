@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/mrtnzlml/hhvm-nette.svg?branch=master)](https://travis-ci.org/mrtnzlml/hhvm-nette)
+[![Build Status](https://travis-ci.org/adeira/connector.svg?branch=master)](https://travis-ci.org/adeira/connector)
 
 Install dependencies:
 ```

@@ -10,7 +10,7 @@
 
 - name: clone repository
   git:
-    repo=https://github.com/mrtnzlml/hhvm-nette
+    repo=https://github.com/adeira/connector
     dest={{ install_dir }}
     recursive=yes
   register: git_result
