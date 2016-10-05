@@ -1,5 +1,11 @@
 [amazon]
-aws-ec2     install_dir=/var/www/html
+aws-ec2-frankfurt
+
+[amazon:vars]
+ansible_user = admin
+install_dir = /var/www/html
+
+
 
 [localhost]
 webserver1  ansible_host=127.0.0.1  ansible_connection=local    install_dir=/tmp/nette_app1

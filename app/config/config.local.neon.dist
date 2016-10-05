@@ -2,6 +2,7 @@
 # https://nette.org/security-warning
 
 
-extensions:
-    - App\Latte\DI\Extension
-    postgreJson: App\PostgreJSON\DI\Extension
+postgreJson:
+	username:
+	password:
+	database:
