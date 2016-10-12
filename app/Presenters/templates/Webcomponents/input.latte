@@ -1,0 +1,19 @@
+<link rel="import" href="{$basePath}/components/paper-button/paper-button.html">
+<link rel="import" href="{$basePath}/components/paper-input/paper-input.html">
+<link rel="import" href="{$basePath}/components/paper-styles/color.html">
+
+<dom-module id="x-input">
+	<template>
+		<paper-input-container>
+			<label aria-hidden="true" for="frm-contactForm-email">Input label</label>
+			<input is="iron-input" id="frm-contactForm-email">
+			<paper-input-char-counter></paper-input-char-counter>
+		</paper-input-container>
+	</template>
+
+	<script>
+		Polymer({
+			is: 'x-input'
+		});
+	</script>
+</dom-module>

@@ -1,128 +1,27 @@
-<link rel="import" href="{$basePath}/components/app-layout/app-scroll-effects/app-scroll-effects.html">
-<link rel="import" href="{$basePath}/components/app-layout/app-header/app-header.html">
-<link rel="import" href="{$basePath}/components/app-layout/app-header-layout/app-header-layout.html">
-<link rel="import" href="{$basePath}/components/app-layout/app-toolbar/app-toolbar.html">
-{*{polyfile 'app-toolbar/app-toolbar.html'}*}
-<link rel="import" href="{$basePath}/components/app-layout/app-drawer-layout/app-drawer-layout.html">
-<link rel="import" href="{$basePath}/components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="{$basePath}/components/paper-styles/typography.html">
 
-<link rel="import" href="{$basePath}/components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="{$basePath}/components/paper-item/paper-item.html">
-<link rel="import" href="{$basePath}/components/paper-listbox/paper-listbox.html">
-<link rel="import" href="{$basePath}/components/paper-input/paper-input.html">
+{*<link rel="import" n:href="Webcomponents:cardsGrid">*}
 
-<link rel="import" href="{$basePath}/components/iron-icons/iron-icons.html">
+<dom-module id="x-app">
 
-<dom-module id="app-root">
+	<template>
 
-    <template>
+		<style>
+			.caption {
+				@apply(--paper-font-display1);
+				font-weight: 200;
+			}
+		</style>
 
-        <style>
-            app-header {
-                background-color: #00897B;
-                color: #fff;
-            }
+		<h2 class="caption">Dashboard</h2>
+		{*<x-cardsGrid></x-cardsGrid>*}
 
-            app-header paper-icon-button {
-                --paper-icon-button-ink-color: white;
-            }
+	</template>
 
-            /* navigation: */
-            .avatar-container {
-                position: relative;
-                border: 2px solid #00AA8D;
-                border-radius: 50%;
-                height: 90px;
-                padding: 2px;
-                width: 90px;
-                margin: 20px auto;
-            }
-
-            .avatar-container .image {
-                background-image: url('//app-layout-assets.appspot.com/assets/pesto/avatar.jpg');
-                background-size: contain;
-                border-radius: 50%;
-                height: 100%;
-                width: 100%;
-            }
-
-            .contact-info {
-                margin: 0 20px;
-                padding-bottom: 20px;
-                border-bottom: 1px solid #CCC;
-                text-align: center;
-            }
-
-            .contact-info .name {
-                font-weight: bold;
-            }
-
-            paper-item {
-                @apply(--layout-center-center);
-                height: 54px;
-            }
-
-            paper-icon-button {
-                --paper-icon-button-ink-color: white;
-            }
-        </style>
-
-        <app-drawer-layout>
-
-            <app-drawer>
-                <app-toolbar>Getting Started</app-toolbar>
-                <app-header-layout has-scrolling-region>
-
-                    <app-header fixed>
-                        <div class="avatar-container">
-                            <div class="image"></div>
-                        </div>
-                        <div class="contact-info">
-                            <div class="name">Hi, Martin!</div>
-                        </div>
-                    </app-header>
-
-                    <!-- nav menu -->
-                    <paper-listbox>
-                        <a n:href=":Homepage:default"><paper-item>Home</paper-item></a>
-                    </paper-listbox>
-
-                </app-header-layout>
-            </app-drawer>
-
-            <app-header-layout>
-
-                <app-header reveals effects="waterfall">
-                    <app-toolbar>
-                        <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
-                        <div main-title>Title</div>
-                    </app-toolbar>
-                </app-header>
-
-                <div style="display: block;">
-                    <div style="box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2); padding: 16px; margin: 24px; border-radius: 5px; background-color: #fff; color: #757575;">
-                        <div style="font-size: 22px; margin: 16px 0; color: #212121;">
-                            Title
-                        </div>
-
-                        {*<paper-input label="Input label" char-counter></paper-input>*}
-                        {form contactForm}
-                            {input email}
-                            {input send}
-                        {/form}
-                    </div>
-                </div>
-
-            </app-header-layout>
-
-        </app-drawer-layout>
-
-    </template>
-
-    <script>
-        Polymer({
-            is: 'app-root',
-        });
-    </script>
+	<script>
+		Polymer({
+			is: 'x-app'
+		});
+	</script>
 
 </dom-module>

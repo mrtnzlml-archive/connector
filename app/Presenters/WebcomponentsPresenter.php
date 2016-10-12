@@ -8,8 +8,6 @@ use Nette\Application\UI;
 class WebcomponentsPresenter extends Nette\Application\UI\Presenter
 {
 
-	//FIXME: nemělo by být přístupné z webu mimo Polymer (?)
-
 	private $factory;
 
 	public function __construct(\App\Forms\ContactFormFactory $factory)

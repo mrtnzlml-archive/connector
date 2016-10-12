@@ -1,0 +1,39 @@
+<link rel="import" href="{$basePath}/components/paper-button/paper-button.html">
+<link rel="import" href="{$basePath}/components/paper-input/paper-input.html">
+<link rel="import" href="{$basePath}/components/paper-styles/color.html">
+
+<link rel="import" n:href="Webcomponents:input">
+
+<dom-module id="x-contactForm">
+	<template>
+		{form contactForm}
+			{*<x-input></x-input>*}
+
+			<paper-input-container>
+				<label aria-hidden="true" n:name="email">Input label</label>
+				<input is="iron-input" n:name="email">
+				<paper-input-char-counter></paper-input-char-counter>
+			</paper-input-container>
+
+			{input send}
+			<paper-button raised>Submit</paper-button>
+		{/form}
+
+		<style>
+			paper-button {
+				background-color: var(--paper-orange-500);
+				color: white;
+			}
+
+			paper-button:hover {
+				background-color: var(--paper-orange-400);
+			}
+		</style>
+	</template>
+
+	<script>
+		Polymer({
+			is: 'x-contactForm'
+		});
+	</script>
+</dom-module>
