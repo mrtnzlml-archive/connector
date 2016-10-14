@@ -20,7 +20,7 @@ class Extension extends \Nette\DI\CompilerExtension
 
 		$builder
 			->addDefinition($this->prefix('connection'))
-			->setClass(\Doctrine\DBAL\Driver\Connection::class)
+			->setClass(\Doctrine\DBAL\Connection::class)
 			->setFactory('Doctrine\DBAL\DriverManager::getConnection', [
 				$config,
 				new \Doctrine\DBAL\Configuration,

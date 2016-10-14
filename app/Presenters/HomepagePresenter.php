@@ -7,11 +7,10 @@ use Nette\Application\UI;
 class HomepagePresenter extends UI\Presenter
 {
 
-//	public function __construct(\Adeira\Connector\PostgreJSON\DML\Select $select)
-//	{
-//		parent::__construct();
-//
-//		$select->text();
-//	}
+	public function __construct(\Doctrine\DBAL\Connection $connection)
+	{
+		parent::__construct();
+		bdump($connection->fetchAll("SELECT id, data#>>'{name}' AS name FROM incoming"));
+	}
 
 }
