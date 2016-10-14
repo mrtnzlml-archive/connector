@@ -14,7 +14,7 @@ application:
 	scanDirs: no
 	errorPresenter: Error
 	mapping:
-		*: App\*Module\Presenters\*Presenter
+		*: Adeira\Connector\*Module\Presenters\*Presenter
 
 
 session:
@@ -22,6 +22,6 @@ session:
 
 
 services:
-	router: App\Router\RouterFactory::createRouter
-	- App\Forms\FormFactory
-	- App\Forms\ContactFormFactory
+	router: Adeira\Connector\Router\RouterFactory::createRouter
+	- Adeira\Connector\Forms\FormFactory
+	- Adeira\Connector\Forms\ContactFormFactory

@@ -1,14 +1,13 @@
 <?php declare(strict_types = 1);
 
-namespace App\Forms;
+namespace Adeira\Connector\Forms;
 
-use Nette;
 use Nette\Application\UI;
 
 class FormFactory
 {
 
-	use Nette\SmartObject;
+	use \Nette\SmartObject;
 
 	public function create(): UI\Form
 	{

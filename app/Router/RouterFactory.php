@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace App\Router;
+namespace Adeira\Connector\Router;
 
 use Nette;
 use Nette\Application\Routers\Route;

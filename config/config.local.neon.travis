@@ -2,7 +2,7 @@
 # https://nette.org/security-warning
 
 
-postgreJson:
-	username: postgres
+dbal:
+	dbname: travis_ci_test
+	user: postgres
 	password: ''
-	database: travis_ci_test

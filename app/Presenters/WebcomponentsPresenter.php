@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace App\Presenters;
+namespace Adeira\Connector\Presenters;
 
 use Nette;
 use Nette\Application\UI;

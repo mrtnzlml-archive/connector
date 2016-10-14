@@ -3,5 +3,4 @@
 
 
 extensions:
-    - App\Latte\DI\Extension
-    postgreJson: App\PostgreJSON\DI\Extension
+    dbal: Adeira\Connector\DBAL\DI\Extension

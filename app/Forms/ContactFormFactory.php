@@ -1,24 +1,19 @@
 <?php declare(strict_types = 1);
 
-namespace App\Forms;
+namespace Adeira\Connector\Forms;
 
-use Nette;
 use Nette\Application\UI;
-use Nette\Security\User;
 
 class ContactFormFactory
 {
 
-	use Nette\SmartObject;
+	use \Nette\SmartObject;
 
 	private $factory;
 
-	private $user;
-
-	public function __construct(FormFactory $factory, User $user)
+	public function __construct(FormFactory $factory)
 	{
 		$this->factory = $factory;
-		$this->user = $user;
 	}
 
 	public function create(\Closure $onSuccess): UI\Form

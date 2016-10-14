@@ -9,8 +9,8 @@
     "GPL-3.0"
   ],
   "require": {
-    "adeira/code-quality": "^1.0",
     "adeira/compiler-extension": "^1.0",
+    "doctrine/dbal": "^2.5",
     "latte/latte": "^2.4",
     "nette/application": "^2.4",
     "nette/bootstrap": "^2.4",
@@ -23,12 +23,13 @@
     "tracy/tracy": "^2.4"
   },
   "require-dev": {
+    "adeira/code-quality": "^1.0",
     "mrtnzlml/testbench": "^2.3",
     "nette/tester": "2.0.x-dev as v1.7"
   },
   "autoload": {
     "psr-4": {
-      "App\\": [
+      "Adeira\\Connector\\": [
         "app/",
         "src/"
       ]
