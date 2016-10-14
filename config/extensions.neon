@@ -3,4 +3,5 @@
 
 
 extensions:
-    dbal: Adeira\Connector\DBAL\DI\Extension
+	doctrine.orm: Adeira\Connector\Doctrine\ORM\DI\Extension
+	symfony.console: Adeira\Connector\Symfony\Console\DI\Extension

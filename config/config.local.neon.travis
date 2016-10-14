@@ -2,7 +2,8 @@
 # https://nette.org/security-warning
 
 
-dbal:
-	dbname: travis_ci_test
-	user: postgres
-	password: ''
+doctrine.orm:
+	connection:
+		dbname: travis_ci_test
+		user: postgres
+		password: ''
