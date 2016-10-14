@@ -3,6 +3,6 @@
 
 
 postgreJson:
-	username:
-	password:
-	database:
+	username: postgres
+	password: ''
+	database: travis_ci_test
