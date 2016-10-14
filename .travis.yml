@@ -4,9 +4,16 @@ php:
   - 7.0
   - 7.1
 
+services:
+  - postgresql
+
+addons:
+  postgresql: "9.6"
+
 before_script:
   - travis_retry composer install --prefer-dist
   - vendor/bin/parallel-lint . -e php,php3,php4,php5,phtml,phpt --exclude vendor --blame
+  - psql -c 'create database travis_ci_test;' -U postgres
 
 script:
   - vendor/bin/run-tests tests/ -C
