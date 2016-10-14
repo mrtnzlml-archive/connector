@@ -1,0 +1,19 @@
+#!/usr/bin/env php
+<?php
+
+set_time_limit(0);
+
+/** @var \Nette\DI\Container $container */
+$container = require __DIR__ . '/../app/bootstrap.php';
+
+$input = new \Symfony\Component\Console\Input\ArgvInput();
+$env = $input->getParameterOption(['--env', '-e'], getenv('NETTE_ENV') ?: 'dev');
+$debug = getenv('NETTE_DEBUG') !== '0' && !$input->hasParameterOption(['--no-debug', '']) && $env !== 'prod';
+
+if ($debug) {
+	\Symfony\Component\Debug\Debug::enable();
+}
+
+/** @var \Symfony\Component\Console\Application $application */
+$application = $container->getByType(\Symfony\Component\Console\Application::class);
+$application->run($input);

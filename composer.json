@@ -10,7 +10,8 @@
   ],
   "require": {
     "adeira/compiler-extension": "^1.0",
-    "doctrine/dbal": "^2.5",
+    "boldtrn/jsonb-bundle": "^1.1",
+    "doctrine/orm": "^2.5",
     "latte/latte": "^2.4",
     "nette/application": "^2.4",
     "nette/bootstrap": "^2.4",
@@ -20,6 +21,8 @@
     "nette/http": "^2.4",
     "nette/security": "^2.4",
     "nette/utils": "^2.4",
+    "ramsey/uuid": "^3.5",
+    "ramsey/uuid-doctrine": "^1.2",
     "tracy/tracy": "^2.4"
   },
   "require-dev": {
@@ -34,5 +37,16 @@
         "src/"
       ]
     }
+  },
+  "scripts": {
+    "adeira-connector-scripts": [
+      "chmod +x bin/console"
+    ],
+    "post-install-cmd": [
+      "@adeira-connector-scripts"
+    ],
+    "post-update-cmd": [
+      "@adeira-connector-scripts"
+    ]
   }
 }
