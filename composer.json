@@ -1,13 +1,7 @@
 {
-  "name": "nette/web-project",
-  "description": "Nette: Standard Web Project",
+  "name": "adeira/connector",
   "type": "project",
-  "license": [
-    "MIT",
-    "BSD-3-Clause",
-    "GPL-2.0",
-    "GPL-3.0"
-  ],
+  "license": "MIT",
   "require": {
     "adeira/compiler-extension": "^1.0",
     "boldtrn/jsonb-bundle": "^1.1",

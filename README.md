@@ -8,7 +8,7 @@ bower install
 
 Run tests:
 ```console
-vendor/bin/run-tests tests/
+vendor/bin/run-tests tests/ -C
 ```
 
 Structuring Code in Modules
