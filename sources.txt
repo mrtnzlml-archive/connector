@@ -5,3 +5,9 @@ Optimize for production                 https://www.polymer-project.org/1.0/docs
 A Complete Guide to Flexbox             https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 JSON Types                              https://www.postgresql.org/docs/current/static/datatype-json.html
 Domain-Driven Design in PHP             https://leanpub.com/ddd-in-php
+Polymer Browser compatibility           https://www.polymer-project.org/1.0/docs/browsers
+Why Web Components?                     http://webcomponents.org/articles/why-web-components/
+Using Web Components in React           https://facebook.github.io/react/docs/webcomponents.html
+Shadow DOM 201                          https://www.html5rocks.com/en/tutorials/webcomponents/shadowdom-201/
+Serve your app                          https://www.polymer-project.org/1.0/toolbox/server
+Test your elements                      https://www.polymer-project.org/1.0/docs/tools/tests
