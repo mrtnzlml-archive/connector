@@ -33,6 +33,13 @@ php:
 	date.timezone: Europe/Prague
 
 
+restApi:
+	errorPresenter: ApiError
+	enableForModules:
+		- ''
+	presenterMapping: no
+
+
 session:
 	expiration: 14 days
 

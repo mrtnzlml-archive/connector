@@ -4,6 +4,7 @@
   "license": "MIT",
   "require": {
     "adeira/compiler-extension": "^1.0",
+    "adeira/rest-api": "dev-master",
     "boldtrn/jsonb-bundle": "^1.1",
     "doctrine/orm": "^2.5",
     "latte/latte": "^2.4",

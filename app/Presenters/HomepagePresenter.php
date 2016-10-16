@@ -2,9 +2,12 @@
 
 namespace Adeira\Connector\Presenters;
 
-use Nette\Application\UI;
-
-class HomepagePresenter extends UI\Presenter
+class HomepagePresenter extends \Adeira\Api\RestPresenter
 {
+
+	public function test()
+	{
+		throw new \Exception('ok');
+	}
 
 }

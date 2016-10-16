@@ -17,6 +17,7 @@ class RouterFactory
 	public static function createRouter(): RouteList
 	{
 		$router = new RouteList();
+		//TODO: optimized REST route
 		$router[] = new Route('webcomponent/<action>', 'Webcomponents:');
 		$router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
 		return $router;

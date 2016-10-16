@@ -5,6 +5,9 @@ namespace Adeira\Connector\Presenters;
 use Nette;
 use Nette\Application\Responses;
 
+/**
+ * @deprecated Use only ApiErrorPresenter (delete also templates!)
+ */
 class ErrorPresenter implements Nette\Application\IPresenter
 {
 
