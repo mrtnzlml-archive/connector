@@ -1,5 +1,4 @@
 /vendor/
-/www/components/
 
 config/config.local.neon
 composer.lock

@@ -10,7 +10,7 @@ class WebcomponentsPresenter extends Nette\Application\UI\Presenter
 
 	private $factory;
 
-	public function __construct(\App\Forms\ContactFormFactory $factory)
+	public function __construct(\Adeira\Connector\Forms\ContactFormFactory $factory)
 	{
 		parent::__construct();
 		$this->factory = $factory;

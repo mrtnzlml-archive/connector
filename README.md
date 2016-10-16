@@ -3,11 +3,10 @@
 Install dependencies:
 ```
 composer install
-bower install
 ```
 
 Run tests:
-```console
+```
 vendor/bin/run-tests tests/ -C
 ```
 

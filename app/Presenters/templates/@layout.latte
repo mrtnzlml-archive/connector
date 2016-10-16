@@ -10,11 +10,12 @@
 		// setup Polymer options
 		window.Polymer = {
 			lazyRegister: true,
-			dom: 'shadow'
+			dom: 'shadow',
+			noUrlSettings: true
 		};
 
 		// load webcomponents polyfills
-		(function() {
+		(function () {
 			if ('registerElement' in document
 				&& 'import' in document.createElement('link')
 				&& 'content' in document.createElement('template')) {
@@ -24,70 +25,42 @@
 				var e = document.createElement('script');
 				e.src = '/components/webcomponentsjs/webcomponents-lite.min.js';
 				document.head.appendChild(e);
-		  	}
+			}
 		})();
 
 		// load pre-caching service worker
 //		if ('serviceWorker' in navigator) {
-//			window.addEventListener('load', function() {
+//			window.addEventListener('load', function () {
 //				navigator.serviceWorker.register('/service-worker.js');
 //			});
 //		}
 	</script>
 
 	<link rel="import" href="{$basePath}/components/polymer/polymer.html">
+	<link rel="import" href="{$basePath}/components/paper-toast/paper-toast.html"> {* Flash Messages *}
 
-	<link rel="import" href="{$basePath}/components/iron-flex-layout/iron-flex-layout-classes.html">
-	<link rel="import" href="{$basePath}/components/iron-icons/iron-icons.html">
-	<link rel="import" href="{$basePath}/components/paper-drawer-panel/paper-drawer-panel.html">
-	<link rel="import" href="{$basePath}/components/paper-icon-button/paper-icon-button.html">
-	<link rel="import" href="{$basePath}/components/paper-item/paper-item.html">
-	<link rel="import" href="{$basePath}/components/paper-menu/paper-menu.html">
-	<link rel="import" href="{$basePath}/components/paper-scroll-header-panel/paper-scroll-header-panel.html">
-	<link rel="import" href="{$basePath}/components/paper-styles/classes/shadow.html">
-	<link rel="import" href="{$basePath}/components/paper-styles/classes/typography.html">
-	<link rel="import" href="{$basePath}/components/paper-toast/paper-toast.html">
-	<link rel="import" href="{$basePath}/components/paper-toolbar/paper-toolbar.html">
+	{* TODO: při debugMode=false dát build z Gulpu (vulcanize, crisper, [babel]) *}
+	<link rel="import" href="{$basePath}/src/adeira-application.html">
 
-	{block webcomponents}{/block}
-
-	<style is="custom-style" include="iron-flex iron-positioning"></style>
 	<style>
-		body {
+		html, body {
 			background-color: #fafafa;
+			height: 100%;
+			margin: 0;
 		}
 	</style>
 </head>
+<body unresolved>
 
-<body class="fullbleed layout vertical">
 	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
 		<paper-toast text="{$flash->message}" opened></paper-toast>
 	</div>
 
-	<paper-scroll-header-panel class="flex">
-		<paper-toolbar class="shadow-elevation-2dp">
-			<paper-icon-button icon="menu"></paper-icon-button>
-			<h1 class="paper-font-headline">Adeira<strong>:connector</strong></h1>
-		</paper-toolbar>
-
-		<paper-drawer-panel style="position:relative">
-			<paper-menu selected="0" drawer class="shadow-elevation-2dp">
-				<paper-item>
-					<iron-icon icon="dashboard"></iron-icon>
-					<span>Dashboard</span>
-				</paper-item>
-			</paper-menu>
-
-			<div main style="overflow-y: auto">
-				{include content}
-			</div>
-
-		</paper-drawer-panel>
-
-	</paper-scroll-header-panel>
+	<adeira-application></adeira-application>
 
 	{block scripts}
 		<script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
 	{/block}
+
 </body>
 </html>
