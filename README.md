@@ -1,5 +1,10 @@
 [![Build Status](https://travis-ci.org/adeira/connector.svg?branch=master)](https://travis-ci.org/adeira/connector)
 
+```
+curl -XPOST -H "Content-Type:application/graphql" -d 'mutation DeviceMutation{device(id:"123"){id}}' http://localhost/adeira/connector/www/graphql
+curl -XPOST -H "Content-Type:application/graphql" -d 'query GetDevice{device(id:"123"){id,name}}' http://localhost/adeira/connector/www/graphql
+```
+
 Install dependencies:
 ```
 composer install

@@ -9,14 +9,14 @@ includes:
 
 application:
 	scanDirs: no
-	errorPresenter: Error
+	errorPresenter: GraphqlError
 	mapping:
-		*: Adeira\Connector\*Module\Presenters\*Presenter
+		*: Adeira\Connector\Endpoints\*Endpoint
 
 
 doctrine.orm:
 	configuration:
-		mappingClassesPaths:
+		mappingClassesPaths!: # FIXME: override instead!
 			- %srcDir%
 	connection:
 		types:
@@ -26,18 +26,11 @@ doctrine.orm:
 
 
 parameters:
-	srcDir: %appDir%/../src
+	srcDir: %appDir%/src
 
 
 php:
 	date.timezone: Europe/Prague
-
-
-restApi:
-	errorPresenter: ApiError
-	enableForModules:
-		- ''
-	presenterMapping: no
 
 
 session:

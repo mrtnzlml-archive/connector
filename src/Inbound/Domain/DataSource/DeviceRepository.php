@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Adeira\Connector\Inbound\Domain\Device;
+namespace Adeira\Connector\Inbound\Domain\DataSource;
 
 interface DeviceRepository
 {

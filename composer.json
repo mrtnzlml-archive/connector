@@ -18,7 +18,8 @@
     "nette/utils": "^2.4",
     "ramsey/uuid": "^3.5",
     "ramsey/uuid-doctrine": "^1.2",
-    "tracy/tracy": "^2.4"
+    "tracy/tracy": "^2.4",
+    "webonyx/graphql-php": "^0.7.2"
   },
   "require-dev": {
     "adeira/code-quality": "^1.0",

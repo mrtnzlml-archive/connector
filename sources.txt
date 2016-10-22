@@ -11,3 +11,9 @@ Using Web Components in React           https://facebook.github.io/react/docs/we
 Shadow DOM 201                          https://www.html5rocks.com/en/tutorials/webcomponents/shadowdom-201/
 Serve your app                          https://www.polymer-project.org/1.0/toolbox/server
 Test your elements                      https://www.polymer-project.org/1.0/docs/tools/tests
+Service Workers: an Introduction        https://developers.google.com/web/fundamentals/getting-started/primers/service-workers
+Service Workers in Production           https://developers.google.com/web/showcase/2015/service-workers-iowa
+GraphQL Introduction			        https://facebook.github.io/react/blog/2015/05/01/graphql-introduction.html
+										https://github.com/facebook/graphql#getting-started
+GraphQL Best Practices                  http://graphql.org/learn/best-practices/
+Serving over HTTP                       http://graphql.org/learn/serving-over-http/

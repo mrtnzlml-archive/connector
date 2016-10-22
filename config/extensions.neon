@@ -5,5 +5,4 @@
 extensions:
 	doctrine.orm: Adeira\Connector\Doctrine\ORM\DI\Extension
 	fakeSession: Kdyby\FakeSession\DI\FakeSessionExtension
-	restApi: Adeira\Api\DI\Extension
 	symfony.console: Adeira\Connector\Symfony\Console\DI\Extension

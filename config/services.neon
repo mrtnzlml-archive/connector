@@ -3,6 +3,4 @@
 
 
 services:
-	router: Adeira\Connector\Router\RouterFactory::createRouter
-	- Adeira\Connector\Forms\FormFactory
-	- Adeira\Connector\Forms\ContactFormFactory
+	router: Adeira\Connector\Routing\RouterFactory::createRouter
