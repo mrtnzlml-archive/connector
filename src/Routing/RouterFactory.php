@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Adeira\Connector\Router;
+namespace Adeira\Connector\Routing;
 
 use Nette;
 use Nette\Application\Routers\Route;
@@ -17,9 +17,8 @@ class RouterFactory
 	public static function createRouter(): RouteList
 	{
 		$router = new RouteList();
-		//TODO: optimized REST route
-		$router[] = new Route('webcomponent/<action>', 'Webcomponents:');
-		$router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
+		$router[] = new Route('', 'Landing:default');
+		$router[] = new Route('graphql', 'Graphql:default'); // GET: /graphql?query={device(id:"1000"){id,name}}
 		return $router;
 	}
 
