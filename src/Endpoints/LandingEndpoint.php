@@ -2,27 +2,18 @@
 
 namespace Adeira\Connector\Endpoints;
 
-use Adeira\Api\JsonResponsePretty;
-use Nette\Application\LinkGenerator;
+use GraphQL;
+use Nette\Utils\Json;
 
-class LandingEndpoint implements \Nette\Application\IPresenter
+class LandingEndpoint extends \Nette\Application\UI\Presenter
 {
 
-	/**
-	 * @var \Nette\Application\LinkGenerator
-	 */
-	private $linkGenerator;
-
-	public function __construct(LinkGenerator $linkGenerator)
+	public function renderDefault()
 	{
-		$this->linkGenerator = $linkGenerator;
-	}
-
-	public function run(\Nette\Application\Request $request): JsonResponsePretty
-	{
-		return new JsonResponsePretty([
-			$this->linkGenerator->link('Graphql:default'),
-		]);
+		$this->template->introspection = Json::encode(GraphQL\GraphQL::execute(
+			GraphqlSchemaFactory::build(),
+			GraphQL\Type\Introspection::getIntrospectionQuery(TRUE)
+		), Json::PRETTY);
 	}
 
 }

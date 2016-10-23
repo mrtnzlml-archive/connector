@@ -3,6 +3,7 @@
 namespace Adeira\Connector\Endpoints;
 
 use Adeira\Api\JsonResponsePretty;
+use GraphQL;
 
 class GraphqlEndpoint extends \Nette\Application\UI\Presenter
 {
@@ -12,21 +13,13 @@ class GraphqlEndpoint extends \Nette\Application\UI\Presenter
 		$httpRequest = $this->getHttpRequest();
 		if ($httpRequest->isMethod('POST')) {
 			$query = $this->getHttpRequest()->getRawBody();
-		} else {
-			$query = $query !== NULL ? $query : <<<GraphQL
-{
-	device(id: "1000") {
-		id,
-		name
-	}
-}
-GraphQL;
+		} elseif ($query === NULL) {
+			$this->sendJson(['Empty query.']);
 		}
-		$result = \GraphQL\GraphQL::execute(
-			\Adeira\Connector\Endpoints\GraphqlSchemaFactory::build(),
+		$this->sendResponse(new JsonResponsePretty(GraphQL\GraphQL::execute(
+			GraphqlSchemaFactory::build(),
 			$query
-		);
-		$this->sendResponse(new JsonResponsePretty($result));
+		)));
 	}
 
 }
