@@ -1,0 +1,43 @@
+---
+
+- name: ensure clone destination exists
+  file: state=directory path={{ install_dir }}
+
+- name: check if it's first application install
+  git: repo={{ git_repo_url }} dest={{ install_dir }} clone=no update=no
+  register: git_result
+
+- name: delete application directory if first application install
+  file: path={{ install_dir }} state=absent
+  when: not git_result.before
+
+- name: ensure destination directory for application exists
+  file: path={{ install_dir }} state=directory
+  when: not git_result.before
+
+- name: clone repository
+  git:
+    repo={{ git_repo_url }}
+    dest={{ install_dir }}
+    recursive=yes
+    force=yes
+    depth=1
+  register: git_clone_result
+
+- name: make log dir writable
+  file: state=directory path={{ install_dir }}/log mode=0777
+
+- name: make temp dir writable
+  file: state=directory path={{ install_dir }}/temp mode=0777
+
+- name: clear cache directory
+  when: git_clone_result.changed
+  file: path={{ install_dir }}/temp/cache state=absent
+
+- name: install composer packages
+  when: git_clone_result.changed
+  composer:
+    working_dir: '{{ install_dir }}'
+
+- name: create configuration (config.local.neon)
+  template: src=usr/share/nginx/html/config/config.local.neon dest={{ local_config_destination }}

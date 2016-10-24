@@ -1,7 +1,19 @@
 ---
-- name: configure and deploy the webservers and application code
-  hosts: amazon
-  become: yes
+
+- name: configure and deploy REMOTE webservers and application code
+  strategy: free
+  hosts:
+    - amazon-webservers
   roles:
     - common
     - webservers
+    - application
+
+
+
+- name: configure and deploy LOCAL application code
+  strategy: free
+  hosts:
+    - localmachine
+  roles:
+    - application

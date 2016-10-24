@@ -1,9 +1,0 @@
----
-- name: download NodeJS
-  shell: curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-
-- name: install NodeJS
-  shell: apt install -y nodejs
-
-- name: install Bower
-  shell: npm install -g bower
