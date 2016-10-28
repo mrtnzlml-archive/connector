@@ -1,5 +1,3 @@
----
-
 - include: install_git.yml
 - include: install_nginx.yml
 - include: install_php7.yml

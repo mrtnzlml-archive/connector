@@ -1,5 +1,3 @@
----
-
 - name: ensure clone destination exists
   file: state=directory path={{ install_dir }}
 
@@ -23,6 +21,7 @@
     force=yes
     depth=1
   register: git_clone_result
+  tags: git_update
 
 - name: make log dir writable
   file: state=directory path={{ install_dir }}/log mode=0777
@@ -33,11 +32,13 @@
 - name: clear cache directory
   when: git_clone_result.changed
   file: path={{ install_dir }}/temp/cache state=absent
+  tags: git_update
 
 - name: install composer packages
   when: git_clone_result.changed
   composer:
     working_dir: '{{ install_dir }}'
+  tags: git_update
 
 - name: create configuration (config.local.neon)
   template: src=usr/share/nginx/html/config/config.local.neon dest={{ local_config_destination }}

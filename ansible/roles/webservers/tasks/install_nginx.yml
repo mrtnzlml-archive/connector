@@ -1,5 +1,3 @@
----
-
 - name: install latest Nginx
   yum: name=nginx state=latest
 
