@@ -6,14 +6,3 @@ git_repo_url=https://github.com/adeira/connector
 ansible_become=yes
 install_dir=/usr/share/nginx/html
 local_config_destination=/usr/share/nginx/html/config/config.local.neon
-
-
-[localmachine]
-localhost1  install_dir=/tmp/nette_app1  local_config_destination=/tmp/nette_app1/config/config.local.neon
-localhost2  install_dir=/tmp/nette_app2  local_config_destination=/tmp/nette_app2/config/config.local.neon
-
-[localmachine:vars]
-ansible_connection=local
-ansible_host=127.0.0.1
-ansible_become=no
-git_repo_url=https://github.com/adeira/connector

@@ -1,5 +1,3 @@
----
-
 - name: configure and deploy REMOTE webservers and application code
   strategy: free
   hosts:
@@ -7,13 +5,4 @@
   roles:
     - common
     - webservers
-    - application
-
-
-
-- name: configure and deploy LOCAL application code
-  strategy: free
-  hosts:
-    - localmachine
-  roles:
     - application
