@@ -2,6 +2,8 @@
 
 namespace Adeira\Connector\Doctrine\ORM\DI;
 
+use Nette\DI;
+
 class Extension extends \Nette\DI\CompilerExtension
 {
 
@@ -18,6 +20,8 @@ class Extension extends \Nette\DI\CompilerExtension
 			'mappingFilesPaths' => [],
 			'isDevMode' => '%debugMode%',
 			'proxyDir' => '%tempDir%/cache/Doctrine.Proxy',
+			'cacheDriver' => NULL,
+			'cacheDriverConfig' => ['%tempDir%/cache/Doctrine.Cache'],
 		],
 		'debugPanel' => TRUE,
 	];
@@ -44,8 +48,18 @@ class Extension extends \Nette\DI\CompilerExtension
 			$mappingFilePaths = $extension->getMappingFilesPaths();
 		}
 
-		// Configuration
 		$configurationConfig = $config['configuration'];
+
+		// Cache Driver
+		if ($configurationConfig['cacheDriver'] === NULL) {
+			$configurationConfig['cacheDriver'] = (new DI\Statement(\Doctrine\Common\Cache\FilesystemCache::class))->getEntity();
+		}
+		$cacheDriver = $builder->addDefinition($this->prefix('cacheDriver'))->setClass(
+			$configurationConfig['cacheDriver'],
+			$configurationConfig['cacheDriverConfig']
+		);
+
+		// Configuration
 		$configuration = $builder
 			->addDefinition($this->prefix('configuration'))
 			->setClass(\Doctrine\ORM\Configuration::class)
@@ -53,7 +67,7 @@ class Extension extends \Nette\DI\CompilerExtension
 				$configurationConfig['mappingFilesPaths'] + $mappingFilePaths,
 				$configurationConfig['isDevMode'],
 				$configurationConfig['proxyDir'],
-				NULL, // \Doctrine\Common\Cache\Cache
+				$cacheDriver,
 			]);
 
 		// Connection
