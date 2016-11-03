@@ -1,0 +1,15 @@
+<doctrine-mapping
+		xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+							https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+
+	<entity name="Adeira\Connector\Inbound\DomainModel\DataSource\DataSource" table="data_sources">
+
+		<id name="id" type="uuid">
+			<generator strategy="NONE"/>
+		</id>
+
+	</entity>
+
+</doctrine-mapping>

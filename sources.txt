@@ -17,3 +17,4 @@ GraphQL Introduction			        https://facebook.github.io/react/blog/2015/05/01/
 										https://github.com/facebook/graphql#getting-started
 GraphQL Best Practices                  http://graphql.org/learn/best-practices/
 Serving over HTTP                       http://graphql.org/learn/serving-over-http/
+XML Mapping                             http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/xml-mapping.html

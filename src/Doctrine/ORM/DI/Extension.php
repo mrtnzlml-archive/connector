@@ -15,12 +15,22 @@ class Extension extends \Nette\DI\CompilerExtension
 			'types' => [],
 		],
 		'configuration' => [
-			'mappingClassesPaths' => ['%appDir%'],
+			'mappingFilesPaths' => [],
 			'isDevMode' => '%debugMode%',
 			'proxyDir' => '%tempDir%/cache/Doctrine.Proxy',
-			'useSimpleAnnotationReader' => FALSE,
 		],
+		'debugPanel' => TRUE,
 	];
+
+	/**
+	 * @var bool
+	 */
+	private $debugMode;
+
+	public function __construct($debugMode = FALSE)
+	{
+		$this->debugMode = $debugMode;
+	}
 
 	public function loadConfiguration()
 	{
@@ -28,17 +38,22 @@ class Extension extends \Nette\DI\CompilerExtension
 		$builder = $this->getContainerBuilder();
 		$config = \Nette\DI\Helpers::expand($config, $builder->parameters, TRUE);
 
+		$mappingFilePaths = [];
+		/** @var IMappingFilesPathsProvider $extension */
+		foreach ($this->compiler->getExtensions(IMappingFilesPathsProvider::class) as $extension) {
+			$mappingFilePaths = $extension->getMappingFilesPaths();
+		}
+
 		// Configuration
 		$configurationConfig = $config['configuration'];
 		$configuration = $builder
 			->addDefinition($this->prefix('configuration'))
 			->setClass(\Doctrine\ORM\Configuration::class)
-			->setFactory('Doctrine\ORM\Tools\Setup::createAnnotationMetadataConfiguration', [
-				$configurationConfig['mappingClassesPaths'],
+			->setFactory('Doctrine\ORM\Tools\Setup::createXMLMetadataConfiguration', [
+				$configurationConfig['mappingFilesPaths'] + $mappingFilePaths,
 				$configurationConfig['isDevMode'],
 				$configurationConfig['proxyDir'],
 				NULL, // \Doctrine\Common\Cache\Cache
-				$configurationConfig['useSimpleAnnotationReader'],
 			]);
 
 		// Connection
@@ -69,6 +84,13 @@ class Extension extends \Nette\DI\CompilerExtension
 				$connection,
 				$configuration,
 			]);
+
+		// Debug Panel
+		if ($this->debugMode && $config['debugPanel']) {
+			$connection->addSetup('@Tracy\Bar::addPanel', [
+				new \Nette\DI\Statement(\Adeira\Connector\Doctrine\ORM\DI\ConnectionPanel::class),
+			]);
+		}
 	}
 
 }

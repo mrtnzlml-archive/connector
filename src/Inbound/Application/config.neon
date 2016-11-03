@@ -1,0 +1,9 @@
+services:
+	- Adeira\Connector\Inbound\Application\Service\AddDataSourceService
+	dataSourceRepository: Adeira\Connector\Inbound\Infrastructure\Persistence\Doctrine\DoctrineDataSourceRepository
+
+
+symfony.console:
+	commands:
+		- Adeira\Connector\Inbound\Application\Console\AddDataSourceCommand
+		- Adeira\Connector\Inbound\Application\Console\RecievePacketCommand

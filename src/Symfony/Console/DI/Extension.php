@@ -22,7 +22,10 @@ final class Extension extends \Nette\DI\CompilerExtension
 
 		$commandServices = [];
 		foreach ($config['commands'] as $commandName => $commandClass) {
-			$commandServices[$commandName] = $builder->addDefinition($this->prefix('command.' . $commandName))->setClass($commandClass);
+			$commandServices[$commandName] = $builder
+				->addDefinition($this->prefix('command.' . $commandName))
+				->setClass($commandClass)
+				->setInject(TRUE);
 		}
 
 		$builder

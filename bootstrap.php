@@ -2,7 +2,7 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-$configurator = new Nette\Configurator();
+$configurator = new Nette\Configurator;
 
 if (PHP_SAPI === 'cli') {
 	$input = new \Symfony\Component\Console\Input\ArgvInput;

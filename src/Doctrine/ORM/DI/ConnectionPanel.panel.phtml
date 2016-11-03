@@ -1,0 +1,34 @@
+<?php
+use Tracy\Dumper;
+?>
+
+<h1><?php echo $totalTime . ' ms (' . $logger->currentQuery . ' queries)' ?></h1>
+
+<div class="tracy-inner">
+	<table>
+		<tr>
+			<th>Time&nbsp;ms</th> <!-- executionMS -->
+			<th>SQL&nbsp;Query</th> <!-- sql -->
+			<th>Params</th> <!-- params[] -->
+			<th>Types</th> <!-- types[] -->
+		</tr>
+		<?php foreach ($outputQueries as $query): ?>
+			<tr<?php if ($query['repeated']): ?> class="repeated"<?php endif; ?>>
+				<td<?php if($query['executionMS'] === $slowestQueryTime): ?> style="background:#cd1818;color:white"<?php endif; ?>>
+					<?php if($query['executionMS'] === $slowestQueryTime): ?><abbr title="This is slowest query." style="cursor:help"><?php endif; ?>
+					<?php echo $query['executionMS']; ?>
+					<?php if($query['executionMS'] === $slowestQueryTime): ?></abbr><?php endif; ?>
+				</td>
+				<td<?php if ($query['repeated']): ?> style="background:#ffc7c5"<?php endif; ?>>
+					<?php if ($query['repeated']): ?><abbr title="You already sent this query to the database." style="cursor:help"><?php endif; ?>
+					<?php foreach ($highlightSql(htmlspecialchars($query['sql'])) as $queryPart):
+						echo $queryPart;
+					endforeach; ?>
+					<?php if ($query['repeated']): ?></abbr><?php endif; ?>
+				</td>
+				<td><?php Dumper::dump($query['params'], [Dumper::LIVE => TRUE, Dumper::COLLAPSE => TRUE]) ?></td>
+				<td><?php Dumper::dump($query['types'], [Dumper::LIVE => TRUE, Dumper::COLLAPSE => TRUE]) ?></td>
+			</tr>
+		<?php endforeach; ?>
+	</table>
+</div>

@@ -15,14 +15,10 @@ application:
 
 
 doctrine.orm:
-	configuration:
-		mappingClassesPaths!: # FIXME: override instead!
-			- %srcDir%
 	connection:
 		types:
 			jsonb: Boldtrn\JsonbBundle\Types\JsonbArrayType
 			uuid: Ramsey\Uuid\Doctrine\UuidType
-			uuid_binary: Ramsey\Uuid\Doctrine\UuidBinaryType
 
 
 parameters:
@@ -39,7 +35,6 @@ session:
 
 symfony.console:
 	commands:
-		- Adeira\Connector\Inbound\Application\CLI\RecievePacketCommand
 		- Doctrine\DBAL\Tools\Console\Command\RunSqlCommand
 		- Doctrine\DBAL\Tools\Console\Command\ImportCommand
 		- Doctrine\ORM\Tools\Console\Command\ClearCache\MetadataCommand
