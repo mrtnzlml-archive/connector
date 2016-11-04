@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Adeira\Connector\Inbound\Application\Console;
+namespace Adeira\Connector\Inbound\Infrastructure\UI\Console;
 
 use Adeira\Connector\Inbound\Application;
 use Symfony\Component\Console\Input\InputInterface;

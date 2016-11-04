@@ -5,5 +5,5 @@ services:
 
 symfony.console:
 	commands:
-		- Adeira\Connector\Inbound\Application\Console\AddDataSourceCommand
-		- Adeira\Connector\Inbound\Application\Console\RecievePacketCommand
+		- Adeira\Connector\Inbound\Infrastructure\UI\Console\AddDataSourceCommand
+		- Adeira\Connector\Inbound\Infrastructure\UI\Console\RecievePacketCommand
