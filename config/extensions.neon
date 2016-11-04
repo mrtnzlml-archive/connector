@@ -5,5 +5,5 @@
 extensions:
 	doctrine.orm: Adeira\Connector\Doctrine\ORM\DI\Extension(%debugMode%)
 	fakeSession: Kdyby\FakeSession\DI\FakeSessionExtension
-	inbound: Adeira\Connector\Inbound\Application\DI\Extension
+	inbound: Adeira\Connector\Inbound\Infrastructure\Bridge\Nette\DI\Extension
 	symfony.console: Adeira\Connector\Symfony\Console\DI\Extension
