@@ -4,11 +4,13 @@
 		xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
 							https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
 
-	<entity name="Adeira\Connector\Inbound\DomainModel\DataSource\DataSource" table="data_sources" schema="public">
+	<entity name="Adeira\Connector\Inbound\DomainModel\DataSource\DataSource" table="data_sources">
 
 		<id name="id" type="uuid">
 			<generator strategy="NONE"/>
 		</id>
+
+		<field name="deviceName" column="device_name" type="string"/>
 
 	</entity>
 

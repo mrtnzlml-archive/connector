@@ -2,6 +2,9 @@
 
 namespace Adeira\Connector\Inbound\DomainModel\DataSource;
 
+use Adeira\Connector\Inbound\DomainModel\DataSourceRecord\DataSourceRecord;
+use Adeira\Connector\Inbound\DomainModel\DataSourceRecord\DataSourceRecordId;
+
 /**
  * This is entity without mapping. Mapping is infrastructure detail.
  *
@@ -15,14 +18,28 @@ class DataSource
 	 */
 	private $id;
 
-	public function __construct(DataSourceId $id)
+	/**
+	 * @var string
+	 */
+	private $deviceName;
+
+	public function __construct(DataSourceId $id, string $deviceName)
 	{
 		$this->id = $id;
+		$this->deviceName = $deviceName;
 	}
 
 	public function id(): DataSourceId
 	{
 		return $this->id;
 	}
+
+//	public function makeDataSourceRecord(DataSourceRecordId $dataSourceRecordId): DataSourceRecord
+//	{
+//		return new DataSourceRecord(
+//			$dataSourceRecordId,
+//			$this->id
+//		);
+//	}
 
 }

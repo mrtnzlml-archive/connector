@@ -7,6 +7,8 @@ interface IDataSourceRepository
 
 	public function add(DataSource $aDataSource);
 
+	public function ofId(DataSourceId $dataSourceId);//: ?DataSource;
+
 //	public function addAll(array $dataSources);
 
 //	public function remove(DataSource $aDataSource);

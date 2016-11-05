@@ -3,6 +3,8 @@
 namespace Adeira\Connector\Inbound\Infrastructure\Persistence\Doctrine;
 
 use Adeira\Connector\Inbound\DomainModel;
+use Adeira\Connector\Inbound\DomainModel\DataSource\DataSource;
+use Adeira\Connector\Inbound\DomainModel\DataSource\DataSourceId;
 use Doctrine\ORM;
 
 /**
@@ -17,14 +19,27 @@ class DoctrineDataSourceRepository /*extends ORM\EntityRepository*/ implements D
 	 */
 	private $em;
 
+	/**
+	 * @var \Doctrine\Common\Persistence\ObjectRepository
+	 */
+	private $dataSourceRepository;
+
 	public function __construct(ORM\EntityManagerInterface $em)
 	{
 		$this->em = $em;
+		$this->dataSourceRepository = $em->getRepository(DataSource::class);
 	}
 
 	public function add(DomainModel\DataSource\DataSource $aDataSource)
 	{
 		$this->em->persist($aDataSource);
+	}
+
+	public function ofId(DataSourceId $dataSourceId)//: ?DataSource
+	{
+		return $this->dataSourceRepository->findOneBy([
+			'id' => $dataSourceId,
+		]);
 	}
 
 	public function nextIdentity(): DomainModel\DataSource\DataSourceId

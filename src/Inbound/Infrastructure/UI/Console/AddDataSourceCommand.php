@@ -3,6 +3,7 @@
 namespace Adeira\Connector\Inbound\Infrastructure\UI\Console;
 
 use Adeira\Connector\Inbound\Application;
+use Nette\Utils\Json;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -10,12 +11,22 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class AddDataSourceCommand extends \Symfony\Component\Console\Command\Command
 {
 
-	/** @var \Adeira\Connector\Inbound\Application\Service\AddDataSourceService */
+	/**
+	 * @var \Adeira\Connector\Inbound\Application\Service\AddDataSourceService
+	 */
 	private $addDataSourceService;
 
-	public function injectDependencies(Application\Service\AddDataSourceService $addDataSourceService)
-	{
+	/**
+	 * @var \Adeira\Connector\Inbound\Application\Service\AddDataSourceRecordService
+	 */
+	private $addDataSourceRecordService;
+
+	public function injectDependencies(
+		Application\Service\AddDataSourceService $addDataSourceService,
+		Application\Service\AddDataSourceRecordService $addDataSourceRecordService
+	) {
 		$this->addDataSourceService = $addDataSourceService;
+		$this->addDataSourceRecordService = $addDataSourceRecordService;
 	}
 
 	protected function configure()
@@ -25,10 +36,16 @@ class AddDataSourceCommand extends \Symfony\Component\Console\Command\Command
 
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
-		$styleGenerator = new SymfonyStyle($input, $output);
 		$response = $this->addDataSourceService->execute(
 			new Application\Service\AddDataSourceRequest('Device Name')
 		);
+
+		$dataSourceId = $response->id();
+		$data = Json::encode(['v' => ['a' => ['l']]]);
+		$this->addDataSourceRecordService->execute(new Application\Service\AddDataSourceRecordRequest($dataSourceId, $data));
+		$this->addDataSourceRecordService->execute(new Application\Service\AddDataSourceRecordRequest($dataSourceId, $data));
+
+		$styleGenerator = new SymfonyStyle($input, $output);
 		$styleGenerator->success("New device with UUID {$response->id()} has been created.");
 	}
 

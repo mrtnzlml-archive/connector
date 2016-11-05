@@ -1,5 +1,7 @@
 services:
+	- Adeira\Connector\Inbound\Application\Service\AddDataSourceRecordService
 	- Adeira\Connector\Inbound\Application\Service\AddDataSourceService
+	dataSourceRecordRepository: Adeira\Connector\Inbound\Infrastructure\Persistence\Doctrine\DoctrineDataSourceRecordRepository
 	dataSourceRepository: Adeira\Connector\Inbound\Infrastructure\Persistence\Doctrine\DoctrineDataSourceRepository
 
 

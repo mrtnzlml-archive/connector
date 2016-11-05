@@ -39,7 +39,8 @@ class AddDataSourceService
 	public function execute(AddDataSourceRequest $request): AddDataSourceResponse
 	{
 		$this->dataSourceRepository->add($dataSource = new DomainModel\DataSource\DataSource(
-			$this->dataSourceRepository->nextIdentity()
+			$this->dataSourceRepository->nextIdentity(),
+			$request->name()
 		));
 
 		$this->em->flush();// FIXME: this is maybe weird?

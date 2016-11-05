@@ -31,6 +31,11 @@ class DataSourceId extends Common\DomainModel\IdentifiableDomainObject
 		return new self($anId);
 	}
 
+	public static function createFromString(string $anId): self
+	{
+		return new self(Uuid::fromString($anId));
+	}
+
 	public function equals(Common\DomainModel\IdentifiableDomainObject $id): bool
 	{
 		return $this->id() === $id->id();
