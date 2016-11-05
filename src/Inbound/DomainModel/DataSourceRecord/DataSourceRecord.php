@@ -23,7 +23,7 @@ class DataSourceRecord
 	private $dataSourceId;
 
 	/**
-	 * @var string
+	 * @var array
 	 */
 	private $data;
 
@@ -37,6 +37,16 @@ class DataSourceRecord
 	public function id(): DataSourceRecordId
 	{
 		return $this->id;
+	}
+
+	public function dataSourceId(): DataSourceId
+	{
+		return $this->dataSourceId;
+	}
+
+	public function data(): array
+	{
+		return $this->data;
 	}
 
 }

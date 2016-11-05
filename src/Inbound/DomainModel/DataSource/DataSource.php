@@ -34,12 +34,18 @@ class DataSource
 		return $this->id;
 	}
 
-//	public function makeDataSourceRecord(DataSourceRecordId $dataSourceRecordId): DataSourceRecord
-//	{
-//		return new DataSourceRecord(
-//			$dataSourceRecordId,
-//			$this->id
-//		);
-//	}
+	public function deviceName(): string
+	{
+		return $this->deviceName;
+	}
+
+	public function makeDataSourceRecord(DataSourceRecordId $dataSourceRecordId, array $recordData): DataSourceRecord
+	{
+		return new DataSourceRecord(
+			$dataSourceRecordId,
+			$this->id,
+			$recordData
+		);
+	}
 
 }
