@@ -17,14 +17,14 @@ class DataSourceRecord
 	 */
 	private $id;
 
-	/**
-	 * @var string JSON
-	 */
-	private $data;
-
 	public function __construct(DataSourceRecordId $id)
 	{
 		$this->id = $id;
+	}
+
+	public function id(): DataSourceRecordId
+	{
+		return $this->id;
 	}
 
 }

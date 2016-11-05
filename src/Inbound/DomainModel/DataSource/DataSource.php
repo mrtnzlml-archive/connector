@@ -20,7 +20,7 @@ class DataSource
 		$this->id = $id;
 	}
 
-	public function id()
+	public function id(): DataSourceId
 	{
 		return $this->id;
 	}
