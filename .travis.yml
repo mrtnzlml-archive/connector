@@ -17,7 +17,7 @@ before_script:
   - cp config/config.local.neon.travis config/config.local.neon
 
 script:
-  - vendor/bin/run-tests tests/ -C
+  - BOOTSTRAP=$(realpath tests/bootstrap.php) vendor/bin/run-tests
 
 after_script:
   - vendor/bin/phpcs --standard=ruleset.xml --extensions=php --encoding=utf-8 --tab-width=4 -sp app/ src/ --ignore=bootstrap.php
