@@ -20,6 +20,15 @@ class DataSourceIdTest extends \Adeira\Connector\Tests\TestCase
 		}, \Error::class, 'Call to private ' . DataSourceId::class . '::__construct() from context%a%');
 	}
 
+	public function testValuesAreEqual()
+	{
+		$id1 = DataSourceId::create('id');
+		$id2 = DataSourceId::create('id');
+		Assert::notSame($id1, $id2);
+		Assert::true($id1->equals($id2));
+		Assert::true($id2->equals($id1));
+	}
+
 }
 
 (new DataSourceIdTest)->run();

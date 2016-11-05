@@ -29,6 +29,7 @@ class DataSourceId
 
 	public static function create($anId = NULL): self
 	{
+		//TODO: validace UUID (?)
 		return new self($anId);
 	}
 
@@ -39,7 +40,13 @@ class DataSourceId
 
 	public function equals(DataSourceId $id): bool
 	{
-		return $this->id === $id;
+		return $this->id() === $id->id();
+	}
+
+	//TODO: IdentifiableEntity interface
+	public function __toString(): string
+	{
+		return $this->id();
 	}
 
 }
