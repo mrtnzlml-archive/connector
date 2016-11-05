@@ -11,15 +11,14 @@ addons:
   postgresql: "9.4"
 
 before_script:
+  - phpenv config-rm xdebug.ini
   - travis_retry composer install --prefer-dist
-  - vendor/bin/parallel-lint . -e php,php3,php4,php5,phtml,phpt --exclude vendor --blame
   - psql -c 'create database travis_ci_test;' -U postgres
   - cp config/config.local.neon.travis config/config.local.neon
 
 script:
+  - vendor/bin/parallel-lint . -e php,php3,php4,php5,phtml,phpt --exclude vendor --blame
   - tests/run
-
-after_script:
   - vendor/bin/phpcs --standard=ruleset.xml --extensions=php --encoding=utf-8 --tab-width=4 -sp src/ --ignore=bootstrap.php
   - vendor/bin/phpcs --standard=ruleset.xml --extensions=php,phpt --encoding=utf-8 --tab-width=4 -sp tests/ --ignore=*/output/*,_temp/*,bootstrap.php
 

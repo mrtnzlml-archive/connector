@@ -1,5 +1,3 @@
 #!/usr/bin/env bash
 
-echo `realpath tests/bootstrap.php`
-BOOTSTRAP=`realpath tests/bootstrap.php` vendor/bin/run-tests --setup tests/runner-setup.php
-printenv
+BOOTSTRAP=$(pwd)/tests/bootstrap.php vendor/bin/run-tests --setup tests/runner-setup.php
