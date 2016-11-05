@@ -30,8 +30,14 @@
   "autoload": {
     "psr-4": {
       "Adeira\\Connector\\": [
-        "app/",
         "src/"
+      ]
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Adeira\\Connector\\Tests\\": [
+        "tests/utils/"
       ]
     }
   },
