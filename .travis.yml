@@ -14,12 +14,11 @@ before_script:
   - travis_retry composer install --prefer-dist
   - cp config/config.local.neon.travis config/config.local.neon
   - psql -c 'create database travis_ci_test;' --username=postgres
-  - psql --username=postgres --dbname=travis_ci_test --echo-all --file=migrations/structure.sql
 
 script:
   - vendor/bin/parallel-lint . -e php,php3,php4,php5,phtml,phpt --exclude vendor --blame
   - tests/run
-  - bin/console orm:validate-schema
+  - bin/console orm:validate-schema --skip-sync
   - vendor/bin/phpcs --standard=ruleset.xml --extensions=php --encoding=utf-8 --tab-width=4 -sp src/ --ignore=bootstrap.php
   - vendor/bin/phpcs --standard=ruleset.xml --extensions=php,phpt --encoding=utf-8 --tab-width=4 -sp tests/ --ignore=*/output/*,_temp/*,bootstrap.php
 
