@@ -10,9 +10,6 @@ services:
 addons:
   postgresql: "9.4"
 
-env:
-  - BOOTSTRAP=$TRAVIS_BUILD_DIR/tests/bootstrap.php
-
 before_script:
   - travis_retry composer install --prefer-dist
   - vendor/bin/parallel-lint . -e php,php3,php4,php5,phtml,phpt --exclude vendor --blame

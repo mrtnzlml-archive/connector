@@ -8,6 +8,13 @@ $runner->outputHandlers = []; // delete native output handlers
 $runner->outputHandlers[] = new class ($runner) extends \Tester\Runner\Output\ConsolePrinter
 {
 
+	public function begin()
+	{
+		ob_start();
+		parent::begin();
+		echo rtrim(ob_get_clean()) . ' | ' . getenv('BOOTSTRAP') . "\n\n";
+	}
+
 	public function result($testName, $result, $message)
 	{
 		$outputs = [
