@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Adeira\Connector\Inbound\DomainModel\DataSource;
+namespace Adeira\Connector\Inbound\DomainModel\DataSourceRecord;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -13,7 +13,7 @@ class DataSourceRecord
 {
 
 	/**
-	 * @var IDataSourceId
+	 * @var DataSourceRecordId
 	 */
 	private $id;
 
@@ -22,7 +22,7 @@ class DataSourceRecord
 	 */
 	private $data;
 
-	public function __construct(IDataSourceId $id)
+	public function __construct(DataSourceRecordId $id)
 	{
 		$this->id = $id;
 	}

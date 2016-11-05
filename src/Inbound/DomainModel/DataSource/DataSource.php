@@ -11,11 +11,11 @@ class DataSource
 {
 
 	/**
-	 * @var IDataSourceId
+	 * @var DataSourceId
 	 */
 	private $id;
 
-	public function __construct(IDataSourceId $id)
+	public function __construct(DataSourceId $id)
 	{
 		$this->id = $id;
 	}

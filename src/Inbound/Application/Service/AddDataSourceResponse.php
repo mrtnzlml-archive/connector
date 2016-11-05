@@ -10,11 +10,11 @@ class AddDataSourceResponse
 	use \Nette\SmartObject;
 
 	/**
-	 * @var \Adeira\Connector\Inbound\DomainModel\DataSource\IDataSourceId
+	 * @var \Adeira\Connector\Inbound\DomainModel\DataSource\DataSourceId
 	 */
 	private $id;
 
-	public function __construct(DomainModel\DataSource\IDataSourceId $id)
+	public function __construct(DomainModel\DataSource\DataSourceId $id)
 	{
 		$this->id = $id;
 	}

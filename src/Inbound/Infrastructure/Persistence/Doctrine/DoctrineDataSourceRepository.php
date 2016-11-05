@@ -3,14 +3,13 @@
 namespace Adeira\Connector\Inbound\Infrastructure\Persistence\Doctrine;
 
 use Adeira\Connector\Inbound\DomainModel;
-use Adeira\Connector\Inbound\Infrastructure;
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM;
 
 /**
  * Do not call flush() here! Flushing and dealing with transactions is delegated to the Application Service.
  * All behavior should still follow the Repositories’ collection characteristics.
  */
-class DoctrineDataSourceRepository implements DomainModel\DataSource\IDataSourceRepository
+class DoctrineDataSourceRepository /*extends ORM\EntityRepository*/ implements DomainModel\DataSource\IDataSourceRepository
 {
 
 	/**
@@ -18,7 +17,7 @@ class DoctrineDataSourceRepository implements DomainModel\DataSource\IDataSource
 	 */
 	private $em;
 
-	public function __construct(EntityManagerInterface $em)
+	public function __construct(ORM\EntityManagerInterface $em)
 	{
 		$this->em = $em;
 	}
@@ -28,10 +27,9 @@ class DoctrineDataSourceRepository implements DomainModel\DataSource\IDataSource
 		$this->em->persist($aDataSource);
 	}
 
-	public function nextIdentity(): DomainModel\DataSource\IDataSourceId
+	public function nextIdentity(): DomainModel\DataSource\DataSourceId
 	{
-		//FIXME: mělo by to být takto zde bez možnosti změny implementace?
-		return Infrastructure\DomainModel\DataSource\UuidDataSourceId::create();
+		return DomainModel\DataSource\DataSourceId::create();
 	}
 
 }

@@ -1,13 +1,12 @@
 <?php declare(strict_types = 1);
 
-namespace Adeira\Connector\Inbound\Infrastructure\DomainModel\DataSource;
+namespace Adeira\Connector\Inbound\DomainModel\DataSource;
 
-use Adeira\Connector\Inbound\DomainModel;
 use Ramsey\Uuid\Uuid;
 
 /**
- * DataSourceId is value object with. Value object must be immutable. Object values shouldn’t be able to be altered
- * over their lifetime.
+ * This is value object. Value object must be immutable. Object values shouldn’t be able to be altered over their
+ * lifetime.
  *
  * Value Objects should be created through their constructors. In order to build one, you usually pass the required
  * primitive types or other Value Objects through this constructor. Value Objects are always in a valid state; that’s
@@ -18,14 +17,14 @@ use Ramsey\Uuid\Uuid;
  * PHP doesn't support __construct overloading (in contrast with e.g. Java) and therefore it's better design to have
  * multiple constructors (factory methods) with their semantic name.
  */
-class UuidDataSourceId implements DomainModel\DataSource\IDataSourceId
+class DataSourceId
 {
 
 	private $id;
 
-	private function __construct(Uuid $anId = NULL)
+	private function __construct(string $anId = NULL)
 	{
-		$this->id = $anId ?: Uuid::uuid4();
+		$this->id = $anId ?: Uuid::uuid4()->toString();
 	}
 
 	public static function create($anId = NULL): self
@@ -33,19 +32,14 @@ class UuidDataSourceId implements DomainModel\DataSource\IDataSourceId
 		return new self($anId);
 	}
 
-	public function id(): Uuid
+	public function id(): string
 	{
 		return $this->id;
 	}
 
-	public function equals(UuidDataSourceId $id): bool
+	public function equals(DataSourceId $id): bool
 	{
 		return $this->id === $id;
-	}
-
-	public function __toString()
-	{
-		return $this->id()->toString();
 	}
 
 }

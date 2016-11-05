@@ -13,6 +13,6 @@ interface IDataSourceRepository
 
 //	public function removeAll(array $dataSources);
 
-	public function nextIdentity(): IDataSourceId;
+	public function nextIdentity(): DataSourceId;
 
 }
