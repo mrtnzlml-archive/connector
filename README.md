@@ -17,7 +17,7 @@ composer install
 
 Run tests:
 ```
-BOOTSTRAP=$(realpath tests/bootstrap.php) vendor/bin/run-tests
+tests/run
 ```
 
 Structuring Code in Modules

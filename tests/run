@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+BOOTSTRAP=$(realpath tests/bootstrap.php) vendor/bin/run-tests --setup tests/runner-setup.php
