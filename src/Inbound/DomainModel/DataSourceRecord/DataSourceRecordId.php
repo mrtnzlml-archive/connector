@@ -2,6 +2,7 @@
 
 namespace Adeira\Connector\Inbound\DomainModel\DataSourceRecord;
 
+use Adeira\Connector\Common;
 use Ramsey\Uuid\Uuid;
 
 /**
@@ -17,29 +18,22 @@ use Ramsey\Uuid\Uuid;
  * PHP doesn't support __construct overloading (in contrast with e.g. Java) and therefore it's better design to have
  * multiple constructors (factory methods) with their semantic name.
  */
-class DataSourceRecordId
+class DataSourceRecordId extends Common\DomainModel\IdentifiableDomainObject
 {
 
-	private $id;
-
-	private function __construct(string $anId = NULL)
+	private function __construct(Uuid $anId = NULL)
 	{
-		$this->id = $anId ?: Uuid::uuid4()->toString();
+		$this->setId($anId ? $anId->toString() : Uuid::uuid4()->toString());
 	}
 
-	public static function create($anId = NULL): self
+	public static function create(Uuid $anId = NULL): self
 	{
 		return new self($anId);
 	}
 
-	public function id(): string
+	public function equals(Common\DomainModel\IdentifiableDomainObject $id): bool
 	{
-		return $this->id;
-	}
-
-	public function equals(DataSourceRecordId $id): bool
-	{
-		return $this->id === $id;
+		return $this->id() === $id->id();
 	}
 
 }

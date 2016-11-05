@@ -3,6 +3,7 @@
 namespace Adeira\Connector\Tests\Inbound\DomainModel\DataSource;
 
 use Adeira\Connector\Inbound\DomainModel\DataSource\DataSourceId;
+use Ramsey\Uuid\Uuid;
 use Tester\Assert;
 
 require getenv('BOOTSTRAP');
@@ -22,8 +23,8 @@ class DataSourceIdTest extends \Adeira\Connector\Tests\TestCase
 
 	public function testValuesAreEqual()
 	{
-		$id1 = DataSourceId::create('id');
-		$id2 = DataSourceId::create('id');
+		$id1 = DataSourceId::create($uuid = Uuid::uuid4());
+		$id2 = DataSourceId::create($uuid);
 		Assert::notSame($id1, $id2);
 		Assert::true($id1->equals($id2));
 		Assert::true($id2->equals($id1));
