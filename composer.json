@@ -20,7 +20,8 @@
     "ramsey/uuid-doctrine": "^1.2",
     "roave/security-advisories": "dev-master",
     "tracy/tracy": "^2.4",
-    "webonyx/graphql-php": "^0.7.2"
+    "webonyx/graphql-php": "^0.7.2",
+    "zenify/doctrine-migrations": "^3.0"
   },
   "require-dev": {
     "adeira/code-quality": "^1.0",
@@ -32,7 +33,10 @@
       "Adeira\\Connector\\": [
         "src/"
       ]
-    }
+    },
+    "classmap": [
+      "migrations/CodeStyle.php"
+    ]
   },
   "autoload-dev": {
     "psr-4": {

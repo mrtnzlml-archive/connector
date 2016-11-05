@@ -21,6 +21,14 @@ doctrine.orm:
 			uuid: Ramsey\Uuid\Doctrine\UuidType
 
 
+migrations: # see @migrations.codeStyle
+	table: database_structure_migrations
+	column: version
+	directory: %appDir%/migrations
+	namespace: Adeira\Connector\Migrations
+	versionsOrganization: year_and_month # null or year
+
+
 parameters:
 	srcDir: %appDir%/src
 

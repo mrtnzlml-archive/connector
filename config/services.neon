@@ -3,4 +3,5 @@
 
 
 services:
+	migrations.codeStyle: Adeira\Connector\Migrations\CodeStyle
 	router: Adeira\Connector\Routing\RouterFactory::createRouter
