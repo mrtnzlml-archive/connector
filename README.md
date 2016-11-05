@@ -5,14 +5,9 @@ curl -XPOST -H "Content-Type:application/graphql" -d 'mutation DeviceMutation{de
 curl -XPOST -H "Content-Type:application/graphql" -d 'query GetDevice{device(id:"123"){id,name}}' http://localhost/adeira/connector/www/graphql
 ```
 
+Deploy:
 ```
 ansible-playbook ansible/deploy.yml
-```
-
-```
-ansible-playbook ansible/deploy.yml
-ansible-playbook ansible/deploy.yml --list-tasks
-ansible-playbook ansible/deploy.yml --list-hosts
 ```
 
 Install dependencies:
