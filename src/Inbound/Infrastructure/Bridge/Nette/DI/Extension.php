@@ -14,7 +14,7 @@ class Extension extends \Adeira\CompilerExtension implements ORM\DI\IMappingFile
 
 	public function getMappingFilesPaths(): array
 	{
-		return [__DIR__ . '/../../Infrastructure/Persistence/Doctrine/Mapping'];
+		return [__DIR__ . '/../../../Persistence/Doctrine/Mapping'];
 	}
 
 }
