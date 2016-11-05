@@ -2,8 +2,6 @@
 
 namespace Adeira\Connector\Inbound\DomainModel\DataSourceRecord;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * This is entity without mapping. Mapping is infrastructure detail.
  *
