@@ -18,7 +18,7 @@ class RouterFactory
 	{
 		$router = new RouteList();
 		$router[] = new Route('', 'Landing:default');
-		$router[] = new Route('graphql', 'Graphql:default'); // GET: /graphql?query={device(id:"1000"){id,name}}
+		$router[] = new Route('graphql', 'Graphql:default'); // GET: /graphql?query={device(id:"58d200ad-6376-4c01-9b6d-2ea536f1cd2c"){id,name,records(first:1)}}
 		return $router;
 	}
 

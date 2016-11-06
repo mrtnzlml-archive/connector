@@ -16,3 +16,8 @@ symfony.console:
 	commands:
 		- Adeira\Connector\Inbound\Infrastructure\UI\Console\AddDataSourceCommand
 		- Adeira\Connector\Inbound\Infrastructure\UI\Console\RecievePacketCommand
+
+
+graphql:
+	types:
+		- Adeira\Connector\Inbound\Infrastructure\UI\GraphQL\DataSourceType
