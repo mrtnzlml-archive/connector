@@ -1,3 +1,10 @@
+doctrine.orm:
+	connection:
+		types:
+			DataSourceId: Adeira\Connector\Inbound\Infrastructure\DomainModel\DoctrineDataSourceIdType
+			DataSourceRecordId: \Adeira\Connector\Inbound\Infrastructure\DomainModel\DoctrineDataSourceRecordIdType
+
+
 services:
 	- Adeira\Connector\Inbound\Application\Service\AddDataSourceRecordService
 	- Adeira\Connector\Inbound\Application\Service\AddDataSourceService
