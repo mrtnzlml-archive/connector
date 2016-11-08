@@ -23,7 +23,9 @@ class LandingEndpoint extends \Nette\Application\UI\Presenter
 	{
 		$this->template->introspection = Json::encode(\GraphQL\GraphQL::execute(
 			$this->schemaFactory->build(),
-			\GraphQL\Type\Introspection::getIntrospectionQuery(TRUE)
+			\GraphQL\Type\Introspection::getIntrospectionQuery(TRUE),
+			NULL,
+			$this->getUser()
 		), Json::PRETTY);
 	}
 

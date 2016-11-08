@@ -86,7 +86,7 @@ class DataSourceType implements \Adeira\Connector\GraphQL\IType
 						),
 					],
 				],
-				'resolve' => function ($obj, $args, $context) {
+				'resolve' => function ($obj, $args, \Nette\Security\User $context) {
 					return $this->dataSourceRepository->ofId(
 						DataSourceId::createFromString($args['id'])
 					);

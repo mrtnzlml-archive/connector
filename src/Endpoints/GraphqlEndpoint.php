@@ -29,7 +29,9 @@ class GraphqlEndpoint extends \Nette\Application\UI\Presenter
 		}
 		$this->sendResponse(new JsonResponsePretty(\GraphQL\GraphQL::execute(
 			$this->schemaFactory->build(),
-			$query
+			$query,
+			NULL,
+			$this->getUser()
 		)));
 	}
 
