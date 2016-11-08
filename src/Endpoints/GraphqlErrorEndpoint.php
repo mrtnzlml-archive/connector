@@ -2,9 +2,10 @@
 
 namespace Adeira\Connector\Endpoints;
 
-use Nette;
+use Nette\Application as NApplication;
+use Tracy\ILogger;
 
-class GraphqlErrorEndpoint implements \Nette\Application\IPresenter
+class GraphqlErrorEndpoint implements NApplication\IPresenter
 {
 
 	/**
@@ -12,19 +13,19 @@ class GraphqlErrorEndpoint implements \Nette\Application\IPresenter
 	 */
 	private $logger;
 
-	public function __construct(\Tracy\ILogger $logger)
+	public function __construct(ILogger $logger)
 	{
 		$this->logger = $logger;
 	}
 
-	public function run(Nette\Application\Request $request): Nette\Application\IResponse
+	public function run(NApplication\Request $request): NApplication\IResponse
 	{
 		$exc = $request->getParameter('exception');
 		if ($exc instanceof \Nette\Application\BadRequestException) {
 			$message = 'No route for HTTP request.';
 		} else {
 			$message = 'Internal Server Error.';
-			$this->logger->log($exc, \Tracy\ILogger::EXCEPTION);
+			$this->logger->log($exc, ILogger::EXCEPTION);
 		}
 
 		$payload = new \stdClass;
@@ -32,7 +33,7 @@ class GraphqlErrorEndpoint implements \Nette\Application\IPresenter
 		$payload->errors = [
 			['message' => $message],
 		];
-		return new \Adeira\Api\JsonResponsePretty($payload);
+		return new NApplication\Responses\JsonResponse($payload);
 	}
 
 }

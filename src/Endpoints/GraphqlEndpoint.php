@@ -2,7 +2,6 @@
 
 namespace Adeira\Connector\Endpoints;
 
-use Adeira\Api\JsonResponsePretty;
 use Adeira\Connector\GraphQL;
 
 class GraphqlEndpoint extends \Nette\Application\UI\Presenter
@@ -27,12 +26,12 @@ class GraphqlEndpoint extends \Nette\Application\UI\Presenter
 		} elseif ($query === NULL) {
 			$this->sendJson(['Empty query.']);
 		}
-		$this->sendResponse(new JsonResponsePretty(\GraphQL\GraphQL::execute(
+		$this->sendJson(\GraphQL\GraphQL::execute(
 			$this->schemaFactory->build(),
 			$query,
 			NULL,
 			$this->getUser()
-		)));
+		));
 	}
 
 }
