@@ -18,3 +18,5 @@ GraphQL Introduction			        https://facebook.github.io/react/blog/2015/05/01/
 GraphQL Best Practices                  http://graphql.org/learn/best-practices/
 Serving over HTTP                       http://graphql.org/learn/serving-over-http/
 XML Mapping                             http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/xml-mapping.html
+Dis/advanages (PHP-FPM)                 http://serverfault.com/a/645765
+REACT createa-app README                https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#importing-a-component
