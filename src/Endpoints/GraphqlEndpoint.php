@@ -3,6 +3,7 @@
 namespace Adeira\Connector\Endpoints;
 
 use Adeira\Connector\GraphQL;
+use Nette\Utils\Json;
 
 class GraphqlEndpoint extends \Nette\Application\UI\Presenter
 {
@@ -20,17 +21,24 @@ class GraphqlEndpoint extends \Nette\Application\UI\Presenter
 
 	public function actionDefault($query = NULL)
 	{
+		$requestString = $query;
+		$variableValues = NULL;
+
 		$httpRequest = $this->getHttpRequest();
 		if ($httpRequest->isMethod('POST')) {
-			$query = $this->getHttpRequest()->getRawBody();
+			// http://graphql.org/learn/serving-over-http/#post-request
+			$queryData = Json::decode($this->getHttpRequest()->getRawBody(), Json::FORCE_ARRAY);
+			$requestString = $queryData['query'];
+			$variableValues = $queryData['variables'];
 		} elseif ($query === NULL) {
 			$this->sendJson(['Empty query.']);
 		}
 		$this->sendJson(\GraphQL\GraphQL::execute(
 			$this->schemaFactory->build(),
-			$query,
+			$requestString,
 			NULL,
-			$this->getUser()
+			$this->getUser(),
+			$variableValues
 		));
 	}
 
