@@ -6,6 +6,7 @@
     "adeira/compiler-extension": "^1.0",
     "boldtrn/jsonb-bundle": "^1.1",
     "doctrine/orm": "^2.5",
+    "firebase/php-jwt": "^4.0",
     "latte/latte": "^2.4",
     "nette/application": "^2.4",
     "nette/bootstrap": "^2.4",
