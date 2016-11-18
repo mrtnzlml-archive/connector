@@ -3,29 +3,17 @@
 namespace Adeira\Connector\Inbound\Infrastructure\UI\GraphQL;
 
 use Adeira\Connector\Inbound\DomainModel\DataSource\DataSource;
-use Adeira\Connector\Inbound\DomainModel\DataSource\DataSourceId;
-use Adeira\Connector\Inbound\DomainModel\DataSource\IDataSourceRepository;
 use GraphQL\Type\Definition;
 
 class DataSourceType implements \Adeira\Connector\GraphQL\IType
 {
 
 	/**
-	 * @var \Adeira\Connector\Inbound\DomainModel\DataSource\IDataSourceRepository
-	 */
-	private $dataSourceRepository;
-
-	public function __construct(IDataSourceRepository $dataSourceRepository)
-	{
-		$this->dataSourceRepository = $dataSourceRepository;
-	}
-
-	/**
 	 * type Device_1 : DataSource {
 	 *     id: String!
 	 * }
 	 */
-	public function getTypeDefinition(): Definition\ObjectType
+	public function __invoke(): Definition\ObjectType
 	{
 		return new Definition\ObjectType([
 			'name' => 'DataSource',
@@ -68,33 +56,5 @@ class DataSourceType implements \Adeira\Connector\GraphQL\IType
 			],
 		]);
 	}
-
-	/**
-	 * device(id: String!): InboundSource
-	 */
-	public function getPublicTypeDefinition(): array
-	{
-		return [
-			'device' => [
-				'type' => $this->getTypeDefinition(),
-				'args' => [
-					'id' => [
-						'name' => 'id',
-						'description' => 'The ID of the data source.',
-						'type' => Definition\Type::nonNull(
-							Definition\Type::string()
-						),
-					],
-				],
-				'resolve' => function ($obj, $args, \Nette\Security\User $context) {
-					return $this->dataSourceRepository->ofId(
-						DataSourceId::createFromString($args['id'])
-					);
-				},
-			],
-		];
-	}
-
-	//TODO: mutations
 
 }
