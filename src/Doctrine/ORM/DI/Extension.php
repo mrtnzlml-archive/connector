@@ -45,7 +45,7 @@ class Extension extends \Nette\DI\CompilerExtension
 		$mappingFilePaths = [];
 		/** @var IMappingFilesPathsProvider $extension */
 		foreach ($this->compiler->getExtensions(IMappingFilesPathsProvider::class) as $extension) {
-			$mappingFilePaths = $extension->getMappingFilesPaths();
+			$mappingFilePaths = array_merge($mappingFilePaths, $extension->getMappingFilesPaths());
 		}
 
 		$configurationConfig = $config['configuration'];
