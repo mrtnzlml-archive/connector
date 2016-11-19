@@ -22,9 +22,9 @@ class GraphqlErrorEndpoint implements NApplication\IPresenter
 	{
 		$exc = $request->getParameter('exception');
 		if ($exc instanceof \Nette\Application\BadRequestException) {
-			$message = 'No route for HTTP request.';
+			$message = $exc->getMessage();
 		} else {
-			$message = 'Internal Server Error.';
+			$message = \Tracy\Debugger::$productionMode ? 'Internal Server Error.' : $exc->getMessage();
 			$this->logger->log($exc, ILogger::EXCEPTION);
 		}
 
