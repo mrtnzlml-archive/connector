@@ -29,7 +29,7 @@ class GraphqlEndpoint extends \Nette\Application\UI\Presenter
 			// http://graphql.org/learn/serving-over-http/#post-request
 			$queryData = Json::decode($this->getHttpRequest()->getRawBody(), Json::FORCE_ARRAY);
 			$requestString = $queryData['query'];
-			$variableValues = $queryData['variables'];
+			$variableValues = $queryData['variables'] ?? [];
 		} elseif ($query === NULL) {
 			$this->sendJson(['Empty query.']);
 		}
