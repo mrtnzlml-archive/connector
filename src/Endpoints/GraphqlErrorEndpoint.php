@@ -2,6 +2,7 @@
 
 namespace Adeira\Connector\Endpoints;
 
+use Adeira\Connector\GraphQL\Bridge\Application\Responses\GraphqlErrorResponse;
 use Nette\Application as NApplication;
 use Tracy\ILogger;
 
@@ -28,12 +29,7 @@ class GraphqlErrorEndpoint implements NApplication\IPresenter
 			$this->logger->log($exc, ILogger::EXCEPTION);
 		}
 
-		$payload = new \stdClass;
-		$payload->data = NULL;
-		$payload->errors = [
-			['message' => $message],
-		];
-		return new NApplication\Responses\JsonResponse($payload);
+		return new GraphqlErrorResponse($message);
 	}
 
 }

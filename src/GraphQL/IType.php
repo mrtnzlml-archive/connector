@@ -23,8 +23,9 @@ namespace Adeira\Connector\GraphQL;
 interface IType
 {
 
-	public function getTypeDefinition(): \GraphQL\Type\Definition\ObjectType;
-
-	public function getPublicTypeDefinition(): array;
+	/**
+	 * Returns single instance (!) of type definition.
+	 */
+	public function __invoke(): \GraphQL\Type\Definition\ObjectType;
 
 }

@@ -2,21 +2,38 @@
 
 namespace Adeira\Connector\GraphQL;
 
+use GraphQL\Type\Definition\ObjectType;
+
 class SchemaFactory
 {
 
-	private $types;
+	private $queryDefinitions;
 
-	public function addTypes(array $types)
+	private $mutationDefinitions;
+
+	public function addQueryDefinitions(array $queryDefinitions)
 	{
-		$types = (function (IType ...$types) {
-			return $types;
-		})(...$types);
+		$queryDefinitions = (function (IQueryDefinition ...$queryDefinitions) {
+			return $queryDefinitions;
+		})(...$queryDefinitions);
 
-		/** @var IType $type */
-		foreach ($types as $type) {
-			$definition = $type->getPublicTypeDefinition();
-			$this->types[key($definition)] = $definition[key($definition)]; //FIXME: ne jen klíč, ale všechny klíče (?)
+		/** @var IQueryDefinition $type */
+		foreach ($queryDefinitions as $type) {
+			$definition = $type->__invoke();
+			$this->queryDefinitions[key($definition)] = $definition[key($definition)]; //FIXME: ne jen klíč, ale všechny klíče (?)
+		}
+	}
+
+	public function addMutationDefinitions(array $mutationDefinitions)
+	{
+		$mutationDefinitions = (function (IMutationDefinition ...$mutationDefinitions) {
+			return $mutationDefinitions;
+		})(...$mutationDefinitions);
+
+		/** @var IMutationDefinition $type */
+		foreach ($mutationDefinitions as $type) {
+			$definition = $type->__invoke();
+			$this->mutationDefinitions[key($definition)] = $definition[key($definition)]; //FIXME: ne jen klíč, ale všechny klíče (?)
 		}
 	}
 
@@ -25,38 +42,16 @@ class SchemaFactory
 		/**
 		 * This is the type that will be the root of our query, and the
 		 * entry point into our schema.
-		 *
-		 * type Query {
-		 *     device(id: String!): InboundSource
-		 * }
 		 */
 		$queryType = new \GraphQL\Type\Definition\ObjectType([
 			'name' => 'Query',
-			'fields' => $this->types,
+			'fields' => $this->queryDefinitions,
 		]);
 
-//		/**
-//		 * input DeviceInput {
-//		 * }
-//		 */
-//		$mutationType = new ObjectType([
-//			'name' => 'Mutation',
-//			'fields' => [
-//				'device' => [
-//					'type' => $deviceType,
-//					'args' => [
-//						'id' => [
-//							'name' => 'id',
-//							'description' => 'id of the device',
-//							'type' => Type::nonNull(Type::string()),
-//						],
-//					],
-//					'resolve' => function ($root, $args) {
-//						\Tracy\Debugger::log($args);
-//					},
-//				],
-//			],
-//		]);
+		$mutationType = new ObjectType([
+			'name' => 'Mutation',
+			'fields' => $this->mutationDefinitions,
+		]);
 
 		/**
 		 * schema {
@@ -68,7 +63,7 @@ class SchemaFactory
 		 */
 		return new \GraphQL\Schema([
 			'query' => $queryType,
-//			'mutation' => $mutationType,
+			'mutation' => $mutationType,
 		]);
 	}
 

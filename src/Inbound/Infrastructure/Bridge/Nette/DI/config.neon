@@ -19,5 +19,5 @@ symfony.console:
 
 
 graphql:
-	types:
-		- Adeira\Connector\Inbound\Infrastructure\UI\GraphQL\DataSourceType
+	queryDefinitions:
+		- Adeira\Connector\Inbound\Infrastructure\UI\GraphQL\DataSourceQueryDefinition

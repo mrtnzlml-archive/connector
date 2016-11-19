@@ -43,6 +43,7 @@ session:
 
 symfony.console:
 	commands:
+		- Adeira\Connector\GraphQL\Console\IntrospectionCommand # FIXME: move it to the GraphQL bundle
 		- Doctrine\DBAL\Tools\Console\Command\RunSqlCommand
 		- Doctrine\DBAL\Tools\Console\Command\ImportCommand
 		- Doctrine\ORM\Tools\Console\Command\ClearCache\MetadataCommand

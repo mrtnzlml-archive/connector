@@ -7,7 +7,7 @@ class TypeIsNotValidObjectType extends \Exception
 
 	public function __construct(string $className)
 	{
-		parent::__construct("$className should be instance of " . \Adeira\Connector\GraphQL\IType::class);
+		parent::__construct("$className should be instance of " . \Adeira\Connector\GraphQL\IQueryDefinition::class);
 	}
 
 }
