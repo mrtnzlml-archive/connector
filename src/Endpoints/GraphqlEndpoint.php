@@ -3,9 +3,12 @@
 namespace Adeira\Connector\Endpoints;
 
 use Adeira\Connector\GraphQL;
+use Nette\Application\Responses\JsonResponse;
+use Nette\Http;
+use Nette\Security\User;
 use Nette\Utils\Json;
 
-class GraphqlEndpoint extends \Nette\Application\UI\Presenter
+class GraphqlEndpoint implements \Nette\Application\IPresenter
 {
 
 	/**
@@ -13,33 +16,46 @@ class GraphqlEndpoint extends \Nette\Application\UI\Presenter
 	 */
 	private $schemaFactory;
 
-	public function __construct(GraphQL\SchemaFactory $schemaFactory)
+	/**
+	 * @var \Nette\Http\IRequest
+	 */
+	private $httpRequest;
+
+	/**
+	 * @var \Nette\Security\User
+	 */
+	private $user;
+
+	public function __construct(GraphQL\SchemaFactory $schemaFactory, Http\IRequest $httpRequest, User $user)
 	{
-		parent::__construct();
 		$this->schemaFactory = $schemaFactory;
+		$this->httpRequest = $httpRequest;
+		$this->user = $user;
 	}
 
-	public function actionDefault($query = NULL)
+	public function run(\Nette\Application\Request $request): \Nette\Application\IResponse
 	{
-		$requestString = $query;
-		$variableValues = NULL;
+		//TODO: check Authorization header (only if application service throw unauthorized exception)!
 
-		$httpRequest = $this->getHttpRequest();
+		$httpRequest = $this->httpRequest;
 		if ($httpRequest->isMethod('POST')) {
 			// http://graphql.org/learn/serving-over-http/#post-request
-			$queryData = Json::decode($this->getHttpRequest()->getRawBody(), Json::FORCE_ARRAY);
+			$queryData = Json::decode($httpRequest->getRawBody(), Json::FORCE_ARRAY);
 			$requestString = $queryData['query'];
 			$variableValues = $queryData['variables'] ?? [];
-		} elseif ($query === NULL) {
-			$this->sendJson(['Empty query.']);
+
+			return new JsonResponse(\GraphQL\GraphQL::execute(
+				$this->schemaFactory->build(),
+				$requestString,
+				NULL,
+				$this->user,
+				$variableValues
+			));
+		} else {
+			return new GraphQL\Bridge\Application\Responses\GraphqlErrorResponse(
+				$httpRequest->getMethod() . ' method is not allowed.'
+			);
 		}
-		$this->sendJson(\GraphQL\GraphQL::execute(
-			$this->schemaFactory->build(),
-			$requestString,
-			NULL,
-			$this->getUser(),
-			$variableValues
-		));
 	}
 
 }
