@@ -10,6 +10,11 @@ interface IUserRepository
 	/**
 	 * @return User | NULL
 	 */
+	public function ofId(UserId $userId);//: ?User;
+
+	/**
+	 * @return User | NULL
+	 */
 	public function ofUsername(string $username);//: ?User;
 
 	public function nextIdentity(): UserId;

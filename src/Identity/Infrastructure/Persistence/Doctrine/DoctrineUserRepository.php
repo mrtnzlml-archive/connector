@@ -29,6 +29,11 @@ class DoctrineUserRepository implements DomainModel\User\IUserRepository
 		$this->em->persist($user);
 	}
 
+	public function ofId(DomainModel\User\UserId $userId)
+	{
+		return $this->userRepository->find($userId);
+	}
+
 	public function ofUsername(string $username)//: ?User
 	{
 		return $this->userRepository->findOneBy([

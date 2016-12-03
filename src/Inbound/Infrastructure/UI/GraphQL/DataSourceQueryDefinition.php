@@ -37,6 +37,7 @@ class DataSourceQueryDefinition implements \Adeira\Connector\GraphQL\IQueryDefin
 					],
 				],
 				'resolve' => function ($obj, $args, \Nette\Security\User $context) {
+					//TODO: authorization (which layer?)
 					return $this->dataSourceRepository->ofId(
 						DataSourceId::createFromString($args['id'])
 					);
