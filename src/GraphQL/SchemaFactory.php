@@ -19,8 +19,10 @@ class SchemaFactory
 
 		/** @var IQueryDefinition $type */
 		foreach ($queryDefinitions as $type) {
-			$definition = $type->__invoke();
-			$this->queryDefinitions[key($definition)] = $definition[key($definition)]; //FIXME: ne jen klíč, ale všechny klíče (?)
+			$definitions = $type->__invoke();
+			foreach ($definitions as $definitionName => $definition) {
+				$this->queryDefinitions[$definitionName] = $definition;
+			}
 		}
 	}
 
@@ -32,8 +34,10 @@ class SchemaFactory
 
 		/** @var IMutationDefinition $type */
 		foreach ($mutationDefinitions as $type) {
-			$definition = $type->__invoke();
-			$this->mutationDefinitions[key($definition)] = $definition[key($definition)]; //FIXME: ne jen klíč, ale všechny klíče (?)
+			$definitions = $type->__invoke();
+			foreach ($definitions as $definitionName => $definition) {
+				$this->mutationDefinitions[$definitionName] = $definition;
+			}
 		}
 	}
 

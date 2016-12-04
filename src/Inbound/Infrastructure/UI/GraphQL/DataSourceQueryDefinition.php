@@ -24,9 +24,10 @@ class DataSourceQueryDefinition implements \Adeira\Connector\GraphQL\IQueryDefin
 	 */
 	public function __invoke(): array
 	{
+		$dataSourceType = (new DataSourceType)(); //FIXME: singleton
 		return [
 			'device' => [
-				'type' => (new DataSourceType)(),
+				'type' => $dataSourceType,
 				'args' => [
 					'id' => [
 						'name' => 'id',
@@ -42,6 +43,9 @@ class DataSourceQueryDefinition implements \Adeira\Connector\GraphQL\IQueryDefin
 						DataSourceId::createFromString($args['id'])
 					);
 				},
+			],
+			'devices' => [
+				'type' => $dataSourceType,
 			],
 		];
 	}
