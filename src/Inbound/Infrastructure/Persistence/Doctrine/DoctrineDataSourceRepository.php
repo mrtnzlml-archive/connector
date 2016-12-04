@@ -42,6 +42,11 @@ class DoctrineDataSourceRepository /*extends ORM\EntityRepository*/ implements D
 		]);
 	}
 
+	public function all()
+	{
+		return $this->dataSourceRepository->findAll();
+	}
+
 	public function nextIdentity(): DomainModel\DataSource\DataSourceId
 	{
 		return DomainModel\DataSource\DataSourceId::create();

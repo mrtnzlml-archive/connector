@@ -45,7 +45,11 @@ class DataSourceQueryDefinition implements \Adeira\Connector\GraphQL\IQueryDefin
 				},
 			],
 			'devices' => [
-				'type' => $dataSourceType,
+				'type' => Definition\Type::listOf($dataSourceType),
+				'resolve' => function ($obj, $args, \Nette\Security\User $context) {
+					//TODO: authorization (which layer?)
+					return $this->dataSourceRepository->all();
+				},
 			],
 		];
 	}

@@ -42,21 +42,25 @@ class IntrospectionCommand extends \Symfony\Component\Console\Command\Command
 	{
 		$schema = $this->schemaFactory->build();
 
-		/** @var \GraphQL\Type\Definition\ObjectType $objectType */
+		/** @var \GraphQL\Type\Definition\Type $objectType */
 		foreach ($schema->getTypeMap() as $typeName => $objectType) {
 			// skip internal types
 			if (in_array($typeName, $this->internalTypes)) {
 				continue;
 			}
 
-			$this->printType($input, $output, $objectType);
+			if ($objectType instanceof \GraphQL\Type\Definition\InputType) {
+				//TODO: printInputType
+			} else {
+				$this->printOutputType($input, $output, $objectType);
+			}
 		}
 	}
 
-	private function printType(
+	private function printOutputType(
 		InputInterface $input,
 		OutputInterface $output,
-		\GraphQL\Type\Definition\ObjectType $objectType
+		\GraphQL\Type\Definition\Type $objectType
 	) {
 		$output->writeln("<fg=blue;options=bold>type $objectType {</>");
 		foreach ($objectType->getFields() as $name => $fieldDefinition) {

@@ -9,6 +9,13 @@ doctrine.orm:
 			UserId: Adeira\Connector\Identity\Infrastructure\DomainModel\DoctrineUserIdType
 
 
+http:
+	headers: # CORS: Cross-Origin Resource Sharing
+		Access-Control-Allow-Headers: 'Authorization, Content-Type'
+		Access-Control-Allow-Methods: 'GET, POST, OPTIONS, HEAD'
+		Access-Control-Allow-Origin: https://adeira.loc:3000
+
+
 services:
 	- Adeira\Connector\Identity\Application\Service\CreateUserService
 	- Adeira\Connector\Identity\Application\Service\SignInService

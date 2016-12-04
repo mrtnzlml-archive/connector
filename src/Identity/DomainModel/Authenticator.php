@@ -48,7 +48,7 @@ class Authenticator implements \Nette\Security\IAuthenticator
 	{
 		$payload = [
 			'iat' => time(), // Issued At
-			'exp' => time() + 100, // Expiration Time
+			'exp' => time() + (60 * 60), // Expiration Time (60 mins; 60 secs)
 		];
 		return \Firebase\JWT\JWT::encode($payload, $this->privateJWTkey, 'HS512');
 	}

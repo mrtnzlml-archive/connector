@@ -22,18 +22,28 @@ class GraphqlEndpoint implements \Nette\Application\IPresenter
 	private $httpRequest;
 
 	/**
+	 * @var \Nette\Http\IResponse
+	 */
+	private $httpResponse;
+
+	/**
 	 * @var \Nette\Security\User
 	 */
 	private $user;
 
-	public function __construct(GraphQL\SchemaFactory $schemaFactory, Http\IRequest $httpRequest, User $user)
-	{
+	public function __construct(
+		GraphQL\SchemaFactory $schemaFactory,
+		Http\IRequest $httpRequest,
+		Http\IResponse $response,
+		User $user
+	) {
 		$this->schemaFactory = $schemaFactory;
 		$this->httpRequest = $httpRequest;
+		$this->httpResponse = $response;
 		$this->user = $user;
 	}
 
-	public function run(\Nette\Application\Request $request): \Nette\Application\IResponse
+	public function run(\Nette\Application\Request $request)//: ?\Nette\Application\IResponse
 	{
 		//TODO: check Authorization header (only if application service throw unauthorized exception)!
 
@@ -44,15 +54,19 @@ class GraphqlEndpoint implements \Nette\Application\IPresenter
 			$requestString = $queryData['query'];
 			$variableValues = $queryData['variables'] ?? [];
 
-			return new JsonResponse(\GraphQL\GraphQL::execute( //FIXME retur 500 is error (?)
+			$graphResponse = \GraphQL\GraphQL::execute(
 				$this->schemaFactory->build(),
 				$requestString,
 				NULL,
 				$this->user,
 				$variableValues
-			));
+			);
+			if (isset($graphResponse['errors'])) {
+				$this->httpResponse->setCode(Http\IResponse::S422_UNPROCESSABLE_ENTITY);
+			}
+			return new JsonResponse($graphResponse);
 		} elseif ($httpRequest->isMethod(Http\IRequest::OPTIONS)) {
-			return new JsonResponse([':)']); //FIXME: what is the right response?
+			return NULL; //terminate
 		} else {
 			return new GraphQL\Bridge\Application\Responses\GraphqlErrorResponse(
 				$httpRequest->getMethod() . ' method is not allowed.',
