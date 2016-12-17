@@ -2,6 +2,8 @@
 
 namespace Adeira\Connector\Symfony\Console\DI;
 
+use Nette\DI;
+
 final class Extension extends \Nette\DI\CompilerExtension
 {
 
@@ -22,10 +24,14 @@ final class Extension extends \Nette\DI\CompilerExtension
 
 		$commandServices = [];
 		foreach ($config['commands'] as $commandName => $commandClass) {
-			$commandServices[$commandName] = $builder
-				->addDefinition($this->prefix('command.' . $commandName))
-				->setClass($commandClass)
-				->setInject(TRUE);
+			if (!is_array($commandClass)) {
+				$commandClass = ['class' => $commandClass];
+			}
+			$defName = $this->prefix('command.' . $commandName);
+			DI\Compiler::loadDefinitions($builder, [
+				$defName => $commandClass + ['inject' => TRUE],
+			]);
+			$commandServices[$commandName] = $builder->getDefinition($defName);
 		}
 
 		$builder

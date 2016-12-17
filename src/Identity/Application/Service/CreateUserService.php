@@ -2,9 +2,9 @@
 
 namespace Adeira\Connector\Identity\Application\Service;
 
+use Adeira\Connector\Common\Application\Service\ITransactionalSession;
 use Adeira\Connector\Identity\DomainModel\User\IUserRepository;
 use Adeira\Connector\Identity\DomainModel\User\User;
-use Doctrine\ORM\EntityManagerInterface;
 use Nette\Security\Passwords;
 
 class CreateUserService
@@ -16,14 +16,14 @@ class CreateUserService
 	private $userRepository;
 
 	/**
-	 * @var \Doctrine\ORM\EntityManagerInterface
+	 * @var \Adeira\Connector\Common\Application\Service\ITransactionalSession
 	 */
-	private $em;
+	private $transactionalSession;
 
-	public function __construct(IUserRepository $userRepository, EntityManagerInterface $em)
+	public function __construct(IUserRepository $userRepository, ITransactionalSession $transactionalSession)
 	{
 		$this->userRepository = $userRepository;
-		$this->em = $em;
+		$this->transactionalSession = $transactionalSession;
 	}
 
 	public function execute($username, $password) //TODO: DTO
@@ -35,7 +35,7 @@ class CreateUserService
 		$user->changePass($password, [Passwords::class, 'hash']);
 
 		try {
-			$this->em->transactional(function () use ($user) {
+			$this->transactionalSession->executeAtomically(function () use ($user) {
 				$this->userRepository->add($user);
 			});
 		} catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $exc) {

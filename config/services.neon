@@ -5,3 +5,8 @@
 services:
 	migrations.codeStyle: Adeira\Connector\Migrations\CodeStyle
 	router: Adeira\Connector\Routing\RouterFactory::createRouter
+
+	doctrineSession: Adeira\Connector\Common\Infrastructure\Application\Service\DoctrineSession
+	dummySession:
+		class: Adeira\Connector\Common\Infrastructure\Application\Service\DummySession
+		autowired: no

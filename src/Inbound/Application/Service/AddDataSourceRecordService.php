@@ -2,12 +2,12 @@
 
 namespace Adeira\Connector\Inbound\Application\Service;
 
+use Adeira\Connector\Common\Application\Service\ITransactionalSession;
 use Adeira\Connector\Inbound\DomainModel\DataSource\DataSource;
 use Adeira\Connector\Inbound\DomainModel\DataSource\DataSourceId;
 use Adeira\Connector\Inbound\DomainModel\DataSource\IDataSourceRepository;
 use Adeira\Connector\Inbound\DomainModel\DataSourceRecord\DataSourceRecord;
 use Adeira\Connector\Inbound\DomainModel\DataSourceRecord\IDataSourceRecordRepository;
-use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Application services should depend on abstraction (interfaces) so we'll make our Application Service immune to
@@ -30,18 +30,18 @@ class AddDataSourceRecordService
 	private $dataSourceRecordRepository;
 
 	/**
-	 * @var \Doctrine\ORM\EntityManagerInterface
+	 * @var \Adeira\Connector\Common\Application\Service\ITransactionalSession
 	 */
-	private $em;
+	private $transactionalSession;
 
 	public function __construct(
 		IDataSourceRepository $dataSourceRepository,
 		IDataSourceRecordRepository $dataSourceRecordRepository,
-		EntityManagerInterface $em
+		ITransactionalSession $transactionalSession
 	) {
 		$this->dataSourceRepository = $dataSourceRepository;
 		$this->dataSourceRecordRepository = $dataSourceRecordRepository;
-		$this->em = $em;
+		$this->transactionalSession = $transactionalSession;
 	}
 
 	/**
@@ -49,18 +49,19 @@ class AddDataSourceRecordService
 	 */
 	public function execute(AddDataSourceRecordRequest $request): bool
 	{
-		$dataSource = $this->findDataSourceOrFail(
-			$request->dataSourceId()
-		);
+		return $this->transactionalSession->executeAtomically(function () use ($request) {
+			$dataSource = $this->findDataSourceOrFail(
+				$request->dataSourceId()
+			);
 
-		$this->dataSourceRecordRepository->add(new DataSourceRecord(
-			$this->dataSourceRecordRepository->nextIdentity(),
-			$dataSource->id(),
-			$request->data()
-		));
+			$this->dataSourceRecordRepository->add(new DataSourceRecord(
+				$this->dataSourceRecordRepository->nextIdentity(),
+				$dataSource->id(),
+				$request->data()
+			));
 
-		$this->em->flush();// FIXME: this is maybe weird?
-		return TRUE; //TODO
+			return TRUE; //TODO
+		});
 	}
 
 	private function findDataSourceOrFail(string $dataSourceId): DataSource

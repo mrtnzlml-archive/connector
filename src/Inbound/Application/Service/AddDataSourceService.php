@@ -2,8 +2,8 @@
 
 namespace Adeira\Connector\Inbound\Application\Service;
 
+use Adeira\Connector\Common\Application\Service\ITransactionalSession;
 use Adeira\Connector\Inbound\DomainModel;
-use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Application services should depend on abstraction (interfaces) so we'll make our Application Service immune to
@@ -21,16 +21,16 @@ class AddDataSourceService
 	private $dataSourceRepository;
 
 	/**
-	 * @var \Doctrine\ORM\EntityManagerInterface
+	 * @var \Adeira\Connector\Common\Application\Service\ITransactionalSession
 	 */
-	private $em;
+	private $transactionalSession;
 
 	public function __construct(
 		DomainModel\DataSource\IDataSourceRepository $dataSourceRepository,
-		EntityManagerInterface $em
+		ITransactionalSession $transactionalSession
 	) {
 		$this->dataSourceRepository = $dataSourceRepository;
-		$this->em = $em;
+		$this->transactionalSession = $transactionalSession;
 	}
 
 	/**
@@ -38,16 +38,16 @@ class AddDataSourceService
 	 */
 	public function execute(AddDataSourceRequest $request): AddDataSourceResponse
 	{
-		$this->dataSourceRepository->add($dataSource = new DomainModel\DataSource\DataSource(
-			$this->dataSourceRepository->nextIdentity(),
-			$request->name()
-		));
+		return $this->transactionalSession->executeAtomically(function () use ($request) {
+			$this->dataSourceRepository->add($dataSource = new DomainModel\DataSource\DataSource(
+				$this->dataSourceRepository->nextIdentity(),
+				$request->name()
+			));
 
-		$this->em->flush();// FIXME: this is maybe weird?
-		return new AddDataSourceResponse($dataSource->id()); // it's returned to the controller!
-
-		//instead of manual DTO creation it's better to use DTO assembler:
-		//return $this->dataSourceDtoAssembler->assemble($dataSource);
+			//instead of manual DTO creation it's better to use DTO assembler:
+			//return $this->dataSourceDtoAssembler->assemble($dataSource);
+			return new AddDataSourceResponse($dataSource->id()); // it's returned to the controller!
+		});
 	}
 
 }
