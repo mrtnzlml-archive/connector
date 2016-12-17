@@ -49,9 +49,8 @@ class IntrospectionCommand extends \Symfony\Component\Console\Command\Command
 				continue;
 			}
 
-			if ($objectType instanceof \GraphQL\Type\Definition\InputType) {
-				//TODO: printInputType
-			} else {
+			//TODO: printInputType
+			if (!$objectType instanceof \GraphQL\Type\Definition\InputType) {
 				$this->printOutputType($input, $output, $objectType);
 			}
 		}
