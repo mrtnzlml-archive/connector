@@ -7,9 +7,9 @@ use Adeira\Connector\Doctrine\ORM;
 class Extension extends \Adeira\CompilerExtension implements ORM\DI\IMappingFilesPathsProvider
 {
 
-	public function loadConfiguration()
+	public function provideConfig()
 	{
-		$this->addConfig(__DIR__ . '/config.neon');
+		return __DIR__ . '/config.neon';
 	}
 
 	public function getMappingFilesPaths(): array

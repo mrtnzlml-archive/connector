@@ -3,7 +3,7 @@
   "type": "project",
   "license": "MIT",
   "require": {
-    "adeira/compiler-extension": "^1.0",
+    "adeira/compiler-extension": "^2.0",
     "boldtrn/jsonb-bundle": "^1.1",
     "doctrine/orm": "^2.5",
     "firebase/php-jwt": "^4.0",

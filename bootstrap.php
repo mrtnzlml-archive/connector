@@ -3,6 +3,7 @@
 require __DIR__ . '/vendor/autoload.php';
 
 $configurator = new Nette\Configurator;
+$configurator->defaultExtensions['extensions'] = \Adeira\ConfigurableExtensionsExtension::class;
 
 if (PHP_SAPI === 'cli') {
 	$input = new \Symfony\Component\Console\Input\ArgvInput;
@@ -25,6 +26,4 @@ $configurator->addConfig(__DIR__ . '/config/config.local.neon');
 	return ['value' => $uuid->toString()];
 };
 
-$container = $configurator->createContainer();
-
-return $container;
+return $configurator->createContainer();

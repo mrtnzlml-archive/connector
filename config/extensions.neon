@@ -3,14 +3,12 @@
 
 
 extensions:
-	# custom bundle extensions must go first because they may change setting of extensions bellow TODO - fix it somehow
-	inbound: Adeira\Connector\Inbound\Infrastructure\Bridge\Nette\DI\Extension
-	users: Adeira\Connector\Identity\Infrastructure\Bridge\Nette\DI\Extension
-
 	- Arachne\ContainerAdapter\DI\ContainerAdapterExtension # because of migrations
 	- Arachne\EventDispatcher\DI\EventDispatcherExtension # because of migrations
 	doctrine.orm: Adeira\Connector\Doctrine\ORM\DI\Extension(%debugMode%)
 	fakeSession: Kdyby\FakeSession\DI\FakeSessionExtension
 	graphql: Adeira\Connector\GraphQL\Bridge\Nette\DI\Extension
+	inbound: Adeira\Connector\Inbound\Infrastructure\Bridge\Nette\DI\Extension
 	migrations: Zenify\DoctrineMigrations\DI\MigrationsExtension
 	symfony.console: Adeira\Connector\Symfony\Console\DI\Extension
+	users: Adeira\Connector\Identity\Infrastructure\Bridge\Nette\DI\Extension
