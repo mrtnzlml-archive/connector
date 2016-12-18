@@ -21,7 +21,7 @@ class DataSource
 	private $id;
 
 	/**
-	 * @var User[]
+	 * @var ArrayCollection | User[]
 	 */
 	private $owners;
 

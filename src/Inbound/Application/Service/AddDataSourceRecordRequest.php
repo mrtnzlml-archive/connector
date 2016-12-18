@@ -20,7 +20,7 @@ class AddDataSourceRecordRequest
 	private $dataSourceId;
 
 	/**
-	 * @var string
+	 * @var array
 	 */
 	private $data;
 

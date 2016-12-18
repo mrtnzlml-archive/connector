@@ -59,7 +59,7 @@ class IntrospectionCommand extends \Symfony\Component\Console\Command\Command
 	private function printOutputType(
 		InputInterface $input,
 		OutputInterface $output,
-		\GraphQL\Type\Definition\Type $objectType
+		\GraphQL\Type\Definition\ObjectType $objectType
 	) {
 		$output->writeln("<fg=blue;options=bold>type $objectType {</>");
 		foreach ($objectType->getFields() as $name => $fieldDefinition) {

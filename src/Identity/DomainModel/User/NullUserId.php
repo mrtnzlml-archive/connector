@@ -22,12 +22,12 @@ class NullUserId extends UserId
 
 	private static $NIL = \Ramsey\Uuid\Uuid::NIL;
 
-	public static function create(Uuid $anId = NULL): parent
+	public static function create(Uuid $anId = NULL): UserId
 	{
 		return self::createFromString(self::$NIL);
 	}
 
-	public static function createFromString(string $anId): parent
+	public static function createFromString(string $anId): UserId
 	{
 		return parent::createFromString(self::$NIL);
 	}
