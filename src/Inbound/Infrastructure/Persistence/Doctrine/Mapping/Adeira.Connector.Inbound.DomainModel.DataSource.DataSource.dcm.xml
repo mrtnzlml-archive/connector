@@ -10,6 +10,17 @@
 			<generator strategy="NONE"/>
 		</id>
 
+		<many-to-many target-entity="Adeira\Connector\Identity\DomainModel\User\User" field="owners">
+			<join-table name="data_sources_user_accounts">
+				<join-columns>
+					<join-column name="data_source_id"/>
+				</join-columns>
+				<inverse-join-columns>
+					<join-column name="user_account_id"/>
+				</inverse-join-columns>
+			</join-table>
+		</many-to-many>
+
 		<field name="deviceName" column="device_name" type="string"/>
 
 	</entity>

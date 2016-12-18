@@ -2,21 +2,31 @@
 
 namespace Adeira\Connector\Inbound\Infrastructure\UI\GraphQL;
 
+use Adeira\Connector\Identity\DomainModel\User\UserId;
+use Adeira\Connector\Inbound\Application\Service\DataSource\ViewAllDataSourcesService;
+use Adeira\Connector\Inbound\Application\Service\DataSource\ViewSingleDataSourceService;
 use Adeira\Connector\Inbound\DomainModel\DataSource\DataSourceId;
-use Adeira\Connector\Inbound\DomainModel\DataSource\IDataSourceRepository;
 use GraphQL\Type\Definition;
 
 class DataSourceQueryDefinition implements \Adeira\Connector\GraphQL\IQueryDefinition
 {
 
 	/**
-	 * @var \Adeira\Connector\Inbound\DomainModel\DataSource\IDataSourceRepository
+	 * @var \Adeira\Connector\Inbound\Application\Service\DataSource\ViewAllDataSourcesService
 	 */
-	private $dataSourceRepository;
+	private $allDataSourcesService;
 
-	public function __construct(IDataSourceRepository $dataSourceRepository)
-	{
-		$this->dataSourceRepository = $dataSourceRepository;
+	/**
+	 * @var \Adeira\Connector\Inbound\Application\Service\DataSource\ViewSingleDataSourceService
+	 */
+	private $singleDataSourceService;
+
+	public function __construct(
+		ViewAllDataSourcesService $allDataSourcesService,
+		ViewSingleDataSourceService $singleDataSourceService
+	) {
+		$this->allDataSourcesService = $allDataSourcesService;
+		$this->singleDataSourceService = $singleDataSourceService;
 	}
 
 	/**
@@ -37,18 +47,17 @@ class DataSourceQueryDefinition implements \Adeira\Connector\GraphQL\IQueryDefin
 						),
 					],
 				],
-				'resolve' => function ($obj, $args, \Nette\Security\User $context) {
-					//TODO: authorization (which layer?)
-					return $this->dataSourceRepository->ofId(
+				'resolve' => function ($obj, $args, UserId $userId) {
+					return $this->singleDataSourceService->execute(
+						$userId,
 						DataSourceId::createFromString($args['id'])
 					);
 				},
 			],
 			'devices' => [
 				'type' => Definition\Type::listOf($dataSourceType),
-				'resolve' => function ($obj, $args, \Nette\Security\User $context) {
-					//TODO: authorization (which layer?)
-					return $this->dataSourceRepository->all();
+				'resolve' => function ($obj, $args, UserId $userId) {
+					return $this->allDataSourcesService->execute($userId);
 				},
 			],
 		];

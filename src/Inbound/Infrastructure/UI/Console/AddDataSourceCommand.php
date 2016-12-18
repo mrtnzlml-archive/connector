@@ -2,8 +2,10 @@
 
 namespace Adeira\Connector\Inbound\Infrastructure\UI\Console;
 
+use Adeira\Connector\Identity\DomainModel\User\UserId;
 use Adeira\Connector\Inbound\Application;
 use Nette\Utils\Json;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -31,13 +33,19 @@ class AddDataSourceCommand extends \Symfony\Component\Console\Command\Command
 
 	protected function configure()
 	{
-		$this->setName('app:add:dataSource')->setDescription('Add new data source to the database.');
+		$this->setName('app:add:dataSource');
+		$this->setDescription('Add new data source to the database.');
+		$this->addArgument('userId', InputArgument::REQUIRED, 'ID of the data source owner?');
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
+		$userId = $input->getArgument('userId');
 		$response = $this->addDataSourceService->execute(
-			new Application\Service\AddDataSourceRequest('Device Name')
+			new Application\Service\AddDataSourceRequest(
+				'Device Name',
+				UserId::createFromString($userId)
+			)
 		);
 
 		$dataSourceId = $response->id();

@@ -2,6 +2,7 @@
 
 namespace Adeira\Connector\Inbound\Infrastructure\Persistence\Doctrine;
 
+use Adeira\Connector\Identity\DomainModel\User\UserId;
 use Adeira\Connector\Inbound\DomainModel;
 use Adeira\Connector\Inbound\DomainModel\DataSource\DataSource;
 use Adeira\Connector\Inbound\DomainModel\DataSource\DataSourceId;
@@ -11,7 +12,8 @@ use Doctrine\ORM;
  * Do not call flush() here! Flushing and dealing with transactions is delegated to the Application Service.
  * All behavior should still follow the Repositories’ collection characteristics.
  */
-class DoctrineDataSourceRepository /*extends ORM\EntityRepository*/ implements DomainModel\DataSource\IDataSourceRepository
+class DoctrineDataSourceRepository /*extends ORM\EntityRepository*/
+	implements DomainModel\DataSource\IDataSourceRepository
 {
 
 	/**
@@ -42,9 +44,16 @@ class DoctrineDataSourceRepository /*extends ORM\EntityRepository*/ implements D
 		]);
 	}
 
-	public function all()
+	public function all(UserId $userId)
 	{
-		return $this->dataSourceRepository->findAll();
+		$qb = $this->em->createQueryBuilder();
+		$qb->from(\Adeira\Connector\Inbound\DomainModel\DataSource\DataSource::class, 'd')
+			->leftJoin('d.owners', 'o')
+			->select([
+				'd', // data sources
+				'o', // owners
+			])->where('o.id = :userId')->setParameter(':userId', $userId);
+		return $qb->getQuery()->getResult();
 	}
 
 	public function nextIdentity(): DomainModel\DataSource\DataSourceId

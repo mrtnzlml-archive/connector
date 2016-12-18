@@ -3,6 +3,9 @@
 namespace Adeira\Connector\Endpoints;
 
 use Adeira\Connector\GraphQL;
+use Adeira\Connector\Identity\DomainModel\ITokenStrategy;
+use Adeira\Connector\Identity\DomainModel\User\NullUserId;
+use Adeira\Connector\Identity\DomainModel\User\UserId;
 use Nette\Application\Responses\JsonResponse;
 use Nette\Http;
 use Nette\Security\User;
@@ -31,24 +34,38 @@ class GraphqlEndpoint implements \Nette\Application\IPresenter
 	 */
 	private $user;
 
+	/**
+	 * @var \Adeira\Connector\Identity\DomainModel\ITokenStrategy
+	 */
+	private $tokenStrategy;
+
 	public function __construct(
 		GraphQL\SchemaFactory $schemaFactory,
 		Http\IRequest $httpRequest,
 		Http\IResponse $response,
-		User $user
+		User $user,
+		ITokenStrategy $tokenStrategy
 	) {
 		$this->schemaFactory = $schemaFactory;
 		$this->httpRequest = $httpRequest;
 		$this->httpResponse = $response;
 		$this->user = $user;
+		$this->tokenStrategy = $tokenStrategy;
 	}
 
 	public function run(\Nette\Application\Request $request)//: ?\Nette\Application\IResponse
 	{
-		//TODO: check Authorization header (only if application service throw unauthorized exception)!
-
 		$httpRequest = $this->httpRequest;
 		if ($httpRequest->isMethod(Http\IRequest::POST)) {
+			$userId = $this->user->getId(); // may be NULL
+
+			$authHeader = $httpRequest->getHeader('authorization');
+			if ($authHeader) {
+				$jwtToken = $authHeader;
+				$payload = $this->tokenStrategy->decodeToken($jwtToken);
+				$userId = $payload->uuid; //TODO: check validity (exp - token is no longer valid)
+			}
+
 			// http://graphql.org/learn/serving-over-http/#post-request
 			$queryData = Json::decode($httpRequest->getRawBody(), Json::FORCE_ARRAY);
 			$requestString = $queryData['query'];
@@ -58,7 +75,7 @@ class GraphqlEndpoint implements \Nette\Application\IPresenter
 				$this->schemaFactory->build(),
 				$requestString,
 				NULL,
-				$this->user,
+				$userId ? UserId::createFromString($userId) : NullUserId::create(),
 				$variableValues
 			);
 			if (isset($graphResponse['errors'])) {

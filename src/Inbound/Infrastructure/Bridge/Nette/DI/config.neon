@@ -7,9 +7,12 @@ doctrine.orm:
 
 services:
 	- Adeira\Connector\Inbound\Application\Service\AddDataSourceRecordService
+	- Adeira\Connector\Inbound\Application\Service\DataSource\ViewAllDataSourcesService
+	- Adeira\Connector\Inbound\Application\Service\DataSource\ViewSingleDataSourceService
 	- class: Adeira\Connector\Inbound\Application\Service\AddDataSourceService
 	  arguments:
 	  	transactionalSession: @doctrineSession # @dummySession
+	  	ownerService: @userIdOwnerService # @jwtOwnerService
 	dataSourceRecordRepository: Adeira\Connector\Inbound\Infrastructure\Persistence\Doctrine\DoctrineDataSourceRecordRepository
 	dataSourceRepository: Adeira\Connector\Inbound\Infrastructure\Persistence\Doctrine\DoctrineDataSourceRepository
 

@@ -14,14 +14,14 @@ class Authenticator implements \Nette\Security\IAuthenticator
 	private $userRepository;
 
 	/**
-	 * @var string
+	 * @var \Adeira\Connector\Identity\DomainModel\ITokenStrategy
 	 */
-	private $privateJWTkey;
+	private $tokenStrategy;
 
-	public function __construct(DomainModel\User\IUserRepository $userRepository, $privateJWTkey)
+	public function __construct(DomainModel\User\IUserRepository $userRepository, ITokenStrategy $tokenStrategy)
 	{
 		$this->userRepository = $userRepository;
-		$this->privateJWTkey = $privateJWTkey;
+		$this->tokenStrategy = $tokenStrategy;
 	}
 
 	public function authenticate(array $credentials): DomainModel\User\User
@@ -31,7 +31,7 @@ class Authenticator implements \Nette\Security\IAuthenticator
 
 		if (!$user) {
 			throw new \Nette\Security\AuthenticationException('The username is incorrect.', self::IDENTITY_NOT_FOUND);
-		} elseif (!$user->authenticate($password, [Passwords::class, 'verify'], [$this, 'generateJsonWebToken'])) {
+		} elseif (!$user->authenticate($password, [Passwords::class, 'verify'], [$this->tokenStrategy, 'generateNewToken'])) {
 			throw new \Nette\Security\AuthenticationException('The password is incorrect.', self::INVALID_CREDENTIAL);
 		} elseif ($user->needRehash([Passwords::class, 'needsRehash'])) {
 			$user->changePass($password, [Passwords::class, 'hash']);
@@ -39,18 +39,6 @@ class Authenticator implements \Nette\Security\IAuthenticator
 		}
 
 		return $user;
-	}
-
-	/**
-	 * This function is called during authentication from entity so it's possible to change implementation in future.
-	 */
-	public function generateJsonWebToken(): string
-	{
-		$payload = [
-			'iat' => time(), // Issued At
-			'exp' => time() + (60 * 60), // Expiration Time (60 mins; 60 secs)
-		];
-		return \Firebase\JWT\JWT::encode($payload, $this->privateJWTkey, 'HS512');
 	}
 
 }

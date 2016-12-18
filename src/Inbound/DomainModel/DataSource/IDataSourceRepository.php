@@ -2,16 +2,18 @@
 
 namespace Adeira\Connector\Inbound\DomainModel\DataSource;
 
+use Adeira\Connector\Identity\DomainModel\User\UserId;
+
 interface IDataSourceRepository
 {
 
 	public function add(DataSource $aDataSource);
 
+//	public function addAll(array $dataSources);
+
 	public function ofId(DataSourceId $dataSourceId);//: ?DataSource;
 
-	public function all();//: iterable;
-
-//	public function addAll(array $dataSources);
+	public function all(UserId $userId);//: iterable;
 
 //	public function remove(DataSource $aDataSource);
 

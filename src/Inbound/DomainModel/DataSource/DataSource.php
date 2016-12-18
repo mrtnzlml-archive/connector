@@ -2,8 +2,10 @@
 
 namespace Adeira\Connector\Inbound\DomainModel\DataSource;
 
+use Adeira\Connector\Identity\DomainModel\User\User;
 use Adeira\Connector\Inbound\DomainModel\DataSourceRecord\DataSourceRecord;
 use Adeira\Connector\Inbound\DomainModel\DataSourceRecord\DataSourceRecordId;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * This is entity without mapping. Mapping is infrastructure detail.
@@ -14,18 +16,30 @@ class DataSource
 {
 
 	/**
-	 * @var DataSourceId
+	 * @var \Adeira\Connector\Inbound\DomainModel\DataSource\DataSourceId
 	 */
 	private $id;
+
+	/**
+	 * @var User[]
+	 */
+	private $owners;
 
 	/**
 	 * @var string
 	 */
 	private $deviceName;
 
-	public function __construct(DataSourceId $id, string $deviceName)
+	/**
+	 * TODO: maybe instead of User use actual Owner to prevent bypasing Owner check
+	 */
+	public function __construct(DataSourceId $id, User $owner, string $deviceName)
 	{
 		$this->id = $id;
+
+		$this->owners = new ArrayCollection;
+		$this->owners->add($owner);
+
 		$this->deviceName = $deviceName;
 	}
 

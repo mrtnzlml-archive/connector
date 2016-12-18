@@ -19,7 +19,12 @@ http:
 services:
 	- Adeira\Connector\Identity\Application\Service\CreateUserService
 	- Adeira\Connector\Identity\Application\Service\SignInService
-	- Adeira\Connector\Identity\DomainModel\Authenticator(..., %identity.jwtPrivateKey%)
+	- Adeira\Connector\Identity\DomainModel\Authenticator
+	- Adeira\Connector\Identity\Infrastructure\DomainModel\JsonWebTokenStrategy(%identity.jwtPrivateKey%)
+	jwtOwnerService: Adeira\Connector\Identity\Infrastructure\DomainModel\JwtOwnerService
+	userIdOwnerService:
+		class: Adeira\Connector\Identity\Infrastructure\DomainModel\UserIdOwnerService
+		autowired: no # @jwtOwnerService is autowired
 	userRepository: Adeira\Connector\Identity\Infrastructure\Persistence\Doctrine\DoctrineUserRepository
 
 

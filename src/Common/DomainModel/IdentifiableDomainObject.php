@@ -12,7 +12,7 @@ abstract class IdentifiableDomainObject
 		return $this->id;
 	}
 
-	public function setId($anId)
+	public function setId(string $anId)
 	{
 		$this->id = $anId;
 	}

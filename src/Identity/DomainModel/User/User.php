@@ -49,7 +49,9 @@ class User implements \Nette\Security\IIdentity
 	{
 		$passwordCorrect = $checkHash($pass, $this->passwordHash);
 		if ($passwordCorrect === TRUE) {
-			$this->token = $generateToken();
+			$this->token = $generateToken([
+				'uuid' => (string)$this->id(),
+			]);
 		}
 		return $passwordCorrect;
 	}
