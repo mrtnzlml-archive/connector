@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\Inbound\Infrastructure\Persistence\Doctrine;
 
-use Adeira\Connector\Identity\DomainModel\User\UserId;
+use Adeira\Connector\Authentication\DomainModel\User\UserId;
 use Adeira\Connector\Inbound\DomainModel;
 use Adeira\Connector\Inbound\DomainModel\DataSource\DataSource;
 use Adeira\Connector\Inbound\DomainModel\DataSource\DataSourceId;
@@ -12,8 +12,7 @@ use Doctrine\ORM;
  * Do not call flush() here! Flushing and dealing with transactions is delegated to the Application Service.
  * All behavior should still follow the Repositories’ collection characteristics.
  */
-class DoctrineDataSourceRepository /*extends ORM\EntityRepository*/
-	implements DomainModel\DataSource\IDataSourceRepository
+class DoctrineDataSourceRepository /*extends ORM\EntityRepository*/ implements DomainModel\DataSource\IDataSourceRepository
 {
 
 	/**

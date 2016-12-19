@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\Authentication\Application\Exception;
 
-use Adeira\Connector\Identity\DomainModel\User\User;
+use Adeira\Connector\Authentication\DomainModel\User\User;
 
 class DuplicateNameException extends \Exception
 {

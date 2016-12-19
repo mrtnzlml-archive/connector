@@ -5,10 +5,10 @@
 extensions:
 	- Arachne\ContainerAdapter\DI\ContainerAdapterExtension # because of migrations
 	- Arachne\EventDispatcher\DI\EventDispatcherExtension # because of migrations
+	authentication: Adeira\Connector\Authentication\Infrastructure\DI\Nette\Extension
 	doctrine.orm: Adeira\Connector\Doctrine\ORM\DI\Extension(%debugMode%)
 	fakeSession: Kdyby\FakeSession\DI\FakeSessionExtension
 	graphql: Adeira\Connector\GraphQL\Bridge\Nette\DI\Extension
 	inbound: Adeira\Connector\Inbound\Infrastructure\Bridge\Nette\DI\Extension
 	migrations: Zenify\DoctrineMigrations\DI\MigrationsExtension
 	symfony.console: Adeira\Connector\Symfony\Console\DI\Extension
-	users: Adeira\Connector\Identity\Infrastructure\Bridge\Nette\DI\Extension

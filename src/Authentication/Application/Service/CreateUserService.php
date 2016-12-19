@@ -2,16 +2,16 @@
 
 namespace Adeira\Connector\Authentication\Application\Service;
 
+use Adeira\Connector\Authentication\DomainModel\User\IUserRepository;
+use Adeira\Connector\Authentication\DomainModel\User\User;
 use Adeira\Connector\Common\Application\Service\ITransactionalSession;
-use Adeira\Connector\Identity\DomainModel\User\IUserRepository;
-use Adeira\Connector\Identity\DomainModel\User\User;
 use Nette\Security\Passwords;
 
 class CreateUserService
 {
 
 	/**
-	 * @var \Adeira\Connector\Identity\DomainModel\User\IUserRepository
+	 * @var \Adeira\Connector\Authentication\DomainModel\User\IUserRepository
 	 */
 	private $userRepository;
 
@@ -39,7 +39,7 @@ class CreateUserService
 				$this->userRepository->add($user);
 			});
 		} catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $exc) {
-			throw new \Adeira\Connector\Identity\Application\Exception\DuplicateNameException($user);
+			throw new \Adeira\Connector\Authentication\Application\Exception\DuplicateNameException($user);
 		}
 	}
 

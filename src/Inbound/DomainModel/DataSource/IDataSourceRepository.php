@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\Inbound\DomainModel\DataSource;
 
-use Adeira\Connector\Identity\DomainModel\User\UserId;
+use Adeira\Connector\Authentication\DomainModel\User\UserId;
 
 interface IDataSourceRepository
 {

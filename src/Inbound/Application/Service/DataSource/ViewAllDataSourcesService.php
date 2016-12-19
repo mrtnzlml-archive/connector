@@ -2,8 +2,8 @@
 
 namespace Adeira\Connector\Inbound\Application\Service\DataSource;
 
-use Adeira\Connector\Identity\DomainModel\User\IOwnerService;
-use Adeira\Connector\Identity\DomainModel\User\UserId;
+use Adeira\Connector\Authentication\DomainModel\Owner\IOwnerService;
+use Adeira\Connector\Authentication\DomainModel\User\UserId;
 use Adeira\Connector\Inbound\DomainModel\DataSource\IDataSourceRepository;
 
 class ViewAllDataSourcesService
@@ -15,7 +15,7 @@ class ViewAllDataSourcesService
 	private $dataSourceRepository;
 
 	/**
-	 * @var \Adeira\Connector\Identity\DomainModel\User\IOwnerService
+	 * @var \Adeira\Connector\Authentication\DomainModel\Owner\IOwnerService
 	 */
 	private $ownerService;
 

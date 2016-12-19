@@ -3,7 +3,7 @@
 namespace Adeira\Connector\Authentication\Application\Service;
 
 use Adeira\Connector\Common\Application\Service\ITransactionalSession;
-use Adeira\Connector\Identity\DomainModel\User\User;
+use Adeira\Connector\Authentication\DomainModel\User\User;
 use Nette\Security\IAuthenticator;
 
 class SignInService

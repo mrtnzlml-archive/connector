@@ -10,7 +10,7 @@
 			<generator strategy="NONE"/>
 		</id>
 
-		<many-to-many target-entity="Adeira\Connector\Identity\DomainModel\User\User" field="owners">
+		<many-to-many target-entity="Adeira\Connector\Authentication\DomainModel\User\User" field="owners">
 			<join-table name="data_sources_user_accounts">
 				<join-columns>
 					<join-column name="data_source_id"/>

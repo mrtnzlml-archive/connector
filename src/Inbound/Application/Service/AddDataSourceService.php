@@ -3,7 +3,7 @@
 namespace Adeira\Connector\Inbound\Application\Service;
 
 use Adeira\Connector\Common\Application\Service\ITransactionalSession;
-use Adeira\Connector\Identity\DomainModel\User\IOwnerService;
+use Adeira\Connector\Authentication\DomainModel\Owner\IOwnerService;
 use Adeira\Connector\Inbound\DomainModel;
 
 /**
@@ -27,7 +27,7 @@ class AddDataSourceService
 	private $transactionalSession;
 
 	/**
-	 * @var \Adeira\Connector\Identity\DomainModel\User\IOwnerService
+	 * @var \Adeira\Connector\Authentication\DomainModel\Owner\IOwnerService
 	 */
 	private $ownerService;
 
