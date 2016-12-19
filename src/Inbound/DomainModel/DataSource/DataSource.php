@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\Inbound\DomainModel\DataSource;
 
-use Adeira\Connector\Identity\DomainModel\User\User;
+use Adeira\Connector\Authentication\DomainModel\User\User;
 use Adeira\Connector\Inbound\DomainModel\DataSourceRecord\DataSourceRecord;
 use Adeira\Connector\Inbound\DomainModel\DataSourceRecord\DataSourceRecordId;
 use Doctrine\Common\Collections\ArrayCollection;

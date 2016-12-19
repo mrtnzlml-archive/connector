@@ -21,3 +21,4 @@ XML Mapping                             http://docs.doctrine-project.org/project
 Dis/advanages (PHP-FPM)                 http://serverfault.com/a/645765
 REACT createa-app README                https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#importing-a-component
 JWT - JSON Web Token                    https://jwt.io/introduction/
+DDD with Symfony2: Folder Structure And Code First      http://williamdurand.fr/2013/08/07/ddd-with-symfony2-folder-structure-and-code-first/

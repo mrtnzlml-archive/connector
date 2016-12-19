@@ -2,8 +2,8 @@
 
 namespace Adeira\Connector\Tests\Inbound\DomainModel\DataSource;
 
-use Adeira\Connector\Identity\DomainModel\User\User;
-use Adeira\Connector\Identity\DomainModel\User\UserId;
+use Adeira\Connector\Authentication\DomainModel\User\User;
+use Adeira\Connector\Authentication\DomainModel\User\UserId;
 use Adeira\Connector\Inbound\DomainModel\DataSource\DataSource;
 use Adeira\Connector\Inbound\DomainModel\DataSource\DataSourceId;
 use Ramsey\Uuid\Uuid;

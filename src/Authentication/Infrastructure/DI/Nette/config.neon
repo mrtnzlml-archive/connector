@@ -1,0 +1,42 @@
+parameters:
+	authentication:
+		jwtPrivateKey: 77c4289ff022e4969c03ea09bf7c22783ce8871e5b6d4393c65941153559292b3903fad9ff4e7fd45e926f4e9ce29c839846a3ed0eb17620c39809112d08af5c
+
+
+doctrine.orm:
+	connection:
+		types:
+			UserId: Adeira\Connector\Authentication\Infrastructure\DomainModel\User\Doctrine\DoctrineUserIdType
+
+
+http:
+	headers: # CORS: Cross-Origin Resource Sharing
+		Access-Control-Allow-Headers: 'Authorization, Content-Type'
+		Access-Control-Allow-Methods: 'GET, POST, OPTIONS, HEAD'
+		Access-Control-Allow-Origin: https://adeira.loc:3000
+
+
+services:
+	- Adeira\Connector\Authentication\Application\Service\CreateUserService
+	- Adeira\Connector\Authentication\Application\Service\SignInService
+	- Adeira\Connector\Authentication\DomainModel\Authenticator
+	- Adeira\Connector\Authentication\Infrastructure\DomainModel\JsonWebTokenStrategy(%authentication.jwtPrivateKey%)
+	jwtOwnerService: Adeira\Connector\Authentication\Infrastructure\DomainModel\Owner\JwtOwnerService
+	userIdOwnerService:
+		class: Adeira\Connector\Authentication\Infrastructure\DomainModel\Owner\UserIdOwnerService
+		autowired: no # @jwtOwnerService is autowired
+	userRepository: Adeira\Connector\Authentication\Infrastructure\Persistence\Doctrine\DoctrineUserRepository
+
+
+symfony.console:
+	commands:
+		- Adeira\Connector\Authentication\Infrastructure\Delivery\Console\Symfony\CreateUserCommand
+
+
+graphql:
+	queryDefinitions:
+		- Adeira\Connector\Authentication\Infrastructure\Delivery\API\GraphQL\QueryDefinitions
+	mutationDefinitions:
+		- Adeira\Connector\Authentication\Infrastructure\Delivery\API\GraphQL\MutationDefinitions
+	types:
+		- Adeira\Connector\Authentication\Infrastructure\Delivery\API\GraphQL\UserType
