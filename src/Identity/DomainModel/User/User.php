@@ -84,7 +84,7 @@ class User implements \Nette\Security\IIdentity
 
 	public function __clone()
 	{
-		$this->id = UserId::create(\Ramsey\Uuid\Uuid::uuid4());
+		$this->id = UserId::create();
 	}
 
 }
