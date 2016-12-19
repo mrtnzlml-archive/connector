@@ -2,10 +2,12 @@
 
 namespace Adeira\Connector\Endpoints;
 
+use Adeira\Connector\Authentication\DomainModel\{
+	ITokenStrategy,
+	User\NullUserId,
+	User\UserId
+};
 use Adeira\Connector\GraphQL;
-use Adeira\Connector\Identity\DomainModel\ITokenStrategy;
-use Adeira\Connector\Identity\DomainModel\User\NullUserId;
-use Adeira\Connector\Identity\DomainModel\User\UserId;
 use Nette\Application\Responses\JsonResponse;
 use Nette\Http;
 use Nette\Security\User;
@@ -35,7 +37,7 @@ class GraphqlEndpoint implements \Nette\Application\IPresenter
 	private $user;
 
 	/**
-	 * @var \Adeira\Connector\Identity\DomainModel\ITokenStrategy
+	 * @var ITokenStrategy
 	 */
 	private $tokenStrategy;
 

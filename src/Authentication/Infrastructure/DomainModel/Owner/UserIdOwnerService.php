@@ -25,7 +25,7 @@ class UserIdOwnerService implements DomainModel\Owner\IOwnerService
 
 	public function throwInvalidOwnerException()
 	{
-		throw new \Adeira\Connector\Inbound\Application\Exceptions\InvalidOwnerException;
+		throw new \Adeira\Connector\Authentication\Application\Exception\InvalidOwnerException;
 	}
 
 }

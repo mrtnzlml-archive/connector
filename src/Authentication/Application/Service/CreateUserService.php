@@ -39,7 +39,7 @@ class CreateUserService
 				$this->userRepository->add($user);
 			});
 		} catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $exc) {
-			throw new \Adeira\Connector\Authentication\Application\Exception\DuplicateNameException($user);
+			throw new \Adeira\Connector\Authentication\Application\Exception\DuplicateUsernameException($user);
 		}
 	}
 

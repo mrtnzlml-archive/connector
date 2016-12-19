@@ -1,0 +1,28 @@
+doctrine.orm:
+	connection:
+		types:
+			WeatherStationId: Adeira\Connector\Devices\Infrastructure\DomainModel\WeatherStation\Doctrine\DoctrineWeatherStationIdType
+			WeatherStationRecordId: Adeira\Connector\Devices\Infrastructure\DomainModel\WeatherStation\Doctrine\DoctrineWeatherStationRecordIdType
+
+
+services:
+	- Adeira\Connector\Devices\Application\Service\WeatherStation\AddWeatherStationRecordService
+	- Adeira\Connector\Devices\Application\Service\WeatherStation\ViewAllWeatherStationsService
+	- Adeira\Connector\Devices\Application\Service\WeatherStation\ViewSingleWeatherStationService
+	- class: Adeira\Connector\Devices\Application\Service\WeatherStation\AddWeatherStationService
+	  arguments:
+	  	transactionalSession: @doctrineSession # @dummySession
+	  	ownerService: @userIdOwnerService # @jwtOwnerService
+	weatherStationRecordRepository: Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\DoctrineWeatherStationRecordRepository
+	weatherStationRepository: Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\DoctrineWeatherStationRepository
+
+
+symfony.console:
+	commands:
+		- Adeira\Connector\Devices\Infrastructure\Delivery\Console\Symfony\AddWeatherStationCommand
+		- Adeira\Connector\Devices\Infrastructure\Delivery\Console\Symfony\RecievePacketCommand
+
+
+graphql:
+	queryDefinitions:
+		- Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStationQueryDefinition

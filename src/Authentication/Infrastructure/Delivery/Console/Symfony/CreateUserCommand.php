@@ -34,7 +34,7 @@ class CreateUserCommand extends Command
 				$input->getArgument('password')
 			);
 			$output->writeln('<info>New user has been successfully created.</info>');
-		} catch (\Adeira\Connector\Authentication\Application\Exception\DuplicateNameException $exc) {
+		} catch (\Adeira\Connector\Authentication\Application\Exception\DuplicateUsernameException $exc) {
 			$output->writeln("<error>{$exc->getMessage()}</error>");
 		}
 	}

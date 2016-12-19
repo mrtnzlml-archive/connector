@@ -25,7 +25,7 @@ class JwtOwnerService implements DomainModel\Owner\IOwnerService
 
 	public function throwInvalidOwnerException()
 	{
-		throw new \Adeira\Connector\Inbound\Application\Exceptions\InvalidOwnerException('Did you send valid JWT token?');
+		throw new \Adeira\Connector\Authentication\Application\Exception\InvalidOwnerException('Did you send valid JWT token?');
 	}
 
 }
