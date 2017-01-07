@@ -7,7 +7,7 @@ use Adeira\Connector\Doctrine\ORM;
 class Extension extends \Adeira\CompilerExtension implements ORM\DI\IMappingFilesPathsProvider
 {
 
-	public function provideConfig()
+	public function provideConfig(): string
 	{
 		return __DIR__ . '/config.neon';
 	}
