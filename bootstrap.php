@@ -4,20 +4,16 @@ require __DIR__ . '/vendor/autoload.php';
 
 $configurator = new Nette\Configurator;
 $configurator->defaultExtensions['extensions'] = \Adeira\ConfigurableExtensionsExtension::class;
+$logDirectory = __DIR__ . '/log';
 
 if (PHP_SAPI === 'cli') {
-	$input = new \Symfony\Component\Console\Input\ArgvInput;
-	$env = $input->getParameterOption(['--env', '-e'], getenv('NETTE_ENV') ?: 'dev');
-	$debug = getenv('NETTE_DEBUG') !== '0' && !$input->hasParameterOption(['--no-debug', '']) && $env !== 'prod';
-
-	if ($debug) {
-		\Symfony\Component\Debug\Debug::enable();
-		$configurator->setDebugMode(TRUE);
-	}
+	\Symfony\Component\Debug\Debug::enable();
+	\Tracy\Debugger::$logDirectory = $logDirectory;
+} else {
+	//$configurator->setDebugMode('23.75.345.200'); // enable for your remote IP
+	$configurator->enableDebugger($logDirectory);
 }
 
-//$configurator->setDebugMode('23.75.345.200'); // enable for your remote IP
-$configurator->enableDebugger(__DIR__ . '/log');
 $configurator->setTempDirectory(__DIR__ . '/temp');
 $configurator->addConfig(__DIR__ . '/config/config.neon');
 $configurator->addConfig(__DIR__ . '/config/config.local.neon');

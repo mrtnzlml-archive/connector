@@ -22,16 +22,24 @@ final class Extension extends \Nette\DI\CompilerExtension
 			$helperServices[$helperName] = $builder->addDefinition($this->prefix('helper.' . $helperName))->setClass($helperClass);
 		}
 
-		$commandServices = [];
+		// Make all commands named services (so we can find and register them later)
+		$commands = [];
+		$iterator = 1;
 		foreach ($config['commands'] as $commandName => $commandClass) {
-			if (!is_array($commandClass)) {
-				$commandClass = ['class' => $commandClass];
+			if ((string)(int)$commandName === (string)$commandName) { //anonymous
+				$commands['_' . $iterator++] = $commandClass;
+			} else {
+				$commands[$commandName] = $commandClass;
 			}
-			$defName = $this->prefix('command.' . $commandName);
-			DI\Compiler::loadDefinitions($builder, [
-				$defName => $commandClass + ['inject' => TRUE],
-			]);
-			$commandServices[$commandName] = $builder->getDefinition($defName);
+		}
+
+		// Register commands as services (so DI will work as expected)
+		DI\Compiler::loadDefinitions($builder, $commands, $this->prefix('command'));
+
+		// Get registered commands definitions and register them in Symfony Application
+		$commandDefinitions = [];
+		foreach ($commands as $commandName => $commandClass) {
+			$commandDefinitions[$commandName] = $builder->getDefinition($this->prefix('command') . ".$commandName");
 		}
 
 		$builder
@@ -43,7 +51,7 @@ final class Extension extends \Nette\DI\CompilerExtension
 			])
 			->addSetup('?->addCommands(?)', [
 				'@self',
-				$commandServices,
+				$commandDefinitions,
 			]);
 	}
 

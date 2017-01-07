@@ -28,8 +28,9 @@ class IntrospectionCommand extends \Symfony\Component\Console\Command\Command
 		'Float',
 	];
 
-	public function injectDependencies(SchemaFactory $schemaFactory)
+	public function __construct(SchemaFactory $schemaFactory)
 	{
+		parent::__construct();
 		$this->schemaFactory = $schemaFactory;
 	}
 

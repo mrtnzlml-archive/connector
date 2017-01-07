@@ -14,8 +14,9 @@ class CreateUserCommand extends Command
 	/** @var \Adeira\Connector\Authentication\Application\Service\CreateUserService */
 	private $createUserService;
 
-	public function injectDependencies(CreateUserService $createUserService)
+	public function __construct(CreateUserService $createUserService)
 	{
+		parent::__construct();
 		$this->createUserService = $createUserService;
 	}
 

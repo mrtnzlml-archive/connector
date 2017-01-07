@@ -1,5 +1,7 @@
 #!/usr/bin/env php
-<?php
+<?php declare(strict_types = 1);
+
+use Symfony\Component\Console\Input\InputOption;
 
 set_time_limit(0);
 
@@ -8,7 +10,36 @@ $container = require __DIR__ . '/../bootstrap.php';
 
 /** @var \Symfony\Component\Console\Application $application */
 $application = $container->getByType(\Symfony\Component\Console\Application::class);
-$application->run(
-	new \Symfony\Component\Console\Input\ArgvInput,
-	new \Symfony\Component\Console\Output\ConsoleOutput
-);
+$application->setCatchExceptions(FALSE);
+$applicationDefinition = $application->getDefinition();
+$applicationDefinition->addOption(new InputOption(
+	'--tracy',
+	NULL,
+	InputOption::VALUE_NONE,
+	'Store failure in log folder using Tracy'
+));
+$application->setDefinition($application->getDefinition());
+
+try {
+	$application->run(
+		$input = new \Symfony\Component\Console\Input\ArgvInput,
+		$output = new \Symfony\Component\Console\Output\ConsoleOutput
+	);
+} catch (\Throwable $exc) {
+	$outputFormat = new \Symfony\Component\Console\Style\SymfonyStyle($input, $output);
+
+	if ($exc instanceof \Exception) {
+		$output->setVerbosity(\Symfony\Component\Console\Output\OutputInterface::VERBOSITY_VERBOSE);
+		$application->renderException($exc, $output);
+	} else {
+		$outputFormat = new \Symfony\Component\Console\Style\SymfonyStyle($input, $output);
+		$outputFormat->block($exc->getMessage(), get_class($exc), 'fg=white;bg=red', ' ', TRUE);
+	}
+
+	if ($input->hasParameterOption('--tracy')) {
+		$file = \Tracy\Debugger::log($exc, \Tracy\Debugger::ERROR);
+		if ($file) {
+			$outputFormat->note(sprintf('Tracy output was stored in %s', basename($file)));
+		}
+	}
+}
