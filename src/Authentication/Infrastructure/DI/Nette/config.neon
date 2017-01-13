@@ -14,7 +14,7 @@ http:
 	headers: # CORS: Cross-Origin Resource Sharing
 		Access-Control-Allow-Headers: 'Authorization, Content-Type'
 		Access-Control-Allow-Methods: 'GET, POST, OPTIONS, HEAD'
-		Access-Control-Allow-Origin: https://adeira.loc:3000
+		Access-Control-Allow-Origin: * #FIXME
 
 
 services:
