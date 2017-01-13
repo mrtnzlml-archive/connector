@@ -3,6 +3,7 @@
 require __DIR__ . '/vendor/autoload.php';
 
 $configurator = new Nette\Configurator;
+//$configurator->setDebugMode(FALSE); //API should return only 500 - Internal Server Error
 $configurator->defaultExtensions['extensions'] = \Adeira\ConfigurableExtensionsExtension::class;
 $logDirectory = __DIR__ . '/log';
 
