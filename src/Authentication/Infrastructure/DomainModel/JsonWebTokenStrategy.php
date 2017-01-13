@@ -33,7 +33,11 @@ class JsonWebTokenStrategy implements DomainModel\ITokenStrategy
 
 	public function decodeToken(string $jsonWebToken)
 	{
-		return \Firebase\JWT\JWT::decode($jsonWebToken, $this->privateJsonWebToken, [$this->allowedAlgs]);
+		try {
+			return \Firebase\JWT\JWT::decode($jsonWebToken, $this->privateJsonWebToken, [$this->allowedAlgs]);
+		} catch (\UnexpectedValueException $exc) {
+			throw new \UnexpectedValueException('Provided JWT token is not valid: ' . mb_strtolower($exc->getMessage()));
+		}
 	}
 
 }
