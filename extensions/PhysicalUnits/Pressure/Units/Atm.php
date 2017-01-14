@@ -2,9 +2,9 @@
 
 namespace Adeira\Connector\PhysicalUnits\Pressure\Units;
 
-use Adeira\Connector\PhysicalUnits\Pressure\IPressureUnit;
+use Adeira\Connector\PhysicalUnits\IUnit;
 
-class Atm implements IPressureUnit
+class Atm implements IUnit
 {
 
 	public function unitCode(): string

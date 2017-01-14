@@ -3,7 +3,7 @@
 namespace Adeira\Connector\PhysicalUnits\Pressure;
 
 use Adeira\Connector\PhysicalUnits\{
-	ICalculator, SimpleCalculator
+	ICalculator, IUnit, SimpleCalculator
 };
 
 class Pressure
@@ -12,7 +12,7 @@ class Pressure
 	private $pressureValue;
 
 	/**
-	 * @var IPressureUnit
+	 * @var IUnit
 	 */
 	private $pressureUnit;
 
@@ -21,10 +21,7 @@ class Pressure
 	 */
 	private $calculator;
 
-	/**
-	 * Pressure value should be in basic SI units.
-	 */
-	public function __construct($pressureValue, IPressureUnit $pressureUnit, /*ICalculator*/ $calculator = SimpleCalculator::class)
+	public function __construct($pressureValue, IUnit $pressureUnit, /*ICalculator*/ $calculator = SimpleCalculator::class)
 	{
 		$this->pressureValue = $pressureValue;
 		$this->pressureUnit = $pressureUnit;
@@ -59,7 +56,7 @@ class Pressure
 		);
 	}
 
-	public function convert(IPressureUnit $toPressureUnit)
+	public function convert(IUnit $toPressureUnit)
 	{
 		$conversion = new Conversion;
 		return $conversion->convert($this, $toPressureUnit);

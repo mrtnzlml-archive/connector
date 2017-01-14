@@ -1,8 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace Adeira\Connector\PhysicalUnits\Pressure;
+namespace Adeira\Connector\PhysicalUnits;
 
-interface IPressureUnit
+interface IUnit
 {
 
 	public function unitCode(): string;

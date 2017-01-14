@@ -2,6 +2,8 @@
 
 namespace Adeira\Connector\PhysicalUnits\Pressure;
 
+use Adeira\Connector\PhysicalUnits\IUnit;
+
 /**
  * 1 bar = 100.000 Pa
  * 1 atm = 101325 Pa = 760 Torr
@@ -9,7 +11,7 @@ namespace Adeira\Connector\PhysicalUnits\Pressure;
 class Conversion
 {
 
-	public function convert(Pressure $fromPressure, IPressureUnit $toPressureUnit): Pressure
+	public function convert(Pressure $fromPressure, IUnit $toPressureUnit): Pressure
 	{
 		$fromUnit = $fromPressure->getPressureUnit();
 		$fromValue = $fromPressure->getPressureValue();
