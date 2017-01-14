@@ -5,12 +5,13 @@ namespace Adeira\Connector\Devices\Infrastructure\Delivery\Console\Symfony;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class RecievePacketCommand extends \Symfony\Component\Console\Command\Command
+class RecievePacketCommand extends \Adeira\Connector\Symfony\Console\Command
 {
 
 	protected function configure()
 	{
-		$this->setName('app:inbound:udp');
+		$this->setName('recieve:udp');
+		$this->setDescription('Listen for incoming UDP datagrams.');
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output)

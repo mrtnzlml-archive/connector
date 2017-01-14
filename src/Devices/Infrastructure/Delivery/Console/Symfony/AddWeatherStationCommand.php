@@ -4,14 +4,20 @@ namespace Adeira\Connector\Devices\Infrastructure\Delivery\Console\Symfony;
 
 use Adeira\Connector\Authentication\DomainModel\User\UserId;
 use Adeira\Connector\Devices\Application\Service\WeatherStation\{
-	AddWeatherStationRecordRequest, AddWeatherStationRecordService, AddWeatherStationRequest, AddWeatherStationService
+	AddWeatherStationRecordRequest,
+	AddWeatherStationRecordService,
+	AddWeatherStationRequest,
+	AddWeatherStationService
 };
 use Nette\Utils\Json;
 use Symfony\Component\Console\{
-	Input\InputArgument, Input\InputInterface, Output\OutputInterface, Style\SymfonyStyle
+	Input\InputArgument,
+	Input\InputInterface,
+	Output\OutputInterface,
+	Style\SymfonyStyle
 };
 
-class AddWeatherStationCommand extends \Symfony\Component\Console\Command\Command
+class AddWeatherStationCommand extends \Adeira\Connector\Symfony\Console\Command
 {
 
 	/**
@@ -28,7 +34,7 @@ class AddWeatherStationCommand extends \Symfony\Component\Console\Command\Comman
 		AddWeatherStationService $addWeatherStationService,
 		AddWeatherStationRecordService $addWeatherStationRecordService
 	) {
-		parent::__construct('app:add:weatherStation');
+		parent::__construct('weatherStation:create');
 		$this->weatherStationService = $addWeatherStationService;
 		$this->addWeatherStationRecordService = $addWeatherStationRecordService;
 	}

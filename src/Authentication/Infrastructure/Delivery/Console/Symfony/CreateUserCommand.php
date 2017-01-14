@@ -3,12 +3,13 @@
 namespace Adeira\Connector\Authentication\Infrastructure\Delivery\Console\Symfony;
 
 use Adeira\Connector\Authentication\Application\Service\CreateUserService;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\{
+	Input\InputArgument,
+	Input\InputInterface,
+	Output\OutputInterface
+};
 
-class CreateUserCommand extends Command
+class CreateUserCommand extends \Adeira\Connector\Symfony\Console\Command
 {
 
 	/** @var \Adeira\Connector\Authentication\Application\Service\CreateUserService */
@@ -22,7 +23,8 @@ class CreateUserCommand extends Command
 
 	protected function configure()
 	{
-		$this->setName('app:create:user');
+		$this->setName('user:create');
+		$this->setDescription('Create new user.');
 		$this->addArgument('name', InputArgument::REQUIRED, 'What is the name of new user?');
 		$this->addArgument('password', InputArgument::REQUIRED, 'What is the password of newly created user?');
 	}

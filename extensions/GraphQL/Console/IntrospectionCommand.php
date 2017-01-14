@@ -6,7 +6,7 @@ use Adeira\Connector\GraphQL\SchemaFactory;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class IntrospectionCommand extends \Symfony\Component\Console\Command\Command
+class IntrospectionCommand extends \Adeira\Connector\Symfony\Console\Command
 {
 
 	/** @var \Adeira\Connector\GraphQL\SchemaFactory */
@@ -36,7 +36,8 @@ class IntrospectionCommand extends \Symfony\Component\Console\Command\Command
 
 	protected function configure()
 	{
-		$this->setName('app:graphql:introspection')->setDescription('Introspect GraphQL schema.');
+		$this->setName('graphql:introspection');
+		$this->setDescription('Introspect GraphQL schema.');
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output)
