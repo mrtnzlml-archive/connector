@@ -19,7 +19,7 @@ class Conversion
 		}
 
 		if (!array_key_exists($toUnit->unitCode(), $fromUnit->getConversionTable())) {
-			throw new \OutOfBoundsException("Cannot convert {$fromUnit->unitCode()} -> {$toUnit->unitCode()} because conversion is unknown.");
+			throw new \OutOfBoundsException("Cannot convert '{$fromUnit->unitCode()}' -> '{$toUnit->unitCode()}' because conversion is unknown.");
 		}
 
 		return new $fromPhysicalQuantity($fromValue * $fromUnit->getConversionTable()[$toUnit->unitCode()], $toUnit);

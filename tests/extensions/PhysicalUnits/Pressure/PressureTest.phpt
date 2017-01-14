@@ -94,7 +94,7 @@ class PressureTest extends \Adeira\Connector\Tests\TestCase
 		$torr = new Pressure(1000, new Torr);
 		Assert::exception(function () use ($torr) {
 			$torr->convert(new Kmh);
-		}, \OutOfBoundsException::class, 'Cannot convert Torr -> Kmh because conversion is unknown.');
+		}, \OutOfBoundsException::class, "Cannot convert 'Torr' -> 'kmh' because conversion is unknown.");
 	}
 
 }
