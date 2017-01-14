@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Adeira\Connector\Tests\Devices\DomainModel\WeatherStation;
+namespace Adeira\Connector\Tests\Symfony\Console;
 
 use Tester\Assert;
 
