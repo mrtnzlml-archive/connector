@@ -17,7 +17,7 @@ use Symfony\Component\Console\{
 	Style\SymfonyStyle
 };
 
-class AddWeatherStationCommand extends \Adeira\Connector\Symfony\Console\Command
+class CreateWeatherStationCommand extends \Adeira\Connector\Symfony\Console\Command
 {
 
 	/**

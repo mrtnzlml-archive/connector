@@ -19,7 +19,7 @@ services:
 
 symfony.console:
 	commands:
-		- Adeira\Connector\Devices\Infrastructure\Delivery\Console\Symfony\AddWeatherStationCommand
+		- Adeira\Connector\Devices\Infrastructure\Delivery\Console\Symfony\CreateWeatherStationCommand
 		- Adeira\Connector\Devices\Infrastructure\Delivery\Console\Symfony\RecievePacketCommand
 
 
