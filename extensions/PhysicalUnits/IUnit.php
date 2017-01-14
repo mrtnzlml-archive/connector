@@ -5,7 +5,9 @@ namespace Adeira\Connector\PhysicalUnits;
 interface IUnit
 {
 
-	public function unitCode(): string;
+	public function __construct($value);
+
+	public function value();
 
 	public function getConversionTable(): array;
 

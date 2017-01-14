@@ -5,17 +5,30 @@ namespace Adeira\Connector\PhysicalUnits\Pressure\Units;
 class Torr implements IPressureUnit
 {
 
-	public function unitCode(): string
+	private $value;
+
+	public function __construct($value)
 	{
-		return 'Torr';
+		$this->value = $value;
+	}
+
+	public function value()
+	{
+		return $this->value;
 	}
 
 	public function getConversionTable(): array
 	{
 		return [
-			'atm' => 1 / 760, //exact
-			'bar' => 101325 / (1e5 * 760), //exact
-			'Pa' => 101325 / 760, //exact
+			Atm::class => function (self $torr) {
+				return new Atm($torr->value / 760); //exact
+			},
+			Bar::class => function (self $torr) {
+				return new Bar($torr->value * 101325 / (1e5 * 760)); //exact
+			},
+			Pascal::class => function (self $torr) {
+				return new Pascal($torr->value * 101325 / 760); //exact
+			},
 		];
 	}
 

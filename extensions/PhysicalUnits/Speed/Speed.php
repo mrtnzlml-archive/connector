@@ -15,33 +15,30 @@ use Adeira\Connector\PhysicalUnits\{
 class Speed implements IPhysicalQuantity
 {
 
-	private $speedValue;
-
 	/**
 	 * @var IUnit
 	 */
 	private $speedUnit;
 
-	public function __construct($speedValue, ISpeedUnit $speedUnit)
+	public function __construct(ISpeedUnit $speedUnit)
 	{
-		$this->speedValue = $speedValue;
 		$this->speedUnit = $speedUnit;
 	}
 
-	public function getValue()
+	public function value()
 	{
-		return $this->speedValue;
+		return $this->speedUnit->value();
 	}
 
-	public function getUnit(): IUnit
+	public function unit(): IUnit
 	{
 		return $this->speedUnit;
 	}
 
-	public function convert(IUnit $toSpeedUnit): IPhysicalQuantity
+	public function convertTo(string $speedUnit): IPhysicalQuantity
 	{
 		$conversion = new Conversion;
-		return $conversion->convert($this, $toSpeedUnit);
+		return $conversion->convert($this, $speedUnit);
 	}
 
 }

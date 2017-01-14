@@ -3,26 +3,32 @@
 namespace Adeira\Connector\PhysicalUnits\Pressure;
 
 use Adeira\Connector\PhysicalUnits\{
-	IPhysicalQuantity, IUnit
+	IPhysicalQuantity
 };
 
 class Conversion
 {
 
-	public function convert(IPhysicalQuantity $fromPhysicalQuantity, IUnit $toUnit): IPhysicalQuantity
+	public function convert(IPhysicalQuantity $fromPhysicalQuantity, string $toUnit): IPhysicalQuantity
 	{
-		$fromUnit = $fromPhysicalQuantity->getUnit();
-		$fromValue = $fromPhysicalQuantity->getValue();
+		$fromUnit = $fromPhysicalQuantity->unit();
+		$conversionTable = $fromUnit->getConversionTable();
 
-		if ($fromUnit->unitCode() === $toUnit->unitCode()) {
-			return new $fromPhysicalQuantity($fromValue, $fromUnit);
+		if (get_class($fromUnit) === $toUnit) {
+			return new $fromPhysicalQuantity($fromUnit); // without conversion
 		}
 
-		if (!array_key_exists($toUnit->unitCode(), $fromUnit->getConversionTable())) {
-			throw new \OutOfBoundsException("Cannot convert '{$fromUnit->unitCode()}' -> '{$toUnit->unitCode()}' because conversion is unknown.");
+		if (!array_key_exists($toUnit, $conversionTable)) {
+			$short = function ($classWithNamespace) {
+				$class = is_object($classWithNamespace) ? get_class($classWithNamespace) : $classWithNamespace;
+				$occurrence = strrchr($class, '\\');
+				return $occurrence ? substr($occurrence, 1) : $class;
+			};
+			throw new \OutOfBoundsException("Cannot convert '" . $short($fromUnit) . "' -> '" . $short($toUnit) . "' because conversion is unknown.");
 		}
 
-		return new $fromPhysicalQuantity($fromValue * $fromUnit->getConversionTable()[$toUnit->unitCode()], $toUnit);
+		$callback = $conversionTable[$toUnit];
+		return new $fromPhysicalQuantity($callback($fromUnit));
 	}
 
 }

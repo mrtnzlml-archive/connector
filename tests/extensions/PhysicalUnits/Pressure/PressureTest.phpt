@@ -19,82 +19,82 @@ class PressureTest extends \Adeira\Connector\Tests\TestCase
 
 	public function testThatPressureAdditionIsImmutable()
 	{
-		$p1 = $p2 = new Pressure(2500, new Pascal);
-		$p1 = $p1->add(new Pressure(500, new Pascal));
-		Assert::same(3000, $p1->getValue());
-		Assert::same(2500, $p2->getValue());
+		$p1 = $p2 = new Pressure(new Pascal(2500));
+		$p1 = $p1->add(new Pressure(new Pascal(500)));
+		Assert::same(3000, $p1->value());
+		Assert::same(2500, $p2->value());
 	}
 
 	public function testThatAdditionWithWrongUnitsThrowsException()
 	{
-		$pressure = new Pressure(2500, new Pascal);
+		$pressure = new Pressure(new Pascal(2500));
 		Assert::exception(function () use ($pressure) {
-			$pressure->add(new Pressure(500, new Bar));
+			$pressure->add(new Pressure(new Bar(500)));
 		}, \InvalidArgumentException::class, 'Pressure units must be identical.');
 	}
 
 	public function testThatPressureSubstractionIsImmutable()
 	{
-		$p1 = $p2 = new Pressure(2500, new Pascal);
-		$p1 = $p1->substract(new Pressure(500, new Pascal));
-		Assert::same(2000, $p1->getValue());
-		Assert::same(2500, $p2->getValue());
+		$p1 = $p2 = new Pressure(new Pascal(2500));
+		$p1 = $p1->substract(new Pressure(new Pascal(500)));
+		Assert::same(2000, $p1->value());
+		Assert::same(2500, $p2->value());
 	}
 
 	public function testThatSubstractionWithWrongUnitsThrowsException()
 	{
-		$pressure = new Pressure(2500, new Pascal);
+		$pressure = new Pressure(new Pascal(2500));
 		Assert::exception(function () use ($pressure) {
-			$pressure->substract(new Pressure(500, new Bar));
+			$pressure->substract(new Pressure(new Bar(500)));
 		}, \InvalidArgumentException::class, 'Pressure units must be identical.');
 	}
 
 	public function testThatConversionFromAtmWorks()
 	{
-		$atm = new Pressure(1000, new Atm);
+		$atm = new Pressure(new Atm(1000));
 		//Tester\Assert::EPSILON === 1e-10
-		Assert::equal(1000, $atm->convert(new Atm)->getValue());
-		Assert::equal(1013.25, $atm->convert(new Bar)->getValue());
-		Assert::equal(101325000, $atm->convert(new Pascal)->getValue());
-		Assert::equal(760000, $atm->convert(new Torr)->getValue());
+		Assert::equal(1000, $atm->convertTo(Atm::class)->value());
+		Assert::equal(1013.25, $atm->convertTo(Bar::class)->value());
+		Assert::equal(101325000, $atm->convertTo(Pascal::class)->value());
+		Assert::equal(760000, $atm->convertTo(Torr::class)->value());
 	}
 
 	public function testThatConversionFromBarWorks()
 	{
-		$bar = new Pressure(1000, new Bar);
+		$bar = new Pressure(new Bar(1000));
 		//Tester\Assert::EPSILON === 1e-10
-		Assert::equal(986.9232667160, $bar->convert(new Atm)->getValue());
-		Assert::equal(1000, $bar->convert(new Bar)->getValue());
-		Assert::equal(100000000.0, $bar->convert(new Pascal)->getValue());
-		Assert::equal(750061.682704, $bar->convert(new Torr)->getValue());
+		Assert::equal(986.9232667160, $bar->convertTo(Atm::class)->value());
+		Assert::equal(1000, $bar->convertTo(Bar::class)->value());
+		Assert::equal(100000000.0, $bar->convertTo(Pascal::class)->value());
+		Assert::equal(750061.682704, $bar->convertTo(Torr::class)->value());
 	}
 
 	public function testThatConversionFromPascalWorks()
 	{
-		$pascal = new Pressure(1000, new Pascal);
+		$pascal = new Pressure(new Pascal(1000));
 		//Tester\Assert::EPSILON === 1e-10
-		Assert::equal(0.0098692327, $pascal->convert(new Atm)->getValue());
-		Assert::equal(0.01, $pascal->convert(new Bar)->getValue());
-		Assert::equal(1000, $pascal->convert(new Pascal)->getValue());
-		Assert::equal(7.5006168270, $pascal->convert(new Torr)->getValue());
+		Assert::equal(0.0098692327, $pascal->convertTo(Atm::class)->value());
+		Assert::equal(0.01, $pascal->convertTo(Bar::class)->value());
+		Assert::equal(1000, $pascal->convertTo(Pascal::class)->value());
+		Assert::equal(7.5006168270, $pascal->convertTo(Torr::class)->value());
 	}
 
 	public function testThatConversionFromTorrWorks()
 	{
-		$torr = new Pressure(1000, new Torr);
+		$torr = new Pressure(new Torr(1000));
 		//Tester\Assert::EPSILON === 1e-10
-		Assert::equal(1.3157894737, $torr->convert(new Atm)->getValue());
-		Assert::equal(1.3332236842, $torr->convert(new Bar)->getValue());
-		Assert::equal(133322.368421, $torr->convert(new Pascal)->getValue());
-		Assert::equal(1000, $torr->convert(new Torr)->getValue());
+		Assert::equal(1.3157894737, $torr->convertTo(Atm::class)->value());
+		Assert::equal(1.3332236842, $torr->convertTo(Bar::class)->value());
+		Assert::equal(133322.368421, $torr->convertTo(Pascal::class)->value());
+		Assert::equal(1000, $torr->convertTo(Torr::class)->value());
 	}
 
-	public function testThatItsNotPossibleToConvertPressureToSpeed()
+	public function testThatItsNotPossibleToconvertToPressureToSpeed()
 	{
-		$torr = new Pressure(1000, new Torr);
+		$torr = new Pressure(new Torr(1000));
 		Assert::exception(function () use ($torr) {
-			$torr->convert(new Kmh);
-		}, \OutOfBoundsException::class, "Cannot convert 'Torr' -> 'kmh' because conversion is unknown.");
+			$torr->convertTo(Kmh::class);
+		}, \OutOfBoundsException::class, "Cannot convert 'Torr' -> 'Kmh' because conversion is unknown.");
 	}
 
 }

@@ -5,10 +5,10 @@ namespace Adeira\Connector\PhysicalUnits;
 interface IPhysicalQuantity
 {
 
-	public function getValue();
+	public function value();
 
-	public function getUnit(): IUnit;
+	public function unit(): IUnit;
 
-	public function convert(IUnit $toUnit): IPhysicalQuantity;
+	public function convertTo(string $toUnit): IPhysicalQuantity;
 
 }

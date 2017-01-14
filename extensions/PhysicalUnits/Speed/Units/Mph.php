@@ -5,16 +5,27 @@ namespace Adeira\Connector\PhysicalUnits\Speed\Units;
 class Mph implements ISpeedUnit
 {
 
-	public function unitCode(): string
+	private $value;
+
+	public function __construct($value)
 	{
-		return 'mph';
+		$this->value = $value;
+	}
+
+	public function value()
+	{
+		return $this->value;
 	}
 
 	public function getConversionTable(): array
 	{
 		return [
-			'kmh' => 1.609344, //exact
-			'ms' => 0.44704, //exact
+			Kmh::class => function (self $mph) {
+				return new Kmh($mph->value * 1.609344); //exact
+			},
+			Ms::class => function (self $mph) {
+				return new Ms($mph->value * 0.44704); //exact
+			},
 		];
 	}
 

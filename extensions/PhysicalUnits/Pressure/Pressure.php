@@ -14,8 +14,6 @@ use Adeira\Connector\PhysicalUnits\{
 class Pressure implements IPhysicalQuantity
 {
 
-	private $pressureValue;
-
 	/**
 	 * @var IPressureUnit
 	 */
@@ -26,19 +24,18 @@ class Pressure implements IPhysicalQuantity
 	 */
 	private $calculator;
 
-	public function __construct($pressureValue, IPressureUnit $pressureUnit, ICalculator $calculator = NULL)
+	public function __construct(IPressureUnit $pressureUnit, ICalculator $calculator = NULL)
 	{
-		$this->pressureValue = $pressureValue;
 		$this->pressureUnit = $pressureUnit;
 		$this->calculator = $calculator ?? new SimpleCalculator;
 	}
 
-	public function getValue()
+	public function value()
 	{
-		return $this->pressureValue;
+		return $this->pressureUnit->value();
 	}
 
-	public function getUnit(): IUnit
+	public function unit(): IUnit
 	{
 		return $this->pressureUnit;
 	}
@@ -47,8 +44,7 @@ class Pressure implements IPhysicalQuantity
 	{
 		$this->assertSamePressureUnit($increment);
 		return new self(
-			$this->calculator->add($this->pressureValue, $increment->pressureValue),
-			$this->pressureUnit
+			new $this->pressureUnit($this->calculator->add($this->value(), $increment->value()))
 		);
 	}
 
@@ -56,15 +52,14 @@ class Pressure implements IPhysicalQuantity
 	{
 		$this->assertSamePressureUnit($decrement);
 		return new self(
-			$this->calculator->substract($this->pressureValue, $decrement->pressureValue),
-			$this->pressureUnit
+			new $this->pressureUnit($this->calculator->substract($this->value(), $decrement->value()))
 		);
 	}
 
-	public function convert(IUnit $toSpeedUnit): IPhysicalQuantity
+	public function convertTo(string $speedUnit): IPhysicalQuantity
 	{
 		$conversion = new Conversion;
-		return $conversion->convert($this, $toSpeedUnit);
+		return $conversion->convert($this, $speedUnit);
 	}
 
 	private function assertSamePressureUnit(Pressure $pressure)

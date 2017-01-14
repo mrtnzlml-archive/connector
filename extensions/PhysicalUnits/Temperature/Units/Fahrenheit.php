@@ -5,14 +5,29 @@ namespace Adeira\Connector\PhysicalUnits\Temperature\Units;
 class Fahrenheit implements ITemperatureUnit
 {
 
-	public function unitCode(): string
+	private $value;
+
+	public function __construct($value)
 	{
-		return 'F';
+		$this->value = $value;
+	}
+
+	public function value()
+	{
+		return $this->value;
 	}
 
 	public function getConversionTable(): array
 	{
-		return [];
+		return [
+			Celsius::class => function (self $fahrenheit) {
+				return new Celsius(($fahrenheit->value - 32) * 5 / 9); //exact
+			},
+			Kelvin::class => function (self $fahrenheit) {
+				$celsius = ($fahrenheit->value - 32) * 5 / 9;
+				return new Kelvin($celsius + 273.15); //exact
+			},
+		];
 	}
 
 }
