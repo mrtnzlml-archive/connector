@@ -10,7 +10,7 @@
 			<generator strategy="NONE"/>
 		</id>
 
-		<field name="username" type="string"/>
+		<field name="username" type="string" unique="true"/>
 		<field name="passwordHash" type="string" column="password_hash"/>
 
 	</entity>
