@@ -21,11 +21,11 @@ class Pressure implements IPhysicalQuantity
 	 */
 	private $calculator;
 
-	public function __construct($pressureValue, IUnit $pressureUnit, /*ICalculator*/ $calculator = SimpleCalculator::class)
+	public function __construct($pressureValue, IUnit $pressureUnit, ICalculator $calculator = NULL)
 	{
 		$this->pressureValue = $pressureValue;
 		$this->pressureUnit = $pressureUnit;
-		$this->calculator = new $calculator; //FIXME: should be instance if ICalculator
+		$this->calculator = $calculator ?? new SimpleCalculator;
 	}
 
 	public function getPressureValue()
