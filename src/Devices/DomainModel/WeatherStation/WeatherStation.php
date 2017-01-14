@@ -3,7 +3,6 @@
 namespace Adeira\Connector\Devices\DomainModel\WeatherStation;
 
 use Adeira\Connector\Authentication\DomainModel\User\User;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * This is entity without mapping. Mapping is infrastructure detail.
@@ -19,9 +18,9 @@ class WeatherStation
 	private $id;
 
 	/**
-	 * @var ArrayCollection | User[]
+	 * @var User
 	 */
-	private $owners;
+	private $owner;
 
 	/**
 	 * @var string
@@ -34,16 +33,18 @@ class WeatherStation
 	public function __construct(WeatherStationId $id, User $owner, string $deviceName)
 	{
 		$this->id = $id;
-
-		$this->owners = new ArrayCollection;
-		$this->owners->add($owner);
-
+		$this->owner = $owner;
 		$this->deviceName = $deviceName;
 	}
 
 	public function id(): WeatherStationId
 	{
 		return $this->id;
+	}
+
+	public function owner(): User
+	{
+		return $this->owner;
 	}
 
 	public function deviceName(): string

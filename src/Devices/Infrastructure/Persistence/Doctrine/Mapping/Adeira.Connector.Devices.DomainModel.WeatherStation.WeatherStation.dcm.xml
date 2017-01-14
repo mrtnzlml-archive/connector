@@ -10,18 +10,7 @@
 			<generator strategy="NONE"/>
 		</id>
 
-		<!-- TODO: remove this relation (it's not needed, just UUID is good enough) -->
-		<many-to-many target-entity="Adeira\Connector\Authentication\DomainModel\User\User" field="owners">
-			<join-table name="weather_stations_user_accounts">
-				<join-columns>
-					<join-column name="weather_station_id"/>
-				</join-columns>
-				<inverse-join-columns>
-					<join-column name="user_account_id"/>
-				</inverse-join-columns>
-			</join-table>
-		</many-to-many>
-
+		<field name="owner" column="owner_uuid" type="UserId"/>
 		<field name="deviceName" column="device_name" type="string"/>
 
 	</entity>
