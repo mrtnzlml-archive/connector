@@ -4,9 +4,7 @@ namespace Adeira\Connector\Authentication\Infrastructure\Delivery\Console\Symfon
 
 use Adeira\Connector\Authentication\Application\Service\CreateUserService;
 use Symfony\Component\Console\{
-	Input\InputArgument,
-	Input\InputInterface,
-	Output\OutputInterface
+	Input\InputArgument, Input\InputInterface, Output\OutputInterface, Style\SymfonyStyle
 };
 
 class CreateUserCommand extends \Adeira\Connector\Symfony\Console\Command
@@ -31,14 +29,15 @@ class CreateUserCommand extends \Adeira\Connector\Symfony\Console\Command
 
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
+		$styleGenerator = new SymfonyStyle($input, $output);
 		try {
 			$userId = $this->createUserService->execute(
 				$input->getArgument('name'),
 				$input->getArgument('password')
 			);
-			$output->writeln(sprintf('<info>New user has been successfully created with UUID %s.</info>', $userId));
+			$styleGenerator->success(sprintf('New user has been successfully created with UUID %s.', $userId));
 		} catch (\Adeira\Connector\Authentication\Application\Exception\DuplicateUsernameException $exc) {
-			$output->writeln("<error>{$exc->getMessage()}</error>");
+			$styleGenerator->error("{$exc->getMessage()}");
 		}
 	}
 
