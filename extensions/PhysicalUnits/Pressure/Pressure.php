@@ -2,6 +2,10 @@
 
 namespace Adeira\Connector\PhysicalUnits\Pressure;
 
+use Adeira\Connector\PhysicalUnits\{
+	ICalculator, SimpleCalculator
+};
+
 class Pressure
 {
 
@@ -13,12 +17,18 @@ class Pressure
 	private $pressureUnit;
 
 	/**
+	 * @var ICalculator
+	 */
+	private $calculator;
+
+	/**
 	 * Pressure value should be in basic SI units.
 	 */
-	public function __construct($pressureValue, IPressureUnit $pressureUnit)
+	public function __construct($pressureValue, IPressureUnit $pressureUnit, /*ICalculator*/ $calculator = SimpleCalculator::class)
 	{
 		$this->pressureValue = $pressureValue;
 		$this->pressureUnit = $pressureUnit;
+		$this->calculator = new $calculator; //FIXME: should be instance if ICalculator
 	}
 
 	public function getPressureValue()
@@ -35,7 +45,7 @@ class Pressure
 	{
 		$this->assertSamePressureUnit($increment);
 		return new self(
-			$this->pressureValue + $increment->pressureValue,
+			$this->calculator->add($this->pressureValue, $increment->pressureValue),
 			$this->pressureUnit
 		);
 	}
@@ -44,7 +54,7 @@ class Pressure
 	{
 		$this->assertSamePressureUnit($decrement);
 		return new self(
-			$this->pressureValue - $decrement->pressureValue,
+			$this->calculator->substract($this->pressureValue, $decrement->pressureValue),
 			$this->pressureUnit
 		);
 	}
