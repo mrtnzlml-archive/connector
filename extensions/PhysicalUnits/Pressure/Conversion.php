@@ -2,29 +2,27 @@
 
 namespace Adeira\Connector\PhysicalUnits\Pressure;
 
-use Adeira\Connector\PhysicalUnits\IUnit;
+use Adeira\Connector\PhysicalUnits\{
+	IPhysicalQuantity, IUnit
+};
 
-/**
- * 1 bar = 100.000 Pa
- * 1 atm = 101325 Pa = 760 Torr
- */
 class Conversion
 {
 
-	public function convert(Pressure $fromPressure, IUnit $toPressureUnit): Pressure
+	public function convert(IPhysicalQuantity $fromPhysicalQuantity, IUnit $toUnit): IPhysicalQuantity
 	{
-		$fromUnit = $fromPressure->getPressureUnit();
-		$fromValue = $fromPressure->getPressureValue();
+		$fromUnit = $fromPhysicalQuantity->getUnit();
+		$fromValue = $fromPhysicalQuantity->getValue();
 
-		if ($fromUnit->unitCode() === $toPressureUnit->unitCode()) {
-			return new Pressure($fromValue, $fromUnit);
+		if ($fromUnit->unitCode() === $toUnit->unitCode()) {
+			return new $fromPhysicalQuantity($fromValue, $fromUnit);
 		}
 
-		if (!array_key_exists($toPressureUnit->unitCode(), $fromUnit->getConversionTable())) {
-			throw new \OutOfBoundsException("Cannot covert {$fromUnit->unitCode()} to {$toPressureUnit->unitCode()} because conversion is not known.");
+		if (!array_key_exists($toUnit->unitCode(), $fromUnit->getConversionTable())) {
+			throw new \OutOfBoundsException("Cannot convert {$fromUnit->unitCode()} -> {$toUnit->unitCode()} because conversion is unknown.");
 		}
 
-		return new Pressure($fromValue * $fromUnit->getConversionTable()[$toPressureUnit->unitCode()], $toPressureUnit);
+		return new $fromPhysicalQuantity($fromValue * $fromUnit->getConversionTable()[$toUnit->unitCode()], $toUnit);
 	}
 
 }

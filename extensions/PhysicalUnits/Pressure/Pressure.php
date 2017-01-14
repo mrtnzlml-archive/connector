@@ -6,6 +6,11 @@ use Adeira\Connector\PhysicalUnits\{
 	ICalculator, IPhysicalQuantity, IUnit, Pressure\Units\IPressureUnit, SimpleCalculator
 };
 
+/**
+ * Exact conversions:
+ * 1 bar = 100.000 Pa
+ * 1 atm = 101325 Pa = 760 Torr
+ */
 class Pressure implements IPhysicalQuantity
 {
 
@@ -28,12 +33,12 @@ class Pressure implements IPhysicalQuantity
 		$this->calculator = $calculator ?? new SimpleCalculator;
 	}
 
-	public function getPressureValue()
+	public function getValue()
 	{
 		return $this->pressureValue;
 	}
 
-	public function getPressureUnit()
+	public function getUnit(): IUnit
 	{
 		return $this->pressureUnit;
 	}
@@ -56,10 +61,10 @@ class Pressure implements IPhysicalQuantity
 		);
 	}
 
-	public function convert(IUnit $toPressureUnit): IPhysicalQuantity
+	public function convert(IUnit $toSpeedUnit): IPhysicalQuantity
 	{
 		$conversion = new Conversion;
-		return $conversion->convert($this, $toPressureUnit);
+		return $conversion->convert($this, $toSpeedUnit);
 	}
 
 	private function assertSamePressureUnit(Pressure $pressure)

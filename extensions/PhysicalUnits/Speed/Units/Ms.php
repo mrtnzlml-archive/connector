@@ -2,19 +2,19 @@
 
 namespace Adeira\Connector\PhysicalUnits\Speed\Units;
 
-class Kmh implements ISpeedUnit
+class Ms implements ISpeedUnit
 {
 
 	public function unitCode(): string
 	{
-		return 'kmh';
+		return 'ms';
 	}
 
 	public function getConversionTable(): array
 	{
 		return [
-			'mph' => 1 / 1.609344, //exact
-			'ms' => 1 / 3.6, //exact
+			'kmh' => 3.6, //exact
+			'mph' => 1 / 0.44704, //exact
 		];
 	}
 
