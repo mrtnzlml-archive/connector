@@ -13,6 +13,11 @@ class Extension extends \Adeira\CompilerExtension
 		'types' => [],
 	];
 
+	public function provideConfig()
+	{
+		return __DIR__ . '/config.neon';
+	}
+
 	public function loadConfiguration()
 	{
 		$config = $this->validateConfig($this->defaults);
