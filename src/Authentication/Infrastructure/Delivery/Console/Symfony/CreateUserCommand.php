@@ -32,11 +32,11 @@ class CreateUserCommand extends \Adeira\Connector\Symfony\Console\Command
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
 		try {
-			$this->createUserService->execute(
+			$userId = $this->createUserService->execute(
 				$input->getArgument('name'),
 				$input->getArgument('password')
 			);
-			$output->writeln('<info>New user has been successfully created.</info>');
+			$output->writeln(sprintf('<info>New user has been successfully created with UUID %s.</info>', $userId));
 		} catch (\Adeira\Connector\Authentication\Application\Exception\DuplicateUsernameException $exc) {
 			$output->writeln("<error>{$exc->getMessage()}</error>");
 		}

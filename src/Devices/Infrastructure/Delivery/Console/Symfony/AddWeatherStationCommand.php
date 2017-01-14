@@ -55,6 +55,7 @@ class AddWeatherStationCommand extends \Adeira\Connector\Symfony\Console\Command
 			)
 		);
 
+		// FIXME: remove
 		$weatherStationId = $response->id();
 		$data = Json::encode(['v' => ['a' => ['l']]]);
 		$this->addWeatherStationRecordService->execute(new AddWeatherStationRecordRequest($weatherStationId, $data));

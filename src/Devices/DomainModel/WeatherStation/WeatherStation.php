@@ -18,7 +18,7 @@ class WeatherStation
 	private $id;
 
 	/**
-	 * @var User
+	 * @var string
 	 */
 	private $owner;
 
@@ -33,7 +33,7 @@ class WeatherStation
 	public function __construct(WeatherStationId $id, User $owner, string $deviceName)
 	{
 		$this->id = $id;
-		$this->owner = $owner;
+		$this->owner = $owner->id();
 		$this->deviceName = $deviceName;
 	}
 
@@ -42,7 +42,7 @@ class WeatherStation
 		return $this->id;
 	}
 
-	public function owner(): User
+	public function owner(): string
 	{
 		return $this->owner;
 	}

@@ -4,6 +4,7 @@ namespace Adeira\Connector\Authentication\Application\Service;
 
 use Adeira\Connector\Authentication\DomainModel\User\IUserRepository;
 use Adeira\Connector\Authentication\DomainModel\User\User;
+use Adeira\Connector\Authentication\DomainModel\User\UserId;
 use Adeira\Connector\Common\Application\Service\ITransactionalSession;
 use Nette\Security\Passwords;
 
@@ -26,7 +27,7 @@ class CreateUserService
 		$this->transactionalSession = $transactionalSession;
 	}
 
-	public function execute($username, $password) //TODO: DTO
+	public function execute($username, $password): UserId
 	{
 		$user = new User(
 			$this->userRepository->nextIdentity(),
@@ -38,6 +39,7 @@ class CreateUserService
 			$this->transactionalSession->executeAtomically(function () use ($user) {
 				$this->userRepository->add($user);
 			});
+			return $user->id();
 		} catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $exc) {
 			throw new \Adeira\Connector\Authentication\Application\Exception\DuplicateUsernameException($user);
 		}

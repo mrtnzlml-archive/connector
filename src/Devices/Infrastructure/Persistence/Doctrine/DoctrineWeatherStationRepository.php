@@ -2,6 +2,7 @@
 
 namespace Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine;
 
+use Adeira\Connector\Authentication\DomainModel\User\User;
 use Adeira\Connector\Authentication\DomainModel\User\UserId;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\{
 	IWeatherStationRepository,
@@ -49,11 +50,11 @@ class DoctrineWeatherStationRepository /*extends ORM\EntityRepository*/ implemen
 	{
 		$qb = $this->em->createQueryBuilder();
 		$qb->from(WeatherStation::class, 'd')
-			->leftJoin('d.owners', 'o')
+			->leftJoin(User::class, 'u')
 			->select([
 				'd', // data sources
-				'o', // owners
-			])->where('o.id = :userId')->setParameter(':userId', $userId);
+				'u', // owner of the device
+			])->where('u.id = :userId')->setParameter(':userId', $userId);
 		return $qb->getQuery()->getResult();
 	}
 
