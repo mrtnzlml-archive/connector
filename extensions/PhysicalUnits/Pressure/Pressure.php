@@ -3,10 +3,10 @@
 namespace Adeira\Connector\PhysicalUnits\Pressure;
 
 use Adeira\Connector\PhysicalUnits\{
-	ICalculator, IUnit, SimpleCalculator
+	ICalculator, IPhysicalQuantity, IUnit, SimpleCalculator
 };
 
-class Pressure
+class Pressure implements IPhysicalQuantity
 {
 
 	private $pressureValue;
@@ -56,7 +56,7 @@ class Pressure
 		);
 	}
 
-	public function convert(IUnit $toPressureUnit)
+	public function convert(IUnit $toPressureUnit): IPhysicalQuantity
 	{
 		$conversion = new Conversion;
 		return $conversion->convert($this, $toPressureUnit);
