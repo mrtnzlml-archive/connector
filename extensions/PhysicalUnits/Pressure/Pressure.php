@@ -3,7 +3,7 @@
 namespace Adeira\Connector\PhysicalUnits\Pressure;
 
 use Adeira\Connector\PhysicalUnits\{
-	ICalculator, IPhysicalQuantity, IUnit, SimpleCalculator
+	ICalculator, IPhysicalQuantity, IUnit, Pressure\Units\IPressureUnit, SimpleCalculator
 };
 
 class Pressure implements IPhysicalQuantity
@@ -12,7 +12,7 @@ class Pressure implements IPhysicalQuantity
 	private $pressureValue;
 
 	/**
-	 * @var IUnit
+	 * @var IPressureUnit
 	 */
 	private $pressureUnit;
 
@@ -21,7 +21,7 @@ class Pressure implements IPhysicalQuantity
 	 */
 	private $calculator;
 
-	public function __construct($pressureValue, IUnit $pressureUnit, ICalculator $calculator = NULL)
+	public function __construct($pressureValue, IPressureUnit $pressureUnit, ICalculator $calculator = NULL)
 	{
 		$this->pressureValue = $pressureValue;
 		$this->pressureUnit = $pressureUnit;

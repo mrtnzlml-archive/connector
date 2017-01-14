@@ -6,6 +6,7 @@ use Adeira\Connector\PhysicalUnits\Pressure\Pressure;
 use Adeira\Connector\PhysicalUnits\Pressure\Units\{
 	Atm, Bar, Pascal, Torr
 };
+use Adeira\Connector\PhysicalUnits\Speed\Units\Kmh;
 use Tester\Assert;
 
 require getenv('BOOTSTRAP');
@@ -86,6 +87,14 @@ class PressureTest extends \Adeira\Connector\Tests\TestCase
 		Assert::equal(1.3332236842, $torr->convert(new Bar)->getPressureValue());
 		Assert::equal(133322.368421, $torr->convert(new Pascal)->getPressureValue());
 		Assert::equal(1000, $torr->convert(new Torr)->getPressureValue());
+	}
+
+	public function testThatItsNotPossibleToConvertPressureToSpeed()
+	{
+		$torr = new Pressure(1000, new Torr);
+		Assert::exception(function () use ($torr) {
+			$torr->convert(new Kmh);
+		}, \OutOfBoundsException::class, 'Cannot covert Torr to Kmh because conversion is not known.');
 	}
 
 }
