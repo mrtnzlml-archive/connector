@@ -12,4 +12,13 @@ class Torr implements IPressureUnit
 		return 'Torr';
 	}
 
+	public function getConversionTable(): array
+	{
+		return [
+			'atm' => 1 / 760, //exact
+			'bar' => 101325 / (1e5 * 760), //exact
+			'Pa' => 101325 / 760, //exact
+		];
+	}
+
 }

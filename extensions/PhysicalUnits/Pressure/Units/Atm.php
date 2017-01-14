@@ -12,4 +12,13 @@ class Atm implements IPressureUnit
 		return 'atm';
 	}
 
+	public function getConversionTable(): array
+	{
+		return [
+			'bar' => 101325 / 1e5, //exact
+			'Pa' => 101325, //exact
+			'Torr' => 760, //exact
+		];
+	}
+
 }

@@ -7,4 +7,6 @@ interface IPressureUnit
 
 	public function unitCode(): string;
 
+	public function getConversionTable(): array;
+
 }

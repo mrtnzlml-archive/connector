@@ -12,4 +12,13 @@ class Bar implements IPressureUnit
 		return 'bar';
 	}
 
+	public function getConversionTable(): array
+	{
+		return [
+			'atm' => 1e5 / 101325, //exact
+			'Pa' => 1e5, //exact
+			'Torr' => (1e5 * 760) / 101325, //exact
+		];
+	}
+
 }
