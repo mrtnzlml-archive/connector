@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\Devices\Infrastructure\DomainModel\WeatherStation\Doctrine;
 
-use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStationId;
+use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStationRecordId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 
 class DoctrineWeatherStationRecordIdType extends \Adeira\Connector\Common\Infrastructure\DomainModel\DoctrineEntityId
@@ -13,10 +13,10 @@ class DoctrineWeatherStationRecordIdType extends \Adeira\Connector\Common\Infras
 		return 'WeatherStationRecordId'; //(DC2Type:WeatherStationRecordId)
 	}
 
-	public function convertToPHPValue($value, AbstractPlatform $platform): WeatherStationId
+	public function convertToPHPValue($value, AbstractPlatform $platform): WeatherStationRecordId
 	{
 		$uuid = parent::convertToPHPValue($value, $platform);
-		return WeatherStationId::create($uuid);
+		return WeatherStationRecordId::create($uuid);
 	}
 
 }
