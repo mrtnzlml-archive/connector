@@ -10,7 +10,6 @@ use Adeira\Connector\Authentication\DomainModel\{
 use Adeira\Connector\GraphQL;
 use Nette\Application\Responses\JsonResponse;
 use Nette\Http;
-use Nette\Security\User;
 use Nette\Utils\Json;
 
 class GraphqlEndpoint implements \Nette\Application\IPresenter
@@ -32,11 +31,6 @@ class GraphqlEndpoint implements \Nette\Application\IPresenter
 	private $httpResponse;
 
 	/**
-	 * @var \Nette\Security\User
-	 */
-	private $user;
-
-	/**
 	 * @var ITokenStrategy
 	 */
 	private $tokenStrategy;
@@ -45,13 +39,11 @@ class GraphqlEndpoint implements \Nette\Application\IPresenter
 		GraphQL\SchemaFactory $schemaFactory,
 		Http\IRequest $httpRequest,
 		Http\IResponse $response,
-		User $user,
 		ITokenStrategy $tokenStrategy
 	) {
 		$this->schemaFactory = $schemaFactory;
 		$this->httpRequest = $httpRequest;
 		$this->httpResponse = $response;
-		$this->user = $user;
 		$this->tokenStrategy = $tokenStrategy;
 	}
 
@@ -59,7 +51,7 @@ class GraphqlEndpoint implements \Nette\Application\IPresenter
 	{
 		$httpRequest = $this->httpRequest;
 		if ($httpRequest->isMethod(Http\IRequest::POST)) {
-			$userId = $this->user->getId(); // may be NULL
+			$userId = NULL;
 
 			$authHeader = $httpRequest->getHeader('authorization');
 			if ($authHeader) {
