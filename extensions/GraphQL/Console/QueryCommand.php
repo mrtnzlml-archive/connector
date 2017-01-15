@@ -2,9 +2,11 @@
 
 namespace Adeira\Connector\GraphQL\Console;
 
+use Adeira\Connector\Authentication\DomainModel\User\UserId;
 use Adeira\Connector\GraphQL\SchemaFactory;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\{
+	InputArgument, InputInterface
+};
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -25,13 +27,16 @@ class QueryCommand extends \Adeira\Connector\Symfony\Console\Command
 		$this->setName('graphql:query');
 		$this->setDescription('Query GraphQL API via command line.');
 		$this->addArgument('requestString', InputArgument::REQUIRED);
+		$this->addArgument('userId', InputArgument::REQUIRED);
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
 		$graphResponse = \GraphQL\GraphQL::execute(
 			$this->schemaFactory->build(),
-			$input->getArgument('requestString')
+			$input->getArgument('requestString'),
+			NULL,
+			UserId::createFromString($input->getArgument('userId'))
 		);
 		$style = new SymfonyStyle($input, $output);
 		$style->block(json_encode($graphResponse, JSON_PRETTY_PRINT));
