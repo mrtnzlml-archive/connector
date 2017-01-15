@@ -1,3 +1,4 @@
 symfony.console:
 	commands:
 		- Adeira\Connector\GraphQL\Console\IntrospectionCommand
+		- Adeira\Connector\GraphQL\Console\QueryCommand
