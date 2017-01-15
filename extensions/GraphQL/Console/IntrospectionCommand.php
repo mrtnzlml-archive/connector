@@ -52,9 +52,7 @@ class IntrospectionCommand extends \Adeira\Connector\Symfony\Console\Command
 			}
 
 			//TODO: printInputType
-			if (!$objectType instanceof \GraphQL\Type\Definition\InputType) {
-				$this->printOutputType($input, $output, $objectType);
-			}
+			$this->printOutputType($input, $output, $objectType);
 		}
 	}
 
@@ -71,8 +69,10 @@ class IntrospectionCommand extends \Adeira\Connector\Symfony\Console\Command
 				$arguments[] = $arg->name . ': ' . (string)$arg->getType();
 			}
 			$arguments = $arguments ? '(' . implode(', ', $arguments) . ')' : '';
-			$output->writeln("  $name<fg=yellow>$arguments</>: <fg=green>{$fieldDefinition->getType()}</>");
+			$description = $fieldDefinition->description ? "# $fieldDefinition->description" : '';
+			$output->writeln("  $name<fg=yellow>$arguments</>: <fg=green>{$fieldDefinition->getType()}</> <fg=magenta>$description</>");
 		}
+
 		$output->writeln('<fg=blue;options=bold>}</>');
 		$output->writeln('');
 	}
