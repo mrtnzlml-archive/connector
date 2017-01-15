@@ -14,7 +14,7 @@ class WeatherStationRecordType extends Definition\ObjectType
 	{
 		parent::__construct([
 			'name' => 'WeatherStationRecord',
-			'description' => 'Record of weather station.',
+			'description' => 'Record of the weather station',
 			'fields' => [
 				'id' => Field::create(
 					new Definition\NonNull(
@@ -24,7 +24,7 @@ class WeatherStationRecordType extends Definition\ObjectType
 						return $wsr->id();
 					},
 					NULL,
-					'ID of the weather station record.'
+					'ID of the weather station record'
 				),
 			],
 		]);

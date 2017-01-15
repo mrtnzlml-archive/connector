@@ -25,7 +25,7 @@ class WeatherStationType extends Definition\ObjectType
 						return $ws->id();
 					},
 					NULL,
-					'ID of the weather station.'
+					'ID of the weather station'
 				),
 				'name' => Field::create(
 					new Definition\NonNull(
@@ -35,11 +35,11 @@ class WeatherStationType extends Definition\ObjectType
 						return $obj->deviceName();
 					},
 					NULL,
-					'Name of the data source.'
+					'Name of the weather station'
 				),
 				'records' => [
 					'type' => Definition\Type::listOf($wsrt),
-					'description' => 'Records of the data source.',
+					'description' => 'Records of the weather station',
 					//TODO: pagination object - http://graphql.org/learn/pagination/
 					'resolve' => function (WeatherStation $ws, $args, UserId $userId) use ($allWsRecords) {
 						return $allWsRecords->execute($userId, $ws->id());

@@ -44,7 +44,7 @@ class WeatherStationQueryDefinition implements \Adeira\Connector\GraphQL\IQueryD
 	{
 		$weatherStationType = $this->weatherStationType;
 		return [
-			'device' => Field::create(
+			'weatherStation' => Field::create(
 				$weatherStationType,
 				function ($ancestorValue, $args, UserId $userId) {
 					return $this->singleWeatherStationService->execute(
@@ -58,7 +58,7 @@ class WeatherStationQueryDefinition implements \Adeira\Connector\GraphQL\IQueryD
 					), 'The ID of the weather station.'),
 				]
 			),
-			'devices' => Field::create(
+			'weatherStations' => Field::create(
 				Definition\Type::listOf($weatherStationType),
 				function ($ancestorValue, $args, UserId $userId) {
 					return $this->allWeatherStationsService->execute($userId);

@@ -18,7 +18,7 @@ class UserType extends Definition\ObjectType
 					'type' => new Definition\NonNull(
 						Definition\Type::string()
 					),
-					'description' => 'The ID of the User.',
+					'description' => 'ID of the User',
 					'resolve' => function (User $user, $args, $context) {
 						return $user->id();
 					},
@@ -27,7 +27,7 @@ class UserType extends Definition\ObjectType
 					'type' => new Definition\NonNull(
 						Definition\Type::string()
 					),
-					'description' => 'Username of the user.',
+					'description' => 'Username of the user',
 					'resolve' => function (User $user, $args, $context) {
 						return $user->nickname();
 					},
@@ -36,7 +36,7 @@ class UserType extends Definition\ObjectType
 					'type' => new Definition\NonNull(
 						Definition\Type::string()
 					),
-					'description' => 'JWT token used for authentication in API.',
+					'description' => 'JWT token used for authentication in API',
 					'resolve' => function (User $user, $args, $context) {
 						return $user->token();
 					},
