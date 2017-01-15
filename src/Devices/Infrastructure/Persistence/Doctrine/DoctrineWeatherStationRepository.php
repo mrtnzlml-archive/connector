@@ -52,8 +52,7 @@ class DoctrineWeatherStationRepository /*extends ORM\EntityRepository*/ implemen
 		$qb->from(WeatherStation::class, 'd')
 			->leftJoin(User::class, 'u')
 			->select([
-				'd', // data sources
-				'u', // owner of the device
+				'd', // only data sources
 			])->where('u.id = :userId')->setParameter(':userId', $userId);
 		return $qb->getQuery()->getResult();
 	}
