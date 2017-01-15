@@ -28,7 +28,7 @@ class QueryDefinitions implements \Adeira\Connector\GraphQL\IQueryDefinition
 	{
 		return [
 			'user' => [
-				'type' => $this->userType->__invoke(),
+				'type' => $this->userType,
 				'args' => [
 					'id' => [
 						'name' => 'id',

@@ -28,7 +28,7 @@ class MutationDefinitions implements \Adeira\Connector\GraphQL\IMutationDefiniti
 	{
 		return [
 			'login' => [
-				'type' => $this->userType->__invoke(),
+				'type' => $this->userType,
 				'args' => [
 					'username' => [
 						'name' => 'username',

@@ -5,25 +5,12 @@ namespace Adeira\Connector\Authentication\Infrastructure\Delivery\API\GraphQL;
 use Adeira\Connector\Authentication\DomainModel\User\User;
 use GraphQL\Type\Definition;
 
-class UserType implements \Adeira\Connector\GraphQL\IType
+class UserType extends Definition\ObjectType
 {
 
-	private $definition;
-
-	/**
-	 * type User {
-	 *     id: String!
-	 *     ...
-	 * }
-	 *
-	 * @throws \Exception
-	 */
-	public function __invoke(): Definition\ObjectType
+	public function __construct()
 	{
-		if ($this->definition !== NULL) {
-			return $this->definition;
-		}
-		return $this->definition = new Definition\ObjectType([
+		parent::__construct([
 			'name' => 'User',
 			'description' => 'User entity.',
 			'fields' => [
