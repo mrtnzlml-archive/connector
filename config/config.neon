@@ -11,7 +11,7 @@ application:
 	scanDirs: no
 	errorPresenter: GraphqlError
 	mapping:
-		*: Adeira\Connector\Endpoints\*Endpoint
+		*: Adeira\Connector\Endpoints\Infrastructure\Delivery\Http\*Endpoint
 
 
 doctrine.orm:
