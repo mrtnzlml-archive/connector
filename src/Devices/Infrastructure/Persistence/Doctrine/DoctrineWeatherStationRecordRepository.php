@@ -37,9 +37,12 @@ class DoctrineWeatherStationRecordRepository implements IWeatherStationRecordRep
 		// TODO: Implement ofId() method.
 	}
 
-	public function ofWeatherStationId(WeatherStationId $weatherStationId)
+	public function ofWeatherStationId(WeatherStationId $weatherStationId): array
 	{
-		// TODO: Implement ofWeatherStationId() method.
+		$qb = $this->em->createQueryBuilder();
+		$qb->select('wsr')->from(WeatherStationRecord::class, 'wsr');
+		$qb->where('wsr.weatherStationId = :wsid')->setParameter(':wsid', $weatherStationId);
+		return $qb->getQuery()->getResult();
 	}
 
 	public function nextIdentity(): WeatherStationRecordId

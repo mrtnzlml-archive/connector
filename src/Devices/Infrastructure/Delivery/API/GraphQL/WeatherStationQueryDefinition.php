@@ -3,10 +3,12 @@
 namespace Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL;
 
 use Adeira\Connector\Authentication\DomainModel\User\UserId;
-use Adeira\Connector\Devices\{
-	Application\Service\WeatherStation\ViewAllWeatherStationsService,
-	Application\Service\WeatherStation\ViewSingleWeatherStationService,
-	DomainModel\WeatherStation\WeatherStationId
+use Adeira\Connector\Devices\Application\Service\WeatherStation\{
+	ViewAllWeatherStationsService, ViewSingleWeatherStationService
+};
+use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStationId;
+use Adeira\Connector\GraphQL\Structure\{
+	Argument, Field
 };
 use GraphQL\Type\Definition;
 
@@ -23,45 +25,45 @@ class WeatherStationQueryDefinition implements \Adeira\Connector\GraphQL\IQueryD
 	 */
 	private $singleWeatherStationService;
 
+	/**
+	 * @var \Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStationType
+	 */
+	private $weatherStationType;
+
 	public function __construct(
 		ViewAllWeatherStationsService $allWeatherStationsService,
-		ViewSingleWeatherStationService $singleWeatherStationService
+		ViewSingleWeatherStationService $singleWeatherStationService,
+		WeatherStationType $weatherStationType
 	) {
 		$this->allWeatherStationsService = $allWeatherStationsService;
 		$this->singleWeatherStationService = $singleWeatherStationService;
+		$this->weatherStationType = $weatherStationType;
 	}
 
-	/**
-	 * device(id: String!): InboundSource
-	 */
 	public function __invoke(): array
 	{
-		$weatherStationType = (new WeatherStationType)(); //FIXME: singleton
+		$weatherStationType = $this->weatherStationType;
 		return [
-			'device' => [
-				'type' => $weatherStationType,
-				'args' => [
-					'id' => [
-						'name' => 'id',
-						'description' => 'The ID of the data source.',
-						'type' => Definition\Type::nonNull(
-							Definition\Type::string()
-						),
-					],
-				],
-				'resolve' => function ($obj, $args, UserId $userId) {
+			'device' => Field::create(
+				$weatherStationType,
+				function ($ancestorValue, $args, UserId $userId) {
 					return $this->singleWeatherStationService->execute(
 						$userId,
 						WeatherStationId::createFromString($args['id'])
 					);
 				},
-			],
-			'devices' => [
-				'type' => Definition\Type::listOf($weatherStationType),
-				'resolve' => function ($obj, $args, UserId $userId) {
+				[
+					'id' => Argument::create(Definition\Type::nonNull(
+						Definition\Type::string()
+					), 'The ID of the weather station.'),
+				]
+			),
+			'devices' => Field::create(
+				Definition\Type::listOf($weatherStationType),
+				function ($ancestorValue, $args, UserId $userId) {
 					return $this->allWeatherStationsService->execute($userId);
-				},
-			],
+				}
+			),
 		];
 	}
 

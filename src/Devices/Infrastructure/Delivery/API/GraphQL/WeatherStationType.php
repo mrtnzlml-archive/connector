@@ -2,57 +2,47 @@
 
 namespace Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL;
 
+use Adeira\Connector\Authentication\DomainModel\User\UserId;
+use Adeira\Connector\Devices\Application\Service\WeatherStation\ViewAllWeatherStationRecordsService;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStation;
+use Adeira\Connector\GraphQL\Structure\Field;
 use GraphQL\Type\Definition;
 
-class WeatherStationType implements \Adeira\Connector\GraphQL\IType
+class WeatherStationType extends Definition\ObjectType
 {
 
-	/**
-	 * type Device_1 : WeatherStation {
-	 *     id: String!
-	 * }
-	 *
-	 * @throws \Exception
-	 */
-	public function __invoke(): Definition\ObjectType
+	public function __construct(WeatherStationRecordType $wsrt, ViewAllWeatherStationRecordsService $allWsRecords)
 	{
-		return new Definition\ObjectType([
+		parent::__construct([
 			'name' => 'WeatherStation',
-			'description' => 'An inbound data source.',
+			'description' => 'Weather station.',
 			'fields' => [
-				'id' => [
-					'type' => new Definition\NonNull(
+				'id' => Field::create(
+					new Definition\NonNull(
 						Definition\Type::string()
 					),
-					'description' => 'The ID of the data source.',
-					'resolve' => function (WeatherStation $obj, $args, $context) {
-						return $obj->id();
+					function (WeatherStation $ws, $args, UserId $userId) {
+						return $ws->id();
 					},
-				],
-				'name' => [
-					'type' => new Definition\NonNull(
+					NULL,
+					'ID of the weather station.'
+				),
+				'name' => Field::create(
+					new Definition\NonNull(
 						Definition\Type::string()
 					),
-					'description' => 'Name of the data source.',
-					'resolve' => function (WeatherStation $obj, $args, $context) {
+					function (WeatherStation $obj, $args, UserId $userId) {
 						return $obj->deviceName();
 					},
-				],
+					NULL,
+					'Name of the data source.'
+				),
 				'records' => [
-					'type' => Definition\Type::listOf(
-						Definition\Type::string() //FIXME: WeatherStationsRecordTypes
-					),
+					'type' => Definition\Type::listOf($wsrt),
 					'description' => 'Records of the data source.',
-					'args' => [
-						'first' => [ // length from beginning
-							'type' => Definition\Type::int(),
-							'defaultValue' => 1000,
-						],
-					],
-					'resolve' => function (WeatherStation $obj, $args, $context) {
-						$data = ['abc', 'xyz']; //TODO: records (record ID + data)
-						return array_slice($data, 0, $args['first']);
+					//TODO: pagination object - http://graphql.org/learn/pagination/
+					'resolve' => function (WeatherStation $ws, $args, UserId $userId) use ($allWsRecords) {
+						return $allWsRecords->execute($userId, $ws->id());
 					},
 				],
 			],

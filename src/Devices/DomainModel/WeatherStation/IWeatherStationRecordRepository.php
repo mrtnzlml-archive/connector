@@ -9,7 +9,7 @@ interface IWeatherStationRecordRepository
 
 	public function ofId(WeatherStationRecordId $weatherStationRecordId);
 
-	public function ofWeatherStationId(WeatherStationId $weatherStationId);
+	public function ofWeatherStationId(WeatherStationId $weatherStationId): array;
 
 	public function nextIdentity(): WeatherStationRecordId;
 
