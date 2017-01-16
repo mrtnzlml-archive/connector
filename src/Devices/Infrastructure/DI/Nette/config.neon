@@ -6,10 +6,12 @@ doctrine.orm:
 
 
 services:
-	- Adeira\Connector\Devices\Application\Service\WeatherStation\AddWeatherStationRecordService
-	- Adeira\Connector\Devices\Application\Service\WeatherStation\ViewAllWeatherStationRecordsService
-	- Adeira\Connector\Devices\Application\Service\WeatherStation\ViewAllWeatherStationsService
-	- Adeira\Connector\Devices\Application\Service\WeatherStation\ViewSingleWeatherStationService
+	- Adeira\Connector\Devices\Application\Service\WeatherStation\(
+		AddWeatherStationRecordService
+		ViewAllWeatherStationRecordsService
+		ViewAllWeatherStationsService
+		ViewSingleWeatherStationService
+	)
 	- class: Adeira\Connector\Devices\Application\Service\WeatherStation\AddWeatherStationService
 	  arguments:
 	  	transactionalSession: @doctrineSession # @dummySession
@@ -28,5 +30,9 @@ graphql:
 	queryDefinitions:
 		- Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStationQueryDefinition
 	types:
-		- Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStationRecordType
-		- Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStationType
+		- Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\(
+			WeatherStationRecordType
+			WeatherStationsConnection
+			WeatherStationsEdge
+			WeatherStationType
+		)
