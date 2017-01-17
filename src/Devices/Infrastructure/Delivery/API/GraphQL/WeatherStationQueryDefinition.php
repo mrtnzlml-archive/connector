@@ -30,14 +30,21 @@ class WeatherStationQueryDefinition implements \Adeira\Connector\GraphQL\IQueryD
 	 */
 	private $weatherStationType;
 
+	/**
+	 * @var \Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStationsConnection
+	 */
+	private $weatherStationsConnection;
+
 	public function __construct(
 		ViewAllWeatherStationsService $allWeatherStationsService,
 		ViewSingleWeatherStationService $singleWeatherStationService,
-		WeatherStationType $weatherStationType
+		WeatherStationType $weatherStationType,
+		WeatherStationsConnection $weatherStationsConnection
 	) {
 		$this->allWeatherStationsService = $allWeatherStationsService;
 		$this->singleWeatherStationService = $singleWeatherStationService;
 		$this->weatherStationType = $weatherStationType;
+		$this->weatherStationsConnection = $weatherStationsConnection;
 	}
 
 	public function __invoke(): array
@@ -58,11 +65,21 @@ class WeatherStationQueryDefinition implements \Adeira\Connector\GraphQL\IQueryD
 					), 'The ID of the weather station.'),
 				]
 			),
-			'weatherStations' => Field::create(
-				Definition\Type::listOf($weatherStationType),
+			'allWeatherStations' => Field::create(
+				$this->weatherStationsConnection,
 				function ($ancestorValue, $args, UserId $userId) {
-					return $this->allWeatherStationsService->execute($userId);
-				}
+					$limit = $args['first'] ?? NULL;
+					$fromWeatherStationId = isset($args['after']) ? WeatherStationId::createFromString(base64_decode($args['after'])) : NULL;
+					return $this->allWeatherStationsService->execute($userId, $limit, $fromWeatherStationId);
+				},
+				[
+					'first' => Argument::create(
+						Definition\Type::int()
+					),
+					'after' => Argument::create(
+						Definition\Type::string()
+					),
+				]
 			),
 		];
 	}

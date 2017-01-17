@@ -2,9 +2,11 @@
 
 namespace Adeira\Connector\Devices\Application\Service\WeatherStation;
 
-use Adeira\Connector\Authentication\DomainModel\Owner\IOwnerService;
-use Adeira\Connector\Authentication\DomainModel\User\UserId;
+use Adeira\Connector\Authentication\DomainModel\{
+	Owner\IOwnerService, User\UserId
+};
 use Adeira\Connector\Devices\DomainModel\WeatherStation\IWeatherStationRepository;
+use Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\AllWeatherStationsSpecification;
 
 class ViewAllWeatherStationsService
 {
@@ -25,14 +27,16 @@ class ViewAllWeatherStationsService
 		$this->ownerService = $ownerService;
 	}
 
-	public function execute(UserId $userId)
+	public function execute(UserId $userId, $limit, $fromWeatherStationId)
 	{
 		$owner = $this->ownerService->ownerFrom($userId);
 		if ($owner === NULL) {
 			$this->ownerService->throwInvalidOwnerException();
 		}
 
-		return $this->weatherStationRepository->all($userId);
+		return $this->weatherStationRepository->findBySpecification(
+			new AllWeatherStationsSpecification($userId, $limit, $fromWeatherStationId)
+		);
 	}
 
 }

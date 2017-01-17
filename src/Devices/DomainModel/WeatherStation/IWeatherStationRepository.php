@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\Devices\DomainModel\WeatherStation;
 
-use Adeira\Connector\Authentication\DomainModel\User\UserId;
+use Adeira\Connector\Common\Infrastructure\DomainModel\Doctrine\Specification\ISpecification;
 
 interface IWeatherStationRepository
 {
@@ -13,7 +13,9 @@ interface IWeatherStationRepository
 
 	public function ofId(WeatherStationId $weatherStationId);//: ?WeatherStation;
 
-	public function all(UserId $userId);//: iterable;
+	public function findBySpecification(ISpecification $userId): array;
+
+	//TODO: findOneBySpecification
 
 //	public function remove(WeatherStation $aWeatherStation);
 
