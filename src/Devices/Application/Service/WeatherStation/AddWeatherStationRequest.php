@@ -14,8 +14,6 @@ use Adeira\Connector\Authentication\DomainModel\User\UserId;
 class AddWeatherStationRequest
 {
 
-	use \Nette\SmartObject;
-
 	private $weatherStationName;
 
 	private $userId;

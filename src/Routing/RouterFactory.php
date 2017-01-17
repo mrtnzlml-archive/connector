@@ -9,8 +9,6 @@ use Nette\Application\Routers\RouteList;
 class RouterFactory
 {
 
-	use Nette\SmartObject;
-
 	/**
 	 * @return Nette\Application\IRouter
 	 */

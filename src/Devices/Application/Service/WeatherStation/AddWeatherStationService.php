@@ -17,8 +17,6 @@ use Adeira\Connector\Devices\DomainModel\WeatherStation\{
 class AddWeatherStationService
 {
 
-	use \Nette\SmartObject;
-
 	/**
 	 * @var IWeatherStationRepository
 	 */
@@ -53,7 +51,7 @@ class AddWeatherStationService
 	{
 		$owner = $this->ownerService->ownerFrom($request->userId());
 		if ($owner === NULL) {
-			throw new \Adeira\Connector\Authentication\Application\Exception\InvalidOwnerException($owner);
+			throw new \Adeira\Connector\Authentication\Application\Exception\InvalidOwnerException;
 		}
 
 		return $this->transactionalSession->executeAtomically(function () use ($request, $owner) {

@@ -7,8 +7,6 @@ use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStationId;
 class AddWeatherStationResponse
 {
 
-	use \Nette\SmartObject;
-
 	/**
 	 * @var WeatherStationId
 	 */

@@ -19,8 +19,6 @@ use Adeira\Connector\Devices\DomainModel\WeatherStation\{
 class AddWeatherStationRecordService
 {
 
-	use \Nette\SmartObject;
-
 	/**
 	 * @var IWeatherStationRepository
 	 */
