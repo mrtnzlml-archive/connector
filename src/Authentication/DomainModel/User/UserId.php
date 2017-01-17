@@ -3,7 +3,9 @@
 namespace Adeira\Connector\Authentication\DomainModel\User;
 
 use Adeira\Connector\Common;
-use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\{
+	Uuid, UuidInterface
+};
 
 /**
  * This is value object. Value object must be immutable. Object values shouldn’t be able to be altered over their
@@ -21,12 +23,12 @@ use Ramsey\Uuid\Uuid;
 class UserId extends Common\DomainModel\IdentifiableDomainObject
 {
 
-	private function __construct(Uuid $anId = NULL)
+	private function __construct(UuidInterface $anId = NULL)
 	{
 		$this->setId($anId ? $anId->toString() : Uuid::uuid4()->toString());
 	}
 
-	public static function create(Uuid $anId = NULL): self
+	public static function create(UuidInterface $anId = NULL): self
 	{
 		return new self($anId);
 	}

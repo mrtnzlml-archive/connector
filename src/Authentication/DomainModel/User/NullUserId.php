@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\Authentication\DomainModel\User;
 
-use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * This is value object. Value object must be immutable. Object values shouldn’t be able to be altered over their
@@ -22,7 +22,7 @@ class NullUserId extends UserId
 
 	private static $NIL = \Ramsey\Uuid\Uuid::NIL;
 
-	public static function create(Uuid $anId = NULL): UserId
+	public static function create(UuidInterface $anId = NULL): UserId
 	{
 		return self::createFromString(self::$NIL);
 	}
