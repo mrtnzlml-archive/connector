@@ -19,15 +19,12 @@ class AddWeatherStationRecordRequest
 	 */
 	private $weatherStationId;
 
-	/**
-	 * @var array
-	 */
-	private $data;
+	private $pressure;
 
-	public function __construct(string $weatherStationId, string $jsonData)
+	public function __construct(string $weatherStationId, int $pressure)
 	{
 		$this->weatherStationId = $weatherStationId;
-		$this->data = Json::decode($jsonData, Json::FORCE_ARRAY);
+		$this->pressure = $pressure;
 	}
 
 	public function weatherStationId(): string
@@ -35,9 +32,9 @@ class AddWeatherStationRecordRequest
 		return $this->weatherStationId;
 	}
 
-	public function data(): array
+	public function pressure(): int
 	{
-		return $this->data;
+		return $this->pressure;
 	}
 
 }

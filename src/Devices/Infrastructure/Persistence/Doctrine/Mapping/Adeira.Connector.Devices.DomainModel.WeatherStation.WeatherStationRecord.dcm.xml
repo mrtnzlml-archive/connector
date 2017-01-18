@@ -11,7 +11,7 @@
 		</id>
 
 		<field name="weatherStationId" column="weather_station_id" type="WeatherStationId"/>
-		<field name="data" column="data" type="jsonb"/>
+		<embedded name="pressure" column-prefix="pressure_" class="Adeira\Connector\Devices\DomainModel\Pressure"/>
 
 	</entity>
 

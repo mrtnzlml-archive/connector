@@ -6,11 +6,15 @@
 
 	<entity name="Adeira\Connector\Authentication\DomainModel\User\User" table="user_accounts">
 
+		<unique-constraints>
+			<unique-constraint columns="username" name="user_accounts_username_uindex"/>
+		</unique-constraints>
+
 		<id name="id" type="UserId">
 			<generator strategy="NONE"/>
 		</id>
 
-		<field name="username" type="string" unique="true"/>
+		<field name="username" type="string"/>
 		<field name="passwordHash" type="string" column="password_hash"/>
 
 	</entity>

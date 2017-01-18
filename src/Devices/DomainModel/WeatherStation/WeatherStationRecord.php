@@ -2,6 +2,8 @@
 
 namespace Adeira\Connector\Devices\DomainModel\WeatherStation;
 
+use Adeira\Connector\Devices\DomainModel\Pressure;
+
 /**
  * This is entity without mapping. Mapping is infrastructure detail.
  *
@@ -21,15 +23,15 @@ class WeatherStationRecord
 	private $weatherStationId;
 
 	/**
-	 * @var array
+	 * @var Pressure
 	 */
-	private $data;
+	private $pressure;
 
-	public function __construct(WeatherStationRecordId $recordId, WeatherStationId $weatherStationId, array $recordData)
+	public function __construct(WeatherStationRecordId $recordId, WeatherStationId $weatherStationId, Pressure $pressure)
 	{
 		$this->id = $recordId;
 		$this->weatherStationId = $weatherStationId;
-		$this->data = $recordData;
+		$this->pressure = $pressure;
 	}
 
 	public function id(): WeatherStationRecordId
@@ -42,9 +44,9 @@ class WeatherStationRecord
 		return $this->weatherStationId;
 	}
 
-	public function data(): array
+	public function pressure(): Pressure
 	{
-		return $this->data;
+		return $this->pressure;
 	}
 
 }

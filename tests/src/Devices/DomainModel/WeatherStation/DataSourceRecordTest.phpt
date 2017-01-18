@@ -2,11 +2,13 @@
 
 namespace Adeira\Connector\Tests\Devices\DomainModel\WeatherStation;
 
+use Adeira\Connector\Devices\DomainModel\Pressure;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\{
 	WeatherStationId,
 	WeatherStationRecord,
 	WeatherStationRecordId
 };
+use Adeira\Connector\PhysicalUnits\Pressure\Units\Pascal;
 use Ramsey\Uuid\Uuid;
 use Tester\Assert;
 
@@ -23,10 +25,7 @@ class DataSourceRecordTest extends \Adeira\Connector\Tests\TestCase
 		$record = new WeatherStationRecord(
 			WeatherStationRecordId::create(Uuid::fromString('71f3f015-1cd3-4b98-ac65-f34c1c661d39')),
 			WeatherStationId::create(Uuid::fromString('846b5741-abfe-45ba-8d9e-d5a78dbe254f')),
-			[
-				'data_1',
-				'data_2',
-			]
+			new Pressure(new Pascal(101325)) //sea level standard atmospheric pressure
 		);
 
 		Assert::type(WeatherStationRecordId::class, $record->id());
@@ -35,10 +34,10 @@ class DataSourceRecordTest extends \Adeira\Connector\Tests\TestCase
 		Assert::type(WeatherStationId::class, $record->weatherStationId());
 		Assert::same('846b5741-abfe-45ba-8d9e-d5a78dbe254f', (string)$record->weatherStationId());
 
-		Assert::same([
-			'data_1',
-			'data_2',
-		], $record->data());
+		$returnedPressure = $record->pressure();
+		Assert::type(Pressure::class, $returnedPressure);
+		Assert::same(101325, $returnedPressure->absolute());
+		Assert::null($returnedPressure->relative()); //TODO
 	}
 
 }

@@ -3,6 +3,7 @@
 namespace Adeira\Connector\Devices\Application\Service\WeatherStation;
 
 use Adeira\Connector\Common\Application\Service\ITransactionalSession;
+use Adeira\Connector\Devices\DomainModel\Pressure;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\{
 	IWeatherStationRecordRepository,
 	IWeatherStationRepository,
@@ -10,6 +11,7 @@ use Adeira\Connector\Devices\DomainModel\WeatherStation\{
 	WeatherStationId,
 	WeatherStationRecord
 };
+use Adeira\Connector\PhysicalUnits\Pressure\Units\Pascal;
 
 /**
  * Application services should depend on abstraction (interfaces) so we'll make our Application Service immune to
@@ -57,7 +59,7 @@ class AddWeatherStationRecordService
 			$this->weatherStationRecordRepository->add(new WeatherStationRecord(
 				$this->weatherStationRecordRepository->nextIdentity(),
 				$weatherStation->id(),
-				$request->data()
+				new Pressure(new Pascal($request->pressure()))
 			));
 
 			return TRUE; //TODO

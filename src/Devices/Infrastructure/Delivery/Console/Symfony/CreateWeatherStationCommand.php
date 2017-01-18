@@ -57,9 +57,8 @@ class CreateWeatherStationCommand extends \Adeira\Connector\Symfony\Console\Comm
 
 		// FIXME: remove
 		$weatherStationId = $response->id();
-		$data = Json::encode(['v' => ['a' => ['l']]]);
-		$this->addWeatherStationRecordService->execute(new AddWeatherStationRecordRequest($weatherStationId, $data));
-		$this->addWeatherStationRecordService->execute(new AddWeatherStationRecordRequest($weatherStationId, $data));
+		$this->addWeatherStationRecordService->execute(new AddWeatherStationRecordRequest($weatherStationId, 101325));
+		$this->addWeatherStationRecordService->execute(new AddWeatherStationRecordRequest($weatherStationId, 101300));
 
 		$styleGenerator = new SymfonyStyle($input, $output);
 		$styleGenerator->success("New device with UUID {$response->id()} has been created.");

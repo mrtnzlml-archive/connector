@@ -3,6 +3,8 @@
 namespace Adeira\Connector\Devices\DomainModel\WeatherStation;
 
 use Adeira\Connector\Authentication\DomainModel\User\User;
+use Adeira\Connector\Devices\DomainModel\Pressure;
+use Adeira\Connector\PhysicalUnits\Pressure\Units\IPressureUnit;
 
 /**
  * This is entity without mapping. Mapping is infrastructure detail.
@@ -52,12 +54,12 @@ class WeatherStation
 		return $this->deviceName;
 	}
 
-	public function makeWeatherStationRecord(WeatherStationRecordId $weatherStationRecordId, array $recordData): WeatherStationRecord
+	public function makeWeatherStationRecord(WeatherStationRecordId $weatherStationRecordId, IPressureUnit $pressureUnit): WeatherStationRecord
 	{
 		return new WeatherStationRecord(
 			$weatherStationRecordId,
 			$this->id,
-			$recordData
+			new Pressure($pressureUnit)
 		);
 	}
 
