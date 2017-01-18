@@ -56,10 +56,10 @@ class Pressure implements IPhysicalQuantity
 		);
 	}
 
-	public function convertTo(string $speedUnit): IPhysicalQuantity
+	public function convertTo(string $pressureUnit): IPhysicalQuantity
 	{
 		$conversion = new Conversion;
-		return $conversion->convert($this, $speedUnit);
+		return $conversion->convert($this, $pressureUnit);
 	}
 
 	private function assertSamePressureUnit(Pressure $pressure)
