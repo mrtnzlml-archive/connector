@@ -21,6 +21,8 @@ class Pressure
 		$this->absolutePressure = $pressureQuantity
 			->convertTo(Pascal::class)
 			->value();
+
+		$this->relativePressure = -1; //FIXME
 	}
 
 	public function absolute()
