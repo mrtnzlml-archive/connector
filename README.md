@@ -6,11 +6,6 @@ curl -XPOST -H "Content-Type:application/graphql" -d '{"query": "mutation {login
 curl -XPOST -H "Content-Type:application/graphql" -d '{"query": "query {device(id:\"123\"){id,name}}"}' http://adeira.loc/graphql | jq .
 ```
 
-Deploy:
-```
-ansible-playbook ansible/deploy.yml
-```
-
 Install dependencies:
 ```
 composer install

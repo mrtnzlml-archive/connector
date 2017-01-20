@@ -1,3 +1,0 @@
-- name: install vim
-  yum: name=vim state=latest
-  tags: optional

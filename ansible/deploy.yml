@@ -1,8 +1,0 @@
-- name: configure and deploy REMOTE webservers and application code
-  strategy: free
-  hosts:
-    - amazon-webservers
-  roles:
-    - common
-    - webservers
-    - application

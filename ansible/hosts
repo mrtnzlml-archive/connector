@@ -1,8 +1,0 @@
-[amazon-webservers]
-aws-ec2-frankfurt
-
-[amazon-webservers:vars]
-git_repo_url=https://github.com/adeira/connector
-ansible_become=yes
-install_dir=/usr/share/nginx/html
-local_config_destination=/usr/share/nginx/html/config/config.local.neon
