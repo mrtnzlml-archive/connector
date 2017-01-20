@@ -1,25 +1,40 @@
 [![Build Status](https://travis-ci.org/adeira/connector.svg?branch=master)](https://travis-ci.org/adeira/connector)
 
-```
-curl -XPOST -H "Content-Type:application/graphql" -d '{"query": "mutation {login(username:\"test\",password:\"test\"){id,token}}"}' http://adeira.loc/graphql | jq .
+This is backend GraphQL API server for [adeira/connector-frontend](https://github.com/adeira/connector-frontend) written in Nette Framework.
 
-curl -XPOST -H "Content-Type:application/graphql" -d '{"query": "query {device(id:\"123\"){id,name}}"}' http://adeira.loc/graphql | jq .
-```
+If you want to play with the API from the CLI you should first create database and create new user account. There is database dump in `migrations/structure.sql` (PostgreSQL) or you can use command `bin/console o:s:c`. Create new user with command `bin/console a:u:c <login> <pass>`. It should return green message with UUID. Please save this UUID for later usage.
 
-Install dependencies:
-```
-composer install
-```
+Now you are ready for testing GraphQL API. Try it using your UUID (returned in previous step):
 
-Run tests:
-```
-tests/run
-```
+    bin/console a:g:q f3cd1f41-42eb-4234-95d2-e89933c2552a
 
-Structuring Code in Modules
----
-Every module is divided into three main parts: Domain code, Infrastructure code and the Application layer according to DDD in PHP suggestions.
+It should return something like this:
 
-> Domain holds all the Domain code, and Infrastructure holds the Infrastructure layer, thereby isolating all the Domain logic from the details of the Infrastructure layer.
+    {
+      "data": {
+        "allQueries": {
+          "queries": [ ... ]
+        }
+      }
+    }
 
-In Domain subfolder there should be only files related to the **Domain concerns** (not Technical concerns). Good example may be `Order`, `OrderLine`, `OrderLineWasAdded`, `OrderRepository`, `OrderWasCreated` and so on. On the other hand Infrastructure should take care about **Technical concerns** (not Domain concerns) so for example `DoctrineOrderRepository` or `RedisOrderRepository`.
+Now you can query this API:
+
+    bin/console a:g:q f3cd1f41-42eb-4234-95d2-e89933c2552a -g '{allWeatherStations{weatherStations{id,name}}}'
+
+But as you can see it can be quite long and not really readable. Create file `test.graphql` in root of this project and write there this query:
+
+    {
+        allWeatherStations {
+            weatherStations {
+                id
+                name
+            }
+        }
+    }
+
+And use `-f` option:
+
+    bin/console a:g:q f3cd1f41-42eb-4234-95d2-e89933c2552a -f test.graphql
+
+Have fun! :)
