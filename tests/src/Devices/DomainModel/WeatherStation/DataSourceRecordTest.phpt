@@ -37,7 +37,7 @@ class DataSourceRecordTest extends \Adeira\Connector\Tests\TestCase
 		$returnedPressure = $record->pressure();
 		Assert::type(Pressure::class, $returnedPressure);
 		Assert::same(101325, $returnedPressure->absolute());
-		Assert::null($returnedPressure->relative()); //TODO
+		Assert::same(-1, $returnedPressure->relative()); //TODO
 	}
 
 }
