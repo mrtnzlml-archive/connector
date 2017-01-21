@@ -40,7 +40,7 @@ class User implements \Nette\Security\IIdentity
 		return $this->username;
 	}
 
-	public function token(): string
+	public function token()//: ?string
 	{
 		return $this->token;
 	}

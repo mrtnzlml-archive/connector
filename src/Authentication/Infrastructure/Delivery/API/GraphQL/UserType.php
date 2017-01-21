@@ -33,9 +33,7 @@ class UserType extends Definition\ObjectType
 					},
 				],
 				'token' => [
-					'type' => new Definition\NonNull(
-						Definition\Type::string()
-					),
+					'type' => Definition\Type::string(),
 					'description' => 'JWT token used for authentication in API',
 					'resolve' => function (User $user, $args, $context) {
 						return $user->token();
