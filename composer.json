@@ -27,7 +27,8 @@
     "adeira/code-quality": "^1.0",
     "mrtnzlml/testbench": "^2.3",
     "nette/tester": "2.0.x-dev as v1.7",
-    "phpstan/phpstan": "dev-master"
+    "phpstan/phpstan": "dev-master",
+    "mockery/mockery": "^0.9.7"
   },
   "autoload": {
     "psr-4": {
