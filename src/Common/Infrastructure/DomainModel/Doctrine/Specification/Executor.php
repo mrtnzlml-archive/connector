@@ -5,7 +5,7 @@ namespace Adeira\Connector\Common\Infrastructure\DomainModel\Doctrine\Specificat
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 
-class Executor
+final class Executor
 {
 
 	public static function prepareQueryBuilder(

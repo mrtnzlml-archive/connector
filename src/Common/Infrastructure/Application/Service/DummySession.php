@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\Common\Infrastructure\Application\Service;
 
-class DummySession implements \Adeira\Connector\Common\Application\Service\ITransactionalSession
+final class DummySession implements \Adeira\Connector\Common\Application\Service\ITransactionalSession
 {
 
 	/**

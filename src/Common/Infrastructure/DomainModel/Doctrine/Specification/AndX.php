@@ -4,7 +4,7 @@ namespace Adeira\Connector\Common\Infrastructure\DomainModel\Doctrine\Specificat
 
 use Doctrine\ORM;
 
-class AndX implements ISpecification
+final class AndX implements ISpecification
 {
 
 	private $wrapped;

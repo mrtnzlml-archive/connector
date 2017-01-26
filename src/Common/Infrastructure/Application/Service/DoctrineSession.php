@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
  * Class DoctrineSession
  * @package Ddd\Infrastructure\Application\Service
  */
-class DoctrineSession implements \Adeira\Connector\Common\Application\Service\ITransactionalSession
+final class DoctrineSession implements \Adeira\Connector\Common\Application\Service\ITransactionalSession
 {
 
 	/**

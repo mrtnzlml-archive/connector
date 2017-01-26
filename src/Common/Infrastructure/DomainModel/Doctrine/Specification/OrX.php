@@ -4,7 +4,7 @@ namespace Adeira\Connector\Common\Infrastructure\DomainModel\Doctrine\Specificat
 
 use Doctrine\ORM;
 
-class OrX implements ISpecification
+final class OrX implements ISpecification
 {
 
 	private $wrapped;
