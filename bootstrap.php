@@ -4,7 +4,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 $configurator = new Nette\Configurator;
 $configurator->defaultExtensions['extensions'] = \Adeira\Connector\CompilerExtension\ConfigurableExtensionsExtension::class;
-$logDirectory = __DIR__ . '/log';
+$logDirectory = __DIR__ . '/var/log';
 
 if (PHP_SAPI === 'cli' && getenv('NETTE_DEBUG') === '1') {
 	$configurator->setDebugMode(TRUE);
@@ -15,7 +15,7 @@ if (PHP_SAPI === 'cli' && getenv('NETTE_DEBUG') === '1') {
 	$configurator->enableDebugger($logDirectory);
 }
 
-$configurator->setTempDirectory(__DIR__ . '/temp');
+$configurator->setTempDirectory(__DIR__ . '/var/temp');
 $configurator->addConfig(__DIR__ . '/config/config.neon');
 $configurator->addConfig(__DIR__ . '/config/config.local.neon');
 
