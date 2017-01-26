@@ -3,15 +3,15 @@
 require __DIR__ . '/vendor/autoload.php';
 
 $configurator = new Nette\Configurator;
-//$configurator->setDebugMode(FALSE); //API should return only 500 - Internal Server Error
 $configurator->defaultExtensions['extensions'] = \Adeira\Connector\CompilerExtension\ConfigurableExtensionsExtension::class;
 $logDirectory = __DIR__ . '/log';
 
-if (PHP_SAPI === 'cli') {
+if (PHP_SAPI === 'cli' && getenv('NETTE_DEBUG') === '1') {
+	$configurator->setDebugMode(TRUE);
 	\Symfony\Component\Debug\Debug::enable();
 	\Tracy\Debugger::$logDirectory = $logDirectory;
 } else {
-	//$configurator->setDebugMode('23.75.345.200'); // enable for your remote IP
+	//$configurator->setDebugMode(FALSE); //API should return only 500 - Internal Server Error
 	$configurator->enableDebugger($logDirectory);
 }
 
