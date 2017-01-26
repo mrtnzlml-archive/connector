@@ -12,7 +12,7 @@ use Nette\Application\Responses\JsonResponse;
 use Nette\Http;
 use Nette\Utils\Json;
 
-class GraphqlEndpoint implements \Nette\Application\IPresenter
+final class GraphqlEndpoint implements \Nette\Application\IPresenter
 {
 
 	/**

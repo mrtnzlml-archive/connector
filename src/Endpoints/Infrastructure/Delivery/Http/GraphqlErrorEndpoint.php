@@ -6,7 +6,7 @@ use Adeira\Connector\GraphQL\Bridge\Application\Responses\GraphqlErrorResponse;
 use Nette\Application as NApplication;
 use Tracy\ILogger;
 
-class GraphqlErrorEndpoint implements NApplication\IPresenter
+final class GraphqlErrorEndpoint implements NApplication\IPresenter
 {
 
 	/**
