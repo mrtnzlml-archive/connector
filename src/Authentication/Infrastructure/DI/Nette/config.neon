@@ -36,7 +36,7 @@ symfony.console:
 
 graphql:
 	queryDefinitions:
-		- Adeira\Connector\Authentication\Infrastructure\Delivery\API\GraphQL\QueryDefinitions
+		- Adeira\Connector\Authentication\Infrastructure\Delivery\API\GraphQL\Query\SingleUser
 	mutationDefinitions:
 		- Adeira\Connector\Authentication\Infrastructure\Delivery\API\GraphQL\MutationDefinitions
 	types:

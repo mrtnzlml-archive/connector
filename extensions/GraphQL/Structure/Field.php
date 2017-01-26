@@ -2,6 +2,9 @@
 
 namespace Adeira\Connector\GraphQL\Structure;
 
+/**
+ * @deprecated Use \Adeira\Connector\GraphQL\Structure\FieldSpecification instead
+ */
 class Field
 {
 
