@@ -11,7 +11,7 @@ use Nette\Utils\Json;
  *  - no business logic
  *  - no tests
  */
-class AddWeatherStationRecordRequest
+final class AddWeatherStationRecordRequest
 {
 
 	/**

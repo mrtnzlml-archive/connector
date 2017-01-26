@@ -5,7 +5,7 @@ namespace Adeira\Connector\Devices\Infrastructure\DomainModel\WeatherStation\Doc
 use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStationId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 
-class DoctrineWeatherStationIdType extends \Adeira\Connector\Common\Infrastructure\DomainModel\DoctrineEntityId
+final class DoctrineWeatherStationIdType extends \Adeira\Connector\Common\Infrastructure\DomainModel\DoctrineEntityId
 {
 
 	public function getTypeName(): string

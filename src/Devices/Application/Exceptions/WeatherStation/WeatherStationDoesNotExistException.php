@@ -4,7 +4,7 @@ namespace Adeira\Connector\Devices\Application\Exceptions\WeatherStation;
 
 use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStationId;
 
-class WeatherStationDoesNotExistException extends \Exception
+final class WeatherStationDoesNotExistException extends \Exception
 {
 
 	public function __construct(WeatherStationId $weatherStationId)

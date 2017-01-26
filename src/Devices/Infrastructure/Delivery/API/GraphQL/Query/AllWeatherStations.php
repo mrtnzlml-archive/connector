@@ -13,7 +13,7 @@ use Adeira\Connector\GraphQL\Structure\{
 };
 use GraphQL\Type\Definition;
 
-class AllWeatherStations implements \Adeira\Connector\GraphQL\IQueryDefinition
+final class AllWeatherStations implements \Adeira\Connector\GraphQL\IQueryDefinition
 {
 
 	/**

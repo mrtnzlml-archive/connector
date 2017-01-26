@@ -7,7 +7,7 @@ use Adeira\Connector\PhysicalUnits\Pressure\Units\{
 	IPressureUnit, Pascal
 };
 
-class Pressure
+final class Pressure
 {
 
 	private $absolutePressure;

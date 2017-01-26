@@ -9,7 +9,6 @@ use Adeira\Connector\Devices\Application\Service\WeatherStation\{
 	AddWeatherStationRequest,
 	AddWeatherStationService
 };
-use Nette\Utils\Json;
 use Symfony\Component\Console\{
 	Input\InputArgument,
 	Input\InputInterface,
@@ -17,7 +16,7 @@ use Symfony\Component\Console\{
 	Style\SymfonyStyle
 };
 
-class CreateWeatherStationCommand extends \Adeira\Connector\Symfony\Console\Command
+final class CreateWeatherStationCommand extends \Adeira\Connector\Symfony\Console\Command
 {
 
 	/**

@@ -8,7 +8,7 @@ use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStation;
 use Adeira\Connector\GraphQL\Structure\Field;
 use GraphQL\Type\Definition;
 
-class WeatherStationType extends Definition\ObjectType
+final class WeatherStationType extends Definition\ObjectType
 {
 
 	public function __construct(WeatherStationRecordType $wsrt, ViewAllWeatherStationRecordsService $allWsRecords)

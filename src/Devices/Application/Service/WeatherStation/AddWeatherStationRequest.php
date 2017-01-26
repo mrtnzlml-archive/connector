@@ -11,7 +11,7 @@ use Adeira\Connector\Authentication\DomainModel\User\UserId;
  *  - no business logic
  *  - no tests
  */
-class AddWeatherStationRequest
+final class AddWeatherStationRequest
 {
 
 	private $weatherStationName;

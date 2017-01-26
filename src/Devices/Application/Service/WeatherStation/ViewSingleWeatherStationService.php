@@ -11,7 +11,7 @@ use Adeira\Connector\Devices\DomainModel\WeatherStation\{
 	WeatherStationId
 };
 
-class ViewSingleWeatherStationService
+final class ViewSingleWeatherStationService
 {
 
 	/**

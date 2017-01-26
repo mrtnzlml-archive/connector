@@ -10,7 +10,7 @@ use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStation;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStationId;
 use Doctrine\ORM;
 
-class AllWeatherStationsSpecification implements ISpecification
+final class AllWeatherStationsSpecification implements ISpecification
 {
 
 	private $specification;

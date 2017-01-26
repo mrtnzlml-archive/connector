@@ -4,7 +4,7 @@ namespace Adeira\Connector\Devices\Application\Service\WeatherStation;
 
 use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStationId;
 
-class AddWeatherStationResponse
+final class AddWeatherStationResponse
 {
 
 	/**

@@ -5,7 +5,7 @@ namespace Adeira\Connector\Devices\Infrastructure\Delivery\Console\Symfony;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class RecievePacketCommand extends \Adeira\Connector\Symfony\Console\Command
+final class RecievePacketCommand extends \Adeira\Connector\Symfony\Console\Command
 {
 
 	protected function configure()

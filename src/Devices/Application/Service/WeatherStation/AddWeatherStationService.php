@@ -14,7 +14,7 @@ use Adeira\Connector\Devices\DomainModel\WeatherStation\{
  * low-level Infrastructure changes. It's important to keep your Application Services setup out of the Infrastructure
  * boundary. Also those services should be registered in DIC.
  */
-class AddWeatherStationService
+final class AddWeatherStationService
 {
 
 	/**

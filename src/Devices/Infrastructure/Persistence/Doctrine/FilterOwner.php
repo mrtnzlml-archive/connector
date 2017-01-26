@@ -7,7 +7,7 @@ use Adeira\Connector\Common\Infrastructure\DomainModel\Doctrine\Specification\IS
 use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStation;
 use Doctrine\ORM;
 
-class FilterOwner implements ISpecification
+final class FilterOwner implements ISpecification
 {
 
 	private $userId;

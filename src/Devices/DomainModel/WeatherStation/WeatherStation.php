@@ -11,7 +11,7 @@ use Adeira\Connector\PhysicalUnits\Pressure\Units\IPressureUnit;
  *
  * @see Infrastructure/Persistence/Doctrine/Mapping/Adeira.Connector.Devices.DomainModel.WeatherStation.WeatherStation.dcm.xml
  */
-class WeatherStation
+final class WeatherStation
 {
 
 	/**

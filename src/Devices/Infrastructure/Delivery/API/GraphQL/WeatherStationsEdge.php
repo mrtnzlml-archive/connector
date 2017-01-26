@@ -6,7 +6,7 @@ use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStation;
 use Adeira\Connector\GraphQL\Structure\Field;
 use GraphQL\Type\Definition;
 
-class WeatherStationsEdge extends Definition\ObjectType
+final class WeatherStationsEdge extends Definition\ObjectType
 {
 
 	public function __construct(WeatherStationType $wsType)

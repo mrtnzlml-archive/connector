@@ -8,7 +8,7 @@ use Adeira\Connector\Devices\DomainModel\WeatherStation\{
 };
 use Doctrine\ORM;
 
-class FilterWeatherStationsAfter implements ISpecification
+final class FilterWeatherStationsAfter implements ISpecification
 {
 
 	private $fromWeatherStationId;

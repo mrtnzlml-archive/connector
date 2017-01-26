@@ -9,7 +9,7 @@ use Adeira\Connector\GraphQL\Structure\{
 };
 use GraphQL\Type\Definition;
 
-class WeatherStationRecordType extends Definition\ObjectType
+final class WeatherStationRecordType extends Definition\ObjectType
 {
 
 	public function __construct()

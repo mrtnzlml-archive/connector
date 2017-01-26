@@ -9,7 +9,7 @@ use Adeira\Connector\Devices\DomainModel\WeatherStation\{
 	IWeatherStationRecordRepository, WeatherStationId
 };
 
-class ViewAllWeatherStationRecordsService
+final class ViewAllWeatherStationRecordsService
 {
 
 	/**

@@ -20,7 +20,7 @@ use Ramsey\Uuid\{
  * PHP doesn't support __construct overloading (in contrast with e.g. Java) and therefore it's better design to have
  * multiple constructors (factory methods) with their semantic name.
  */
-class WeatherStationId extends Common\DomainModel\IdentifiableDomainObject
+final class WeatherStationId extends Common\DomainModel\IdentifiableDomainObject
 {
 
 	private function __construct(UuidInterface $anId = NULL)

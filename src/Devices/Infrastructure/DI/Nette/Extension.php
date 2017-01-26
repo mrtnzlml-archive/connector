@@ -4,7 +4,7 @@ namespace Adeira\Connector\Devices\Infrastructure\DI\Nette;
 
 use Adeira\Connector\Doctrine\ORM;
 
-class Extension extends \Adeira\CompilerExtension implements ORM\DI\IMappingFilesPathsProvider
+final class Extension extends \Adeira\CompilerExtension implements ORM\DI\IMappingFilesPathsProvider
 {
 
 	public function provideConfig(): string

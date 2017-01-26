@@ -9,7 +9,7 @@ use Adeira\Connector\Devices\DomainModel\Pressure;
  *
  * @see Infrastructure/Persistence/Doctrine/Mapping/Adeira.Connector.Devices.DomainModel.WeatherStation.WeatherStationRecord.dcm.xml
  */
-class WeatherStationRecord
+final class WeatherStationRecord
 {
 
 	/**

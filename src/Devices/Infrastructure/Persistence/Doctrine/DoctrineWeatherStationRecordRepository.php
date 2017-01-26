@@ -14,7 +14,7 @@ use Doctrine\ORM;
  * Do not call flush() here! Flushing and dealing with transactions is delegated to the Application Service.
  * All behavior should still follow the Repositories’ collection characteristics.
  */
-class DoctrineWeatherStationRecordRepository implements IWeatherStationRecordRepository
+final class DoctrineWeatherStationRecordRepository implements IWeatherStationRecordRepository
 {
 
 	/**
