@@ -14,7 +14,7 @@ require getenv('BOOTSTRAP');
 /**
  * @testCase
  */
-class PressureTest extends \Adeira\Connector\Tests\TestCase
+final class PressureTest extends \Adeira\Connector\Tests\TestCase
 {
 
 	public function testThatPressureAdditionIsImmutable()

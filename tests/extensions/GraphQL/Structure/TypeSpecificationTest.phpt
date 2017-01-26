@@ -13,7 +13,7 @@ require getenv('BOOTSTRAP');
 /**
  * @testCase
  */
-class TypeSpecificationTest extends \Adeira\Connector\Tests\TestCase
+final class TypeSpecificationTest extends \Adeira\Connector\Tests\TestCase
 {
 
 	public function testThatMinimalStructureWorks()

@@ -13,7 +13,7 @@ require getenv('BOOTSTRAP');
 /**
  * @testCase
  */
-class SpeedTest extends \Adeira\Connector\Tests\TestCase
+final class SpeedTest extends \Adeira\Connector\Tests\TestCase
 {
 
 	public function testThatConversionFromKmhWorks()

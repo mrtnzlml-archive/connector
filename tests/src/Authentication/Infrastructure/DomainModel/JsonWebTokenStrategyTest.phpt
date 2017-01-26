@@ -10,7 +10,7 @@ require getenv('BOOTSTRAP');
 /**
  * @testCase
  */
-class JsonWebTokenStrategyTest extends \Tester\TestCase
+final class JsonWebTokenStrategyTest extends \Tester\TestCase
 {
 
 	public function testThatGenerateTokenWorks()

@@ -13,7 +13,7 @@ require getenv('BOOTSTRAP');
 /**
  * @testCase
  */
-class TemperatureTest extends \Adeira\Connector\Tests\TestCase
+final class TemperatureTest extends \Adeira\Connector\Tests\TestCase
 {
 
 	public function testThatItsNotPossibleToConvertToTheUnknownUnit()

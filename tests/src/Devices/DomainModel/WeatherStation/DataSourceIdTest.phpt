@@ -11,7 +11,7 @@ require getenv('BOOTSTRAP');
 /**
  * @testCase
  */
-class DataSourceIdTest extends \Adeira\Connector\Tests\TestCase
+final class DataSourceIdTest extends \Adeira\Connector\Tests\TestCase
 {
 
 	public function testThatConstructorIsPrivate()

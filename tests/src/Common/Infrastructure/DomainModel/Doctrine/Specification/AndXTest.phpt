@@ -14,7 +14,7 @@ require getenv('BOOTSTRAP');
 /**
  * @testCase
  */
-class AndXTest extends \Adeira\Connector\Tests\TestCase
+final class AndXTest extends \Adeira\Connector\Tests\TestCase
 {
 
 	use \Testbench\TCompiledContainer;

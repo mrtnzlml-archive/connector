@@ -14,7 +14,7 @@ require getenv('BOOTSTRAP');
 /**
  * @testCase
  */
-class OrXTest extends \Adeira\Connector\Tests\TestCase
+final class OrXTest extends \Adeira\Connector\Tests\TestCase
 {
 
 	use \Testbench\TCompiledContainer;

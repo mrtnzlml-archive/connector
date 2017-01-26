@@ -11,7 +11,7 @@ require getenv('BOOTSTRAP');
 /**
  * @testCase
  */
-class GraphqlEndpointTest extends \Adeira\Connector\Tests\TestCase
+final class GraphqlEndpointTest extends \Adeira\Connector\Tests\TestCase
 {
 
 	use \Testbench\TCompiledContainer;

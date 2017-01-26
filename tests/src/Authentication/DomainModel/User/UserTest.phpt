@@ -11,7 +11,7 @@ require getenv('BOOTSTRAP');
 /**
  * @testCase
  */
-class UserTest extends \Tester\TestCase
+final class UserTest extends \Tester\TestCase
 {
 
 	public function testThatBasicConstructWorks()

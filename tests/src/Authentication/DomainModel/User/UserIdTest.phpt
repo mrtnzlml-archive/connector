@@ -11,7 +11,7 @@ require getenv('BOOTSTRAP');
 /**
  * @testCase
  */
-class UserIdTest extends \Tester\TestCase
+final class UserIdTest extends \Tester\TestCase
 {
 
 	public function testThatConstructorIsPrivate()

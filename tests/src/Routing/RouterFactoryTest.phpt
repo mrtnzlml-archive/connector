@@ -11,7 +11,7 @@ require getenv('BOOTSTRAP');
 /**
  * @testCase
  */
-class RouterFactoryTest extends \Adeira\Connector\Tests\TestCase
+final class RouterFactoryTest extends \Adeira\Connector\Tests\TestCase
 {
 
 	public function testThatCreateRouterWorksAsExpected()

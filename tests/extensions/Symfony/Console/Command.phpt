@@ -9,7 +9,7 @@ require getenv('BOOTSTRAP');
 /**
  * @testCase
  */
-class Command extends \Adeira\Connector\Tests\TestCase
+final class Command extends \Adeira\Connector\Tests\TestCase
 {
 
 	public function testThatCommandIsSymfonyType()

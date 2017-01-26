@@ -10,7 +10,7 @@ require getenv('BOOTSTRAP');
 /**
  * @testCase
  */
-class DummySessionTest extends \Adeira\Connector\Tests\TestCase
+final class DummySessionTest extends \Adeira\Connector\Tests\TestCase
 {
 
 	public function testThatSessionExecutionWorks()
