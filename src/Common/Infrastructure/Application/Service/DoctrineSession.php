@@ -21,6 +21,9 @@ class DoctrineSession implements \Adeira\Connector\Common\Application\Service\IT
 		$this->entityManager = $entityManager;
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function executeAtomically(callable $operation)
 	{
 		return $this->entityManager->transactional($operation);

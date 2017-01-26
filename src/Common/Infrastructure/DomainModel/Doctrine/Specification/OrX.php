@@ -14,7 +14,7 @@ class OrX implements ISpecification
 		$this->wrapped = $wrapped;
 	}
 
-	public function match(ORM\QueryBuilder $qb, string $dqlAlias)//: ORM\Query\Expr
+	public function match(ORM\QueryBuilder $qb, string $dqlAlias): ORM\Query\Expr\Orx
 	{
 		return call_user_func_array(
 			[$qb->expr(), 'orX'],

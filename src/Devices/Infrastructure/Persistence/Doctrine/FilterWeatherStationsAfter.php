@@ -18,7 +18,7 @@ class FilterWeatherStationsAfter implements ISpecification
 		$this->fromWeatherStationId = $fromWeatherStationId;
 	}
 
-	public function match(ORM\QueryBuilder $qb, string $dqlAlias)//: ORM\Query\Expr
+	public function match(ORM\QueryBuilder $qb, string $dqlAlias): ORM\Query\Expr\Comparison
 	{
 		$qb->orderBy('ws.deviceName', 'ASC'); // must be ASC because of ->gt(...) call
 		$qb->setParameter(':innerId', $this->fromWeatherStationId);

@@ -25,12 +25,12 @@ class Pressure
 		$this->relativePressure = -1; //FIXME
 	}
 
-	public function absolute()
+	public function absolute(): int
 	{
 		return $this->absolutePressure;
 	}
 
-	public function relative()
+	public function relative(): int
 	{
 		return $this->relativePressure;
 	}

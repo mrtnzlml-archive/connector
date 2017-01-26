@@ -40,12 +40,12 @@ class User implements \Nette\Security\IIdentity
 		return $this->username;
 	}
 
-	public function token()//: ?string
+	public function token(): ?string
 	{
 		return $this->token;
 	}
 
-	public function authenticate($pass, callable $checkHash, callable $generateToken): bool
+	public function authenticate(string $pass, callable $checkHash, callable $generateToken): bool
 	{
 		$passwordCorrect = $checkHash($pass, $this->passwordHash);
 		if ($passwordCorrect === TRUE) {

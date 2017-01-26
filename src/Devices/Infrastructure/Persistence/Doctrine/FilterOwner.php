@@ -17,7 +17,7 @@ class FilterOwner implements ISpecification
 		$this->userId = $userId;
 	}
 
-	public function match(ORM\QueryBuilder $qb, string $dqlAlias)//: ORM\Query\Expr
+	public function match(ORM\QueryBuilder $qb, string $dqlAlias): ORM\Query\Expr\Comparison
 	{
 		$qb->setParameter(':owner', $this->userId);
 		return $qb->expr()->eq("$dqlAlias.owner", ':owner');

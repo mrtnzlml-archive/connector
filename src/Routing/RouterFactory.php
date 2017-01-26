@@ -2,16 +2,13 @@
 
 namespace Adeira\Connector\Routing;
 
-use Nette;
-use Nette\Application\Routers\Route;
-use Nette\Application\Routers\RouteList;
+use Nette\Application\Routers\{
+	Route, RouteList
+};
 
 class RouterFactory
 {
 
-	/**
-	 * @return Nette\Application\IRouter
-	 */
 	public static function createRouter(): RouteList
 	{
 		$router = new RouteList();

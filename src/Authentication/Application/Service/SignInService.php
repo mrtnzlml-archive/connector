@@ -25,7 +25,10 @@ class SignInService
 		$this->transactionalSession = $transactionalSession;
 	}
 
-	public function execute($username, $password): User //FIXME: return DTO instead
+	/**
+	 * FIXME: should return DTO instead
+	 */
+	public function execute(string $username, string $password): User
 	{
 		return $this->transactionalSession->executeAtomically(function () use ($username, $password) {
 			return $this->authenticator->authenticate([

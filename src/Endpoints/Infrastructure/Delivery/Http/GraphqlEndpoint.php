@@ -47,7 +47,7 @@ class GraphqlEndpoint implements \Nette\Application\IPresenter
 		$this->tokenStrategy = $tokenStrategy;
 	}
 
-	public function run(\Nette\Application\Request $request)//: ?\Nette\Application\IResponse
+	public function run(\Nette\Application\Request $request): ?\Nette\Application\IResponse
 	{
 		$httpRequest = $this->httpRequest;
 		if ($httpRequest->isMethod(Http\IRequest::POST)) {

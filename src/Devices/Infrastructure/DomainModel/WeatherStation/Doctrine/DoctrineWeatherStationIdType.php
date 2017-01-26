@@ -13,6 +13,9 @@ class DoctrineWeatherStationIdType extends \Adeira\Connector\Common\Infrastructu
 		return 'WeatherStationId'; //(DC2Type:WeatherStationId)
 	}
 
+	/**
+	 * @param null|string $value
+	 */
 	public function convertToPHPValue($value, AbstractPlatform $platform): WeatherStationId
 	{
 		$uuid = parent::convertToPHPValue($value, $platform);

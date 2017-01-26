@@ -14,7 +14,7 @@ class AndX implements ISpecification
 		$this->wrapped = $wrapped;
 	}
 
-	public function match(ORM\QueryBuilder $qb, string $dqlAlias)//: ORM\Query\Expr
+	public function match(ORM\QueryBuilder $qb, string $dqlAlias): ORM\Query\Expr\Andx
 	{
 		return call_user_func_array(
 			[$qb->expr(), 'andX'],

@@ -5,6 +5,9 @@ namespace Adeira\Connector\Common\Infrastructure\Application\Service;
 class DummySession implements \Adeira\Connector\Common\Application\Service\ITransactionalSession
 {
 
+	/**
+	 * @return mixed
+	 */
 	public function executeAtomically(callable $operation)
 	{
 		return $operation();

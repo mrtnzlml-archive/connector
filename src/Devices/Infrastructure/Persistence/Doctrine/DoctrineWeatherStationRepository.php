@@ -38,7 +38,7 @@ class DoctrineWeatherStationRepository /*extends ORM\EntityRepository*/ implemen
 		$this->em->persist($aWeatherStation);
 	}
 
-	public function ofId(WeatherStationId $weatherStationId)//: ?WeatherStation
+	public function ofId(WeatherStationId $weatherStationId): ?WeatherStation
 	{
 		return $this->weatherStationRepository->findOneBy([
 			'id' => $weatherStationId,
@@ -58,7 +58,7 @@ class DoctrineWeatherStationRepository /*extends ORM\EntityRepository*/ implemen
 	 *
 	 * @throws \InvalidArgumentException
 	 */
-	public function findBySpecification(ISpecification $specification/*, Selection $selection = NULL*/): array
+	public function findBySpecification(ISpecification $specification): array
 	{
 		$qb = Executor::prepareQueryBuilder($this->em, $specification, WeatherStation::class, 'ws');
 		return $qb->getQuery()->getResult();

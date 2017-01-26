@@ -20,7 +20,6 @@ class RouterFactoryTest extends \Adeira\Connector\Tests\TestCase
 		Assert::type(RouteList::class, $routeList);
 		Assert::same('', $routeList->getModule());
 		Assert::same(1, $routes = $routeList->getIterator()->count());
-		/** @var $route Route */
 		Assert::type(Route::class, $route = $routeList[0]);
 		Assert::same('graphql', $route->getMask());
 		Assert::same([

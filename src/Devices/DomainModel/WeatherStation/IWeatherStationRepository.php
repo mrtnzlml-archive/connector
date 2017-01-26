@@ -11,7 +11,7 @@ interface IWeatherStationRepository
 
 //	public function addAll(array $weatherStations);
 
-	public function ofId(WeatherStationId $weatherStationId);//: ?WeatherStation;
+	public function ofId(WeatherStationId $weatherStationId): ?WeatherStation;
 
 	public function findBySpecification(ISpecification $userId): array;
 

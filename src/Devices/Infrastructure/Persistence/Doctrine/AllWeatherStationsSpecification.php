@@ -17,7 +17,7 @@ class AllWeatherStationsSpecification implements ISpecification
 
 	private $limit;
 
-	public function __construct(UserId $userId, $limit = NULL, WeatherStationId $fromWeatherStationId = NULL)
+	public function __construct(UserId $userId, int $limit = NULL, WeatherStationId $fromWeatherStationId = NULL)
 	{
 		$andSpecifications = [
 			new FilterOwner($userId),
@@ -29,7 +29,7 @@ class AllWeatherStationsSpecification implements ISpecification
 		$this->limit = $limit;
 	}
 
-	public function match(ORM\QueryBuilder $qb, string $dqlAlias)
+	public function match(ORM\QueryBuilder $qb, string $dqlAlias): ORM\Query\Expr
 	{
 		$qb->setMaxResults($this->limit);
 		return $this->specification->match($qb, $dqlAlias);
