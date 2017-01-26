@@ -6,7 +6,7 @@ use Nette\Application\Routers\{
 	Route, RouteList
 };
 
-class RouterFactory
+final class RouterFactory
 {
 
 	public static function createRouter(): RouteList
