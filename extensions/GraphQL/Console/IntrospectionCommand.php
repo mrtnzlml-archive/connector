@@ -66,15 +66,25 @@ class IntrospectionCommand extends \Adeira\Connector\Symfony\Console\Command
 			$arguments = [];
 			/** @var \GraphQL\Type\Definition\FieldArgument $arg */
 			foreach ($fieldDefinition->args as $arg) {
-				$arguments[] = $arg->name . ': ' . (string)$arg->getType();
+				$arguments[] = $arg->name . ': ' . (string)$arg->getType() . $this->formatComment($arg->description);
 			}
-			$arguments = $arguments ? '(' . implode(', ', $arguments) . ')' : '';
-			$description = $fieldDefinition->description ? "# $fieldDefinition->description" : '';
-			$output->writeln("  $name<fg=yellow>$arguments</>: <fg=green>{$fieldDefinition->getType()}</> <fg=magenta>$description</>");
+			$arguments = $this->formatArguments($arguments);
+			$output->writeln("  $name<fg=yellow>$arguments</>: <fg=green>{$fieldDefinition->getType()}</>" . $this->formatComment($fieldDefinition->description));
 		}
 
 		$output->writeln('<fg=blue;options=bold>}</>');
 		$output->writeln('');
+	}
+
+	private function formatArguments($arguments)
+	{
+		return $arguments ? "(\n    " . implode("\n    ", $arguments) . "\n  )" : '';
+	}
+
+	private function formatComment(string $comment = NULL)
+	{
+		$comment = $comment ? " # $comment" : '';
+		return "<fg=magenta>$comment</>";
 	}
 
 }
