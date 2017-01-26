@@ -5,7 +5,7 @@ namespace Adeira\Connector\Authentication\DomainModel;
 use Adeira\Connector\Authentication\DomainModel;
 use Nette\Security\Passwords;
 
-class Authenticator implements \Nette\Security\IAuthenticator
+final class Authenticator implements \Nette\Security\IAuthenticator
 {
 
 	/**

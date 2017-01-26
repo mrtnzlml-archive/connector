@@ -4,7 +4,7 @@ namespace Adeira\Connector\Authentication\Application\Exception;
 
 use Adeira\Connector\Authentication\DomainModel\User\User;
 
-class DuplicateUsernameException extends \Exception
+final class DuplicateUsernameException extends \Exception
 {
 
 	public function __construct(User $user)

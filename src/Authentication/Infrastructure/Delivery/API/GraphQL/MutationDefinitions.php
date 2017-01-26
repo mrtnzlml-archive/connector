@@ -5,7 +5,7 @@ namespace Adeira\Connector\Authentication\Infrastructure\Delivery\API\GraphQL;
 use Adeira\Connector\Authentication\Application\Service\SignInService;
 use GraphQL\Type\Definition\Type;
 
-class MutationDefinitions implements \Adeira\Connector\GraphQL\IMutationDefinition
+final class MutationDefinitions implements \Adeira\Connector\GraphQL\IMutationDefinition
 {
 
 	/**

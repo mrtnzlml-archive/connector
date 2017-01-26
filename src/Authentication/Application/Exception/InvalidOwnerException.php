@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\Authentication\Application\Exception;
 
-class InvalidOwnerException extends \Exception
+final class InvalidOwnerException extends \Exception
 {
 
 	public function __construct(string $message = NULL)

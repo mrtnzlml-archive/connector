@@ -5,7 +5,7 @@ namespace Adeira\Connector\Authentication\Infrastructure\DomainModel\User\Doctri
 use Adeira\Connector\Authentication\DomainModel\User\UserId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 
-class DoctrineUserIdType extends \Adeira\Connector\Common\Infrastructure\DomainModel\DoctrineEntityId
+final class DoctrineUserIdType extends \Adeira\Connector\Common\Infrastructure\DomainModel\DoctrineEntityId
 {
 
 	public function getTypeName(): string

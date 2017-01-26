@@ -4,7 +4,7 @@ namespace Adeira\Connector\Authentication\Infrastructure\DomainModel\Owner;
 
 use Adeira\Connector\Authentication\DomainModel;
 
-class UserIdOwnerService implements DomainModel\Owner\IOwnerService
+final class UserIdOwnerService implements DomainModel\Owner\IOwnerService
 {
 
 	/**

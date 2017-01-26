@@ -6,7 +6,7 @@ use Adeira\Connector\Authentication\DomainModel\User\User;
 use Adeira\Connector\Common\Application\Service\ITransactionalSession;
 use Nette\Security\IAuthenticator;
 
-class SignInService
+final class SignInService
 {
 
 	/**

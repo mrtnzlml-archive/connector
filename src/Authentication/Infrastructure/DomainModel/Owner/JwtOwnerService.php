@@ -4,7 +4,7 @@ namespace Adeira\Connector\Authentication\Infrastructure\DomainModel\Owner;
 
 use Adeira\Connector\Authentication\DomainModel;
 
-class JwtOwnerService implements DomainModel\Owner\IOwnerService
+final class JwtOwnerService implements DomainModel\Owner\IOwnerService
 {
 
 	/**

@@ -7,7 +7,7 @@ use Symfony\Component\Console\{
 	Input\InputArgument, Input\InputInterface, Output\OutputInterface, Style\SymfonyStyle
 };
 
-class CreateUserCommand extends \Adeira\Connector\Symfony\Console\Command
+final class CreateUserCommand extends \Adeira\Connector\Symfony\Console\Command
 {
 
 	/** @var \Adeira\Connector\Authentication\Application\Service\CreateUserService */

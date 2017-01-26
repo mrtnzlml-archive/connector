@@ -9,7 +9,7 @@ use Adeira\Connector\GraphQL\Structure\{
 };
 use GraphQL\Type\Definition;
 
-class SingleUser implements \Adeira\Connector\GraphQL\IQueryDefinition
+final class SingleUser implements \Adeira\Connector\GraphQL\IQueryDefinition
 {
 
 	/**

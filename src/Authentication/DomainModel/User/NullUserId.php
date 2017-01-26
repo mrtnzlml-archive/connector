@@ -17,7 +17,7 @@ use Ramsey\Uuid\UuidInterface;
  * PHP doesn't support __construct overloading (in contrast with e.g. Java) and therefore it's better design to have
  * multiple constructors (factory methods) with their semantic name.
  */
-class NullUserId extends UserId
+final class NullUserId extends UserId
 {
 
 	private static $NIL = \Ramsey\Uuid\Uuid::NIL;

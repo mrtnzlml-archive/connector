@@ -5,7 +5,7 @@ namespace Adeira\Connector\Authentication\Infrastructure\Persistence\Doctrine;
 use Adeira\Connector\Authentication\DomainModel;
 use Doctrine\ORM;
 
-class DoctrineUserRepository implements DomainModel\User\IUserRepository
+final class DoctrineUserRepository implements DomainModel\User\IUserRepository
 {
 
 	/**

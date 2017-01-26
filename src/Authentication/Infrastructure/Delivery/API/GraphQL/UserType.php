@@ -5,7 +5,7 @@ namespace Adeira\Connector\Authentication\Infrastructure\Delivery\API\GraphQL;
 use Adeira\Connector\Authentication\DomainModel\User\User;
 use GraphQL\Type\Definition;
 
-class UserType extends Definition\ObjectType
+final class UserType extends Definition\ObjectType
 {
 
 	public function __construct()

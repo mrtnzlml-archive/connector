@@ -8,7 +8,7 @@ use Adeira\Connector\Authentication\DomainModel\User\UserId;
 use Adeira\Connector\Common\Application\Service\ITransactionalSession;
 use Nette\Security\Passwords;
 
-class CreateUserService
+final class CreateUserService
 {
 
 	/**

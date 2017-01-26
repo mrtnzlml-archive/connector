@@ -4,7 +4,7 @@ namespace Adeira\Connector\Authentication\Infrastructure\DomainModel;
 
 use Adeira\Connector\Authentication\DomainModel;
 
-class JsonWebTokenStrategy implements DomainModel\ITokenStrategy
+final class JsonWebTokenStrategy implements DomainModel\ITokenStrategy
 {
 
 	/**

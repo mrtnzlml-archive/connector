@@ -7,7 +7,7 @@ namespace Adeira\Connector\Authentication\DomainModel\User;
  *
  * @see Infrastructure/Persistence/Doctrine/Mapping/Adeira.Connector.Identity.DomainModel.User.User.dcm.xml
  */
-class User implements \Nette\Security\IIdentity
+final class User implements \Nette\Security\IIdentity
 {
 
 	/**
@@ -69,7 +69,7 @@ class User implements \Nette\Security\IIdentity
 	/**
 	 * Implementation of Nette\Security\IIdentity
 	 */
-	final public function getId(): UserId
+	public function getId(): UserId
 	{
 		return $this->id;
 	}
