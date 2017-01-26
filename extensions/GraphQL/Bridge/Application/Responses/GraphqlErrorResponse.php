@@ -5,7 +5,7 @@ namespace Adeira\Connector\GraphQL\Bridge\Application\Responses;
 use Nette;
 use Nette\Http;
 
-class GraphqlErrorResponse extends \Nette\Application\Responses\JsonResponse
+final class GraphqlErrorResponse extends \Nette\Application\Responses\JsonResponse
 {
 
 	/**

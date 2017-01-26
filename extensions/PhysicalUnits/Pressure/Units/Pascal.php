@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\PhysicalUnits\Pressure\Units;
 
-class Pascal implements IPressureUnit
+final class Pascal implements IPressureUnit
 {
 
 	private $value;

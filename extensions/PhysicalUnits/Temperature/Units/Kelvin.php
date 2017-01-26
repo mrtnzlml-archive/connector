@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\PhysicalUnits\Temperature\Units;
 
-class Kelvin implements ITemperatureUnit
+final class Kelvin implements ITemperatureUnit
 {
 
 	/**

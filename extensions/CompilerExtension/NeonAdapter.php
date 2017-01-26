@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\CompilerExtension;
 
-class NeonAdapter extends \Nette\DI\Config\Adapters\NeonAdapter
+final class NeonAdapter extends \Nette\DI\Config\Adapters\NeonAdapter
 {
 
 	public function process(array $arr)

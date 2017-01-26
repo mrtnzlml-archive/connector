@@ -5,7 +5,7 @@ namespace Adeira\Connector\GraphQL\Structure;
 /**
  * @deprecated Use \Adeira\Connector\GraphQL\Structure\FieldSpecification instead
  */
-class Field
+final class Field
 {
 
 	private function __construct()

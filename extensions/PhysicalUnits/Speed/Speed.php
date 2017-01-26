@@ -12,7 +12,7 @@ use Adeira\Connector\PhysicalUnits\{
  * 1 mph = 0.44704 m/s
  * 1 mph = 1.609344 km/h
  */
-class Speed implements IPhysicalQuantity
+final class Speed implements IPhysicalQuantity
 {
 
 	/**

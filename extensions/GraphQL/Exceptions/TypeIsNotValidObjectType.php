@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\GraphQL\Exceptions;
 
-class TypeIsNotValidObjectType extends \Exception
+final class TypeIsNotValidObjectType extends \Exception
 {
 
 	public function __construct(string $className)

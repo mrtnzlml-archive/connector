@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\PhysicalUnits\Speed\Units;
 
-class Mph implements ISpeedUnit
+final class Mph implements ISpeedUnit
 {
 
 	private $value;

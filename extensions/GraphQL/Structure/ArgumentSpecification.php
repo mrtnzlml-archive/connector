@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\GraphQL\Structure;
 
-class ArgumentSpecification
+final class ArgumentSpecification
 {
 
 	private $name;

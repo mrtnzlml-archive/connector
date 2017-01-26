@@ -6,7 +6,7 @@ use Adeira\Connector\GraphQL\SchemaFactory;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class IntrospectionCommand extends \Adeira\Connector\Symfony\Console\Command
+final class IntrospectionCommand extends \Adeira\Connector\Symfony\Console\Command
 {
 
 	/** @var \Adeira\Connector\GraphQL\SchemaFactory */

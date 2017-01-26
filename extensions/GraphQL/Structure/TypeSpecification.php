@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\GraphQL\Structure;
 
-class TypeSpecification
+final class TypeSpecification
 {
 
 	private $name;

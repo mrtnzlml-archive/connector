@@ -11,7 +11,7 @@ use Adeira\Connector\PhysicalUnits\{
  * 1 bar = 100.000 Pa
  * 1 atm = 101325 Pa = 760 Torr
  */
-class Pressure implements IPhysicalQuantity
+final class Pressure implements IPhysicalQuantity
 {
 
 	/**

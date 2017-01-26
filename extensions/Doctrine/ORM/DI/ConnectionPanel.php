@@ -4,7 +4,7 @@ namespace Adeira\Connector\Doctrine\ORM\DI;
 
 use Doctrine\DBAL;
 
-class ConnectionPanel implements \Tracy\IBarPanel
+final class ConnectionPanel implements \Tracy\IBarPanel
 {
 
 	/**

@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\PhysicalUnits\Pressure\Units;
 
-class Atm implements IPressureUnit
+final class Atm implements IPressureUnit
 {
 
 	private $value;

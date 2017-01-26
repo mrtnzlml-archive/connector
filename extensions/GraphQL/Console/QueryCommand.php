@@ -10,7 +10,7 @@ use Symfony\Component\Console\Input\{
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class QueryCommand extends \Adeira\Connector\Symfony\Console\Command
+final class QueryCommand extends \Adeira\Connector\Symfony\Console\Command
 {
 
 	/** @var \Adeira\Connector\GraphQL\SchemaFactory */

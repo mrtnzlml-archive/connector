@@ -11,7 +11,7 @@ use Adeira\Connector\PhysicalUnits\{
  * 0 K = -273.15 °C
  * 1 °C = (1 °F - 32 °F) * 5/9
  */
-class Temperature implements IPhysicalQuantity
+final class Temperature implements IPhysicalQuantity
 {
 
 	/**

@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\PhysicalUnits\Temperature\Units;
 
-class Fahrenheit implements ITemperatureUnit
+final class Fahrenheit implements ITemperatureUnit
 {
 
 	private $value;

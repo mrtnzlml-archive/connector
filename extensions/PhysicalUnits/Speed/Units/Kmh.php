@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\PhysicalUnits\Speed\Units;
 
-class Kmh implements ISpeedUnit
+final class Kmh implements ISpeedUnit
 {
 
 	private $value;

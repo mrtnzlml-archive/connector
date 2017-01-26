@@ -4,7 +4,7 @@ namespace Adeira\Connector\GraphQL;
 
 use GraphQL\Type\Definition\ObjectType;
 
-class SchemaFactory
+final class SchemaFactory
 {
 
 	private $queryDefinitions;

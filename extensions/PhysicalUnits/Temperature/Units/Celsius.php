@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\PhysicalUnits\Temperature\Units;
 
-class Celsius implements ITemperatureUnit
+final class Celsius implements ITemperatureUnit
 {
 
 	private $value;

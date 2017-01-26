@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\PhysicalUnits\Pressure\Units;
 
-class Torr implements IPressureUnit
+final class Torr implements IPressureUnit
 {
 
 	private $value;

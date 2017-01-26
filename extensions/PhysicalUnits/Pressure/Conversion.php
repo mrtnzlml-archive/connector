@@ -6,7 +6,7 @@ use Adeira\Connector\PhysicalUnits\{
 	IPhysicalQuantity
 };
 
-class Conversion
+final class Conversion
 {
 
 	public function convert(IPhysicalQuantity $fromPhysicalQuantity, string $toUnit): IPhysicalQuantity

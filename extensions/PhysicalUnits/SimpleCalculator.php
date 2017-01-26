@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\PhysicalUnits;
 
-class SimpleCalculator
+final class SimpleCalculator
 {
 
 	public function add($x, $increment)
