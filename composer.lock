@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ba42a304a1fe930a07e7871fb9488e3c",
-    "content-hash": "300fed49c8683200a7d8a433eb4f9fb5",
+    "hash": "04eb7e7712d74d8798636d9914b10d3e",
+    "content-hash": "e92234d78783fde37b5745085b55a974",
     "packages": [
         {
             "name": "adeira/compiler-extension",
@@ -2876,66 +2876,6 @@
         }
     ],
     "packages-dev": [
-        {
-            "name": "consistence/coding-standard",
-            "version": "0.12",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/consistence/coding-standard.git",
-                "reference": "827e1f52dd1acd2d190bfb8d6f00bc8ca84c9334"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/consistence/coding-standard/zipball/827e1f52dd1acd2d190bfb8d6f00bc8ca84c9334",
-                "reference": "827e1f52dd1acd2d190bfb8d6f00bc8ca84c9334",
-                "shasum": ""
-            },
-            "require": {
-                "php": "~5.6|~7.0",
-                "squizlabs/php_codesniffer": "~2.7.0"
-            },
-            "require-dev": {
-                "jakub-onderka/php-console-highlighter": "0.3.2",
-                "jakub-onderka/php-parallel-lint": "0.9.2",
-                "phing/phing": "2.14",
-                "phpunit/phpunit": "5.4.6"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Consistence\\": [
-                        "Consistence"
-                    ]
-                },
-                "classmap": [
-                    "Consistence"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Vašek Purchart",
-                    "email": "me@vasekpurchart.cz",
-                    "homepage": "http://vasekpurchart.cz"
-                }
-            ],
-            "description": "Consistence - Coding Standard - PHP Code Sniffer rules",
-            "keywords": [
-                "Coding Standard",
-                "PHPCodeSniffer",
-                "codesniffer",
-                "coding",
-                "cs",
-                "phpcs",
-                "ruleset",
-                "sniffer",
-                "standard"
-            ],
-            "time": "2016-09-06 18:48:54"
-        },
         {
             "name": "hamcrest/hamcrest-php",
             "version": "v1.2.2",

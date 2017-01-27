@@ -1,65 +1,60 @@
 <?xml version="1.0"?>
 <ruleset name="adeira/code-quality">
-	<!--
-		SEE:
-		- https://github.com/juzna/nette-coding-standard/blob/master/NetteStandard/ruleset.xml
-		- https://gist.github.com/jakubkulhan/b054b89cb207822fcb71
-		- https://github.com/consistence/coding-standard
-		- https://github.com/slevomat/coding-standard
-	-->
-
 	<description>Source of code quality rules for Adeira packages</description>
 	<exclude-pattern>*/vendor/*</exclude-pattern>
 
-	<!-- /vendor/adeira/code-quality -->
-	<rule ref="./vendor/consistence/coding-standard/Consistence/ruleset.xml">
-		<exclude name="Generic.PHP.LowerCaseConstant"/>
-		<exclude name="Generic.Formatting.SpaceAfterCast"/>
-		<exclude name="Generic.Functions.OpeningFunctionBraceBsdAllman.BraceOnSameLine"/> <!-- better implementation already in: Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine -->
-		<exclude name="Squiz.Commenting.FunctionComment.MissingParamTag"/>
-		<exclude name="Squiz.Commenting.FunctionComment.WrongStyle"/>
-		<exclude name="Squiz.PHP.Heredoc.NotAllowed"/>
-		<exclude name="Squiz.Strings.DoubleQuoteUsage.ContainsVar"/>
-		<exclude name="Squiz.WhiteSpace.OperatorSpacing.NoSpaceAfter"/>
-		<exclude name="Squiz.WhiteSpace.OperatorSpacing.NoSpaceBefore"/>
-	</rule>
-
-	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/ruleset.xml">
-		<exclude name="SlevomatCodingStandard.Files.TypeNameMatchesFileName"/>
-		<exclude name="SlevomatCodingStandard.Namespaces.FullyQualifiedClassNameAfterKeyword"/>
-		<exclude name="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly"/>
-		<exclude name="SlevomatCodingStandard.Namespaces.UseOnlyWhitelistedNamespaces"/>
-		<exclude name="PSR2.Namespaces.UseDeclaration.MultipleDeclarations"/> <!-- allow PHP 7 group use declaration -->
-		<exclude name="SlevomatCodingStandard.Namespaces.MultipleUsesPerLine"/> <!-- allow PHP 7 group use declaration -->
-		<exclude name="SlevomatCodingStandard.Namespaces.UnusedUses.UnusedUse"/> <!-- doesn't work correctly (PHP 7) -->
-		<exclude name="SlevomatCodingStandard.Namespaces.DisallowGroupUse"/>
-		<exclude name="SlevomatCodingStandard.Typehints.TypeHintDeclaration.missingParameterTypeHint"/> <!-- doesn't work correctly (PHP 7) -->
-		<exclude name="SlevomatCodingStandard.Typehints.TypeHintDeclaration.missingReturnTypeHint"/> <!-- doesn't work correctly (PHP 7) -->
-	</rule>
-
-	<!--<rule ref="SlevomatCodingStandard.Namespaces.UseOnlyWhitelistedNamespaces">-->
-		<!--<properties>-->
-			<!--<property name="allowUseFromRootNamespace" value="true"/>-->
-			<!--<property name="namespacesRequiredToUse" type="array" value="Adeira"/>-->
-		<!--</properties>-->
-	<!--</rule>-->
-
-	<rule ref="PSR1.Files.SideEffects.FoundWithSymbols">
-		<exclude-pattern>*.phpt</exclude-pattern>
-	</rule>
-
-	<rule ref="SlevomatCodingStandard.Classes.UnusedPrivateElements">
+	<rule ref="Generic.Arrays.DisallowLongArraySyntax"/> <!-- $array = []; -->
+	<rule ref="Generic.CodeAnalysis.EmptyStatement"/>
+	<rule ref="Generic.CodeAnalysis.JumbledIncrementer"/>
+	<rule ref="Generic.CodeAnalysis.UnconditionalIfStatement"/>
+	<rule ref="Generic.CodeAnalysis.UnnecessaryFinalModifier"/>
+	<rule ref="Generic.CodeAnalysis.UselessOverridingMethod"/>
+	<!--<rule ref="Generic.Commenting.Todo"/>-->
+	<rule ref="Generic.ControlStructures.InlineControlStructure"/>
+	<rule ref="Generic.Files.ByteOrderMark"/>
+	<rule ref="Generic.Files.EndFileNewline"/>
+	<rule ref="Generic.Files.LineLength">
 		<properties>
-			<property name="alwaysUsedPropertiesAnnotations" type="array" value="@ORM\Column,@ORM\Embedded,@ORM\JoinColumn,@ORM\ManyToMany"/>
+			<property name="lineLimit" value="160"/>
+			<property name="absoluteLineLimit" value="160"/>
 		</properties>
 	</rule>
-
-	<rule ref="SlevomatCodingStandard.Namespaces.UnusedUses">
+	<rule ref="Generic.Files.OneClassPerFile"/>
+	<rule ref="Generic.Files.OneInterfacePerFile"/>
+	<rule ref="Generic.Files.OneTraitPerFile"/>
+	<rule ref="Generic.Formatting.DisallowMultipleStatements"/>
+	<rule ref="Generic.Formatting.NoSpaceAfterCast"/>
+	<rule ref="Generic.Metrics.CyclomaticComplexity"/>
+	<rule ref="Generic.Metrics.NestingLevel">
 		<properties>
-			<property name="searchAnnotations" value="true"/>
+			<property name="nestingLevel" value="7"/>
 		</properties>
 	</rule>
+	<rule ref="Generic.NamingConventions.ConstructorName"/>
+	<rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
+	<rule ref="Generic.PHP.BacktickOperator"/>
+	<rule ref="Generic.PHP.DisallowShortOpenTag"/>
+	<rule ref="Generic.PHP.SAPIUsage"/>
+	<rule ref="Generic.PHP.UpperCaseConstant"/> <!-- TRUE, FALSE, NULL -->
+	<rule ref="Generic.Strings.UnnecessaryStringConcat"/>
+	<rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/> <!-- tabs only -->
 
-	<rule ref="Generic.PHP.UpperCaseConstant"/>
+	<rule ref="PSR2.ControlStructures.ElseIfDeclaration"/>
+	<rule ref="PSR2.Files.ClosingTag"/>
+	<rule ref="PSR2.Methods.MethodDeclaration"/>
+	<rule ref="PSR2.Namespaces.NamespaceDeclaration"/>
+
+	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Arrays/TrailingArrayCommaSniff.php"/>
+	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Classes/UnusedPrivateElementsSniff.php"/>
+	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/ControlStructures/AssignmentInConditionSniff.php"/>
+	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/ControlStructures/YodaComparisonSniff.php"/>
+	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Exceptions/ReferenceThrowableOnlySniff.php"/>
+	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Namespaces/AlphabeticallySortedUsesSniff.php"/>
+	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Namespaces/FullyQualifiedExceptionsSniff.php"/>
+	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Namespaces/UseDoesNotStartWithBackslashSniff.php"/>
+	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Namespaces/UseFromSameNamespaceSniff.php"/>
+	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Typehints/DeclareStrictTypesSniff.php"/>
+	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Typehints/ReturnTypehintSpacingSniff.php"/>
+	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Types/EmptyLinesAroundTypeBracesSniff.php"/>
 
 </ruleset>

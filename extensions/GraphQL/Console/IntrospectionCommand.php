@@ -69,7 +69,9 @@ final class IntrospectionCommand extends \Adeira\Connector\Symfony\Console\Comma
 				$arguments[] = $arg->name . ': ' . (string)$arg->getType() . $this->formatComment($arg->description);
 			}
 			$arguments = $this->formatArguments($arguments);
-			$output->writeln("  $name<fg=yellow>$arguments</>: <fg=green>{$fieldDefinition->getType()}</>" . $this->formatComment($fieldDefinition->description));
+			$output->writeln(
+				"  $name<fg=yellow>$arguments</>: <fg=green>{$fieldDefinition->getType()}</>" . $this->formatComment($fieldDefinition->description)
+			);
 		}
 
 		$output->writeln('<fg=blue;options=bold>}</>');
