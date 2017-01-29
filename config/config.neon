@@ -4,7 +4,6 @@
 
 includes:
 	- extensions.neon
-	- services.neon
 
 
 application:
@@ -35,6 +34,14 @@ parameters:
 
 php:
 	date.timezone: Europe/Prague
+
+
+services:
+	migrations.codeStyle: Adeira\Connector\Migrations\CodeStyle
+	doctrineSession: Adeira\Connector\Common\Infrastructure\Application\Service\DoctrineSession
+	dummySession:
+		class: Adeira\Connector\Common\Infrastructure\Application\Service\DummySession
+		autowired: no
 
 
 session:
