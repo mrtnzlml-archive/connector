@@ -2,8 +2,9 @@
 
 namespace Adeira\Connector\Tests\Routing;
 
-use Nette\Application\Routers\Route;
-use Nette\Application\Routers\RouteList;
+use Nette\Application\IRouter;
+use Nette\Http\Request;
+use Nette\Http\UrlScript;
 use Tester\Assert;
 
 require getenv('BOOTSTRAP');
@@ -14,19 +15,34 @@ require getenv('BOOTSTRAP');
 final class RouterFactoryTest extends \Adeira\Connector\Tests\TestCase
 {
 
-	public function testThatCreateRouterWorksAsExpected()
+	public function testThatRouterIsInstanceOfIRouter()
 	{
-		$routeList = (new \Adeira\Connector\Routing\RouterFactory)->createRouter();
-		Assert::type(RouteList::class, $routeList);
-		Assert::same('', $routeList->getModule());
-		Assert::same(1, $routes = $routeList->getIterator()->count());
-		Assert::type(Route::class, $route = $routeList[0]);
-		Assert::same('graphql', $route->getMask());
-		Assert::same([
-			'presenter' => 'Graphql',
-			'action' => 'default',
-		], $route->getDefaults());
-		Assert::same(0, $route->getFlags()); //default
+		$router = new \Adeira\Connector\Routing\Router;
+		Assert::type(IRouter::class, $router);
+	}
+
+	public function testThatMatchMethodWorks()
+	{
+		$router = new \Adeira\Connector\Routing\Router;
+		Assert::same('Graphql', ($router->match(new Request(
+			new UrlScript('//x.y/graphql')
+		)))->getPresenterName());
+
+		Assert::null($router->match(new Request(
+			new UrlScript('//x.y/')
+		)));
+		Assert::null($router->match(new Request(
+			new UrlScript('//x.y/nonsense')
+		)));
+	}
+
+	public function testThatConstructUrlReturnsNull()
+	{
+		$router = new \Adeira\Connector\Routing\Router;
+		Assert::null($router->constructUrl(
+			new \Nette\Application\Request('Graphql'),
+			new UrlScript('//x.y/')
+		));
 	}
 
 }
