@@ -5,6 +5,7 @@
 extensions:
 	- Arachne\ContainerAdapter\DI\ContainerAdapterExtension # because of migrations
 	- Arachne\EventDispatcher\DI\EventDispatcherExtension # because of migrations
+	adeira.routing: Adeira\Connector\Routing\Infrastructure\DI\Nette\Extension
 	authentication: Adeira\Connector\Authentication\Infrastructure\DI\Nette\Extension
 	devices: Adeira\Connector\Devices\Infrastructure\DI\Nette\Extension
 	doctrine.orm: Adeira\Connector\Doctrine\ORM\DI\Extension(%debugMode%)

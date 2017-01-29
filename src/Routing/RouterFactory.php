@@ -9,7 +9,7 @@ use Nette\Application\Routers\{
 final class RouterFactory
 {
 
-	public static function createRouter(): RouteList
+	public function createRouter(): RouteList
 	{
 		$router = new RouteList();
 		$router[] = new Route('graphql', 'Graphql:default');

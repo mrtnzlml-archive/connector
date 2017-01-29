@@ -1,0 +1,4 @@
+services:
+	routing.router:
+		class: Adeira\Connector\Routing\RouterFactory()::createRouter
+		alteration: yes

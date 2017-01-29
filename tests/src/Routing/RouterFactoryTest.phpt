@@ -16,7 +16,7 @@ final class RouterFactoryTest extends \Adeira\Connector\Tests\TestCase
 
 	public function testThatCreateRouterWorksAsExpected()
 	{
-		$routeList = \Adeira\Connector\Routing\RouterFactory::createRouter();
+		$routeList = (new \Adeira\Connector\Routing\RouterFactory)->createRouter();
 		Assert::type(RouteList::class, $routeList);
 		Assert::same('', $routeList->getModule());
 		Assert::same(1, $routes = $routeList->getIterator()->count());
