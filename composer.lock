@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "04eb7e7712d74d8798636d9914b10d3e",
-    "content-hash": "e92234d78783fde37b5745085b55a974",
+    "hash": "9348524e1a3235ce3108dc673b0c6d05",
+    "content-hash": "2d29f4a60872cd2acc24b1773099c40e",
     "packages": [
         {
             "name": "adeira/compiler-extension",
@@ -2614,16 +2614,16 @@
         },
         {
             "name": "tracy/tracy",
-            "version": "v2.4.5",
+            "version": "v2.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/tracy.git",
-                "reference": "f1ec2f25347ca75dbadcb43244a9ac04dea29fc2"
+                "reference": "c9fbca15b0a11d904c7783b7aad114182618d8d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/tracy/zipball/f1ec2f25347ca75dbadcb43244a9ac04dea29fc2",
-                "reference": "f1ec2f25347ca75dbadcb43244a9ac04dea29fc2",
+                "url": "https://api.github.com/repos/nette/tracy/zipball/c9fbca15b0a11d904c7783b7aad114182618d8d4",
+                "reference": "c9fbca15b0a11d904c7783b7aad114182618d8d4",
                 "shasum": ""
             },
             "require": {
@@ -2672,20 +2672,20 @@
                 "debugger",
                 "nette"
             ],
-            "time": "2017-01-15 13:26:45"
+            "time": "2017-01-29 19:39:20"
         },
         {
             "name": "webonyx/graphql-php",
-            "version": "v0.8.0",
+            "version": "v0.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webonyx/graphql-php.git",
-                "reference": "49453174061bbbe61a8189f87bad0b708495ff9c"
+                "reference": "c18cd1696063ded179a51669592105127815d1ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webonyx/graphql-php/zipball/49453174061bbbe61a8189f87bad0b708495ff9c",
-                "reference": "49453174061bbbe61a8189f87bad0b708495ff9c",
+                "url": "https://api.github.com/repos/webonyx/graphql-php/zipball/c18cd1696063ded179a51669592105127815d1ed",
+                "reference": "c18cd1696063ded179a51669592105127815d1ed",
                 "shasum": ""
             },
             "require": {
@@ -2694,6 +2694,9 @@
             },
             "require-dev": {
                 "phpunit/phpunit": "^4.8"
+            },
+            "suggest": {
+                "react/promise": "To use ReactPHP promise adapter"
             },
             "type": "library",
             "autoload": {
@@ -2714,7 +2717,7 @@
                 "api",
                 "graphql"
             ],
-            "time": "2016-11-25 11:45:38"
+            "time": "2017-01-26 12:24:53"
         },
         {
             "name": "zendframework/zend-code",
@@ -3273,12 +3276,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/tester.git",
-                "reference": "a53970b9b4aefeb6568e5fa57b488573fa6b0954"
+                "reference": "636a38808b8a5c211304f3e59e37b0b4f1df2963"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/tester/zipball/a53970b9b4aefeb6568e5fa57b488573fa6b0954",
-                "reference": "a53970b9b4aefeb6568e5fa57b488573fa6b0954",
+                "url": "https://api.github.com/repos/nette/tester/zipball/636a38808b8a5c211304f3e59e37b0b4f1df2963",
+                "reference": "636a38808b8a5c211304f3e59e37b0b4f1df2963",
                 "shasum": ""
             },
             "require": {
@@ -3321,7 +3324,7 @@
                 "testing",
                 "unit"
             ],
-            "time": "2017-01-09 19:57:29"
+            "time": "2017-01-29 19:11:47"
         },
         {
             "name": "nikic/php-parser",
@@ -3380,12 +3383,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "1c782ef490e916c38d6c9d6a62747b67b5c314ed"
+                "reference": "b873b05d92b87409df2a2b4a0f8b950b230b346f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/1c782ef490e916c38d6c9d6a62747b67b5c314ed",
-                "reference": "1c782ef490e916c38d6c9d6a62747b67b5c314ed",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/b873b05d92b87409df2a2b4a0f8b950b230b346f",
+                "reference": "b873b05d92b87409df2a2b4a0f8b950b230b346f",
                 "shasum": ""
             },
             "require": {
@@ -3425,7 +3428,7 @@
                 "MIT"
             ],
             "description": "PHPStan - PHP Static Analysis Tool",
-            "time": "2017-01-24 19:09:57"
+            "time": "2017-01-29 22:16:12"
         },
         {
             "name": "slevomat/coding-standard",
