@@ -3383,12 +3383,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "b873b05d92b87409df2a2b4a0f8b950b230b346f"
+                "reference": "a1953fd6c06f738d3270fed3dce8db751595980d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/b873b05d92b87409df2a2b4a0f8b950b230b346f",
-                "reference": "b873b05d92b87409df2a2b4a0f8b950b230b346f",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/a1953fd6c06f738d3270fed3dce8db751595980d",
+                "reference": "a1953fd6c06f738d3270fed3dce8db751595980d",
                 "shasum": ""
             },
             "require": {
@@ -3428,7 +3428,7 @@
                 "MIT"
             ],
             "description": "PHPStan - PHP Static Analysis Tool",
-            "time": "2017-01-29 22:16:12"
+            "time": "2017-01-30 17:44:11"
         },
         {
             "name": "slevomat/coding-standard",
