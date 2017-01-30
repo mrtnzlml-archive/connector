@@ -4,9 +4,9 @@
 
 application:
 	scanDirs: no
-	errorPresenter: GraphqlError
+	errorPresenter: Connector:GraphqlError
 	mapping:
-		*: Adeira\Connector\Endpoints\Infrastructure\Delivery\Http\*Endpoint
+		Connector: Adeira\Connector\Endpoints\Infrastructure\Delivery\Http\*Endpoint
 
 
 doctrine.orm:

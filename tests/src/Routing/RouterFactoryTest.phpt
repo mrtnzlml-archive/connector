@@ -24,7 +24,7 @@ final class RouterFactoryTest extends \Adeira\Connector\Tests\TestCase
 	public function testThatMatchMethodWorks()
 	{
 		$router = new \Adeira\Connector\Routing\Router;
-		Assert::same('Graphql', ($router->match(new Request(
+		Assert::same('Connector:Graphql', ($router->match(new Request(
 			new UrlScript('//x.y/graphql')
 		)))->getPresenterName());
 
@@ -40,7 +40,7 @@ final class RouterFactoryTest extends \Adeira\Connector\Tests\TestCase
 	{
 		$router = new \Adeira\Connector\Routing\Router;
 		Assert::null($router->constructUrl(
-			new \Nette\Application\Request('Graphql'),
+			new \Nette\Application\Request('Connector:Graphql'),
 			new UrlScript('//x.y/')
 		));
 	}

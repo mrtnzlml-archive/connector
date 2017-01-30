@@ -17,7 +17,7 @@ final class Router implements IRouter
 		}
 
 		return new AppRequest(
-			'Graphql'
+			'Connector:Graphql'
 		);
 	}
 

@@ -19,8 +19,8 @@ final class GraphqlEndpointTest extends \Adeira\Connector\Tests\TestCase
 
 	public function testThatGraphqlEndpointDoesntReturnError()
 	{
-		$presenterFactory = $this->getService('Nette\Application\IPresenterFactory');
-		$presenter = $presenterFactory->createPresenter('Graphql');
+		$presenterFactory = $this->getService(\Nette\Application\IPresenterFactory::class);
+		$presenter = $presenterFactory->createPresenter('Connector:Graphql');
 		$request = new ApplicationRequestMock(
 			$presenter,
 			'GET',
