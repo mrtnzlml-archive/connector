@@ -23,7 +23,14 @@ extensions:
 	doctrine.orm: Adeira\Connector\Doctrine\ORM\DI\Extension(%debugMode%)
 	fakeSession: Kdyby\FakeSession\DI\FakeSessionExtension
 	graphql: Adeira\Connector\GraphQL\Bridge\Nette\DI\Extension
+	migrations: Nextras\Migrations\Bridges\NetteDI\MigrationsExtension
 	symfony.console: Adeira\Connector\Symfony\Console\DI\Extension
+
+
+migrations:
+	dir: %appDir%/migrations #FIXME: rename to %rootDir%
+	driver: pgsql
+	dbal: doctrine
 
 
 parameters:
