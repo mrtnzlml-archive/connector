@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+cd "$(dirname "$0")"
+CACHE_DIR=./../var/temp/cache/
+if [ -d "$CACHE_DIR" ]; then
+  rm --recursive --verbose $CACHE_DIR
+fi
+
+echo "Cache cleanup DONE"
