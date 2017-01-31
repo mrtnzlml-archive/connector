@@ -4,6 +4,7 @@ namespace Adeira\Connector\Endpoints\Infrastructure\Delivery\Http;
 
 use Adeira\Connector\GraphQL\Bridge\Application\Responses\GraphqlErrorResponse;
 use Nette\Application as NApplication;
+use Nette\Http\IResponse;
 use Tracy\ILogger;
 
 final class GraphqlErrorEndpoint implements NApplication\IPresenter
@@ -22,14 +23,17 @@ final class GraphqlErrorEndpoint implements NApplication\IPresenter
 	public function run(NApplication\Request $request): NApplication\IResponse
 	{
 		$exc = $request->getParameter('exception');
+
 		if ($exc instanceof \Nette\Application\BadRequestException) {
 			$message = $exc->getMessage();
+			$code = IResponse::S404_NOT_FOUND;
 		} else {
 			$message = \Tracy\Debugger::$productionMode ? 'Internal Server Error.' : $exc->getMessage();
+			$code = IResponse::S500_INTERNAL_SERVER_ERROR;
 			$this->logger->log($exc, ILogger::EXCEPTION);
 		}
 
-		return new GraphqlErrorResponse($message);
+		return new GraphqlErrorResponse($message, $code);
 	}
 
 }

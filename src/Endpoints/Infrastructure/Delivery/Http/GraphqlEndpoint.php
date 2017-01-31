@@ -62,9 +62,16 @@ final class GraphqlEndpoint implements \Nette\Application\IPresenter
 			}
 
 			// http://graphql.org/learn/serving-over-http/#post-request
-			$queryData = Json::decode($httpRequest->getRawBody(), Json::FORCE_ARRAY);
-			$requestString = $queryData['query'];
-			$variableValues = $queryData['variables'] ?? [];
+			try {
+				$queryData = Json::decode($httpRequest->getRawBody(), Json::FORCE_ARRAY); //FIXME: syntax error
+				$requestString = $queryData['query'];
+				$variableValues = $queryData['variables'] ?? [];
+			} catch(\Nette\Utils\JsonException $exc) {
+				return new GraphQL\Bridge\Application\Responses\GraphqlErrorResponse(
+					'Recieved POST body is not in valid JSON format.',
+					Http\IResponse::S422_UNPROCESSABLE_ENTITY
+				);
+			}
 
 			$graphResponse = \GraphQL\GraphQL::execute(
 				$this->schemaFactory->build(),
@@ -77,11 +84,12 @@ final class GraphqlEndpoint implements \Nette\Application\IPresenter
 				$this->httpResponse->setCode(Http\IResponse::S422_UNPROCESSABLE_ENTITY);
 			}
 			return new JsonResponse($graphResponse);
+
 		} elseif ($httpRequest->isMethod(Http\IRequest::OPTIONS)) {
 			return NULL; //terminate
 		} else {
 			return new GraphQL\Bridge\Application\Responses\GraphqlErrorResponse(
-				$httpRequest->getMethod() . ' method is not allowed.',
+				$httpRequest->getMethod() . ' method is not allowed. Use POST instead.',
 				Http\IResponse::S405_METHOD_NOT_ALLOWED
 			);
 		}

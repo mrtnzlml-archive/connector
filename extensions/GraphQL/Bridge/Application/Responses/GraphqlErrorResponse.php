@@ -34,4 +34,9 @@ final class GraphqlErrorResponse extends \Nette\Application\Responses\JsonRespon
 		parent::send($httpRequest, $httpResponse);
 	}
 
+	public function getCode(): int
+	{
+		return $this->code;
+	}
+
 }
