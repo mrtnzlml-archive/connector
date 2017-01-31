@@ -10,7 +10,7 @@ use Doctrine\ORM;
 interface ISpecification
 {
 
-	public function match(ORM\QueryBuilder $qb, string $dqlAlias);//: ORM\Query\Expr;
+	public function match(ORM\QueryBuilder $qb, string $dqlAlias);
 
 	/**
 	 * Introduce reusability across different repositories by adding functionality to check if a specification supports a given entity.

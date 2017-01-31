@@ -29,7 +29,7 @@ final class AllWeatherStationsSpecification implements ISpecification
 		$this->limit = $limit;
 	}
 
-	public function match(ORM\QueryBuilder $qb, string $dqlAlias): ORM\Query\Expr
+	public function match(ORM\QueryBuilder $qb, string $dqlAlias): ORM\Query\Expr\Andx
 	{
 		$qb->setMaxResults($this->limit);
 		return $this->specification->match($qb, $dqlAlias);
