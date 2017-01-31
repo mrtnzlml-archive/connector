@@ -16,6 +16,7 @@ before_script:
 
 script:
   - vendor/bin/parallel-lint . -e php,php3,php4,php5,phtml,phpt --exclude vendor --blame
+  - bin/console migrations:continue
   - tests/run
   - vendor/bin/phpstan analyse --level 5 extensions migrations src tests/extensions tests/src tests/utils
   - bin/console orm:validate-schema --skip-sync
