@@ -38,8 +38,11 @@ final class Extension extends \Nette\DI\CompilerExtension
 
 		// Get registered commands definitions and register them in Symfony Application
 		$commandDefinitions = [];
+		foreach ($builder->findByTag('kdyby.console.command') as $commandName => $commandClass) { //compatibility with Kdyby
+			$commandDefinitions[$commandName] = '@' . $commandName;
+		}
 		foreach ($commands as $commandName => $commandClass) {
-			$commandDefinitions[$commandName] = $builder->getDefinition($this->prefix('command') . ".$commandName");
+			$commandDefinitions[$commandName] = '@' . $this->prefix('command') . ".$commandName";
 		}
 
 		$builder
