@@ -17,24 +17,13 @@ doctrine.orm:
 
 
 extensions:
-	- Arachne\ContainerAdapter\DI\ContainerAdapterExtension # because of migrations
-	- Arachne\EventDispatcher\DI\EventDispatcherExtension # because of migrations
 	adeira.routing: Adeira\Connector\Routing\Infrastructure\DI\Nette\Extension
 	authentication: Adeira\Connector\Authentication\Infrastructure\DI\Nette\Extension
 	devices: Adeira\Connector\Devices\Infrastructure\DI\Nette\Extension
 	doctrine.orm: Adeira\Connector\Doctrine\ORM\DI\Extension(%debugMode%)
 	fakeSession: Kdyby\FakeSession\DI\FakeSessionExtension
 	graphql: Adeira\Connector\GraphQL\Bridge\Nette\DI\Extension
-	migrations: Zenify\DoctrineMigrations\DI\MigrationsExtension
 	symfony.console: Adeira\Connector\Symfony\Console\DI\Extension
-
-
-migrations: # see @migrations.codeStyle
-	table: database_structure_migrations
-	column: version
-	directory: %appDir%/migrations
-	namespace: Adeira\Connector\Migrations
-	versionsOrganization: year_and_month # null or year
 
 
 parameters:
@@ -46,7 +35,6 @@ php:
 
 
 services:
-	migrations.codeStyle: Adeira\Connector\Migrations\CodeStyle
 	doctrineSession: Adeira\Connector\Common\Infrastructure\Application\Service\DoctrineSession
 	dummySession:
 		class: Adeira\Connector\Common\Infrastructure\Application\Service\DummySession

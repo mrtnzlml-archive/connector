@@ -17,11 +17,6 @@ COMMENT ON COLUMN weather_stations.id IS '(DC2Type:WeatherStationId)';
 COMMENT ON COLUMN weather_stations.owner_uuid IS '(DC2Type:UserId)';
 
 
-CREATE TABLE public.database_structure_migrations (
-	version VARCHAR(255) PRIMARY KEY NOT NULL
-);
-
-
 CREATE TABLE public.user_accounts (
 	id UUID PRIMARY KEY NOT NULL, -- (DC2Type:UserId)
 	password_hash VARCHAR(255) NOT NULL,
