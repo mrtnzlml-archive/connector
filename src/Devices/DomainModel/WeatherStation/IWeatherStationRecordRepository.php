@@ -11,6 +11,8 @@ interface IWeatherStationRecordRepository
 
 	public function ofWeatherStationId(WeatherStationId $weatherStationId): array;
 
+	public function ofAllWeatherStationIds(array $weatherStationId): array;
+
 	public function nextIdentity(): WeatherStationRecordId;
 
 }

@@ -64,7 +64,11 @@ final class WeatherStationType extends \Adeira\Connector\GraphQL\Structure\Type
 	{
 		$field = new Field('records', 'Records of the weather station', listOf($this->wsrt));
 		$field->setResolveFunction(function (WeatherStation $ws, $args, UserId $userId) {
-			return $this->allWsRecords->execute($userId, $ws->id());
+			$this->allWsRecords->buffer($ws->id());
+
+			return new \GraphQL\Deferred(function() use ($userId, $ws) {
+				return $this->allWsRecords->execute($userId, $ws->id());
+			});
 		});
 		return $field;
 	}

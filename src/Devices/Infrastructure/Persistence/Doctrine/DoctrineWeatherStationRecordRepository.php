@@ -3,10 +3,7 @@
 namespace Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine;
 
 use Adeira\Connector\Devices\DomainModel\WeatherStation\{
-	IWeatherStationRecordRepository,
-	WeatherStationId,
-	WeatherStationRecord,
-	WeatherStationRecordId
+	IWeatherStationRecordRepository, WeatherStationId, WeatherStationRecord, WeatherStationRecordId
 };
 use Doctrine\ORM;
 
@@ -43,6 +40,21 @@ final class DoctrineWeatherStationRecordRepository implements IWeatherStationRec
 		$qb->select('wsr')->from(WeatherStationRecord::class, 'wsr');
 		$qb->where('wsr.weatherStationId = :wsid')->setParameter(':wsid', $weatherStationId);
 		return $qb->getQuery()->getResult();
+	}
+
+	public function ofAllWeatherStationIds(array $weatherStationId): array
+	{
+		$qb = $this->em->createQueryBuilder();
+		$qb->select('wsr')->from(WeatherStationRecord::class, 'wsr'/*, 'wsr.weatherStationId'*/);
+		$qb->where($qb->expr()->in('wsr.weatherStationId', $weatherStationId));
+
+		$result = [];
+		/** @var WeatherStationRecord $record */
+		foreach ($qb->getQuery()->getResult() as $record) {
+			$result[$record->weatherStationId()->id()][] = $record;
+		}
+
+		return $result;
 	}
 
 	public function nextIdentity(): WeatherStationRecordId

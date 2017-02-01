@@ -22,10 +22,17 @@ final class ViewAllWeatherStationRecordsService
 	 */
 	private $ownerService;
 
+	private $weatherStationIdsBuffer = [];
+
 	public function __construct(IWeatherStationRecordRepository $wsrr, IOwnerService $ownerService)
 	{
 		$this->wsrr = $wsrr;
 		$this->ownerService = $ownerService;
+	}
+
+	public function buffer(WeatherStationId $stationId)
+	{
+		$this->weatherStationIdsBuffer[$stationId->id()] = $stationId->id(); //unique
 	}
 
 	public function execute(UserId $userId, WeatherStationId $weatherStationId)
@@ -35,7 +42,15 @@ final class ViewAllWeatherStationRecordsService
 			$this->ownerService->throwInvalidOwnerException();
 		}
 
-		return $this->wsrr->ofWeatherStationId($weatherStationId);
+		if(empty($this->weatherStationIdsBuffer)) {
+			return $this->wsrr->ofWeatherStationId($weatherStationId);
+		} else {
+			static $result = NULL; //memoization
+			if ($result === NULL) {
+				$result = $this->wsrr->ofAllWeatherStationIds($this->weatherStationIdsBuffer);
+			}
+			return $result[$weatherStationId->id()];
+		}
 	}
 
 }
