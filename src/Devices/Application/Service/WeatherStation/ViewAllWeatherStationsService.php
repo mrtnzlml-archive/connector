@@ -29,14 +29,26 @@ final class ViewAllWeatherStationsService
 
 	public function execute(UserId $userId, $limit, $fromWeatherStationId)
 	{
+		$this->assertOwnerPermissions($userId);
+		return $this->weatherStationRepository->findBySpecification(
+			new AllWeatherStationsSpecification($userId, $limit, $fromWeatherStationId)
+		);
+	}
+
+	public function executeCountOnly(UserId $userId): int
+	{
+		$this->assertOwnerPermissions($userId);
+		return $this->weatherStationRepository->countBySpecification(
+			new AllWeatherStationsSpecification($userId, NULL, NULL)
+		);
+	}
+
+	public function assertOwnerPermissions(UserId $userId)
+	{
 		$owner = $this->ownerService->ownerFrom($userId);
 		if ($owner === NULL) {
 			$this->ownerService->throwInvalidOwnerException();
 		}
-
-		return $this->weatherStationRepository->findBySpecification(
-			new AllWeatherStationsSpecification($userId, $limit, $fromWeatherStationId)
-		);
 	}
 
 }

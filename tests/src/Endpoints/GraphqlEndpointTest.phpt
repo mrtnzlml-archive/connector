@@ -71,7 +71,7 @@ final class GraphqlEndpointTest extends \Adeira\Connector\Tests\TestCase
 					'locations' => [['line' => 1, 'column' => 2]],
 				],
 				[
-					'message' => 'Field "user" argument "id" of type "String!" is required but not provided.',
+					'message' => 'Field "user" argument "id" of type "ID!" is required but not provided.',
 					'locations' => [['line' => 1, 'column' => 2]],
 				],
 			],

@@ -2,30 +2,49 @@
 
 namespace Adeira\Connector\GraphQL\Structure;
 
-/**
- * @deprecated Use \Adeira\Connector\GraphQL\Structure\FieldSpecification instead
- */
 final class Field
 {
 
-	private function __construct()
+	private $name;
+
+	private $description;
+
+	private $type;
+
+	private $argumentSpecifications = NULL;
+
+	private $resolveFunction = NULL;
+
+	public function __construct(string $name, string $description, \GraphQL\Type\Definition\Type $type)
 	{
+		$this->name = $name;
+		$this->description = $description;
+		$this->type = $type;
 	}
 
-	/**
-	 * Resolve: callback($ancestorValue, $args, $context, ResolveInfo $info) => $fieldValue
-	 */
-	public static function create(
-		\GraphQL\Type\Definition\Type $type,
-		callable $resolveFunction,
-		array $args = NULL,
-		string $description = NULL
-	): array {
+	public function addArguments(Argument ...$argumentSpecifications)
+	{
+		foreach ($argumentSpecifications as $argumentSpecification) {
+			$argArray = $argumentSpecification->buildArray();
+			$argArrayKey = key($argArray);
+			$this->argumentSpecifications[$argArrayKey] = $argArray[$argArrayKey];
+		}
+	}
+
+	public function setResolveFunction(callable $resolveFunction)
+	{
+		$this->resolveFunction = $resolveFunction;
+	}
+
+	public function buildArray(): array
+	{
 		return [
-			'type' => $type,
-			'resolve' => $resolveFunction,
-			'args' => $args,
-			'description' => $description,
+			$this->name => [
+				'type' => $this->type,
+				'description' => $this->description,
+				'args' => $this->argumentSpecifications,
+				'resolve' => $this->resolveFunction,
+			],
 		];
 	}
 

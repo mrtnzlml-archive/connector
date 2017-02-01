@@ -13,7 +13,9 @@ interface IWeatherStationRepository
 
 	public function ofId(WeatherStationId $weatherStationId): ?WeatherStation;
 
-	public function findBySpecification(ISpecification $userId): array;
+	public function countBySpecification(ISpecification $specification): int;
+
+	public function findBySpecification(ISpecification $specification): array;
 
 	//TODO: findOneBySpecification
 

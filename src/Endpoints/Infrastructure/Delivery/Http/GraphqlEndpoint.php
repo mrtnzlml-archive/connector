@@ -73,6 +73,17 @@ final class GraphqlEndpoint implements \Nette\Application\IPresenter
 				);
 			}
 
+			\GraphQL\GraphQL::setDefaultFieldResolver(function($source, $args, $context, \GraphQL\Type\Definition\ResolveInfo $info) {
+				$fieldName = $info->fieldName;
+				$property = $source; //pass-through resolver
+
+				if (is_object($source) && isset($source->{$fieldName})) { //needed for introspection resolver
+					$property = $source->{$fieldName};
+				}
+
+				return $property instanceof \Closure ? $property($source, $args, $context) : $property;
+			});
+
 			$graphResponse = \GraphQL\GraphQL::execute(
 				$this->schemaFactory->build(),
 				$requestString,
@@ -80,6 +91,7 @@ final class GraphqlEndpoint implements \Nette\Application\IPresenter
 				$userId ? UserId::createFromString($userId) : NullUserId::create(),
 				$variableValues
 			);
+			//FIXME: filtrovat co se smí dostat na produkci a co nikoliv (podle localhostu!)
 			if (isset($graphResponse['errors'])) {
 				$this->httpResponse->setCode(Http\IResponse::S422_UNPROCESSABLE_ENTITY);
 			}

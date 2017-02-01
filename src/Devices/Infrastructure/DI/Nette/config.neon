@@ -28,12 +28,14 @@ symfony.console:
 
 graphql:
 	queryDefinitions:
-		- Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Query\AllWeatherStations
-		- Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Query\WeatherStation
+		- Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Query\(
+			AllWeatherStationsQuery
+			WeatherStationQuery
+		)
 	types:
-		- Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\(
+		- Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Type\(
 			WeatherStationRecordType
-			WeatherStationsConnection
-			WeatherStationsEdge
+			WeatherStationsConnectionType
+			WeatherStationsEdgeType
 			WeatherStationType
 		)

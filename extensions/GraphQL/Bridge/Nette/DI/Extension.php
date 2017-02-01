@@ -26,18 +26,12 @@ class Extension extends \Adeira\CompilerExtension
 		// Register GraphQL query definitions
 		$queryDefinitions = [];
 		foreach ($config['queryDefinitions'] as $definitionName => $definitionClass) {
-			if (!is_a($definitionClass, \Adeira\Connector\GraphQL\IQueryDefinition::class, TRUE)) {
-				throw new \Adeira\Connector\GraphQL\Exceptions\TypeIsNotValidObjectType($definitionClass);
-			}
 			$queryDefinitions[] = $builder->addDefinition($this->prefix('queryDefinition.' . $definitionName))->setClass($definitionClass);
 		}
 
 		// Register GraphQL mutation definitions
 		$mutationDefinitions = [];
 		foreach ($config['mutationDefinitions'] as $mutationName => $definitionClass) {
-			if (!is_a($definitionClass, \Adeira\Connector\GraphQL\IMutationDefinition::class, TRUE)) {
-				throw new \Adeira\Connector\GraphQL\Exceptions\TypeIsNotValidObjectType($definitionClass); //FIXME
-			}
 			$mutationDefinitions[] = $builder->addDefinition($this->prefix('mutationDefinition.' . $mutationName))->setClass($definitionClass);
 		}
 

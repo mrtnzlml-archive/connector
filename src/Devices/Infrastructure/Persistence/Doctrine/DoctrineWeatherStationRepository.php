@@ -45,6 +45,12 @@ final class DoctrineWeatherStationRepository /*extends ORM\EntityRepository*/ im
 		]);
 	}
 
+	public function countBySpecification(ISpecification $specification): int {
+		$qb = Executor::prepareQueryBuilder($this->em, $specification, WeatherStation::class, 'ws');
+		$qb->select('COUNT(ws.id)');
+		return $qb->getQuery()->getSingleScalarResult();
+	}
+
 	/**
 	 * TODO: findOneBySpecification
 	 *

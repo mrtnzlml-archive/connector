@@ -2,6 +2,7 @@
 
 namespace Adeira\Connector\GraphQL;
 
+use Adeira\Connector\GraphQL\Structure\Query;
 use GraphQL\Type\Definition\ObjectType;
 
 final class SchemaFactory
@@ -13,31 +14,27 @@ final class SchemaFactory
 
 	public function addQueryDefinitions(array $queryDefinitions)
 	{
-		$queryDefinitions = (function (IQueryDefinition ...$queryDefinitions) {
+		/** @var Query[] $queryDefinitions */
+		$queryDefinitions = (function (Query ...$queryDefinitions) {
 			return $queryDefinitions;
 		})(...$queryDefinitions);
 
-		/** @var IQueryDefinition $type */
-		foreach ($queryDefinitions as $type) {
-			$definitions = $type->__invoke();
-			foreach ($definitions as $definitionName => $definition) {
-				$this->queryDefinitions[$definitionName] = $definition;
-			}
+		foreach ($queryDefinitions as $definition) {
+			$config = $definition->constructTypeArrayDefinition();
+			$this->queryDefinitions[$config['name']] = $config;
 		}
 	}
 
 	public function addMutationDefinitions(array $mutationDefinitions)
 	{
-		$mutationDefinitions = (function (IMutationDefinition ...$mutationDefinitions) {
+		/** @var Query[] $mutationDefinitions */
+		$mutationDefinitions = (function (Query ...$mutationDefinitions) {
 			return $mutationDefinitions;
 		})(...$mutationDefinitions);
 
-		/** @var IMutationDefinition $type */
-		foreach ($mutationDefinitions as $type) {
-			$definitions = $type->__invoke();
-			foreach ($definitions as $definitionName => $definition) {
-				$this->mutationDefinitions[$definitionName] = $definition;
-			}
+		foreach ($mutationDefinitions as $definition) {
+			$config = $definition->constructTypeArrayDefinition();
+			$this->mutationDefinitions[$config['name']] = $config;
 		}
 	}
 

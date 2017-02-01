@@ -38,7 +38,10 @@
         "extensions/",
         "src/"
       ]
-    }
+    },
+    "files": [
+      "extensions/GraphQL/Types.php"
+    ]
   },
   "autoload-dev": {
     "psr-4": {

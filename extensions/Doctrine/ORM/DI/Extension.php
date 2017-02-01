@@ -24,6 +24,7 @@ class Extension extends \Nette\DI\CompilerExtension
 			'cacheDriverConfig' => ['%tempDir%/cache/Doctrine.Cache'],
 		],
 		'debugPanel' => TRUE,
+		'debugSql' => FALSE,
 	];
 
 	/**
@@ -103,6 +104,15 @@ class Extension extends \Nette\DI\CompilerExtension
 		if ($this->debugMode && $config['debugPanel']) {
 			$connection->addSetup('@Tracy\Bar::addPanel', [
 				new \Nette\DI\Statement(\Adeira\Connector\Doctrine\ORM\DI\ConnectionPanel::class),
+			]);
+		}
+
+		if ($config['debugSql']) {
+			$builder->addDefinition($this->prefix('onShutdownLogger'))->setClass(\Adeira\Connector\Doctrine\ORM\OnShutdownLogger::class);
+			$application = $builder->getDefinition('application');
+			$application->addSetup('?->onShutdown[] = ?', [
+				'@self',
+				'@' . $this->prefix('onShutdownLogger'),
 			]);
 		}
 	}

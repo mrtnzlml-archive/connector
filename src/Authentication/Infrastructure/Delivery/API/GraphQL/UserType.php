@@ -3,44 +3,58 @@
 namespace Adeira\Connector\Authentication\Infrastructure\Delivery\API\GraphQL;
 
 use Adeira\Connector\Authentication\DomainModel\User\User;
-use GraphQL\Type\Definition;
+use Adeira\Connector\GraphQL\Structure\Field;
+use function Adeira\Connector\GraphQL\{
+	id, nullableString, string
+};
 
-final class UserType extends Definition\ObjectType
+final class UserType extends \Adeira\Connector\GraphQL\Structure\Type
 {
 
-	public function __construct()
+	public function getPublicTypeName(): string
 	{
-		parent::__construct([
-			'name' => 'User',
-			'description' => 'User entity.',
-			'fields' => [
-				'id' => [
-					'type' => new Definition\NonNull(
-						Definition\Type::string()
-					),
-					'description' => 'ID of the User',
-					'resolve' => function (User $user, $args, $context) {
-						return $user->id();
-					},
-				],
-				'username' => [
-					'type' => new Definition\NonNull(
-						Definition\Type::string()
-					),
-					'description' => 'Username of the user',
-					'resolve' => function (User $user, $args, $context) {
-						return $user->nickname();
-					},
-				],
-				'token' => [
-					'type' => Definition\Type::string(),
-					'description' => 'JWT token used for authentication in API',
-					'resolve' => function (User $user, $args, $context) {
-						return $user->token();
-					},
-				],
-			],
-		]);
+		return 'User';
+	}
+
+	public function getPublicTypeDescription(): string
+	{
+		return 'User entity.';
+	}
+
+	public function defineFields(): array
+	{
+		return [
+			$this->idFieldDefinition(),
+			$this->usernameFieldDefinition(),
+			$this->tokenFieldDefinition(),
+		];
+	}
+
+	private function idFieldDefinition()
+	{
+		$field = new Field('id', 'ID of the User', id());
+		$field->setResolveFunction(function (User $user, $args, $context) {
+			return $user->id();
+		});
+		return $field;
+	}
+
+	private function usernameFieldDefinition()
+	{
+		$field = new Field('username', 'Username of the user', string());
+		$field->setResolveFunction(function (User $user, $args, $context) {
+			return $user->nickname();
+		});
+		return $field;
+	}
+
+	private function tokenFieldDefinition()
+	{
+		$field = new Field('token', 'JWT token used for authentication in API', nullableString());
+		$field->setResolveFunction(function (User $user, $args, $context) {
+			return $user->token();
+		});
+		return $field;
 	}
 
 }

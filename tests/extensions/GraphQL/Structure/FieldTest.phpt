@@ -3,7 +3,7 @@
 namespace Adeira\Connector\Tests\GraphQL\Structure;
 
 use Adeira\Connector\GraphQL\Structure\{
-	ArgumentSpecification
+	Field
 };
 use GraphQL\Type\Definition;
 use Tester\Assert;
@@ -13,24 +13,26 @@ require getenv('BOOTSTRAP');
 /**
  * @testCase
  */
-final class ArgumentSpecificationTest extends \Adeira\Connector\Tests\TestCase
+final class FieldTest extends \Adeira\Connector\Tests\TestCase
 {
 
 	public function testThatMinimalStructureWorks()
 	{
-		$arg = new ArgumentSpecification(':name', ':description', Definition\Type::string());
+		$field = new Field(':name', ':description', Definition\Type::string());
 
 		Assert::equal(
 			[
 				':name' => [
 					'type' => Definition\Type::string(),
 					'description' => ':description',
+					'args' => NULL,
+					'resolve' => NULL,
 				],
 			],
-			$arg->buildArray()
+			$field->buildArray()
 		);
 	}
 
 }
 
-(new ArgumentSpecificationTest)->run();
+(new FieldTest)->run();
