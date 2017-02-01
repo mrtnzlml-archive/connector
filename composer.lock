@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "171d2b308c1443b7ec98483fa257e228",
+    "hash": "d9032061c5855fe6faaa2576579367b5",
     "content-hash": "7c1c3e8b3afda7756c5ce1e6da633d09",
     "packages": [
         {
             "name": "adeira/compiler-extension",
-            "version": "v2.0.2",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/adeira/compiler-extension.git",
-                "reference": "fe7b6ff1357454e706e13c1369333e2390127823"
+                "reference": "de0d7be1773f47b268f01836fa19e5187dd8621b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/adeira/compiler-extension/zipball/fe7b6ff1357454e706e13c1369333e2390127823",
-                "reference": "fe7b6ff1357454e706e13c1369333e2390127823",
+                "url": "https://api.github.com/repos/adeira/compiler-extension/zipball/de0d7be1773f47b268f01836fa19e5187dd8621b",
+                "reference": "de0d7be1773f47b268f01836fa19e5187dd8621b",
                 "shasum": ""
             },
             "require": {
@@ -42,7 +42,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2017-01-20 22:20:41"
+            "time": "2017-02-01 08:33:35"
         },
         {
             "name": "boldtrn/jsonb-bundle",
@@ -2808,12 +2808,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "ec69763f958f4f0281cc58483f0a1f498ce33b6a"
+                "reference": "2ade5afbc1b378f5133e7e186c761b6d51e3764c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/ec69763f958f4f0281cc58483f0a1f498ce33b6a",
-                "reference": "ec69763f958f4f0281cc58483f0a1f498ce33b6a",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/2ade5afbc1b378f5133e7e186c761b6d51e3764c",
+                "reference": "2ade5afbc1b378f5133e7e186c761b6d51e3764c",
                 "shasum": ""
             },
             "require": {
@@ -2853,7 +2853,7 @@
                 "MIT"
             ],
             "description": "PHPStan - PHP Static Analysis Tool",
-            "time": "2017-01-30 23:13:58"
+            "time": "2017-01-31 19:13:21"
         },
         {
             "name": "slevomat/coding-standard",

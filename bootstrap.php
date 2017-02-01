@@ -3,7 +3,7 @@
 require __DIR__ . '/vendor/autoload.php';
 
 $configurator = new Nette\Configurator;
-$configurator->defaultExtensions['extensions'] = \Adeira\Connector\CompilerExtension\ConfigurableExtensionsExtension::class;
+$configurator->defaultExtensions['extensions'] = [\Adeira\ConfigurableExtensionsExtension::class, [TRUE]];
 $logDirectory = __DIR__ . '/var/log';
 
 if (PHP_SAPI === 'cli' && getenv('NETTE_DEBUG') === '1') {
