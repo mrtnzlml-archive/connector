@@ -72,21 +72,7 @@ final class GraphqlEndpoint implements \Nette\Application\IPresenter
 				return $this->error('Recieved POST body is not in valid JSON format.');
 			}
 
-			\GraphQL\GraphQL::setDefaultFieldResolver(function (
-				$source,
-				$args,
-				$context,
-				\GraphQL\Type\Definition\ResolveInfo $info
-			) {
-				$fieldName = $info->fieldName;
-				$property = $source; //pass-through resolver
-
-				if (is_object($source) && isset($source->{$fieldName})) { //needed for introspection resolver
-					$property = $source->{$fieldName};
-				}
-
-				return $property instanceof \Closure ? $property($source, $args, $context) : $property;
-			});
+			\GraphQL\GraphQL::setDefaultFieldResolver([\Adeira\Connector\GraphQL\Executor::class, 'defaultFieldResolver']);
 
 			$graphResponse = \GraphQL\GraphQL::execute(
 				$this->schemaFactory->build(),
