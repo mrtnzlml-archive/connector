@@ -76,11 +76,7 @@ final class GraphqlEndpointTest extends \Adeira\Connector\Tests\TestCase
 		Assert::same([
 			'errors' => [
 				[
-					'message' => 'Field "user" of type "User" must have a sub selection.',
-					'locations' => [['line' => 1, 'column' => 2]],
-				],
-				[
-					'message' => 'Field "user" argument "id" of type "ID!" is required but not provided.',
+					'message' => 'Argument "id" of required type "ID!" was not provided.',
 					'locations' => [['line' => 1, 'column' => 2]],
 				],
 			],
