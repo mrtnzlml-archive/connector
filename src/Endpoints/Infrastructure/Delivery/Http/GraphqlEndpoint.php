@@ -7,6 +7,7 @@ use Adeira\Connector\Authentication\DomainModel\{
 };
 use Adeira\Connector\GraphQL\Bridge\Application\Responses\GraphqlErrorResponse;
 use Adeira\Connector\GraphQL\SchemaFactory;
+use GraphQL\Validator\DocumentValidator;
 use Nette\Application\Responses\JsonResponse;
 use Nette\Http;
 use Nette\Utils\Json;
@@ -73,6 +74,10 @@ final class GraphqlEndpoint implements \Nette\Application\IPresenter
 			}
 
 			\GraphQL\GraphQL::setDefaultFieldResolver([\Adeira\Connector\GraphQL\Executor::class, 'defaultFieldResolver']);
+
+			/** @var \GraphQL\Validator\Rules\QueryComplexity $queryComplexity */
+			$queryComplexity = DocumentValidator::getRule('QueryComplexity');
+			$queryComplexity->setMaxQueryComplexity($maxQueryComplexity = 200); //introspection complexity is 181
 
 			$graphResponse = \GraphQL\GraphQL::execute(
 				$this->schemaFactory->build(),
