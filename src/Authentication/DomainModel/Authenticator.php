@@ -24,7 +24,7 @@ final class Authenticator implements \Nette\Security\IAuthenticator
 		$this->tokenStrategy = $tokenStrategy;
 	}
 
-	public function authenticate(array $credentials): DomainModel\User\User
+	public function authenticate(array $credentials): \Nette\Security\IIdentity
 	{
 		list($username, $password) = $credentials;
 		$user = $this->userRepository->ofUsername($username);

@@ -22,32 +22,41 @@ final class GraphqlEndpointTest extends \Adeira\Connector\Tests\TestCase
 
 	public function testThat404Works()
 	{
-		$response = $this->performFatRequest();
+		$response = $this->performFatRequest('/', NULL);
 		Assert::type(GraphqlErrorResponse::class, $response);
-		Assert::same(404, $response->getCode());
 		Assert::same([
 			'data' => NULL,
 			'errors' => [['message' => 'No route for HTTP request.']],
 		], (array)$response->getPayload());
+		Assert::same(404, $response->getCode());
 	}
 
-	public function testThatGraphqlRequestWithEmptyBodyReturnsError()
+	public function testThatRequestWithEmptyBodyReturnsError()
 	{
 		$response = $this->performFatRequest('/graphql', NULL);
 		Assert::type(GraphqlErrorResponse::class, $response);
+		Assert::same([
+			'data' => NULL,
+			'errors' => [['message' => 'Recieved POST body empty.']],
+		], (array)$response->getPayload());
 		Assert::same(422, $response->getCode());
+	}
+
+	public function testThatRequestInvalidJsonReturnsError()
+	{
+		$response = $this->performFatRequest('/graphql', NULL, '{"invalidRawJson":');
+		Assert::type(GraphqlErrorResponse::class, $response);
 		Assert::same([
 			'data' => NULL,
 			'errors' => [['message' => 'Recieved POST body is not in valid JSON format.']],
 		], (array)$response->getPayload());
+		Assert::same(422, $response->getCode());
 	}
 
-	public function testThatGraphqlSyntaxErrorResponse()
+	public function testThatGraphqlSyntaxErrorReturnsError()
 	{
 		$response = $this->performFatRequest('/graphql', '{user');
 		Assert::type(JsonResponse::class, $response);
-		$httpResponse = $this->getService(HttpResponse::class);
-		Assert::same(422, $httpResponse->getCode());
 		Assert::same([
 			'errors' => [
 				[
@@ -56,14 +65,14 @@ final class GraphqlEndpointTest extends \Adeira\Connector\Tests\TestCase
 				],
 			],
 		], (array)$response->getPayload());
+		$httpResponse = $this->getService(HttpResponse::class);
+		Assert::same(422, $httpResponse->getCode());
 	}
 
-	public function testThatGraphqlValidationErrorResponse()
+	public function testThatGraphqlValidationErrorReturnsError()
 	{
 		$response = $this->performFatRequest('/graphql', '{user}');
 		Assert::type(JsonResponse::class, $response);
-		$httpResponse = $this->getService(HttpResponse::class);
-		Assert::same(422, $httpResponse->getCode());
 		Assert::same([
 			'errors' => [
 				[
@@ -76,14 +85,14 @@ final class GraphqlEndpointTest extends \Adeira\Connector\Tests\TestCase
 				],
 			],
 		], (array)$response->getPayload());
+		$httpResponse = $this->getService(HttpResponse::class);
+		Assert::same(422, $httpResponse->getCode());
 	}
 
 	public function testThatGraphqlEndpointWorks()
 	{
 		$response = $this->performFatRequest('/graphql', '{__type(name:"Query"){fields{name}}}'); //introspection
 		Assert::type(JsonResponse::class, $response);
-		$httpResponse = $this->getService(HttpResponse::class);
-		Assert::same(200, $httpResponse->getCode());
 		Assert::same([
 			'data' => [
 				'__type' => [
@@ -95,9 +104,11 @@ final class GraphqlEndpointTest extends \Adeira\Connector\Tests\TestCase
 				],
 			],
 		], (array)$response->getPayload());
+		$httpResponse = $this->getService(HttpResponse::class);
+		Assert::same(200, $httpResponse->getCode());
 	}
 
-	private function performFatRequest($path = '/', ?string $query = NULL): ?JsonResponse
+	private function performFatRequest($path = '/', ?string $query, ?string $rawJson = NULL): ?JsonResponse
 	{
 		$container = $this->getContainer();
 		$container->addService('httpRequest', new \Nette\Http\Request(
@@ -110,7 +121,10 @@ final class GraphqlEndpointTest extends \Adeira\Connector\Tests\TestCase
 			'POST',
 			NULL,
 			NULL,
-			function () use ($query) {
+			function () use ($query, $rawJson) {
+				if($rawJson !== NULL) {
+					return $rawJson;
+				}
 				if ($query === NULL) {
 					return NULL;
 				}

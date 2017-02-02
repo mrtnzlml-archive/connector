@@ -9,7 +9,8 @@ use Nette\Http;
 final class Router implements IRouter
 {
 
-	public function match(Http\IRequest $httpRequest) {
+	public function match(Http\IRequest $httpRequest): ?AppRequest
+	{
 		$url = $httpRequest->getUrl();
 		$path = $url->getPath();
 		if ($path !== '/graphql') {
@@ -21,7 +22,8 @@ final class Router implements IRouter
 		);
 	}
 
-	public function constructUrl(AppRequest $appRequest, Http\Url $refUrl) {
+	public function constructUrl(AppRequest $appRequest, Http\Url $refUrl): ?string
+	{
 		return NULL; // ONE_WAY by default
 	}
 

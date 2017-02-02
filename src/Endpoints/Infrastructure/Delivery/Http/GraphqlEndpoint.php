@@ -3,15 +3,13 @@
 namespace Adeira\Connector\Endpoints\Infrastructure\Delivery\Http;
 
 use Adeira\Connector\Authentication\DomainModel\{
-	ITokenStrategy,
-	User\NullUserId,
-	User\UserId
+	ITokenStrategy, User\NullUserId, User\UserId
 };
-use Adeira\Connector\GraphQL;
+use Adeira\Connector\GraphQL\Bridge\Application\Responses\GraphqlErrorResponse;
+use Adeira\Connector\GraphQL\SchemaFactory;
 use Nette\Application\Responses\JsonResponse;
 use Nette\Http;
 use Nette\Utils\Json;
-use Ramsey\Uuid\Uuid;
 
 final class GraphqlEndpoint implements \Nette\Application\IPresenter
 {
@@ -37,7 +35,7 @@ final class GraphqlEndpoint implements \Nette\Application\IPresenter
 	private $tokenStrategy;
 
 	public function __construct(
-		GraphQL\SchemaFactory $schemaFactory,
+		SchemaFactory $schemaFactory,
 		Http\IRequest $httpRequest,
 		Http\IResponse $response,
 		ITokenStrategy $tokenStrategy
@@ -52,7 +50,7 @@ final class GraphqlEndpoint implements \Nette\Application\IPresenter
 	{
 		$httpRequest = $this->httpRequest;
 		if ($httpRequest->isMethod(Http\IRequest::POST)) {
-			$userId = Uuid::NIL;
+			$userId = \Ramsey\Uuid\Uuid::NIL;
 
 			$authHeader = $httpRequest->getHeader('authorization');
 			if ($authHeader) {
@@ -63,17 +61,23 @@ final class GraphqlEndpoint implements \Nette\Application\IPresenter
 
 			// http://graphql.org/learn/serving-over-http/#post-request
 			try {
-				$queryData = Json::decode($httpRequest->getRawBody(), Json::FORCE_ARRAY); //FIXME: syntax error
+				$rawBody = $httpRequest->getRawBody();
+				if ($rawBody === NULL) {
+					return $this->error('Recieved POST body empty.');
+				}
+				$queryData = Json::decode($rawBody, Json::FORCE_ARRAY); //FIXME: syntax error
 				$requestString = $queryData['query'];
 				$variableValues = $queryData['variables'] ?? [];
-			} catch(\Nette\Utils\JsonException $exc) {
-				return new GraphQL\Bridge\Application\Responses\GraphqlErrorResponse(
-					'Recieved POST body is not in valid JSON format.',
-					Http\IResponse::S422_UNPROCESSABLE_ENTITY
-				);
+			} catch (\Nette\Utils\JsonException $exc) {
+				return $this->error('Recieved POST body is not in valid JSON format.');
 			}
 
-			\GraphQL\GraphQL::setDefaultFieldResolver(function($source, $args, $context, \GraphQL\Type\Definition\ResolveInfo $info) {
+			\GraphQL\GraphQL::setDefaultFieldResolver(function (
+				$source,
+				$args,
+				$context,
+				\GraphQL\Type\Definition\ResolveInfo $info
+			) {
 				$fieldName = $info->fieldName;
 				$property = $source; //pass-through resolver
 
@@ -96,15 +100,19 @@ final class GraphqlEndpoint implements \Nette\Application\IPresenter
 				$this->httpResponse->setCode(Http\IResponse::S422_UNPROCESSABLE_ENTITY);
 			}
 			return new JsonResponse($graphResponse);
-
 		} elseif ($httpRequest->isMethod(Http\IRequest::OPTIONS)) {
 			return NULL; //terminate
 		} else {
-			return new GraphQL\Bridge\Application\Responses\GraphqlErrorResponse(
+			return $this->error(
 				$httpRequest->getMethod() . ' method is not allowed. Use POST instead.',
 				Http\IResponse::S405_METHOD_NOT_ALLOWED
 			);
 		}
+	}
+
+	private function error(string $message, int $httpCode = Http\IResponse::S422_UNPROCESSABLE_ENTITY)
+	{
+		return new GraphqlErrorResponse($message, $httpCode);
 	}
 
 }
