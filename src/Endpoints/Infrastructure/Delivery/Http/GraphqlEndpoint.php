@@ -75,9 +75,14 @@ final class GraphqlEndpoint implements \Nette\Application\IPresenter
 
 			\GraphQL\GraphQL::setDefaultFieldResolver([\Adeira\Connector\GraphQL\Executor::class, 'defaultFieldResolver']);
 
-			/** @var \GraphQL\Validator\Rules\QueryComplexity $queryComplexity */
+			/**
+			 * @var \GraphQL\Validator\Rules\QueryComplexity $queryComplexity
+			 * @var \GraphQL\Validator\Rules\QueryDepth $queryDepth
+			 */
 			$queryComplexity = DocumentValidator::getRule('QueryComplexity');
+			$queryDepth = DocumentValidator::getRule('QueryDepth');
 			$queryComplexity->setMaxQueryComplexity($maxQueryComplexity = 200); //introspection complexity is 181
+			$queryDepth->setMaxQueryDepth($maxQueryDepth = 11); //introspection depth is 11
 
 			$graphResponse = \GraphQL\GraphQL::execute(
 				$this->schemaFactory->build(),
