@@ -2,6 +2,7 @@
 
 namespace Adeira\Connector\GraphQL\Bridge\Application\Responses;
 
+use GraphQL\Language\SourceLocation;
 use Nette;
 use Nette\Http;
 
@@ -13,14 +14,39 @@ final class GraphqlErrorResponse extends \Nette\Application\Responses\JsonRespon
 	 */
 	private $code;
 
-	public function __construct(string $errorMessage, int $code = Http\IResponse::S500_INTERNAL_SERVER_ERROR)
+	/**
+	 * @param $errorMessage string|array
+	 *
+	 * @throws \Exception
+	 * @throws \InvalidArgumentException
+	 */
+	public function __construct($errorMessage, int $code = Http\IResponse::S500_INTERNAL_SERVER_ERROR, $withDataField = TRUE)
 	{
 		$this->code = $code;
 		$payload = new \stdClass;
-		$payload->data = NULL;
-		$payload->errors = [
-			['message' => $errorMessage],
-		];
+		if ($withDataField) {
+			$payload->data = NULL;
+		}
+
+		if(is_string($errorMessage)) {
+			$payload->errors = [
+				['message' => $errorMessage],
+			];
+		} else {
+			foreach ($errorMessage as $error) {
+				if (!$error instanceof \GraphQL\Error\Error) {
+					$exceptionMessage = 'If you are sending array to the ' . __METHOD__ . ' it has to be array of ' . \GraphQL\Error\Error::class;
+					throw new \InvalidArgumentException($exceptionMessage);
+				}
+				$payload->errors[] = [
+					'message' => $error->getMessage(),
+					'locations' => \GraphQL\Utils::map($error->getLocations(), function (SourceLocation $loc) {
+						return $loc->toSerializableArray();
+					}),
+				];
+			}
+		}
+
 		parent::__construct($payload, NULL);
 	}
 

@@ -22,18 +22,42 @@ final class GraphqlErrorEndpoint implements NApplication\IPresenter
 
 	public function run(NApplication\Request $request): NApplication\IResponse
 	{
+		/** @var \Exception $exc */
 		$exc = $request->getParameter('exception');
 
 		if ($exc instanceof \Nette\Application\BadRequestException) {
-			$message = $exc->getMessage();
-			$code = IResponse::S404_NOT_FOUND;
-		} else {
-			$message = \Tracy\Debugger::$productionMode ? 'Internal Server Error.' : $exc->getMessage();
-			$code = IResponse::S500_INTERNAL_SERVER_ERROR;
-			$this->logger->log($exc, ILogger::EXCEPTION);
-		}
 
-		return new GraphqlErrorResponse($message, $code);
+			$messages = $exc->getMessage();
+			$code = IResponse::S404_NOT_FOUND;
+			return new GraphqlErrorResponse($messages, $code);
+
+		} elseif ($exc instanceof \GraphQL\Executor\ExecutionResult) {
+
+			$messages = [];
+			/** @var \GraphQL\Error\Error $error */
+			foreach ($exc->errors as $error) {
+				if ($error->getPrevious() === NULL) {
+					$messages[] = $error;
+				} else {
+					return $this->internalServerError($error->getPrevious());
+				}
+			}
+			$code = IResponse::S422_UNPROCESSABLE_ENTITY;
+			return new GraphqlErrorResponse($messages, $code, FALSE);
+
+		} else {
+
+			return $this->internalServerError($exc);
+
+		}
+	}
+
+	private function internalServerError(\Throwable $exc)
+	{
+		$messages = \Tracy\Debugger::$productionMode ? 'Internal Server Error.' : $exc->getMessage();
+		$code = IResponse::S500_INTERNAL_SERVER_ERROR;
+		$this->logger->log($exc, ILogger::EXCEPTION);
+		return new GraphqlErrorResponse($messages, $code);
 	}
 
 }

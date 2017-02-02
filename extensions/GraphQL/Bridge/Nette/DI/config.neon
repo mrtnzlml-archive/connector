@@ -1,3 +1,8 @@
 symfony.console:
 	commands:
 		- Adeira\Connector\GraphQL\Console\QueryCommand
+
+
+graphql:
+	queryDefinitions:
+		- Adeira\Connector\GraphQL\Delivery\API\GraphQL\Query\TestQuery

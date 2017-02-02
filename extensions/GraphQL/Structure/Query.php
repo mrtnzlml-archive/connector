@@ -11,15 +11,19 @@ class Query
 	{
 		$definition = [
 			'name' => $this->getPublicQueryName(),
+			'description' => $this->getPublicQueryDescription(),
 			'type' => $this->getQueryReturnType(),
 			'resolve' => [$this, 'resolve'],
 		];
 
-		/** @var \Adeira\Connector\GraphQL\Structure\Argument $argument */
-		foreach ($this->defineArguments() as $argument) {
-			$fieldArray = $argument->buildArray(); //FIXME: vracet něco přádného (možná ani ne pole)
-			$fieldArrayKey = key($fieldArray);
-			$definition['args'][$fieldArrayKey] = $fieldArray[$fieldArrayKey];
+		$arguments = $this->defineArguments();
+		if ($arguments) {
+			/** @var \Adeira\Connector\GraphQL\Structure\Argument $argument */
+			foreach ($arguments as $argument) {
+				$fieldArray = $argument->buildArray(); //FIXME: vracet něco přádného (možná ani ne pole)
+				$fieldArrayKey = key($fieldArray);
+				$definition['args'][$fieldArrayKey] = $fieldArray[$fieldArrayKey];
+			}
 		}
 
 		return $definition;
@@ -42,7 +46,7 @@ class Query
 
 	public function defineArguments(): ?array
 	{
-		//TODO
+		return NULL;
 	}
 
 	public function resolve($ancestorValue, $args, UserId $userId)

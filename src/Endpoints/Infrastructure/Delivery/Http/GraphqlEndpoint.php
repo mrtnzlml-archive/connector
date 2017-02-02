@@ -26,11 +26,6 @@ final class GraphqlEndpoint implements \Nette\Application\IPresenter
 	private $httpRequest;
 
 	/**
-	 * @var \Nette\Http\IResponse
-	 */
-	private $httpResponse;
-
-	/**
 	 * @var ITokenStrategy
 	 */
 	private $tokenStrategy;
@@ -38,12 +33,10 @@ final class GraphqlEndpoint implements \Nette\Application\IPresenter
 	public function __construct(
 		SchemaFactory $schemaFactory,
 		Http\IRequest $httpRequest,
-		Http\IResponse $response,
 		ITokenStrategy $tokenStrategy
 	) {
 		$this->schemaFactory = $schemaFactory;
 		$this->httpRequest = $httpRequest;
-		$this->httpResponse = $response;
 		$this->tokenStrategy = $tokenStrategy;
 	}
 
@@ -51,22 +44,27 @@ final class GraphqlEndpoint implements \Nette\Application\IPresenter
 	{
 		$httpRequest = $this->httpRequest;
 		if ($httpRequest->isMethod(Http\IRequest::POST)) {
-			$userId = \Ramsey\Uuid\Uuid::NIL;
 
+			// get user UUID from authorization header
 			$authHeader = $httpRequest->getHeader('authorization');
 			if ($authHeader) {
 				$jwtToken = $authHeader;
 				$payload = $this->tokenStrategy->decodeToken($jwtToken);
-				$userId = $payload->uuid; //TODO: check validity (exp - token is no longer valid)
+				$userId = $payload->uuid;
+			} else {
+				$userId = \Ramsey\Uuid\Uuid::NIL;
 			}
 
-			// http://graphql.org/learn/serving-over-http/#post-request
+			// parse JSON from raw POST body
 			try {
 				$rawBody = $httpRequest->getRawBody();
 				if ($rawBody === NULL) {
-					return $this->error('Recieved POST body empty.');
+					return $this->error('Recieved POST body empty. Please send me valid JSON.');
 				}
-				$queryData = Json::decode($rawBody, Json::FORCE_ARRAY); //FIXME: syntax error
+				$queryData = Json::decode($rawBody, Json::FORCE_ARRAY);
+				if (!isset($queryData['query'])) {
+					return $this->error("Request mush have 'query' field with GraphQL query.");
+				}
 				$requestString = $queryData['query'];
 				$variableValues = $queryData['variables'] ?? [];
 			} catch (\Nette\Utils\JsonException $exc) {
@@ -84,18 +82,26 @@ final class GraphqlEndpoint implements \Nette\Application\IPresenter
 			$queryComplexity->setMaxQueryComplexity($maxQueryComplexity = 200); //introspection complexity is 181
 			$queryDepth->setMaxQueryDepth($maxQueryDepth = 11); //introspection depth is 11
 
-			$graphResponse = \GraphQL\GraphQL::execute(
+			// execute GraphQL query
+			$graphResponse = \GraphQL\GraphQL::executeAndReturnResult(
 				$this->schemaFactory->build(),
 				$requestString,
 				NULL,
 				$userId ? UserId::createFromString($userId) : NullUserId::create(),
 				$variableValues
 			);
-			//FIXME: filtrovat co se smí dostat na produkci a co nikoliv (podle localhostu!)
-			if (isset($graphResponse['errors'])) {
-				$this->httpResponse->setCode(Http\IResponse::S422_UNPROCESSABLE_ENTITY);
+
+			// forward to the Error presenter
+			if (!empty($graphResponse->errors)) {
+				$request->setPresenterName('Connector:GraphqlError');
+				$request->setMethod(\Nette\Application\Request::FORWARD);
+				$request->setParameters(['exception' => $graphResponse]);
+				return new \Nette\Application\Responses\ForwardResponse($request);
 			}
-			return new JsonResponse($graphResponse);
+
+			// return JSON response
+			return new JsonResponse(['data' => $graphResponse->data]);
+
 		} elseif ($httpRequest->isMethod(Http\IRequest::OPTIONS)) {
 			return NULL; //terminate
 		} else {

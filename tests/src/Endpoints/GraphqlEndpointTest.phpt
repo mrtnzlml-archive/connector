@@ -20,6 +20,11 @@ final class GraphqlEndpointTest extends \Adeira\Connector\Tests\TestCase
 
 	use \Testbench\TCompiledContainer;
 
+	public function setUp()
+	{
+		\Tracy\Debugger::$productionMode = TRUE;
+	}
+
 	public function testThat404Works()
 	{
 		$response = $this->performFatRequest('/', NULL);
@@ -37,7 +42,7 @@ final class GraphqlEndpointTest extends \Adeira\Connector\Tests\TestCase
 		Assert::type(GraphqlErrorResponse::class, $response);
 		Assert::same([
 			'data' => NULL,
-			'errors' => [['message' => 'Recieved POST body empty.']],
+			'errors' => [['message' => 'Recieved POST body empty. Please send me valid JSON.']],
 		], (array)$response->getPayload());
 		Assert::same(422, $response->getCode());
 	}
@@ -49,6 +54,17 @@ final class GraphqlEndpointTest extends \Adeira\Connector\Tests\TestCase
 		Assert::same([
 			'data' => NULL,
 			'errors' => [['message' => 'Recieved POST body is not in valid JSON format.']],
+		], (array)$response->getPayload());
+		Assert::same(422, $response->getCode());
+	}
+
+	public function testThatValidJsonWithoutQueryReturnsError()
+	{
+		$response = $this->performFatRequest('/graphql', NULL, '{"key":"value"}');
+		Assert::type(GraphqlErrorResponse::class, $response);
+		Assert::same([
+			'data' => NULL,
+			'errors' => [['message' => "Request mush have 'query' field with GraphQL query."]],
 		], (array)$response->getPayload());
 		Assert::same(422, $response->getCode());
 	}
@@ -85,7 +101,7 @@ final class GraphqlEndpointTest extends \Adeira\Connector\Tests\TestCase
 		Assert::same(422, $httpResponse->getCode());
 	}
 
-	public function testThatGraphqlEndpointWorks()
+	public function testThatAllGraphqlEndpointAreAvailable()
 	{
 		$response = $this->performFatRequest('/graphql', '{__type(name:"Query"){fields{name}}}'); //introspection
 		Assert::type(JsonResponse::class, $response);
@@ -96,6 +112,7 @@ final class GraphqlEndpointTest extends \Adeira\Connector\Tests\TestCase
 						['name' => 'user'],
 						['name' => 'allWeatherStations'],
 						['name' => 'weatherStation'],
+						['name' => 'test'],
 					],
 				],
 			],
@@ -104,9 +121,43 @@ final class GraphqlEndpointTest extends \Adeira\Connector\Tests\TestCase
 		Assert::same(200, $httpResponse->getCode());
 	}
 
+	public function testThatSuccessEndpointWorks()
+	{
+		$response = $this->performFatRequest('/graphql', '{test{success}}');
+		Assert::type(JsonResponse::class, $response);
+		Assert::same([
+			'data' => [
+				'test' => ['success' => '00000000-0000-0000-0000-000000000000'],
+			],
+		], (array)$response->getPayload());
+		$httpResponse = $this->getService(HttpResponse::class);
+		Assert::same(200, $httpResponse->getCode());
+	}
+
+	public function testThatInternalExceptionReturnsServerError()
+	{
+		$doRequest = function (string $errorMessage) {
+			$response = $this->performFatRequest('/graphql', '{test{exception}}');
+			Assert::type(JsonResponse::class, $response);
+			Assert::same([
+				'data' => NULL,
+				'errors' => [
+					['message' => $errorMessage],
+				],
+			], (array)$response->getPayload());
+			$httpResponse = $this->getService(HttpResponse::class);
+			Assert::same(500, $httpResponse->getCode());
+		};
+
+		$doRequest('Internal Server Error.');
+		\Tracy\Debugger::$productionMode = FALSE; //localhost
+		$doRequest('Internal exception message with sensitive data.');
+	}
+
 	private function performFatRequest($path = '/', ?string $query, ?string $rawJson = NULL): ?JsonResponse
 	{
 		$container = $this->getContainer();
+		$container->removeService('httpRequest');
 		$container->addService('httpRequest', new \Nette\Http\Request(
 			new UrlScript("//x.y.$path"),
 			NULL,
