@@ -31,6 +31,8 @@ migrations:
 	dir: %appDir%/migrations #FIXME: rename to %rootDir%
 	driver: pgsql
 	dbal: doctrine
+	diffGenerator: doctrine
+	withDummyData: no
 
 
 parameters:

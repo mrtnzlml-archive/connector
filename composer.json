@@ -16,7 +16,7 @@
     "nette/http": "^v2.4 || ^3.0@dev",
     "nette/security": "^v2.4",
     "nette/utils": "3.0.x-dev as v2.4",
-    "nextras/migrations": "^3.0",
+    "nextras/migrations": "^3.1@beta",
     "ramsey/uuid": "^3.5",
     "ramsey/uuid-doctrine": "^1.2",
     "roave/security-advisories": "dev-master",
