@@ -18,7 +18,7 @@ final class UuidCommand extends Command
 	public function execute(InputInterface $input, OutputInterface $output)
 	{
 		$style = new SymfonyStyle($input, $output);
-		$style->block(\Ramsey\Uuid\Uuid::uuid4(), 'UUID');
+		$style->block((string)\Ramsey\Uuid\Uuid::uuid4(), 'UUID');
 	}
 
 }
