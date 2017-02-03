@@ -18,7 +18,7 @@ require getenv('BOOTSTRAP');
 /**
  * @testCase
  */
-final class DataSourceTest extends \Adeira\Connector\Tests\TestCase
+final class WeatherStationTest extends \Adeira\Connector\Tests\TestCase
 {
 
 	public function testThatItIsPossibleToGetAllRequiredAttributes()
@@ -36,4 +36,4 @@ final class DataSourceTest extends \Adeira\Connector\Tests\TestCase
 
 }
 
-(new DataSourceTest)->run();
+(new WeatherStationTest)->run();
