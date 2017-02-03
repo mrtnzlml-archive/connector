@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Adeira\Connector\Devices\Infrastructure\DomainModel\WeatherStation\Type\WS3600;
+namespace Adeira\Connector\Devices\Infrastructure\DomainModel\WeatherStation\Series\WS3600;
 
 use Adeira\Connector\Devices\DomainModel\WeatherStation\{
 	IFileLoader
