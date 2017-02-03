@@ -31,7 +31,7 @@ final class WeatherStationsConnectionType extends \Adeira\Connector\GraphQL\Stru
 
 	public function getPublicTypeName(): string
 	{
-		return 'WeatherStationsConnectionType';
+		return 'WeatherStationsConnection';
 	}
 
 	public function getPublicTypeDescription(): string

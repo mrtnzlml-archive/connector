@@ -20,7 +20,7 @@ final class WeatherStationsEdgeType extends \Adeira\Connector\GraphQL\Structure\
 
 	public function getPublicTypeName(): string
 	{
-		return 'WeatherStationsEdgeType';
+		return 'WeatherStationsEdge';
 	}
 
 	public function getPublicTypeDescription(): string
