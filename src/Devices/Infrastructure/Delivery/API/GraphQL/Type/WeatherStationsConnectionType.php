@@ -3,6 +3,7 @@
 namespace Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Type;
 
 use Adeira\Connector\Authentication\DomainModel\User\UserId;
+use Adeira\Connector\Devices\Application\Service\WeatherStation\ViewAllWeatherStationSeries;
 use Adeira\Connector\Devices\Application\Service\WeatherStation\ViewAllWeatherStationsService;
 use Adeira\Connector\GraphQL\Structure\Field;
 use function Adeira\Connector\GraphQL\{
@@ -18,15 +19,22 @@ final class WeatherStationsConnectionType extends \Adeira\Connector\GraphQL\Stru
 
 	private $allWeatherStationsService;
 
+	private $weatherStationSeriesType;
+
+	private $allWeatherStationsSeries;
+
 	public function __construct(
 		WeatherStationType $wst,
 		WeatherStationsEdgeType $wsEdge,
-		ViewAllWeatherStationsService $allWeatherStationsService
-	)
-	{
+		ViewAllWeatherStationsService $allWeatherStationsService,
+		WeatherStationSeriesType $weatherStationSeriesType,
+		ViewAllWeatherStationSeries $allWeatherStationsSeries
+	) {
 		$this->wst = $wst;
 		$this->wsEdge = $wsEdge;
 		$this->allWeatherStationsService = $allWeatherStationsService;
+		$this->weatherStationSeriesType = $weatherStationSeriesType;
+		$this->allWeatherStationsSeries = $allWeatherStationsSeries;
 	}
 
 	public function getPublicTypeName(): string
@@ -46,6 +54,7 @@ final class WeatherStationsConnectionType extends \Adeira\Connector\GraphQL\Stru
 			$this->edgesFieldDefinition(),
 			$this->totalCountFieldDefinition(),
 			$this->weatherStationsFieldDefinition(),
+			$this->seriesFieldDefinition(),
 		];
 	}
 
@@ -66,6 +75,19 @@ final class WeatherStationsConnectionType extends \Adeira\Connector\GraphQL\Stru
 	private function weatherStationsFieldDefinition()
 	{
 		return new Field('weatherStations', 'All weather stations.', listOf($this->wst));
+	}
+
+	private function seriesFieldDefinition()
+	{
+		$field = new Field(
+			'series',
+			'All weather station production series known by this system.',
+			listOf($this->weatherStationSeriesType)
+		);
+		$field->setResolveFunction(function(array $weatherStations, $args, UserId $userId) {
+			return $this->allWeatherStationsSeries->execute($userId);
+		});
+		return $field;
 	}
 
 }

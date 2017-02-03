@@ -11,6 +11,7 @@ services:
 		AddWeatherStationRecordService
 		ViewAllWeatherStationRecordsService
 		ViewAllWeatherStationsService
+		ViewAllWeatherStationSeries
 		ViewSingleWeatherStationService
 	)
 	- class: Adeira\Connector\Devices\Application\Service\WeatherStation\AddWeatherStationService
@@ -19,6 +20,7 @@ services:
 	  	ownerService: @userIdOwnerService # @jwtOwnerService
 	weatherStationRecordRepository: Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\DoctrineWeatherStationRecordRepository
 	weatherStationRepository: Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\DoctrineWeatherStationRepository
+	weatherStationSeriesRepository: Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\DoctrineWeatherStationSeriesRepository
 
 
 symfony.console:
@@ -38,5 +40,6 @@ graphql:
 			WeatherStationRecordType
 			WeatherStationsConnectionType
 			WeatherStationsEdgeType
+			WeatherStationSeriesType
 			WeatherStationType
 		)
