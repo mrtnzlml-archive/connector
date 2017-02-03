@@ -18,23 +18,20 @@ class Extension extends \Nette\DI\CompilerExtension
 		],
 		'configuration' => [
 			'mappingFilesPaths' => [],
-			'isDevMode' => '%debugMode%',
-			'proxyDir' => '%tempDir%/cache/Doctrine.Proxy',
+			'isDevMode' => FALSE,
+			'proxyDir' => NULL,
 			'cacheDriver' => NULL,
-			'cacheDriverConfig' => ['%tempDir%/cache/Doctrine.Cache'],
+			'cacheDriverConfig' => [],
 		],
 		'debugPanel' => TRUE,
 		'debugSql' => FALSE,
 	];
 
-	/**
-	 * @var bool
-	 */
-	private $debugMode;
-
-	public function __construct($debugMode = FALSE)
+	public function __construct(bool $debugMode = FALSE, string $cacheDir)
 	{
-		$this->debugMode = $debugMode;
+		$this->defaults['configuration']['isDevMode'] = $debugMode;
+		$this->defaults['configuration']['proxyDir'] = $cacheDir . '/Doctrine.Proxy';
+		$this->defaults['configuration']['cacheDriverConfig'] = [$cacheDir . '/Doctrine.Cache'];
 	}
 
 	public function loadConfiguration()
@@ -101,7 +98,7 @@ class Extension extends \Nette\DI\CompilerExtension
 			]);
 
 		// Debug Panel
-		if ($this->debugMode && $config['debugPanel']) {
+		if ($config['debugPanel'] && $config['configuration']['isDevMode']) {
 			$connection->addSetup('@Tracy\Bar::addPanel', [
 				new \Nette\DI\Statement(\Adeira\Connector\Doctrine\ORM\DI\ConnectionPanel::class),
 			]);
