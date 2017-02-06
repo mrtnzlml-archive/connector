@@ -6,12 +6,13 @@ $configurator = new Nette\Configurator;
 $configurator->defaultExtensions['extensions'] = [\Adeira\ConfigurableExtensionsExtension::class, [TRUE]];
 $logDirectory = __DIR__ . '/var/log';
 
-if (PHP_SAPI === 'cli' && getenv('NETTE_DEBUG') === '1') {
-	$configurator->setDebugMode(TRUE);
+define('ENV_NETTE_DEBUG', getenv('NETTE_DEBUG'));
+
+$configurator->setDebugMode(ENV_NETTE_DEBUG === '1');
+if (PHP_SAPI === 'cli' && ENV_NETTE_DEBUG === '1') {
 	\Symfony\Component\Debug\Debug::enable();
 	\Tracy\Debugger::$logDirectory = $logDirectory;
 } else {
-	//$configurator->setDebugMode(FALSE); //API should return only 500 - Internal Server Error
 	$configurator->enableDebugger($logDirectory);
 }
 
