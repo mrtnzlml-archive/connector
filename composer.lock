@@ -4,21 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bcb1f91146f711af838ce1d1e100e704",
     "content-hash": "15036e27f26dd9caf3ef0008546e06f7",
     "packages": [
         {
             "name": "adeira/compiler-extension",
-            "version": "v2.1.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/adeira/compiler-extension.git",
-                "reference": "de0d7be1773f47b268f01836fa19e5187dd8621b"
+                "reference": "15b3bd2217b04ff2c10d64128bbaed66c4ba1261"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/adeira/compiler-extension/zipball/de0d7be1773f47b268f01836fa19e5187dd8621b",
-                "reference": "de0d7be1773f47b268f01836fa19e5187dd8621b",
+                "url": "https://api.github.com/repos/adeira/compiler-extension/zipball/15b3bd2217b04ff2c10d64128bbaed66c4ba1261",
+                "reference": "15b3bd2217b04ff2c10d64128bbaed66c4ba1261",
                 "shasum": ""
             },
             "require": {
@@ -27,10 +26,11 @@
                 "php": "^7.0"
             },
             "require-dev": {
-                "adeira/code-quality": "^1.0",
+                "jakub-onderka/php-parallel-lint": "^0.9.2",
                 "latte/latte": "^2.4",
                 "nette/bootstrap": "^2.4",
-                "nette/tester": "dev-master"
+                "nette/tester": "dev-master",
+                "slevomat/coding-standard": "dev-php7"
             },
             "type": "library",
             "autoload": {
@@ -42,7 +42,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2017-02-01 08:33:35"
+            "time": "2017-02-06T10:27:54+00:00"
         },
         {
             "name": "boldtrn/jsonb-bundle",
@@ -94,7 +94,7 @@
                 "postgresql",
                 "symfony"
             ],
-            "time": "2015-10-22 19:05:50"
+            "time": "2015-10-22T19:05:50+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -162,7 +162,7 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2016-12-30 15:59:45"
+            "time": "2016-12-30T15:59:45+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -232,7 +232,7 @@
                 "cache",
                 "caching"
             ],
-            "time": "2016-10-29 11:16:17"
+            "time": "2016-10-29T11:16:17+00:00"
         },
         {
             "name": "doctrine/collections",
@@ -299,7 +299,7 @@
                 "collections",
                 "iterator"
             ],
-            "time": "2017-01-03 10:49:41"
+            "time": "2017-01-03T10:49:41+00:00"
         },
         {
             "name": "doctrine/common",
@@ -372,20 +372,20 @@
                 "persistence",
                 "spl"
             ],
-            "time": "2017-01-13 14:02:13"
+            "time": "2017-01-13T14:02:13+00:00"
         },
         {
             "name": "doctrine/dbal",
-            "version": "v2.5.10",
+            "version": "v2.5.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "fc376f7a61498e18520cd6fa083752a4ca08072b"
+                "reference": "1b1effbddbdc0f40d1c8f849f44bcddac4f52a48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/fc376f7a61498e18520cd6fa083752a4ca08072b",
-                "reference": "fc376f7a61498e18520cd6fa083752a4ca08072b",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/1b1effbddbdc0f40d1c8f849f44bcddac4f52a48",
+                "reference": "1b1effbddbdc0f40d1c8f849f44bcddac4f52a48",
                 "shasum": ""
             },
             "require": {
@@ -443,7 +443,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2017-01-23 23:17:10"
+            "time": "2017-02-04T21:20:13+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -510,7 +510,7 @@
                 "singularize",
                 "string"
             ],
-            "time": "2015-11-06 14:35:42"
+            "time": "2015-11-06T14:35:42+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -564,7 +564,7 @@
                 "constructor",
                 "instantiate"
             ],
-            "time": "2015-06-14 21:17:01"
+            "time": "2015-06-14T21:17:01+00:00"
         },
         {
             "name": "doctrine/lexer",
@@ -618,7 +618,7 @@
                 "lexer",
                 "parser"
             ],
-            "time": "2014-09-09 13:34:57"
+            "time": "2014-09-09T13:34:57+00:00"
         },
         {
             "name": "doctrine/orm",
@@ -694,7 +694,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2016-12-18 15:42:34"
+            "time": "2016-12-18T15:42:34+00:00"
         },
         {
             "name": "firebase/php-jwt",
@@ -737,7 +737,7 @@
             ],
             "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
             "homepage": "https://github.com/firebase/php-jwt",
-            "time": "2016-07-18 04:51:16"
+            "time": "2016-07-18T04:51:16+00:00"
         },
         {
             "name": "latte/latte",
@@ -803,7 +803,7 @@
                 "templating",
                 "twig"
             ],
-            "time": "2017-01-19 11:06:59"
+            "time": "2017-01-19T11:06:59+00:00"
         },
         {
             "name": "nette/application",
@@ -878,7 +878,7 @@
             ],
             "description": "Nette Application MVC Component",
             "homepage": "https://nette.org",
-            "time": "2017-02-02 02:25:28"
+            "time": "2017-02-02T02:25:28+00:00"
         },
         {
             "name": "nette/bootstrap",
@@ -1068,7 +1068,7 @@
             ],
             "description": "Nette Component Model",
             "homepage": "https://nette.org",
-            "time": "2016-06-17 17:36:56"
+            "time": "2016-06-17T17:36:56+00:00"
         },
         {
             "name": "nette/di",
@@ -1076,12 +1076,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/di.git",
-                "reference": "187ebc045c28e816c0167f36f377f48fc6e12830"
+                "reference": "f2e8ced089549eda2288c780893bf4b4065449ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/di/zipball/187ebc045c28e816c0167f36f377f48fc6e12830",
-                "reference": "187ebc045c28e816c0167f36f377f48fc6e12830",
+                "url": "https://api.github.com/repos/nette/di/zipball/f2e8ced089549eda2288c780893bf4b4065449ee",
+                "reference": "f2e8ced089549eda2288c780893bf4b4065449ee",
                 "shasum": ""
             },
             "require": {
@@ -1128,7 +1128,7 @@
             ],
             "description": "Nette Dependency Injection Component",
             "homepage": "https://nette.org",
-            "time": "2017-02-02 03:11:11"
+            "time": "2017-02-04 14:40:36"
         },
         {
             "name": "nette/finder",
@@ -1184,7 +1184,7 @@
             ],
             "description": "Nette Finder: Files Searching",
             "homepage": "https://nette.org",
-            "time": "2016-05-17 15:49:06"
+            "time": "2016-05-17T15:49:06+00:00"
         },
         {
             "name": "nette/http",
@@ -1192,12 +1192,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/http.git",
-                "reference": "3d81838229cd6d3f8ead2de2a0785ec89bf3a85c"
+                "reference": "d910cde53bb5e53a04ddf96f498edd7c05788f38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/http/zipball/3d81838229cd6d3f8ead2de2a0785ec89bf3a85c",
-                "reference": "3d81838229cd6d3f8ead2de2a0785ec89bf3a85c",
+                "url": "https://api.github.com/repos/nette/http/zipball/d910cde53bb5e53a04ddf96f498edd7c05788f38",
+                "reference": "d910cde53bb5e53a04ddf96f498edd7c05788f38",
                 "shasum": ""
             },
             "require": {
@@ -1244,7 +1244,7 @@
             ],
             "description": "Nette HTTP Component",
             "homepage": "https://nette.org",
-            "time": "2017-01-30 01:56:26"
+            "time": "2017-02-04 14:47:07"
         },
         {
             "name": "nette/neon",
@@ -1298,7 +1298,7 @@
             ],
             "description": "Nette NEON: parser & generator for Nette Object Notation",
             "homepage": "http://ne-on.org",
-            "time": "2017-01-13 08:00:19"
+            "time": "2017-01-13T08:00:19+00:00"
         },
         {
             "name": "nette/php-generator",
@@ -1354,7 +1354,7 @@
             ],
             "description": "Nette PHP Generator",
             "homepage": "https://nette.org",
-            "time": "2017-01-13 08:02:14"
+            "time": "2017-01-13T08:02:14+00:00"
         },
         {
             "name": "nette/reflection",
@@ -1413,7 +1413,7 @@
             ],
             "description": "Nette PHP Reflection Component",
             "homepage": "https://nette.org",
-            "time": "2017-01-10 16:10:27"
+            "time": "2017-01-10T16:10:27+00:00"
         },
         {
             "name": "nette/security",
@@ -1471,7 +1471,7 @@
             ],
             "description": "Nette Security: Access Control Component",
             "homepage": "https://nette.org",
-            "time": "2016-12-19 10:53:40"
+            "time": "2016-12-19T10:53:40+00:00"
         },
         {
             "name": "nette/utils",
@@ -1479,12 +1479,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/utils.git",
-                "reference": "a7f93081cd384056288bc9aa5af72e425e311008"
+                "reference": "b5fabaa65fe0ce9aad14fdc5a3fd581c45086429"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/utils/zipball/a7f93081cd384056288bc9aa5af72e425e311008",
-                "reference": "a7f93081cd384056288bc9aa5af72e425e311008",
+                "url": "https://api.github.com/repos/nette/utils/zipball/b5fabaa65fe0ce9aad14fdc5a3fd581c45086429",
+                "reference": "b5fabaa65fe0ce9aad14fdc5a3fd581c45086429",
                 "shasum": ""
             },
             "require": {
@@ -1534,7 +1534,7 @@
             ],
             "description": "Nette Utility Classes",
             "homepage": "https://nette.org",
-            "time": "2017-02-01 23:52:55"
+            "time": "2017-02-04 14:39:40"
         },
         {
             "name": "nextras/migrations",
@@ -1596,7 +1596,7 @@
                 "BSD-3-Clause"
             ],
             "description": "Database migrations runner",
-            "time": "2016-08-26 11:42:47"
+            "time": "2016-08-26T11:42:47+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -1644,7 +1644,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2016-11-07 23:38:38"
+            "time": "2016-11-07T23:38:38+00:00"
         },
         {
             "name": "psr/log",
@@ -1691,7 +1691,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2016-10-10 12:19:37"
+            "time": "2016-10-10T12:19:37+00:00"
         },
         {
             "name": "ramsey/uuid",
@@ -1773,7 +1773,7 @@
                 "identifier",
                 "uuid"
             ],
-            "time": "2016-11-22 19:21:44"
+            "time": "2016-11-22T19:21:44+00:00"
         },
         {
             "name": "ramsey/uuid-doctrine",
@@ -1829,7 +1829,7 @@
                 "identifier",
                 "uuid"
             ],
-            "time": "2016-03-23 17:44:03"
+            "time": "2016-03-23T17:44:03+00:00"
         },
         {
             "name": "roave/security-advisories",
@@ -1960,20 +1960,20 @@
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "time": "2017-01-24 18:32:04"
+            "time": "2017-01-24T18:32:04+00:00"
         },
         {
             "name": "symfony/console",
-            "version": "v3.2.2",
+            "version": "v3.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "4f9e449e76996adf310498a8ca955c6deebe29dd"
+                "reference": "7a8405a9fc175f87fed8a3c40856b0d866d61936"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/4f9e449e76996adf310498a8ca955c6deebe29dd",
-                "reference": "4f9e449e76996adf310498a8ca955c6deebe29dd",
+                "url": "https://api.github.com/repos/symfony/console/zipball/7a8405a9fc175f87fed8a3c40856b0d866d61936",
+                "reference": "7a8405a9fc175f87fed8a3c40856b0d866d61936",
                 "shasum": ""
             },
             "require": {
@@ -2023,20 +2023,20 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-08 20:47:33"
+            "time": "2017-02-06T12:04:21+00:00"
         },
         {
             "name": "symfony/debug",
-            "version": "v3.2.2",
+            "version": "v3.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "810ba5c1c5352a4ddb15d4719e8936751dff0b05"
+                "reference": "b4d9818f127c60ce21ed62c395da7df868dc8477"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/810ba5c1c5352a4ddb15d4719e8936751dff0b05",
-                "reference": "810ba5c1c5352a4ddb15d4719e8936751dff0b05",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/b4d9818f127c60ce21ed62c395da7df868dc8477",
+                "reference": "b4d9818f127c60ce21ed62c395da7df868dc8477",
                 "shasum": ""
             },
             "require": {
@@ -2080,7 +2080,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-02 20:32:22"
+            "time": "2017-01-28T02:37:08+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -2139,7 +2139,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-11-14 01:06:16"
+            "time": "2016-11-14T01:06:16+00:00"
         },
         {
             "name": "tracy/tracy",
@@ -2201,7 +2201,7 @@
                 "debugger",
                 "nette"
             ],
-            "time": "2017-01-29 19:39:20"
+            "time": "2017-01-29T19:39:20+00:00"
         },
         {
             "name": "webonyx/graphql-php",
@@ -2246,7 +2246,7 @@
                 "api",
                 "graphql"
             ],
-            "time": "2017-01-26 12:24:53"
+            "time": "2017-01-26T12:24:53+00:00"
         }
     ],
     "packages-dev": [
@@ -2293,7 +2293,7 @@
             "keywords": [
                 "test"
             ],
-            "time": "2015-05-11 14:41:42"
+            "time": "2015-05-11T14:41:42+00:00"
         },
         {
             "name": "jakub-onderka/php-parallel-lint",
@@ -2340,7 +2340,7 @@
             ],
             "description": "This tool check syntax of PHP files about 20x faster than serial check.",
             "homepage": "https://github.com/JakubOnderka/PHP-Parallel-Lint",
-            "time": "2015-12-15 10:42:16"
+            "time": "2015-12-15T10:42:16+00:00"
         },
         {
             "name": "kdyby/fake-session",
@@ -2387,7 +2387,7 @@
                 "nette",
                 "session"
             ],
-            "time": "2015-02-16 16:31:32"
+            "time": "2015-02-16T16:31:32+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -2452,7 +2452,7 @@
                 "test double",
                 "testing"
             ],
-            "time": "2016-12-19 14:50:55"
+            "time": "2016-12-19T14:50:55+00:00"
         },
         {
             "name": "mrtnzlml/testbench",
@@ -2460,12 +2460,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mrtnzlml/testbench.git",
-                "reference": "de757cea5ad6c94e5e2954c8bf58c43fb11abfe3"
+                "reference": "b96b8c8fc8f529ce53090655b419694472ca4f74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mrtnzlml/testbench/zipball/de757cea5ad6c94e5e2954c8bf58c43fb11abfe3",
-                "reference": "de757cea5ad6c94e5e2954c8bf58c43fb11abfe3",
+                "url": "https://api.github.com/repos/mrtnzlml/testbench/zipball/b96b8c8fc8f529ce53090655b419694472ca4f74",
+                "reference": "b96b8c8fc8f529ce53090655b419694472ca4f74",
                 "shasum": ""
             },
             "require": {
@@ -2525,7 +2525,7 @@
                 }
             ],
             "description": "Simple integration testing tool for Nette Framework applications",
-            "time": "2017-02-02 07:55:18"
+            "time": "2017-02-06 13:39:41"
         },
         {
             "name": "nette/robot-loader",
@@ -2584,7 +2584,7 @@
             ],
             "description": "Nette RobotLoader: comfortable autoloading",
             "homepage": "https://nette.org",
-            "time": "2017-01-02 17:15:22"
+            "time": "2017-01-02T17:15:22+00:00"
         },
         {
             "name": "nette/safe-stream",
@@ -2639,7 +2639,7 @@
             ],
             "description": "Nette SafeStream: Atomic Operations",
             "homepage": "https://nette.org",
-            "time": "2016-03-19 13:06:04"
+            "time": "2016-03-19T13:06:04+00:00"
         },
         {
             "name": "nette/tester",
@@ -2647,12 +2647,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/tester.git",
-                "reference": "636a38808b8a5c211304f3e59e37b0b4f1df2963"
+                "reference": "83317fa991ab9cd2bb9610129fc75c53c2c417b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/tester/zipball/636a38808b8a5c211304f3e59e37b0b4f1df2963",
-                "reference": "636a38808b8a5c211304f3e59e37b0b4f1df2963",
+                "url": "https://api.github.com/repos/nette/tester/zipball/83317fa991ab9cd2bb9610129fc75c53c2c417b6",
+                "reference": "83317fa991ab9cd2bb9610129fc75c53c2c417b6",
                 "shasum": ""
             },
             "require": {
@@ -2695,20 +2695,20 @@
                 "testing",
                 "unit"
             ],
-            "time": "2017-01-29 19:11:47"
+            "time": "2017-02-04 14:42:23"
         },
         {
             "name": "nikic/php-parser",
-            "version": "v3.0.2",
+            "version": "v3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "adf44419c0fc014a0f191db6f89d3e55d4211744"
+                "reference": "5b8182cc0abb4b0ff290ba9df6c0e1323286013a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/adf44419c0fc014a0f191db6f89d3e55d4211744",
-                "reference": "adf44419c0fc014a0f191db6f89d3e55d4211744",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/5b8182cc0abb4b0ff290ba9df6c0e1323286013a",
+                "reference": "5b8182cc0abb4b0ff290ba9df6c0e1323286013a",
                 "shasum": ""
             },
             "require": {
@@ -2746,7 +2746,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2016-12-06 11:30:35"
+            "time": "2017-02-03T21:57:31+00:00"
         },
         {
             "name": "phpstan/phpstan",
@@ -2754,12 +2754,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "4af016567ec07b94a2c6b73a048e22d94dbb14ba"
+                "reference": "005610adaded0aa4559452bec87bc68778e2d64a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/4af016567ec07b94a2c6b73a048e22d94dbb14ba",
-                "reference": "4af016567ec07b94a2c6b73a048e22d94dbb14ba",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/005610adaded0aa4559452bec87bc68778e2d64a",
+                "reference": "005610adaded0aa4559452bec87bc68778e2d64a",
                 "shasum": ""
             },
             "require": {
@@ -2799,7 +2799,7 @@
                 "MIT"
             ],
             "description": "PHPStan - PHP Static Analysis Tool",
-            "time": "2017-02-03 08:51:51"
+            "time": "2017-02-04 16:38:18"
         },
         {
             "name": "slevomat/coding-standard",
@@ -2911,11 +2911,11 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2017-02-02 03:30:00"
+            "time": "2017-02-02T03:30:00+00:00"
         },
         {
             "name": "symfony/finder",
-            "version": "v3.2.2",
+            "version": "v3.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
@@ -2960,7 +2960,7 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-02 20:32:22"
+            "time": "2017-01-02T20:32:22+00:00"
         }
     ],
     "aliases": [
