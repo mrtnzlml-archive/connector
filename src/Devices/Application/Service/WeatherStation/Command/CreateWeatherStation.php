@@ -1,17 +1,18 @@
 <?php declare(strict_types = 1);
 
-namespace Adeira\Connector\Devices\Application\Service\WeatherStation;
+namespace Adeira\Connector\Devices\Application\Service\WeatherStation\Command;
 
 use Adeira\Connector\Authentication\DomainModel\User\UserId;
+use Adeira\Connector\ServiceBus\DomainModel\ICommand;
 
 /**
- * AddWeatherStationRequest is just simple DTO and should be filled by form in presenter.
+ * This is just simple DTO and should be filled by form in presenter or by command in CLI.
  *  - use primitives
  *  - make it serializable
  *  - no business logic
  *  - no tests
  */
-final class AddWeatherStationRequest
+final class CreateWeatherStation implements ICommand
 {
 
 	private $weatherStationName;

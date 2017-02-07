@@ -8,19 +8,19 @@ doctrine.orm:
 
 services:
 	- Adeira\Connector\Devices\Application\Service\WeatherStation\(
-		AddWeatherStationRecordService
 		ViewAllWeatherStationRecordsService
 		ViewAllWeatherStationsService
 		ViewAllWeatherStationSeries
 		ViewSingleWeatherStationService
 	)
-	- class: Adeira\Connector\Devices\Application\Service\WeatherStation\AddWeatherStationService
-	  arguments:
-	  	transactionalSession: @doctrineSession # @dummySession
-	  	ownerService: @userIdOwnerService # @jwtOwnerService
 	weatherStationRecordRepository: Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\DoctrineWeatherStationRecordRepository
 	weatherStationRepository: Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\DoctrineWeatherStationRepository
 	weatherStationSeriesRepository: Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\DoctrineWeatherStationSeriesRepository
+
+
+serviceBus:
+	dispatchMap:
+		Adeira\Connector\Devices\Application\Service\WeatherStation\Command\CreateWeatherStation: Adeira\Connector\Devices\Application\Service\WeatherStation\Command\CreateWeatherStationHandler
 
 
 symfony.console:

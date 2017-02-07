@@ -24,6 +24,7 @@ extensions:
 	fakeSession: Kdyby\FakeSession\DI\FakeSessionExtension
 	graphql: Adeira\Connector\GraphQL\Bridge\Nette\DI\Extension
 	migrations: Nextras\Migrations\Bridges\NetteDI\MigrationsExtension
+	serviceBus: Adeira\Connector\ServiceBus\Infrastructure\DI\Nette\Extension
 	symfony.console: Adeira\Connector\Symfony\Console\DI\Extension
 
 

@@ -3,10 +3,8 @@
 namespace Adeira\Connector\Devices\Infrastructure\Delivery\Console\Symfony;
 
 use Adeira\Connector\Authentication\DomainModel\User\UserId;
-use Adeira\Connector\Devices\Application\Service\WeatherStation\{
-	AddWeatherStationRequest,
-	AddWeatherStationService
-};
+use Adeira\Connector\Devices\Application\Service\WeatherStation\Command\CreateWeatherStation;
+use Adeira\Connector\ServiceBus\DomainModel\ICommandBus;
 use Symfony\Component\Console\{
 	Input\InputArgument,
 	Input\InputInterface,
@@ -17,14 +15,12 @@ use Symfony\Component\Console\{
 final class CreateWeatherStationCommand extends \Adeira\Connector\Symfony\Console\Command
 {
 
-	/**
-	 * @var AddWeatherStationService
-	 */
-	private $weatherStationService;
+	private $commandBus;
 
-	public function __construct(AddWeatherStationService $addWeatherStationService) {
+	public function __construct(ICommandBus $commandBus)
+	{
 		parent::__construct('weatherStation:create');
-		$this->weatherStationService = $addWeatherStationService;
+		$this->commandBus = $commandBus;
 	}
 
 	protected function configure()
@@ -36,15 +32,14 @@ final class CreateWeatherStationCommand extends \Adeira\Connector\Symfony\Consol
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
 		$userId = $input->getArgument('userId');
-		$response = $this->weatherStationService->execute(
-			new AddWeatherStationRequest(
-				'Device Name',
-				UserId::createFromString($userId)
-			)
-		);
+
+		$this->commandBus->dispatch(new CreateWeatherStation(
+			'Device Name',
+			UserId::createFromString($userId)
+		));
 
 		$styleGenerator = new SymfonyStyle($input, $output);
-		$styleGenerator->success("New device with UUID {$response->id()} has been created.");
+		$styleGenerator->success('New weather station has been created.');
 	}
 
 }
