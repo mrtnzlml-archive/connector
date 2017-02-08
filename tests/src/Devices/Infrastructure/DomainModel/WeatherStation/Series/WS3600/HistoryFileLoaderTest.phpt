@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Adeira\Connector\Tests\Devices\Infrastructure\DomainModel\Series\WS3600;
+namespace Adeira\Connector\Tests\Devices\Infrastructure\DomainModel\WeatherStation\Series\WS3600;
 
 use Adeira\Connector\Devices\Infrastructure\DomainModel\WeatherStation\Series\WS3600;
 use Tester\Assert;
