@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\Devices\DomainModel\WeatherStation;
 
-use Adeira\Connector\Authentication\DomainModel\User\User;
+use Adeira\Connector\Authentication\DomainModel\Owner\Owner;
 use Adeira\Connector\Devices\DomainModel\Pressure;
 use Adeira\Connector\PhysicalUnits\Pressure\Units\IPressureUnit;
 
@@ -29,10 +29,7 @@ final class WeatherStation
 	 */
 	private $deviceName;
 
-	/**
-	 * TODO: maybe instead of User use actual Owner to prevent bypasing Owner check
-	 */
-	public function __construct(WeatherStationId $id, User $owner, string $deviceName)
+	public function __construct(WeatherStationId $id, Owner $owner, string $deviceName)
 	{
 		$this->id = $id;
 		$this->owner = (string)$owner->id();

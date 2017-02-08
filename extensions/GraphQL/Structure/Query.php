@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\GraphQL\Structure;
 
-use Adeira\Connector\Authentication\DomainModel\User\UserId;
+use Adeira\Connector\GraphQL\Context;
 
 class Query
 {
@@ -49,7 +49,7 @@ class Query
 		return NULL;
 	}
 
-	public function resolve($ancestorValue, $args, UserId $userId)
+	public function resolve($ancestorValue, $args, Context $context)
 	{
 		//TODO
 	}

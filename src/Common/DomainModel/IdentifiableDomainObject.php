@@ -5,6 +5,9 @@ namespace Adeira\Connector\Common\DomainModel;
 abstract class IdentifiableDomainObject
 {
 
+	/**
+	 * @var string
+	 */
 	private $id;
 
 	public function id(): string

@@ -5,6 +5,7 @@ namespace Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Type;
 use Adeira\Connector\Authentication\DomainModel\User\UserId;
 use Adeira\Connector\Devices\Application\Service\WeatherStation\ViewAllWeatherStationRecords;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStation;
+use Adeira\Connector\GraphQL\Context;
 use Adeira\Connector\GraphQL\Structure\Field;
 use function Adeira\Connector\GraphQL\{
 	id, listOf, string
@@ -45,7 +46,7 @@ final class WeatherStationType extends \Adeira\Connector\GraphQL\Structure\Type
 	private function idFieldDefinition()
 	{
 		$field = new Field('id', 'ID of the weather station', id());
-		$field->setResolveFunction(function (WeatherStation $ws, $args, UserId $userId) {
+		$field->setResolveFunction(function (WeatherStation $ws, $args, Context $context) {
 			return $ws->id();
 		});
 		return $field;
@@ -54,7 +55,7 @@ final class WeatherStationType extends \Adeira\Connector\GraphQL\Structure\Type
 	private function nameFieldDefinition()
 	{
 		$field = new Field('name', 'Name of the weather station', string());
-		$field->setResolveFunction(function (WeatherStation $obj, $args, UserId $userId) {
+		$field->setResolveFunction(function (WeatherStation $obj, $args, Context $context) {
 			return $obj->deviceName();
 		});
 		return $field;
@@ -63,9 +64,10 @@ final class WeatherStationType extends \Adeira\Connector\GraphQL\Structure\Type
 	private function recordsFieldDefinition()
 	{
 		$field = new Field('records', 'Records of the weather station', listOf($this->wsrt));
-		$field->setResolveFunction(function (WeatherStation $ws, $args, UserId $userId) {
+		$field->setResolveFunction(function (WeatherStation $ws, $args, Context $context) {
 			$this->allWsRecords->buffer($ws->id());
 
+			$userId = $context->userId();
 			return new \GraphQL\Deferred(function() use ($userId, $ws) {
 				return $this->allWsRecords->execute($userId, $ws->id());
 			});

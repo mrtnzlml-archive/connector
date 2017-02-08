@@ -2,10 +2,10 @@
 
 namespace Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Query;
 
-use Adeira\Connector\Authentication\DomainModel\User\UserId;
 use Adeira\Connector\Devices\Application\Service\WeatherStation\ViewAllWeatherStations;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStationId;
 use Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Type\WeatherStationsConnectionType;
+use Adeira\Connector\GraphQL\Context;
 use Adeira\Connector\GraphQL\Structure\Argument;
 use function Adeira\Connector\GraphQL\{
 	nullableInt, nullableString, type
@@ -56,11 +56,11 @@ final class AllWeatherStationsQuery extends \Adeira\Connector\GraphQL\Structure\
 		];
 	}
 
-	public function resolve($ancestorValue, $args, UserId $userId)
+	public function resolve($ancestorValue, $args, Context $context)
 	{
 		$limit = $args['first'] ?? NULL;
 		$fromWeatherStationId = isset($args['after']) ? WeatherStationId::createFromString(base64_decode($args['after'])) : NULL;
-		return $this->allWeatherStationsService->execute($userId, $limit, $fromWeatherStationId);
+		return $this->allWeatherStationsService->execute($context->userId(), $limit, $fromWeatherStationId);
 	}
 
 }

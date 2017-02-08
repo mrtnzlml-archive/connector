@@ -2,15 +2,12 @@
 
 namespace Adeira\Connector\Authentication\Infrastructure\DomainModel\Owner;
 
-use Adeira\Connector\Authentication\DomainModel\Owner\IOwnerService;
+use Adeira\Connector\Authentication\DomainModel\Owner\Owner;
 use Adeira\Connector\Authentication\DomainModel\User;
 
-final class UserIdOwnerService implements IOwnerService
+final class UserIdOwnerService
 {
 
-	/**
-	 * @var \Adeira\Connector\Authentication\DomainModel\User\IUserRepository
-	 */
 	private $userRepository;
 
 	public function __construct(User\IUserRepository $userRepository)
@@ -18,15 +15,22 @@ final class UserIdOwnerService implements IOwnerService
 		$this->userRepository = $userRepository;
 	}
 
-	public function ownerFrom(User\UserId $userId): ?User\User
+	//TODO: check permissions here (e.g. is user allowed to do this action?)
+	public function ownerFrom(User\UserId $userId): ?Owner
 	{
-		//TODO: check permissions here (e.g. is user allowed to do this action?)
-		return $this->userRepository->ofId($userId);
+		$user = $this->userRepository->ofId($userId);
+		return $user ? new Owner($user) : NULL;
 	}
 
-	public function throwInvalidOwnerException()
+	public function existingOwner(User\UserId $userId): Owner
 	{
-		throw new \Adeira\Connector\Authentication\Application\Exception\InvalidOwnerException;
+		$owner = $this->ownerFrom($userId);
+
+		if ($owner === NULL) {
+			throw new \Adeira\Connector\Authentication\Application\Exception\InvalidOwnerException;
+		}
+
+		return $owner;
 	}
 
 }

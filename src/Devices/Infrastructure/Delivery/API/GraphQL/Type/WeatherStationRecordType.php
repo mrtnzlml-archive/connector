@@ -2,8 +2,8 @@
 
 namespace Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Type;
 
-use Adeira\Connector\Authentication\DomainModel\User\UserId;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStationRecord;
+use Adeira\Connector\GraphQL\Context;
 use Adeira\Connector\GraphQL\Structure\Field;
 use function Adeira\Connector\GraphQL\id;
 
@@ -30,7 +30,7 @@ final class WeatherStationRecordType extends \Adeira\Connector\GraphQL\Structure
 	private function idFieldDefinition()
 	{
 		$field = new Field('id', 'ID of the weather station record', id());
-		$field->setResolveFunction(function (WeatherStationRecord $wsr, $args, UserId $userId) {
+		$field->setResolveFunction(function (WeatherStationRecord $wsr, $args, Context $context) {
 			return $wsr->id();
 		});
 		return $field;

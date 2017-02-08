@@ -2,9 +2,9 @@
 
 namespace Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Type;
 
-use Adeira\Connector\Authentication\DomainModel\User\UserId;
 use Adeira\Connector\Devices\Application\Service\WeatherStation\ViewAllWeatherStationSeries;
 use Adeira\Connector\Devices\Application\Service\WeatherStation\ViewAllWeatherStations;
+use Adeira\Connector\GraphQL\Context;
 use Adeira\Connector\GraphQL\Structure\Field;
 use function Adeira\Connector\GraphQL\{
 	int, listOf
@@ -66,8 +66,8 @@ final class WeatherStationsConnectionType extends \Adeira\Connector\GraphQL\Stru
 	private function totalCountFieldDefinition()
 	{
 		$field = new Field('totalCount', 'Total count of all weather stations.', int());
-		$field->setResolveFunction(function (array $weatherStations, $args, UserId $userId) {
-			return $this->allWeatherStationsService->executeCountOnly($userId);
+		$field->setResolveFunction(function (array $weatherStations, $args, Context $context) {
+			return $this->allWeatherStationsService->executeCountOnly($context->userId());
 		});
 		return $field;
 	}
@@ -84,8 +84,8 @@ final class WeatherStationsConnectionType extends \Adeira\Connector\GraphQL\Stru
 			'All weather station production series known by this system.',
 			listOf($this->weatherStationSeriesType)
 		);
-		$field->setResolveFunction(function(array $weatherStations, $args, UserId $userId) {
-			return $this->allWeatherStationsSeries->execute($userId);
+		$field->setResolveFunction(function(array $weatherStations, $args, Context $context) {
+			return $this->allWeatherStationsSeries->execute($context->userId());
 		});
 		return $field;
 	}

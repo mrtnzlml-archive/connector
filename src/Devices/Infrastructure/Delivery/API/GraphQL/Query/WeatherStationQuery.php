@@ -2,10 +2,10 @@
 
 namespace Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Query;
 
-use Adeira\Connector\Authentication\DomainModel\User\UserId;
 use Adeira\Connector\Devices\Application\Service\WeatherStation\ViewSingleWeatherStation;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStationId;
 use Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Type\WeatherStationType;
+use Adeira\Connector\GraphQL\Context;
 use Adeira\Connector\GraphQL\Structure\Argument;
 use function Adeira\Connector\GraphQL\{
 	id, type
@@ -55,10 +55,10 @@ final class WeatherStationQuery extends \Adeira\Connector\GraphQL\Structure\Quer
 		];
 	}
 
-	public function resolve($ancestorValue, $args, UserId $userId)
+	public function resolve($ancestorValue, $args, Context $context)
 	{
 		return $this->singleWeatherStationService->execute(
-			$userId,
+			$context->userId(),
 			WeatherStationId::createFromString($args['id'])
 		);
 	}

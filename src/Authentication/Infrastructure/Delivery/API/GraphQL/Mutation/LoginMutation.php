@@ -3,8 +3,8 @@
 namespace Adeira\Connector\Authentication\Infrastructure\Delivery\API\GraphQL\Mutation;
 
 use Adeira\Connector\Authentication\Application\Service\SignInService;
-use Adeira\Connector\Authentication\DomainModel\User\UserId;
 use Adeira\Connector\Authentication\Infrastructure\Delivery\API\GraphQL\UserType;
+use Adeira\Connector\GraphQL\Context;
 use Adeira\Connector\GraphQL\Structure\Argument;
 use function Adeira\Connector\GraphQL\string;
 use GraphQL\Type\Definition\ObjectType;
@@ -51,7 +51,7 @@ final class LoginMutation extends \Adeira\Connector\GraphQL\Structure\Query
 		];
 	}
 
-	public function resolve($ancestorValue, $args, UserId $userId)
+	public function resolve($ancestorValue, $args, Context $context)
 	{
 		return $this->signInService->execute($args['username'], $args['password']);
 	}

@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\GraphQL\Delivery\API\GraphQL\Query;
 
-use Adeira\Connector\Authentication\DomainModel\User\UserId;
+use Adeira\Connector\GraphQL\Context;
 use function Adeira\Connector\GraphQL\id;
 use GraphQL\Type\Definition;
 
@@ -40,7 +40,7 @@ final class TestQuery extends \Adeira\Connector\GraphQL\Structure\Query
 		]);
 	}
 
-	public function resolve($ancestorValue, $args, UserId $userId)
+	public function resolve($ancestorValue, $args, Context $context)
 	{
 		return TRUE; // pass through
 	}

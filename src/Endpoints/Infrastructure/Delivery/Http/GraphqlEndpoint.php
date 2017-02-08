@@ -3,12 +3,13 @@
 namespace Adeira\Connector\Endpoints\Infrastructure\Delivery\Http;
 
 use Adeira\Connector\Authentication\DomainModel\{
-	ITokenStrategy, User\NullUserId, User\UserId
+	User\NullUserId, User\UserId
 };
+use Adeira\Connector\Authentication\Infrastructure\DomainModel\Owner\JwtOwnerService;
 use Adeira\Connector\GraphQL\Bridge\Application\Responses\GraphqlErrorResponse;
+use Adeira\Connector\GraphQL\Context;
 use Adeira\Connector\GraphQL\SchemaFactory;
 use GraphQL\Validator\DocumentValidator;
-use Nette\Application\IResponse;
 use Nette\Application\Responses\JsonResponse;
 use Nette\Http;
 use Nette\Utils\Json;
@@ -27,36 +28,33 @@ final class GraphqlEndpoint implements \Nette\Application\IPresenter
 	private $httpRequest;
 
 	/**
-	 * @var ITokenStrategy
+	 * @var \Adeira\Connector\Authentication\Infrastructure\DomainModel\Owner\JwtOwnerService
 	 */
-	private $tokenStrategy;
+	private $ownerService;
 
 	public function __construct(
 		SchemaFactory $schemaFactory,
 		Http\IRequest $httpRequest,
-		ITokenStrategy $tokenStrategy
+		JwtOwnerService $ownerService
 	) {
 		$this->schemaFactory = $schemaFactory;
 		$this->httpRequest = $httpRequest;
-		$this->tokenStrategy = $tokenStrategy;
+		$this->ownerService = $ownerService;
 	}
 
 	public function run(\Nette\Application\Request $request): ?\Nette\Application\IResponse
 	{
 		$httpRequest = $this->httpRequest;
 		if ($httpRequest->isMethod(Http\IRequest::POST)) {
+			$userId = \Ramsey\Uuid\Uuid::NIL;
 
 			// get user UUID from authorization header
-			$authHeader = $httpRequest->getHeader('authorization');
-			if ($authHeader) {
-				try {
-					$payload = $this->tokenStrategy->decodeToken($authHeader); // JWT token
-				} catch(\UnexpectedValueException $exc) {
-					return $this->error($exc->getMessage(), Http\IResponse::S401_UNAUTHORIZED);
+			$jwtToken = $httpRequest->getHeader('authorization');
+			if ($jwtToken) {
+				$owner = $this->ownerService->ownerFrom($jwtToken);
+				if ($owner !== NULL) {
+					$userId = (string)$owner->id();
 				}
-				$userId = $payload->uuid;
-			} else {
-				$userId = \Ramsey\Uuid\Uuid::NIL;
 			}
 
 			// parse JSON from raw POST body
@@ -91,7 +89,7 @@ final class GraphqlEndpoint implements \Nette\Application\IPresenter
 				$this->schemaFactory->build(),
 				$requestString,
 				NULL,
-				$userId ? UserId::createFromString($userId) : NullUserId::create(),
+				new Context($userId ? UserId::createFromString($userId) : NullUserId::create()),
 				$variableValues
 			);
 

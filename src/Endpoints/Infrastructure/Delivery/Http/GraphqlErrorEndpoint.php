@@ -27,9 +27,7 @@ final class GraphqlErrorEndpoint implements NApplication\IPresenter
 
 		if ($exc instanceof \Nette\Application\BadRequestException) {
 
-			$messages = $exc->getMessage();
-			$code = IResponse::S404_NOT_FOUND;
-			return new GraphqlErrorResponse($messages, $code);
+			return new GraphqlErrorResponse($exc->getMessage(), IResponse::S404_NOT_FOUND);
 
 		} elseif ($exc instanceof \GraphQL\Executor\ExecutionResult) {
 
@@ -40,13 +38,16 @@ final class GraphqlErrorEndpoint implements NApplication\IPresenter
 				if ($previousError === NULL) {
 					$messages[] = $error;
 				} elseif ($previousError instanceof \Adeira\Connector\Endpoints\Application\Exceptions\BubbleUpGracefullyException) {
-					return new GraphqlErrorResponse($previousError->getMessage(), IResponse::S401_UNAUTHORIZED);
+					return new GraphqlErrorResponse($previousError->getMessage(), $previousError->getCode());
 				} else {
 					return $this->internalServerError($error->getPrevious());
 				}
 			}
-			$code = IResponse::S422_UNPROCESSABLE_ENTITY;
-			return new GraphqlErrorResponse($messages, $code, FALSE);
+			return new GraphqlErrorResponse($messages, IResponse::S422_UNPROCESSABLE_ENTITY, FALSE);
+
+		} elseif ($exc instanceof \Adeira\Connector\Endpoints\Application\Exceptions\BubbleUpGracefullyException) {
+
+			return new GraphqlErrorResponse($exc->getMessage(), $exc->getCode());
 
 		} else {
 

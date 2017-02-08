@@ -49,9 +49,7 @@ final class User implements \Nette\Security\IIdentity
 	{
 		$passwordCorrect = $checkHash($pass, $this->passwordHash);
 		if ($passwordCorrect === TRUE) {
-			$this->token = $generateToken([
-				'uuid' => (string)$this->id(),
-			]);
+			$this->token = $generateToken($this->id());
 		}
 		return $passwordCorrect;
 	}
@@ -68,6 +66,7 @@ final class User implements \Nette\Security\IIdentity
 
 	/**
 	 * Implementation of Nette\Security\IIdentity
+	 * @deprecated use id() instead
 	 */
 	public function getId(): UserId
 	{

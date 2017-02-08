@@ -4,6 +4,7 @@ namespace Adeira\Connector\Authentication\Infrastructure\Delivery\API\GraphQL\Qu
 
 use Adeira\Connector\Authentication\DomainModel;
 use Adeira\Connector\Authentication\Infrastructure\Delivery\API\GraphQL\UserType;
+use Adeira\Connector\GraphQL\Context;
 use Adeira\Connector\GraphQL\Structure\Argument;
 use function Adeira\Connector\GraphQL\{
 	id, type
@@ -45,7 +46,7 @@ final class SingleUserQuery extends \Adeira\Connector\GraphQL\Structure\Query
 		];
 	}
 
-	public function resolve($ancestorValue, $args, DomainModel\User\UserId $userId)
+	public function resolve($ancestorValue, $args, Context $context)
 	{
 		return $this->userRepository->ofId(
 			DomainModel\User\UserId::createFromString($args['id'])

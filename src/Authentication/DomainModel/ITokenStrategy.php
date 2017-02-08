@@ -2,10 +2,12 @@
 
 namespace Adeira\Connector\Authentication\DomainModel;
 
+use Adeira\Connector\Authentication\DomainModel\User\UserId;
+
 interface ITokenStrategy
 {
 
-	public function generateNewToken(array $payload = []): string;
+	public function generateNewToken(UserId $userId): string;
 
 	/**
 	 * This should also verify token.

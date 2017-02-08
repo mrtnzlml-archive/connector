@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\Devices\Application\Service\WeatherStation\Command;
 
-use Adeira\Connector\Authentication\DomainModel\Owner\IOwnerService;
+use Adeira\Connector\Authentication\Infrastructure\DomainModel\Owner\UserIdOwnerService;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\IWeatherStationRepository;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStation;
 
@@ -20,7 +20,7 @@ final class CreateWeatherStationHandler
 
 	public function __construct(
 		IWeatherStationRepository $weatherStationRepository,
-		IOwnerService $ownerService
+		UserIdOwnerService $ownerService
 	) {
 		$this->weatherStationRepository = $weatherStationRepository;
 		$this->ownerService = $ownerService;
@@ -28,10 +28,7 @@ final class CreateWeatherStationHandler
 
 	public function __invoke(CreateWeatherStation $aCommand)
 	{
-		$owner = $this->ownerService->ownerFrom($aCommand->userId());
-		if ($owner === NULL) {
-			$this->ownerService->throwInvalidOwnerException();
-		}
+		$owner = $this->ownerService->existingOwner($aCommand->userId());
 
 		$this->weatherStationRepository->add($weatherStation = new WeatherStation(
 			$this->weatherStationRepository->nextIdentity(),

@@ -2,8 +2,8 @@
 
 namespace Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Type;
 
-use Adeira\Connector\Authentication\DomainModel\User\UserId;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStationSeries;
+use Adeira\Connector\GraphQL\Context;
 use Adeira\Connector\GraphQL\Structure\Field;
 use function Adeira\Connector\GraphQL\{
 	id, string
@@ -33,7 +33,7 @@ final class WeatherStationSeriesType extends \Adeira\Connector\GraphQL\Structure
 	private function idFieldDefinition()
 	{
 		$field = new Field('id', 'ID of the weather station series', id());
-		$field->setResolveFunction(function (WeatherStationSeries $series, $args, UserId $userId) {
+		$field->setResolveFunction(function (WeatherStationSeries $series, $args, Context $context) {
 			return $series->id();
 		});
 		return $field;
@@ -42,7 +42,7 @@ final class WeatherStationSeriesType extends \Adeira\Connector\GraphQL\Structure
 	private function nameFieldDefinition()
 	{
 		$field = new Field('name', 'Name of the weather station', string());
-		$field->setResolveFunction(function (WeatherStationSeries $series, $args, UserId $userId) {
+		$field->setResolveFunction(function (WeatherStationSeries $series, $args, Context $context) {
 			return $series->code();
 		});
 		return $field;

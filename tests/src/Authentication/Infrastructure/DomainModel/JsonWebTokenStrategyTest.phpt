@@ -2,6 +2,7 @@
 
 namespace Adeira\Connector\Tests\Authentication\Infrastructure\DomainModel;
 
+use Adeira\Connector\Authentication\DomainModel\User\UserId;
 use Adeira\Connector\Authentication\Infrastructure\DomainModel\JsonWebTokenStrategy;
 use Tester\Assert;
 
@@ -16,13 +17,11 @@ final class JsonWebTokenStrategyTest extends \Tester\TestCase
 	public function testThatGenerateTokenWorks()
 	{
 		$jwts = new JsonWebTokenStrategy('token');
-		$generatedToken = $jwts->generateNewToken();
-		Assert::same(['iat', 'exp'], array_keys((array)$jwts->decodeToken($generatedToken)));
+		$generatedToken = $jwts->generateNewToken(UserId::createFromString('00000000-0000-0000-0000-100000000000'));
 
-		$generatedToken = $jwts->generateNewToken(['payload' => 'value']);
 		$payload = (array)$jwts->decodeToken($generatedToken);
-		Assert::same(['iat', 'exp', 'payload'], array_keys($payload));
-		Assert::same('value', $payload['payload']);
+		Assert::same(['iat', 'exp', 'uuid'], array_keys($payload));
+		Assert::same('00000000-0000-0000-0000-100000000000', $payload['uuid']);
 	}
 
 }

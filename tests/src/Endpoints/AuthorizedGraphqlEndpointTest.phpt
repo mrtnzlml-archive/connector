@@ -30,7 +30,7 @@ final class AuthorizedGraphqlEndpointTest extends \Adeira\Connector\Tests\TestCa
 			'data' => NULL,
 			'errors' => [
 				[
-					'message' => 'Owner is not valid or it doesn\'t have enough permissions. Did you send valid JWT token?',
+					'message' => 'Owner is not valid or it doesn\'t have enough permissions.',
 				],
 			],
 		], (array)$response->getPayload());

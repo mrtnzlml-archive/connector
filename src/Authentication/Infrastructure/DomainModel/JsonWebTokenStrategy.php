@@ -22,12 +22,13 @@ final class JsonWebTokenStrategy implements DomainModel\ITokenStrategy
 		$this->privateJsonWebToken = $privateJsonWebToken;
 	}
 
-	public function generateNewToken(array $payload = []): string
+	public function generateNewToken(DomainModel\User\UserId $userId): string
 	{
 		$newPayload = [
-				'iat' => time(), // Issued At
-				'exp' => time() + (60 * 60), // Expiration Time (60 mins; 60 secs)
-			] + $payload;
+			'iat' => time(), // Issued At
+			'exp' => time() + (60 * 60), // Expiration Time (60 mins; 60 secs)
+			'uuid' => $userId->id(),
+		];
 		return \Firebase\JWT\JWT::encode($newPayload, $this->privateJsonWebToken, $this->allowedAlgs);
 	}
 

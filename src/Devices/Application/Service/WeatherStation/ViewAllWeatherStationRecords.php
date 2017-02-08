@@ -2,9 +2,8 @@
 
 namespace Adeira\Connector\Devices\Application\Service\WeatherStation;
 
-use Adeira\Connector\Authentication\DomainModel\{
-	Owner\IOwnerService, User\UserId
-};
+use Adeira\Connector\Authentication\DomainModel\User\UserId;
+use Adeira\Connector\Authentication\Infrastructure\DomainModel\Owner\UserIdOwnerService;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\{
 	IWeatherStationRecordRepository, WeatherStationId
 };
@@ -18,13 +17,13 @@ final class ViewAllWeatherStationRecords
 	private $wsrr;
 
 	/**
-	 * @var \Adeira\Connector\Authentication\DomainModel\Owner\IOwnerService
+	 * @var \Adeira\Connector\Authentication\Infrastructure\DomainModel\Owner\UserIdOwnerService
 	 */
 	private $ownerService;
 
 	private $weatherStationIdsBuffer = [];
 
-	public function __construct(IWeatherStationRecordRepository $wsrr, IOwnerService $ownerService)
+	public function __construct(IWeatherStationRecordRepository $wsrr, UserIdOwnerService $ownerService)
 	{
 		$this->wsrr = $wsrr;
 		$this->ownerService = $ownerService;
@@ -37,10 +36,7 @@ final class ViewAllWeatherStationRecords
 
 	public function execute(UserId $userId, WeatherStationId $weatherStationId)
 	{
-		$owner = $this->ownerService->ownerFrom($userId);
-		if ($owner === NULL) {
-			$this->ownerService->throwInvalidOwnerException();
-		}
+		$owner = $this->ownerService->ownerFrom($userId); //FIXME: filtrovat podle uživatele!
 
 		if(empty($this->weatherStationIdsBuffer)) {
 			return $this->wsrr->ofWeatherStationId($weatherStationId);
