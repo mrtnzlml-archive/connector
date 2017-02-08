@@ -8,7 +8,7 @@ $rootTestPaths = [
 ];
 
 $ignoreList = [
-	'/output$'
+	'/output$',
 ];
 
 $ignoreList = implode('|', $ignoreList);
