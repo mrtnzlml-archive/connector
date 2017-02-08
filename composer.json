@@ -50,6 +50,7 @@
   "scripts": {
     "adeira-connector-scripts": [
       "chmod +x bin/console",
+      "chmod +x bin/purge",
       "chmod +x tests/run"
     ],
     "post-install-cmd": [
