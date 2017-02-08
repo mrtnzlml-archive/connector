@@ -3,7 +3,7 @@
 namespace Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Query;
 
 use Adeira\Connector\Authentication\DomainModel\User\UserId;
-use Adeira\Connector\Devices\Application\Service\WeatherStation\ViewSingleWeatherStationService;
+use Adeira\Connector\Devices\Application\Service\WeatherStation\ViewSingleWeatherStation;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStationId;
 use Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Type\WeatherStationType;
 use Adeira\Connector\GraphQL\Structure\Argument;
@@ -16,7 +16,7 @@ final class WeatherStationQuery extends \Adeira\Connector\GraphQL\Structure\Quer
 {
 
 	/**
-	 * @var ViewSingleWeatherStationService
+	 * @var ViewSingleWeatherStation
 	 */
 	private $singleWeatherStationService;
 
@@ -26,7 +26,7 @@ final class WeatherStationQuery extends \Adeira\Connector\GraphQL\Structure\Quer
 	private $weatherStationType;
 
 	public function __construct(
-		ViewSingleWeatherStationService $singleWeatherStationService,
+		ViewSingleWeatherStation $singleWeatherStationService,
 		WeatherStationType $weatherStationType
 	) {
 		$this->singleWeatherStationService = $singleWeatherStationService;

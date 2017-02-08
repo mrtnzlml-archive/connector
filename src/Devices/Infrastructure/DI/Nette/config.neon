@@ -11,7 +11,7 @@ services:
 		ViewAllWeatherStationRecordsService
 		ViewAllWeatherStationsService
 		ViewAllWeatherStationSeries
-		ViewSingleWeatherStationService
+		ViewSingleWeatherStation
 	)
 	weatherStationRecordRepository: Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\DoctrineWeatherStationRecordRepository
 	weatherStationRepository: Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\DoctrineWeatherStationRepository
