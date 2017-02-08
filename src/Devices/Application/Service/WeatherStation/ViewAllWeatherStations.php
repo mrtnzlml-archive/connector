@@ -8,7 +8,7 @@ use Adeira\Connector\Authentication\DomainModel\{
 use Adeira\Connector\Devices\DomainModel\WeatherStation\IWeatherStationRepository;
 use Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\AllWeatherStationsSpecification;
 
-final class ViewAllWeatherStationsService
+final class ViewAllWeatherStations
 {
 
 	/**

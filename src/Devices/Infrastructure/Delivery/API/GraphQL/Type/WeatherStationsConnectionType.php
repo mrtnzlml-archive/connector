@@ -4,7 +4,7 @@ namespace Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Type;
 
 use Adeira\Connector\Authentication\DomainModel\User\UserId;
 use Adeira\Connector\Devices\Application\Service\WeatherStation\ViewAllWeatherStationSeries;
-use Adeira\Connector\Devices\Application\Service\WeatherStation\ViewAllWeatherStationsService;
+use Adeira\Connector\Devices\Application\Service\WeatherStation\ViewAllWeatherStations;
 use Adeira\Connector\GraphQL\Structure\Field;
 use function Adeira\Connector\GraphQL\{
 	int, listOf
@@ -26,7 +26,7 @@ final class WeatherStationsConnectionType extends \Adeira\Connector\GraphQL\Stru
 	public function __construct(
 		WeatherStationType $wst,
 		WeatherStationsEdgeType $wsEdge,
-		ViewAllWeatherStationsService $allWeatherStationsService,
+		ViewAllWeatherStations $allWeatherStationsService,
 		WeatherStationSeriesType $weatherStationSeriesType,
 		ViewAllWeatherStationSeries $allWeatherStationsSeries
 	) {

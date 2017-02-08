@@ -9,7 +9,7 @@ doctrine.orm:
 services:
 	- Adeira\Connector\Devices\Application\Service\WeatherStation\(
 		ViewAllWeatherStationRecordsService
-		ViewAllWeatherStationsService
+		ViewAllWeatherStations
 		ViewAllWeatherStationSeries
 		ViewSingleWeatherStation
 	)
