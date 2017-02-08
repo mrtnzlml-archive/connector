@@ -3,7 +3,7 @@
 namespace Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Type;
 
 use Adeira\Connector\Authentication\DomainModel\User\UserId;
-use Adeira\Connector\Devices\Application\Service\WeatherStation\ViewAllWeatherStationRecordsService;
+use Adeira\Connector\Devices\Application\Service\WeatherStation\ViewAllWeatherStationRecords;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStation;
 use Adeira\Connector\GraphQL\Structure\Field;
 use function Adeira\Connector\GraphQL\{
@@ -17,7 +17,7 @@ final class WeatherStationType extends \Adeira\Connector\GraphQL\Structure\Type
 
 	private $allWsRecords;
 
-	public function __construct(WeatherStationRecordType $wsrt, ViewAllWeatherStationRecordsService $allWsRecords)
+	public function __construct(WeatherStationRecordType $wsrt, ViewAllWeatherStationRecords $allWsRecords)
 	{
 		$this->wsrt = $wsrt;
 		$this->allWsRecords = $allWsRecords;
