@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\Authentication\Application\Exception;
 
-final class InvalidOwnerException extends \Exception
+final class InvalidOwnerException extends \Adeira\Connector\Endpoints\Application\Exceptions\BubbleUpGracefullyException
 {
 
 	public function __construct(string $message = NULL)

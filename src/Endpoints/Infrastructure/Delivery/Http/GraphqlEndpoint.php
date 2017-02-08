@@ -8,6 +8,7 @@ use Adeira\Connector\Authentication\DomainModel\{
 use Adeira\Connector\GraphQL\Bridge\Application\Responses\GraphqlErrorResponse;
 use Adeira\Connector\GraphQL\SchemaFactory;
 use GraphQL\Validator\DocumentValidator;
+use Nette\Application\IResponse;
 use Nette\Application\Responses\JsonResponse;
 use Nette\Http;
 use Nette\Utils\Json;
@@ -48,8 +49,11 @@ final class GraphqlEndpoint implements \Nette\Application\IPresenter
 			// get user UUID from authorization header
 			$authHeader = $httpRequest->getHeader('authorization');
 			if ($authHeader) {
-				$jwtToken = $authHeader;
-				$payload = $this->tokenStrategy->decodeToken($jwtToken);
+				try {
+					$payload = $this->tokenStrategy->decodeToken($authHeader); // JWT token
+				} catch(\UnexpectedValueException $exc) {
+					return $this->error($exc->getMessage(), Http\IResponse::S401_UNAUTHORIZED);
+				}
 				$userId = $payload->uuid;
 			} else {
 				$userId = \Ramsey\Uuid\Uuid::NIL;

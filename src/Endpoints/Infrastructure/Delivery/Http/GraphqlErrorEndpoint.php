@@ -36,8 +36,11 @@ final class GraphqlErrorEndpoint implements NApplication\IPresenter
 			$messages = [];
 			/** @var \GraphQL\Error\Error $error */
 			foreach ($exc->errors as $error) {
-				if ($error->getPrevious() === NULL) {
+				$previousError = $error->getPrevious();
+				if ($previousError === NULL) {
 					$messages[] = $error;
+				} elseif ($previousError instanceof \Adeira\Connector\Endpoints\Application\Exceptions\BubbleUpGracefullyException) {
+					return new GraphqlErrorResponse($previousError->getMessage(), IResponse::S401_UNAUTHORIZED);
 				} else {
 					return $this->internalServerError($error->getPrevious());
 				}

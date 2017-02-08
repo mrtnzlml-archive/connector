@@ -2,9 +2,10 @@
 
 namespace Adeira\Connector\Authentication\Infrastructure\DomainModel\Owner;
 
-use Adeira\Connector\Authentication\DomainModel;
+use Adeira\Connector\Authentication\DomainModel\Owner\IOwnerService;
+use Adeira\Connector\Authentication\DomainModel\User;
 
-final class UserIdOwnerService implements DomainModel\Owner\IOwnerService
+final class UserIdOwnerService implements IOwnerService
 {
 
 	/**
@@ -12,12 +13,12 @@ final class UserIdOwnerService implements DomainModel\Owner\IOwnerService
 	 */
 	private $userRepository;
 
-	public function __construct(DomainModel\User\IUserRepository $userRepository)
+	public function __construct(User\IUserRepository $userRepository)
 	{
 		$this->userRepository = $userRepository;
 	}
 
-	public function ownerFrom(DomainModel\User\UserId $userId)
+	public function ownerFrom(User\UserId $userId): ?User\User
 	{
 		//TODO: check permissions here (e.g. is user allowed to do this action?)
 		return $this->userRepository->ofId($userId);

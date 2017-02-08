@@ -30,7 +30,7 @@ final class CreateWeatherStationHandler
 	{
 		$owner = $this->ownerService->ownerFrom($aCommand->userId());
 		if ($owner === NULL) {
-			throw new \Adeira\Connector\Authentication\Application\Exception\InvalidOwnerException;
+			$this->ownerService->throwInvalidOwnerException();
 		}
 
 		$this->weatherStationRepository->add($weatherStation = new WeatherStation(

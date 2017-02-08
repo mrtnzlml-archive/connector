@@ -2,22 +2,20 @@
 
 namespace Adeira\Connector\Authentication\Infrastructure\DomainModel\Owner;
 
-use Adeira\Connector\Authentication\DomainModel;
+use Adeira\Connector\Authentication\DomainModel\Owner\IOwnerService;
+use Adeira\Connector\Authentication\DomainModel\User;
 
-final class JwtOwnerService implements DomainModel\Owner\IOwnerService
+final class JwtOwnerService implements IOwnerService
 {
 
-	/**
-	 * @var \Adeira\Connector\Authentication\DomainModel\User\IUserRepository
-	 */
 	private $userRepository;
 
-	public function __construct(DomainModel\User\IUserRepository $userRepository)
+	public function __construct(User\IUserRepository $userRepository)
 	{
 		$this->userRepository = $userRepository;
 	}
 
-	public function ownerFrom(DomainModel\User\UserId $userId)
+	public function ownerFrom(User\UserId $userId): ?User\User
 	{
 		//TODO: check permissions here (e.g. is user allowed to do this action?)
 		return $this->userRepository->ofId($userId);

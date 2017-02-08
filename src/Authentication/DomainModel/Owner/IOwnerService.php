@@ -2,15 +2,12 @@
 
 namespace Adeira\Connector\Authentication\DomainModel\Owner;
 
-use Adeira\Connector\Authentication;
+use Adeira\Connector\Authentication\DomainModel\User;
 
 interface IOwnerService
 {
 
-	/**
-	 * @return Authentication\DomainModel\User\User | NULL - Owner or NULL if not authorized.
-	 */
-	public function ownerFrom(Authentication\DomainModel\User\UserId $userId);
+	public function ownerFrom(User\UserId $userId): ?User\User;
 
 	public function throwInvalidOwnerException();
 
