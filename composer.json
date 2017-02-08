@@ -43,11 +43,9 @@
     ]
   },
   "autoload-dev": {
-    "psr-4": {
-      "Adeira\\Connector\\Tests\\": [
-        "tests/utils/"
-      ]
-    }
+    "classmap": [
+      "tests/utils/TestCase.php"
+    ]
   },
   "scripts": {
     "adeira-connector-scripts": [
