@@ -18,7 +18,7 @@ script:
   - vendor/bin/parallel-lint . -e php,php3,php4,php5,phtml,phpt --exclude vendor --blame
   - bin/console migrations:continue
   - tests/run
-  - vendor/bin/phpstan analyse --level 5 extensions migrations src tests/extensions tests/src tests/utils
+  - vendor/bin/phpstan analyse --level 5 extensions migrations src
   - bin/console orm:validate-schema --skip-sync
   - vendor/bin/phpcs --standard=ruleset.xml --extensions=php --encoding=utf-8 --tab-width=4 -sp extensions/ migrations/ src/ --ignore=bootstrap.php
   - vendor/bin/phpcs --standard=ruleset.xml --extensions=php,phpt --encoding=utf-8 --tab-width=4 -sp tests/ --ignore=*/output/*,_temp/*,bootstrap.php
