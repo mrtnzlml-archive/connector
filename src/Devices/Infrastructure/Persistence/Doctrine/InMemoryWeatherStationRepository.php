@@ -12,9 +12,12 @@ final class InMemoryWeatherStationRepository /*extends ORM\EntityRepository*/ im
 
 	private $memory;
 
-	public function __construct()
+	private $weatherStationId;
+
+	public function __construct(?WeatherStationId $weatherStationId = NULL)
 	{
 		$this->memory = new \Doctrine\Common\Collections\ArrayCollection;
+		$this->weatherStationId = $weatherStationId;
 	}
 
 	public function add(WeatherStation $aWeatherStation)
@@ -39,7 +42,7 @@ final class InMemoryWeatherStationRepository /*extends ORM\EntityRepository*/ im
 
 	public function nextIdentity(): WeatherStationId
 	{
-		return WeatherStationId::create();
+		return $this->weatherStationId ?? WeatherStationId::create();
 	}
 
 }
