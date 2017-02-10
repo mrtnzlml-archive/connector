@@ -3,7 +3,7 @@
 namespace Adeira\Connector\PhysicalUnits\Speed;
 
 use Adeira\Connector\PhysicalUnits\{
-	IPhysicalQuantity, IUnit, Pressure\Conversion, Speed\Units\ISpeedUnit
+	IPhysicalQuantity, IUnit, Conversion, Speed\Units\ISpeedUnit
 };
 
 /**

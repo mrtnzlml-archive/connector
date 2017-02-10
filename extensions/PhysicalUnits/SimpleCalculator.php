@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\PhysicalUnits;
 
-final class SimpleCalculator
+final class SimpleCalculator implements ICalculator
 {
 
 	public function add($x, $increment)

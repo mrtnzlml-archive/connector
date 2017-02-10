@@ -3,7 +3,7 @@
 namespace Adeira\Connector\PhysicalUnits\Temperature;
 
 use Adeira\Connector\PhysicalUnits\{
-	IPhysicalQuantity, IUnit, Pressure\Conversion, Temperature\Units\ITemperatureUnit
+	IPhysicalQuantity, IUnit, Conversion, Temperature\Units\ITemperatureUnit
 };
 
 /**

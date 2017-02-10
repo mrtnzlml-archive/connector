@@ -1,10 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Adeira\Connector\PhysicalUnits\Pressure;
-
-use Adeira\Connector\PhysicalUnits\{
-	IPhysicalQuantity
-};
+namespace Adeira\Connector\PhysicalUnits;
 
 final class Conversion
 {

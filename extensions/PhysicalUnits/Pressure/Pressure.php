@@ -3,7 +3,7 @@
 namespace Adeira\Connector\PhysicalUnits\Pressure;
 
 use Adeira\Connector\PhysicalUnits\{
-	ICalculator, IPhysicalQuantity, IUnit, Pressure\Units\IPressureUnit, SimpleCalculator
+	Conversion, ICalculator, IPhysicalQuantity, IUnit, Pressure\Units\IPressureUnit, SimpleCalculator
 };
 
 /**
