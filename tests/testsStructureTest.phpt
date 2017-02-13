@@ -7,20 +7,19 @@ $rootTestPaths = [
 	__DIR__ . '/src',
 ];
 
-$ignoreList = [
-	'/output$',
-];
-
-$ignoreList = implode('|', $ignoreList);
 foreach ($rootTestPaths as $rootPath) {
 	$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($rootPath));
 	foreach ($iterator as $fileInfo) {
-		if ($fileInfo->getFilename() === '.') {
-			$path = str_replace(__DIR__, '', $fileInfo->getPath());
-			if (preg_match("~$ignoreList~", $path)) {
-				continue;
-			}
-			Tester\Assert::true(is_dir(__DIR__ . '/../' . $path), 'TESTS PATH MISHMASH ' . $path);
+		$path = str_replace(__DIR__, '', $fileInfo->getPath());
+		if (preg_match('~(/output$)~', $path)) { // ignore paths
+			continue;
 		}
+
+		$filename = $fileInfo->getFilename();
+		if (!preg_match('~(\.phpt$)~', $filename)) { // allow extensions
+			continue;
+		}
+
+		Tester\Assert::true(file_exists(__DIR__ . '/..' . $path), 'TESTS PATH MISHMASH ' . $path);
 	}
 }
