@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine;
+namespace Adeira\Connector\Devices\Infrastructure\Persistence\InMemory;
 
 use Adeira\Connector\Authentication\DomainModel\Owner\Owner;
 use Adeira\Connector\Common\Infrastructure\DomainModel\Doctrine\Specification\ISpecification;

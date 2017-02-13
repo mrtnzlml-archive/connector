@@ -11,7 +11,7 @@ use Adeira\Connector\Devices\Application\Service\WeatherStation\Command\CreateWe
 use Adeira\Connector\Devices\Application\Service\WeatherStation\Command\CreateWeatherStationHandler;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStation;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStationId;
-use Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\InMemoryWeatherStationRepository;
+use Adeira\Connector\Devices\Infrastructure\Persistence\InMemory\InMemoryWeatherStationRepository;
 use Tester\Assert;
 
 require getenv('BOOTSTRAP');
