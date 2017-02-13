@@ -5,7 +5,6 @@ namespace Adeira\Connector\Devices\DomainModel\WeatherStation;
 use Adeira\Connector\Authentication\DomainModel\Owner\Owner;
 use Adeira\Connector\Common\Infrastructure\DomainModel\Doctrine\Specification\ISpecification;
 
-//TODO: všechny dotazy musí být navázány na uživatelské ID!
 interface IWeatherStationRepository
 {
 

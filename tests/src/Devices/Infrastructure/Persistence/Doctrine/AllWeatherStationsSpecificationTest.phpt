@@ -2,9 +2,12 @@
 
 namespace Adeira\Connector\Tests\Devices\Infrastructure\Persistence\Doctrine;
 
-use Adeira\Connector\Authentication\DomainModel\User\UserId;
-use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStation;
-use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStationId;
+use Adeira\Connector\Authentication\DomainModel\{
+	Owner\Owner, User\User, User\UserId
+};
+use Adeira\Connector\Devices\DomainModel\WeatherStation\{
+	WeatherStation, WeatherStationId
+};
 use Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\AllWeatherStationsSpecification;
 use Tester\Assert;
 
@@ -26,7 +29,7 @@ final class AllWeatherStationsSpecificationTest extends \Adeira\Connector\Tests\
 	public function setUp()
 	{
 		$this->specification = new AllWeatherStationsSpecification(
-			UserId::create(),
+			new Owner(new User(UserId::create(), 'username')),
 			2, //limit
 			WeatherStationId::create()
 		);

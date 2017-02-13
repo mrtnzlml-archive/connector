@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine;
 
-use Adeira\Connector\Authentication\DomainModel\User\UserId;
+use Adeira\Connector\Authentication\DomainModel\Owner\Owner;
 use Adeira\Connector\Common\Infrastructure\DomainModel\Doctrine\Specification\ISpecification;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStation;
 use Doctrine\ORM;
@@ -10,16 +10,16 @@ use Doctrine\ORM;
 final class FilterOwner implements ISpecification
 {
 
-	private $userId;
+	private $owner;
 
-	public function __construct(UserId $userId)
+	public function __construct(Owner $owner)
 	{
-		$this->userId = $userId;
+		$this->owner = $owner;
 	}
 
 	public function match(ORM\QueryBuilder $qb, string $dqlAlias): ORM\Query\Expr\Comparison
 	{
-		$qb->setParameter(':owner', $this->userId);
+		$qb->setParameter(':owner', (string)$this->owner->id());
 		return $qb->expr()->eq("$dqlAlias.owner", ':owner');
 	}
 

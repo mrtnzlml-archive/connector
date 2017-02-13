@@ -28,19 +28,17 @@ final class ViewAllWeatherStations
 
 	public function execute(UserId $userId, $limit, $fromWeatherStationId)
 	{
-		$owner = $this->ownerService->existingOwner($userId); //FIXME: filtrovat podle uživatele!
-
+		$owner = $this->ownerService->existingOwner($userId);
 		return $this->weatherStationRepository->findBySpecification(
-			new AllWeatherStationsSpecification($userId, $limit, $fromWeatherStationId)
+			new AllWeatherStationsSpecification($owner, $limit, $fromWeatherStationId)
 		);
 	}
 
 	public function executeCountOnly(UserId $userId): int
 	{
-		$owner = $this->ownerService->existingOwner($userId); //FIXME: filtrovat podle uživatele!
-
+		$owner = $this->ownerService->existingOwner($userId);
 		return $this->weatherStationRepository->countBySpecification(
-			new AllWeatherStationsSpecification($userId, NULL, NULL)
+			new AllWeatherStationsSpecification($owner, NULL, NULL)
 		);
 	}
 

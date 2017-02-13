@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine;
 
-use Adeira\Connector\Authentication\DomainModel\User\UserId;
+use Adeira\Connector\Authentication\DomainModel\Owner\Owner;
 use Adeira\Connector\Common\Infrastructure\DomainModel\Doctrine\Specification\{
 	AndX, ISpecification
 };
@@ -17,10 +17,10 @@ final class AllWeatherStationsSpecification implements ISpecification
 
 	private $limit;
 
-	public function __construct(UserId $userId, int $limit = NULL, WeatherStationId $fromWeatherStationId = NULL)
+	public function __construct(Owner $owner, int $limit = NULL, WeatherStationId $fromWeatherStationId = NULL)
 	{
 		$andSpecifications = [
-			new FilterOwner($userId),
+			new FilterOwner($owner),
 		];
 		if ($fromWeatherStationId !== NULL) {
 			$andSpecifications[] = new FilterWeatherStationsAfter($fromWeatherStationId);
