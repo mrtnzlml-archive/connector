@@ -35,4 +35,9 @@ final class Owner
 		return $this->user->nickname();
 	}
 
+	public function __clone()
+	{
+		$this->id = UserId::create();
+	}
+
 }

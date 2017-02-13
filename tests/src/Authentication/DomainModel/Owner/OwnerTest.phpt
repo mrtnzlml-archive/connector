@@ -28,6 +28,16 @@ final class OwnerTest extends \Tester\TestCase
 		Assert::same('jůzrnějm', $owner->nickname());
 	}
 
+	public function testThatCloneGeneratesNewUUID()
+	{
+		$user = new User(UserId::createFromString($originalUuidString = '11111111-2222-3333-4444-555555555555'), 'jůzrnějm');
+		$owner = new Owner($user);
+
+		Assert::notSame($owner, $newOwner = clone $owner);
+		Assert::type(UserId::class, $newOwner->id());
+		Assert::notSame($originalUuidString, (string)$newOwner->id());
+	}
+
 }
 
 (new OwnerTest)->run();
