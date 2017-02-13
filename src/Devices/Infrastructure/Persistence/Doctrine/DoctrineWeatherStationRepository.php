@@ -2,6 +2,7 @@
 
 namespace Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine;
 
+use Adeira\Connector\Authentication\DomainModel\Owner\Owner;
 use Adeira\Connector\Common\Infrastructure\DomainModel\Doctrine\Specification\{
 	Executor, ISpecification
 };
@@ -38,11 +39,14 @@ final class DoctrineWeatherStationRepository /*extends ORM\EntityRepository*/ im
 		$this->em->persist($aWeatherStation);
 	}
 
-	public function ofId(WeatherStationId $weatherStationId): ?WeatherStation
+	public function ofId(WeatherStationId $weatherStationId, Owner $owner): ?WeatherStation
 	{
-		return $this->weatherStationRepository->findOneBy([
+		/** @var WeatherStation $weatherStation */
+		$weatherStation = $this->weatherStationRepository->findOneBy([
 			'id' => $weatherStationId,
+			'owner' => (string)$owner->id(),
 		]);
+		return $weatherStation;
 	}
 
 	public function countBySpecification(ISpecification $specification): int {

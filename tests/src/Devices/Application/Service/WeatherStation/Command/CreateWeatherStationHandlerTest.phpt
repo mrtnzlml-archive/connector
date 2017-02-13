@@ -2,6 +2,7 @@
 
 namespace Adeira\Connector\Tests\Devices\Application\Service\WeatherStation\Command;
 
+use Adeira\Connector\Authentication\DomainModel\Owner\Owner;
 use Adeira\Connector\Authentication\DomainModel\User\User;
 use Adeira\Connector\Authentication\DomainModel\User\UserId;
 use Adeira\Connector\Authentication\Infrastructure\DomainModel\Owner\UserIdOwnerService;
@@ -39,11 +40,12 @@ final class CreateWeatherStationHandlerTest extends \Adeira\Connector\Tests\Test
 
 	public function testThatHandlerWorks()
 	{
+		$userId = UserId::createFromString('00000000-0000-0000-0000-555500004444');
 		$handler = $this->handler;
-		$handler(new CreateWeatherStation('Weather Station Name', UserId::createFromString('00000000-0000-0000-0000-555500004444')));
+		$handler(new CreateWeatherStation('Weather Station Name', $userId));
 		Assert::type(
 			WeatherStation::class,
-			$this->weatherStationRespository->ofId(WeatherStationId::createFromString('11111111-2222-3333-4444-555555555555'))
+			$this->weatherStationRespository->ofId(WeatherStationId::createFromString('11111111-2222-3333-4444-555555555555'), new Owner(new User($userId, 'username')))
 		);
 	}
 

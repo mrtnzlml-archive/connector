@@ -23,9 +23,12 @@ final class InMemoryWeatherStationRespositoryTest extends \Adeira\Connector\Test
 	{
 		$repository = new InMemoryWeatherStationRepository;
 		$wid = WeatherStationId::createFromString('00000000-0000-0000-0000-000000000001');
-		Assert::null($repository->ofId($wid));
-		$repository->add($station = $this->createWeatherStation($wid));
-		Assert::same($station, $repository->ofId($wid));
+		$owner = new Owner(new User(UserId::create(), 'username'));
+		Assert::null($repository->ofId($wid, $owner)); // WS doesn't exist yet
+
+		$repository->add($station = $this->createWeatherStation($wid, $owner));
+		Assert::same($station, $repository->ofId($wid, $owner)); // WS with this UUID exists
+		Assert::null($repository->ofId($wid, clone $owner)); // WS with this cloned UUID doens't exist
 	}
 
 	/**
@@ -55,11 +58,11 @@ final class InMemoryWeatherStationRespositoryTest extends \Adeira\Connector\Test
 		Assert::type('string', $id->id());
 	}
 
-	private function createWeatherStation(?WeatherStationId $weatherStationId = NULL)
+	private function createWeatherStation(?WeatherStationId $weatherStationId = NULL, ?Owner $owner = NULL)
 	{
 		return new WeatherStation(
 			$weatherStationId ?? WeatherStationId::create(),
-			new Owner(new User(UserId::create(), 'User Name')),
+			$owner ?? new Owner(new User(UserId::create(), 'User Name')),
 			'Weather Station Name'
 		);
 	}

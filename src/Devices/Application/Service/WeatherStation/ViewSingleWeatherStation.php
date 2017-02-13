@@ -30,9 +30,8 @@ final class ViewSingleWeatherStation
 
 	public function execute(UserId $userId, WeatherStationId $weatherStationId)
 	{
-		$owner = $this->ownerService->existingOwner($userId); //FIXME: filtrovat podle uživatele!
-
-		return $this->weatherStationRepository->ofId($weatherStationId);
+		$owner = $this->ownerService->existingOwner($userId);
+		return $this->weatherStationRepository->ofId($weatherStationId, $owner);
 	}
 
 }

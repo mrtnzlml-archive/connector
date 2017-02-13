@@ -2,6 +2,7 @@
 
 namespace Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine;
 
+use Adeira\Connector\Authentication\DomainModel\Owner\Owner;
 use Adeira\Connector\Common\Infrastructure\DomainModel\Doctrine\Specification\ISpecification;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\{
 	IWeatherStationRepository, WeatherStation, WeatherStationId
@@ -25,9 +26,14 @@ final class InMemoryWeatherStationRepository /*extends ORM\EntityRepository*/ im
 		$this->memory->set((string)$aWeatherStation->id(), $aWeatherStation);
 	}
 
-	public function ofId(WeatherStationId $weatherStationId): ?WeatherStation
+	public function ofId(WeatherStationId $weatherStationId, Owner $owner): ?WeatherStation
 	{
-		return $this->memory->get((string)$weatherStationId);
+		/** @var WeatherStation $weatherStation */
+		$weatherStation = $this->memory->get((string)$weatherStationId);
+		if ($weatherStation && $weatherStation->owner() === (string)$owner->id()) {
+			return $weatherStation;
+		}
+		return NULL;
 	}
 
 	public function countBySpecification(ISpecification $specification): int
