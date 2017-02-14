@@ -9,9 +9,10 @@ use Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Type\WeatherSta
 use Adeira\Connector\GraphQL\Context;
 use Adeira\Connector\GraphQL\Structure\Argument;
 use Adeira\Connector\ServiceBus\DomainModel\ICommandBus;
+use function Adeira\Connector\GraphQL\{
+	string, type
+};
 use GraphQL\Type\Definition\ObjectType;
-use function Adeira\Connector\GraphQL\string;
-use function Adeira\Connector\GraphQL\type;
 
 final class CreateWeatherStation extends \Adeira\Connector\GraphQL\Structure\Mutation
 {
