@@ -15,13 +15,6 @@ final class UserIdOwnerService
 		$this->userRepository = $userRepository;
 	}
 
-	//TODO: check permissions here (e.g. is user allowed to do this action?)
-	public function ownerFrom(User\UserId $userId): ?Owner
-	{
-		$user = $this->userRepository->ofId($userId);
-		return $user ? new Owner($user) : NULL;
-	}
-
 	public function existingOwner(User\UserId $userId): Owner
 	{
 		$owner = $this->ownerFrom($userId);
@@ -31,6 +24,13 @@ final class UserIdOwnerService
 		}
 
 		return $owner;
+	}
+
+	//TODO: check permissions here (e.g. is user allowed to do this action?)
+	private function ownerFrom(User\UserId $userId): ?Owner
+	{
+		$user = $this->userRepository->ofId($userId);
+		return $user ? new Owner($user) : NULL;
 	}
 
 }

@@ -24,7 +24,7 @@ final class DoctrineUserRepository implements DomainModel\User\IUserRepository
 		$this->userRepository = $em->getRepository(DomainModel\User\User::class);
 	}
 
-	public function add(DomainModel\User\User $user)
+	public function add(DomainModel\User\User $user): void
 	{
 		$this->em->persist($user);
 	}

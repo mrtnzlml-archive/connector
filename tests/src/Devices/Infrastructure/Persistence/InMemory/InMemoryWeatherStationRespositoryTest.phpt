@@ -8,7 +8,7 @@ use Adeira\Connector\Authentication\DomainModel\{
 use Adeira\Connector\Devices\DomainModel\WeatherStation\{
 	WeatherStation, WeatherStationId
 };
-use Adeira\Connector\Devices\Infrastructure\Persistence\InMemory\InMemoryWeatherStationRepository;
+use Adeira\Connector\Devices\Infrastructure\Persistence\InMemory\InMemoryAllWeatherStations;
 use Tester\Assert;
 
 require getenv('BOOTSTRAP');
@@ -19,40 +19,31 @@ require getenv('BOOTSTRAP');
 final class InMemoryWeatherStationRespositoryTest extends \Adeira\Connector\Tests\TestCase
 {
 
-	public function testThatOfIdWorks()
+	public function testThatWithIdWorks()
 	{
-		$repository = new InMemoryWeatherStationRepository;
+		$repository = new InMemoryAllWeatherStations;
 		$wid = WeatherStationId::createFromString('00000000-0000-0000-0000-000000000001');
 		$owner = new Owner(new User(UserId::create(), 'username'));
-		Assert::null($repository->ofId($wid, $owner)); // WS doesn't exist yet
+		Assert::null($repository->withId($owner, $wid)->hydrate()); // WS doesn't exist yet
 
 		$repository->add($station = $this->createWeatherStation($wid, $owner));
-		Assert::same($station, $repository->ofId($wid, $owner)); // WS with this UUID exists
-		Assert::null($repository->ofId($wid, clone $owner)); // WS with this cloned UUID doens't exist
+		Assert::same($station, $repository->withId($owner, $wid)->hydrateOne()); // WS with this UUID exists
+		Assert::null($repository->withId(clone $owner, $wid)->hydrate()); // WS with this cloned UUID doens't exist
 	}
 
-	/**
-	 * TODO: nelze zatím dobře testovat, protože specifikace jsou navázané na Doctrine
-	 */
-	public function testSpecificationMethods()
+	public function testThatBelongingToWorks()
 	{
-		$repository = new InMemoryWeatherStationRepository;
-		$specification = new class implements \Adeira\Connector\Common\Infrastructure\DomainModel\Doctrine\Specification\ISpecification {
-			public function match(\Doctrine\ORM\QueryBuilder $qb, string $dqlAlias) {}
-			public function isSatisfiedBy(string $candidate): bool {}
-		};
+		$repository = new InMemoryAllWeatherStations;
+		$owner = new Owner(new User(UserId::create(), 'username'));
+		$repository->add($station = $this->createWeatherStation(NULL, $owner));
 
-		Assert::exception(function() use ($repository, $specification) {
-			$repository->countBySpecification($specification);
-		}, \Nette\NotImplementedException::class);
-		Assert::exception(function() use ($repository, $specification) {
-			$repository->findBySpecification($specification);
-		}, \Nette\NotImplementedException::class);
+		Assert::type(WeatherStation::class, $repository->belongingTo($owner)->hydrateOne());
+		Assert::null($repository->belongingTo(new Owner(new User(UserId::create(), 'u')))->hydrateOne());
 	}
 
 	public function testThatNextIdentityWorks()
 	{
-		$repository = new InMemoryWeatherStationRepository;
+		$repository = new InMemoryAllWeatherStations;
 		$id = $repository->nextIdentity();
 		Assert::type(WeatherStationId::class, $id);
 		Assert::type('string', $id->id());
@@ -63,7 +54,8 @@ final class InMemoryWeatherStationRespositoryTest extends \Adeira\Connector\Test
 		return new WeatherStation(
 			$weatherStationId ?? WeatherStationId::create(),
 			$owner ?? new Owner(new User(UserId::create(), 'User Name')),
-			'Weather Station Name'
+			'Weather Station Name',
+			new \DateTimeImmutable
 		);
 	}
 

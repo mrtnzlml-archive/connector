@@ -5,28 +5,31 @@ namespace Adeira\Connector\Devices\Application\Service\WeatherStation;
 use Adeira\Connector\Authentication\DomainModel\User\UserId;
 use Adeira\Connector\Authentication\Infrastructure\DomainModel\Owner\UserIdOwnerService;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\{
-	IWeatherStationRecordRepository, WeatherStationId
+	IAllWeatherStations, IAllWeatherStationRecords, WeatherStationId
 };
 
 final class ViewAllWeatherStationRecords
 {
 
-	/**
-	 * @var IWeatherStationRecordRepository
-	 */
-	private $wsrr;
+	private $allWeatherStations;
 
 	/**
 	 * @var \Adeira\Connector\Authentication\Infrastructure\DomainModel\Owner\UserIdOwnerService
 	 */
 	private $ownerService;
 
+	/**
+	 * @var \Adeira\Connector\Devices\DomainModel\WeatherStation\IAllWeatherStationRecords
+	 */
+	private $allRecords;
+
 	private $weatherStationIdsBuffer = [];
 
-	public function __construct(IWeatherStationRecordRepository $wsrr, UserIdOwnerService $ownerService)
+	public function __construct(IAllWeatherStations $allWeatherStations, UserIdOwnerService $ownerService, IAllWeatherStationRecords $allRecords)
 	{
-		$this->wsrr = $wsrr;
+		$this->allWeatherStations = $allWeatherStations;
 		$this->ownerService = $ownerService;
+		$this->allRecords = $allRecords;
 	}
 
 	public function buffer(WeatherStationId $stationId)
@@ -36,16 +39,20 @@ final class ViewAllWeatherStationRecords
 
 	public function execute(UserId $userId, WeatherStationId $weatherStationId)
 	{
-		$owner = $this->ownerService->ownerFrom($userId); //FIXME: filtrovat podle uživatele!
+		$owner = $this->ownerService->existingOwner($userId);
+		$weatherStation = $this->allWeatherStations->withId($owner, $weatherStationId)->hydrateOne();
+		if (!$owner->id()->equals($weatherStation->ownerId())) {
+			throw new \InvalidArgumentException('User is not authorized to view this weather station.');
+		}
 
-		if(empty($this->weatherStationIdsBuffer)) {
-			return $this->wsrr->ofWeatherStationId($weatherStationId);
+		if (empty($this->weatherStationIdsBuffer)) {
+			return $this->allRecords->ofWeatherStationId($weatherStationId);
 		} else {
 			static $result = NULL; //memoization
 			if ($result === NULL) {
-				$result = $this->wsrr->ofAllWeatherStationIds($this->weatherStationIdsBuffer);
+				$result = $this->allRecords->ofAllWeatherStationIds($this->weatherStationIdsBuffer);
 			}
-			return $result[$weatherStationId->id()];
+			return $result[$weatherStationId->id()] ?? NULL;
 		}
 	}
 

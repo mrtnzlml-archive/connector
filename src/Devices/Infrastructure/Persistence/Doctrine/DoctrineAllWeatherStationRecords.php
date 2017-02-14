@@ -3,15 +3,11 @@
 namespace Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine;
 
 use Adeira\Connector\Devices\DomainModel\WeatherStation\{
-	IWeatherStationRecordRepository, WeatherStationId, WeatherStationRecord, WeatherStationRecordId
+	IAllWeatherStationRecords, WeatherStationId, WeatherStationRecord, WeatherStationRecordId
 };
 use Doctrine\ORM;
 
-/**
- * Do not call flush() here! Flushing and dealing with transactions is delegated to the Application Service.
- * All behavior should still follow the Repositories’ collection characteristics.
- */
-final class DoctrineWeatherStationRecordRepository implements IWeatherStationRecordRepository
+final class DoctrineAllWeatherStationRecords implements IAllWeatherStationRecords
 {
 
 	/**
@@ -29,11 +25,6 @@ final class DoctrineWeatherStationRecordRepository implements IWeatherStationRec
 		$this->em->persist($aWeatherStationRecord);
 	}
 
-	public function ofId(WeatherStationRecordId $weatherStationRecordId)
-	{
-		// TODO: Implement ofId() method.
-	}
-
 	public function ofWeatherStationId(WeatherStationId $weatherStationId): array
 	{
 		$qb = $this->em->createQueryBuilder();
@@ -42,16 +33,16 @@ final class DoctrineWeatherStationRecordRepository implements IWeatherStationRec
 		return $qb->getQuery()->getResult();
 	}
 
-	public function ofAllWeatherStationIds(array $weatherStationId): array
+	public function ofAllWeatherStationIds(array $weatherStationIds): array
 	{
 		$qb = $this->em->createQueryBuilder();
 		$qb->select('wsr')->from(WeatherStationRecord::class, 'wsr'/*, 'wsr.weatherStationId'*/);
-		$qb->where($qb->expr()->in('wsr.weatherStationId', $weatherStationId));
+		$qb->where($qb->expr()->in('wsr.weatherStationId', $weatherStationIds));
 
 		$result = [];
 		/** @var WeatherStationRecord $record */
 		foreach ($qb->getQuery()->getResult() as $record) {
-			$result[$record->weatherStationId()->id()][] = $record;
+			$result[(string)$record->weatherStationId()][] = $record;
 		}
 
 		return $result;

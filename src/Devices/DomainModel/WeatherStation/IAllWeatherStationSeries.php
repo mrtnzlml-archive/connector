@@ -4,7 +4,7 @@ namespace Adeira\Connector\Devices\DomainModel\WeatherStation;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-interface IWeatherStationSeriesRepository
+interface IAllWeatherStationSeries
 {
 
 	public function all(): ArrayCollection;

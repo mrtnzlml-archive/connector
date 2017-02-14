@@ -2,12 +2,10 @@
 
 namespace Adeira\Connector\Devices\DomainModel\WeatherStation;
 
-interface IWeatherStationRecordRepository
+interface IAllWeatherStationRecords
 {
 
 	public function add(WeatherStationRecord $aWeatherStationRecord);
-
-	public function ofId(WeatherStationRecordId $weatherStationRecordId);
 
 	public function ofWeatherStationId(WeatherStationId $weatherStationId): array;
 

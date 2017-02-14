@@ -4,11 +4,9 @@ namespace Adeira\Connector\Devices\Application\Service\WeatherStation;
 
 use Adeira\Connector\Authentication\DomainModel\User\UserId;
 use Adeira\Connector\Authentication\Infrastructure\DomainModel\Owner\UserIdOwnerService;
-use Adeira\Connector\Devices\DomainModel\WeatherStation\{
-	IAllWeatherStations, WeatherStation, WeatherStationId
-};
+use Adeira\Connector\Devices\DomainModel\WeatherStation\IAllWeatherStations;
 
-final class ViewSingleWeatherStation
+final class CountAllWeatherStations
 {
 
 	/**
@@ -27,10 +25,11 @@ final class ViewSingleWeatherStation
 		$this->ownerService = $ownerService;
 	}
 
-	public function execute(UserId $userId, WeatherStationId $weatherStationId): WeatherStation
+	public function execute(UserId $userId)
 	{
 		$owner = $this->ownerService->existingOwner($userId);
-		return $this->allWeatherStations->withId($owner, $weatherStationId)->hydrateOne();
+		$stub = $this->allWeatherStations->belongingTo($owner);
+		return $stub->hydrateCount();
 	}
 
 }

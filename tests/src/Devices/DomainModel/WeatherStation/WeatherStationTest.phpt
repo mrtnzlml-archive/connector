@@ -6,8 +6,7 @@ use Adeira\Connector\Authentication\DomainModel\Owner\Owner;
 use Adeira\Connector\Authentication\DomainModel\User\User;
 use Adeira\Connector\Authentication\DomainModel\User\UserId;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\{
-	WeatherStation,
-	WeatherStationId
+	WeatherStation, WeatherStationId
 };
 use Ramsey\Uuid\Uuid;
 use Tester\Assert;
@@ -25,7 +24,8 @@ final class WeatherStationTest extends \Adeira\Connector\Tests\TestCase
 		$dataSource = new WeatherStation(
 			WeatherStationId::create(Uuid::fromString('58d200ad-6376-4c01-9b6d-2ea536f1cd2c')),
 			new Owner(new User(UserId::create(), 'User Name')),
-			'Device Name'
+			'Device Name',
+			new \DateTimeImmutable
 		);
 
 		Assert::type(WeatherStationId::class, $dataSource->id());

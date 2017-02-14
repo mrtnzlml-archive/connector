@@ -3,12 +3,12 @@
 namespace Adeira\Connector\Devices\Infrastructure\Persistence\InMemory;
 
 use Adeira\Connector\Authentication\DomainModel\Owner\Owner;
-use Adeira\Connector\Common\Infrastructure\DomainModel\Doctrine\Specification\ISpecification;
+use Adeira\Connector\Common\DomainModel\Stub;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\{
-	IWeatherStationRepository, WeatherStation, WeatherStationId
+	IAllWeatherStations, WeatherStation, WeatherStationId
 };
 
-final class InMemoryWeatherStationRepository /*extends ORM\EntityRepository*/ implements IWeatherStationRepository
+final class InMemoryAllWeatherStations implements IAllWeatherStations
 {
 
 	private $memory;
@@ -21,29 +21,31 @@ final class InMemoryWeatherStationRepository /*extends ORM\EntityRepository*/ im
 		$this->weatherStationId = $weatherStationId;
 	}
 
-	public function add(WeatherStation $aWeatherStation)
+	public function add(WeatherStation $aWeatherStation): void
 	{
 		$this->memory->set((string)$aWeatherStation->id(), $aWeatherStation);
 	}
 
-	public function ofId(WeatherStationId $weatherStationId, Owner $owner): ?WeatherStation
+	public function withId(Owner $owner, WeatherStationId $weatherStationId): Stub
 	{
 		/** @var WeatherStation $weatherStation */
 		$weatherStation = $this->memory->get((string)$weatherStationId);
-		if ($weatherStation && $weatherStation->owner() === (string)$owner->id()) {
-			return $weatherStation;
+		if ($weatherStation && $owner->id()->equals($weatherStation->ownerId())) {
+			return Stub::wrap([$weatherStation]);
 		}
-		return NULL;
+		return Stub::wrap(NULL);
 	}
 
-	public function countBySpecification(ISpecification $specification): int
+	public function belongingTo(Owner $owner): Stub
 	{
-		throw new \Nette\NotImplementedException;
-	}
-
-	public function findBySpecification(ISpecification $specification): array
-	{
-		throw new \Nette\NotImplementedException;
+		$stations = [];
+		/** @var WeatherStation $weatherStation */
+		foreach ($this->memory as $weatherStation) {
+			if ($weatherStation->ownerId()->equals($owner->id())) {
+				$stations[] = $weatherStation;
+			}
+		}
+		return Stub::wrap($stations);
 	}
 
 	public function nextIdentity(): WeatherStationId

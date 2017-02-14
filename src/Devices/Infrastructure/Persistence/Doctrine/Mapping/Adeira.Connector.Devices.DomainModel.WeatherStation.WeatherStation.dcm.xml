@@ -10,8 +10,9 @@
 			<generator strategy="NONE"/>
 		</id>
 
-		<field name="owner" column="owner_uuid" type="UserId"/>
+		<field name="ownerId" column="owner_uuid" type="UserId"/>
 		<field name="deviceName" column="device_name" type="string"/>
+		<field name="creationDate" column="creation_date" type="datetime"/>
 
 	</entity>
 

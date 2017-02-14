@@ -3,6 +3,7 @@
 namespace Adeira\Connector\Devices\DomainModel\WeatherStation;
 
 use Adeira\Connector\Authentication\DomainModel\Owner\Owner;
+use Adeira\Connector\Authentication\DomainModel\User\UserId;
 use Adeira\Connector\Devices\DomainModel\Pressure;
 use Adeira\Connector\PhysicalUnits\Pressure\Units\IPressureUnit;
 
@@ -20,20 +21,26 @@ final class WeatherStation
 	private $id;
 
 	/**
-	 * @var string
+	 * @var UserId
 	 */
-	private $owner;
+	private $ownerId;
 
 	/**
 	 * @var string
 	 */
 	private $deviceName;
 
-	public function __construct(WeatherStationId $id, Owner $owner, string $deviceName)
+	/**
+	 * @var \DateTimeImmutable
+	 */
+	private $creationDate;
+
+	public function __construct(WeatherStationId $id, Owner $owner, string $deviceName, \DateTimeImmutable $creationDate)
 	{
 		$this->id = $id;
-		$this->owner = (string)$owner->id();
+		$this->ownerId = $owner->id();
 		$this->deviceName = $deviceName;
+		$this->creationDate = $creationDate;
 	}
 
 	public function id(): WeatherStationId
@@ -41,9 +48,9 @@ final class WeatherStation
 		return $this->id;
 	}
 
-	public function owner(): string
+	public function ownerId(): UserId
 	{
-		return $this->owner;
+		return $this->ownerId;
 	}
 
 	public function deviceName(): string
@@ -51,6 +58,15 @@ final class WeatherStation
 		return $this->deviceName;
 	}
 
+	public function creationDate()
+	{
+		return $this->creationDate;
+	}
+
+	/**
+	 * Weather station records doesn't belong to the same aggregate because there are no true invariants needed to protect.
+	 * Both (weather stations and records) can be handled separately if needed. This is why it's here return instead of collection.
+	 */
 	public function makeWeatherStationRecord(WeatherStationRecordId $weatherStationRecordId, IPressureUnit $pressureUnit): WeatherStationRecord
 	{
 		return new WeatherStationRecord(

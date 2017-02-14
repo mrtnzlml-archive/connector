@@ -11,7 +11,7 @@ use Adeira\Connector\Devices\Application\Service\WeatherStation\Command\CreateWe
 use Adeira\Connector\Devices\Application\Service\WeatherStation\Command\CreateWeatherStationHandler;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStation;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStationId;
-use Adeira\Connector\Devices\Infrastructure\Persistence\InMemory\InMemoryWeatherStationRepository;
+use Adeira\Connector\Devices\Infrastructure\Persistence\InMemory\InMemoryAllWeatherStations;
 use Tester\Assert;
 
 require getenv('BOOTSTRAP');
@@ -25,7 +25,7 @@ final class CreateWeatherStationHandlerTest extends \Adeira\Connector\Tests\Test
 	/** @var CreateWeatherStationHandler */
 	private $handler;
 
-	/** @var InMemoryWeatherStationRepository */
+	/** @var InMemoryAllWeatherStations */
 	private $weatherStationRespository;
 
 	public function setUp()
@@ -33,7 +33,7 @@ final class CreateWeatherStationHandlerTest extends \Adeira\Connector\Tests\Test
 		$userRepository = new InMemoryUserRepository;
 		$userRepository->add(new User(UserId::createFromString('00000000-0000-0000-0000-555500004444'), 'User Name'));
 		$this->handler = new CreateWeatherStationHandler(
-			$this->weatherStationRespository = new InMemoryWeatherStationRepository(WeatherStationId::createFromString('11111111-2222-3333-4444-555555555555')),
+			$this->weatherStationRespository = new InMemoryAllWeatherStations(WeatherStationId::createFromString('11111111-2222-3333-4444-555555555555')),
 			new UserIdOwnerService($userRepository)
 		);
 	}
@@ -45,11 +45,14 @@ final class CreateWeatherStationHandlerTest extends \Adeira\Connector\Tests\Test
 		$handler(new CreateWeatherStation('Weather Station Name', $userId));
 		Assert::type(
 			WeatherStation::class,
-			$this->weatherStationRespository->ofId(WeatherStationId::createFromString('11111111-2222-3333-4444-555555555555'), new Owner(new User($userId, 'username')))
+			$this->weatherStationRespository->withId(
+				new Owner(new User($userId, 'username')),
+				WeatherStationId::createFromString('11111111-2222-3333-4444-555555555555')
+			)->hydrateOne()
 		);
 	}
 
-	public function testThathandlerThrowsExceptionForUnauthorizedUser()
+	public function testThatHandlerThrowsExceptionForUnauthorizedUser()
 	{
 		$handler = $this->handler;
 		Assert::exception(

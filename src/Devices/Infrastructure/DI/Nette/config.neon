@@ -8,14 +8,15 @@ doctrine.orm:
 
 services:
 	- Adeira\Connector\Devices\Application\Service\WeatherStation\(
+		CountAllWeatherStations
 		ViewAllWeatherStationRecords
 		ViewAllWeatherStations
 		ViewAllWeatherStationSeries
 		ViewSingleWeatherStation
 	)
-	weatherStationRecordRepository: Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\DoctrineWeatherStationRecordRepository
-	weatherStationRepository: Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\DoctrineWeatherStationRepository
-	weatherStationSeriesRepository: Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\DoctrineWeatherStationSeriesRepository
+	allWeatherStationRecords: Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\DoctrineAllWeatherStationRecords
+	allWeatherStations: Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\DoctrineAllWeatherStations
+	allWeatherStationSeries: Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\DoctrineAllWeatherStationSeries
 
 
 serviceBus:

@@ -5,7 +5,7 @@ namespace Adeira\Connector\Authentication\DomainModel\User;
 interface IUserRepository
 {
 
-	public function add(User $aUser);
+	public function add(User $aUser): void;
 
 	public function ofId(UserId $userId): ?User;
 

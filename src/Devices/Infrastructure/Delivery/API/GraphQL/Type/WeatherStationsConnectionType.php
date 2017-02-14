@@ -2,8 +2,8 @@
 
 namespace Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Type;
 
+use Adeira\Connector\Devices\Application\Service\WeatherStation\CountAllWeatherStations;
 use Adeira\Connector\Devices\Application\Service\WeatherStation\ViewAllWeatherStationSeries;
-use Adeira\Connector\Devices\Application\Service\WeatherStation\ViewAllWeatherStations;
 use Adeira\Connector\GraphQL\Context;
 use Adeira\Connector\GraphQL\Structure\Field;
 use function Adeira\Connector\GraphQL\{
@@ -17,24 +17,24 @@ final class WeatherStationsConnectionType extends \Adeira\Connector\GraphQL\Stru
 
 	private $wsEdge;
 
-	private $allWeatherStationsService;
-
 	private $weatherStationSeriesType;
 
 	private $allWeatherStationsSeries;
 
+	private $countAllWeatherStations;
+
 	public function __construct(
 		WeatherStationType $wst,
 		WeatherStationsEdgeType $wsEdge,
-		ViewAllWeatherStations $allWeatherStationsService,
 		WeatherStationSeriesType $weatherStationSeriesType,
-		ViewAllWeatherStationSeries $allWeatherStationsSeries
+		ViewAllWeatherStationSeries $allWeatherStationsSeries,
+		CountAllWeatherStations $countAllWeatherStations
 	) {
 		$this->wst = $wst;
 		$this->wsEdge = $wsEdge;
-		$this->allWeatherStationsService = $allWeatherStationsService;
 		$this->weatherStationSeriesType = $weatherStationSeriesType;
 		$this->allWeatherStationsSeries = $allWeatherStationsSeries;
+		$this->countAllWeatherStations = $countAllWeatherStations;
 	}
 
 	public function getPublicTypeName(): string
@@ -67,7 +67,7 @@ final class WeatherStationsConnectionType extends \Adeira\Connector\GraphQL\Stru
 	{
 		$field = new Field('totalCount', 'Total count of all weather stations.', int());
 		$field->setResolveFunction(function (array $weatherStations, $args, Context $context) {
-			return $this->allWeatherStationsService->executeCountOnly($context->userId());
+			return $this->countAllWeatherStations->execute($context->userId());
 		});
 		return $field;
 	}

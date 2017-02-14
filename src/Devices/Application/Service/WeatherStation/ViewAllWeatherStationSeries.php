@@ -3,14 +3,14 @@
 namespace Adeira\Connector\Devices\Application\Service\WeatherStation;
 
 use Adeira\Connector\Authentication\DomainModel\User\UserId;
-use Adeira\Connector\Devices\DomainModel\WeatherStation\IWeatherStationSeriesRepository;
+use Adeira\Connector\Devices\DomainModel\WeatherStation\IAllWeatherStationSeries;
 
 final class ViewAllWeatherStationSeries
 {
 
 	private $seriesRepository;
 
-	public function __construct(IWeatherStationSeriesRepository $seriesRepository)
+	public function __construct(IAllWeatherStationSeries $seriesRepository)
 	{
 		$this->seriesRepository = $seriesRepository;
 	}

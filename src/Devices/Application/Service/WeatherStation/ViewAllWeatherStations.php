@@ -4,42 +4,40 @@ namespace Adeira\Connector\Devices\Application\Service\WeatherStation;
 
 use Adeira\Connector\Authentication\DomainModel\User\UserId;
 use Adeira\Connector\Authentication\Infrastructure\DomainModel\Owner\UserIdOwnerService;
-use Adeira\Connector\Devices\DomainModel\WeatherStation\IWeatherStationRepository;
-use Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\AllWeatherStationsSpecification;
+use Adeira\Connector\Devices\DomainModel\WeatherStation\IAllWeatherStations;
+use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStationId;
 
 final class ViewAllWeatherStations
 {
 
 	/**
-	 * @var IWeatherStationRepository
+	 * @var IAllWeatherStations
 	 */
-	private $weatherStationRepository;
+	private $allWeatherStations;
 
 	/**
 	 * @var \Adeira\Connector\Authentication\Infrastructure\DomainModel\Owner\UserIdOwnerService
 	 */
 	private $ownerService;
 
-	public function __construct(IWeatherStationRepository $weatherStationRepository, UserIdOwnerService $ownerService)
+	public function __construct(IAllWeatherStations $allWeatherStations, UserIdOwnerService $ownerService)
 	{
-		$this->weatherStationRepository = $weatherStationRepository;
+		$this->allWeatherStations = $allWeatherStations;
 		$this->ownerService = $ownerService;
 	}
 
-	public function execute(UserId $userId, $limit, $fromWeatherStationId)
+	public function execute(UserId $userId, ?int $limit, ?WeatherStationId $fromWeatherStationId)
 	{
 		$owner = $this->ownerService->existingOwner($userId);
-		return $this->weatherStationRepository->findBySpecification(
-			new AllWeatherStationsSpecification($owner, $limit, $fromWeatherStationId)
-		);
-	}
-
-	public function executeCountOnly(UserId $userId): int
-	{
-		$owner = $this->ownerService->existingOwner($userId);
-		return $this->weatherStationRepository->countBySpecification(
-			new AllWeatherStationsSpecification($owner, NULL, NULL)
-		);
+		$stub = $this->allWeatherStations->belongingTo($owner);
+		$stub->orientation('creationDate'); //FIXME: to by zde asi nemělo být (? detail entity)
+		if ($limit !== NULL) {
+			$stub->first($limit);
+		}
+		if ($fromWeatherStationId !== NULL) {
+			$stub->after($fromWeatherStationId);
+		}
+		return $stub->hydrate();
 	}
 
 }

@@ -15,7 +15,7 @@ final class InMemoryUserRepository implements DomainModel\User\IUserRepository
 		$this->memory = new ArrayCollection;
 	}
 
-	public function add(DomainModel\User\User $user)
+	public function add(DomainModel\User\User $user): void
 	{
 		$this->memory->set((string)$user->id(), $user);
 	}
