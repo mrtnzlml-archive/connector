@@ -35,6 +35,8 @@ graphql:
 			AllWeatherStationsQuery
 			WeatherStationQuery
 		)
+	mutationDefinitions:
+		- Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Mutation\CreateWeatherStation
 	types:
 		- Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Type\(
 			WeatherStationRecordType
