@@ -30,7 +30,7 @@ final class CreateWeatherStationHandler
 	{
 		$owner = $this->ownerService->existingOwner($aCommand->userId());
 
-		$this->weatherStationRepository->add($weatherStation = new WeatherStation(
+		$this->weatherStationRepository->add(new WeatherStation(
 			$aCommand->stationId(),
 			$owner,
 			$aCommand->name(),
