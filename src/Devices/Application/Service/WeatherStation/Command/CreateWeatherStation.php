@@ -3,6 +3,7 @@
 namespace Adeira\Connector\Devices\Application\Service\WeatherStation\Command;
 
 use Adeira\Connector\Authentication\DomainModel\User\UserId;
+use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStationId;
 use Adeira\Connector\ServiceBus\DomainModel\ICommand;
 
 /**
@@ -15,12 +16,15 @@ use Adeira\Connector\ServiceBus\DomainModel\ICommand;
 final class CreateWeatherStation implements ICommand
 {
 
+	private $stationId;
+
 	private $weatherStationName;
 
 	private $userId;
 
-	public function __construct(string $weatherStationName, UserId $userId)
+	public function __construct(WeatherStationId $stationId, string $weatherStationName, UserId $userId)
 	{
+		$this->stationId = $stationId;
 		$this->weatherStationName = $weatherStationName;
 		$this->userId = $userId;
 	}
@@ -33,6 +37,11 @@ final class CreateWeatherStation implements ICommand
 	public function userId(): UserId
 	{
 		return $this->userId;
+	}
+
+	public function stationId()
+	{
+		return $this->stationId;
 	}
 
 }

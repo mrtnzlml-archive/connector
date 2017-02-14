@@ -31,7 +31,7 @@ final class CreateWeatherStationHandler
 		$owner = $this->ownerService->existingOwner($aCommand->userId());
 
 		$this->weatherStationRepository->add($weatherStation = new WeatherStation(
-			$this->weatherStationRepository->nextIdentity(),
+			$aCommand->stationId(),
 			$owner,
 			$aCommand->name(),
 			new \DateTimeImmutable('now')

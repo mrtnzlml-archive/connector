@@ -42,7 +42,13 @@ final class CreateWeatherStationHandlerTest extends \Adeira\Connector\Tests\Test
 	{
 		$userId = UserId::createFromString('00000000-0000-0000-0000-555500004444');
 		$handler = $this->handler;
-		$handler(new CreateWeatherStation('Weather Station Name', $userId));
+		$handler(
+			new CreateWeatherStation(
+				$this->weatherStationRespository->nextIdentity(),
+				'Weather Station Name',
+				$userId
+			)
+		);
 		Assert::type(
 			WeatherStation::class,
 			$this->weatherStationRespository->withId(
@@ -57,7 +63,13 @@ final class CreateWeatherStationHandlerTest extends \Adeira\Connector\Tests\Test
 		$handler = $this->handler;
 		Assert::exception(
 			function () use ($handler) {
-				$handler(new CreateWeatherStation('Weather Station Name', UserId::create()));
+				$handler(
+					new CreateWeatherStation(
+						$this->weatherStationRespository->nextIdentity(),
+						'Weather Station Name',
+						UserId::create()
+					)
+				);
 			},
 			\Adeira\Connector\Authentication\Application\Exception\InvalidOwnerException::class,
 			'Owner is not valid or it doesn\'t have enough permissions.'
