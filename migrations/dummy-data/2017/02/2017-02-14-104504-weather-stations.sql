@@ -1,16 +1,16 @@
 INSERT INTO weather_stations VALUES (
-		'00000000-0001-0000-0000-000000000001', -- UUID
-		'00000000-0000-0000-0000-000000000001', -- owner UUID
-		'Device Name 1', -- device name
-		CURRENT_TIMESTAMP - INTERVAL '3 hour' --creation date
+	'00000000-0001-0000-0000-000000000001', -- UUID
+	'00000000-0000-0000-0000-000000000001', -- owner UUID
+	'EU 411', -- device name
+	CURRENT_TIMESTAMP - INTERVAL '3 hour' --creation date
 ), (
 	'00000000-0001-0000-0000-000000000002', -- UUID
 	'00000000-0000-0000-0000-000000000001', -- owner UUID
-	'Device Name 1', -- device name
+	'FEL rooftop', -- device name
 	CURRENT_TIMESTAMP - INTERVAL '2 hour' --creation date
 ), (
 	'00000000-0001-0000-0000-000000000003', -- UUID
 	'00000000-0000-0000-0000-000000000001', -- owner UUID
-	'Device Name 1', -- device name
+	'Home outside', -- device name
 	CURRENT_TIMESTAMP - INTERVAL '1 hour' --creation date
 );
