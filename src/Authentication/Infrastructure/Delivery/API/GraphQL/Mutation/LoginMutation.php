@@ -9,7 +9,7 @@ use Adeira\Connector\GraphQL\Structure\Argument;
 use function Adeira\Connector\GraphQL\string;
 use GraphQL\Type\Definition\ObjectType;
 
-final class LoginMutation extends \Adeira\Connector\GraphQL\Structure\Query
+final class LoginMutation extends \Adeira\Connector\GraphQL\Structure\Mutation
 {
 
 	/**

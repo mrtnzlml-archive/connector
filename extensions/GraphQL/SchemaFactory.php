@@ -2,7 +2,9 @@
 
 namespace Adeira\Connector\GraphQL;
 
-use Adeira\Connector\GraphQL\Structure\Query;
+use Adeira\Connector\GraphQL\Structure\{
+	Mutation, Query
+};
 use GraphQL\Type\Definition\ObjectType;
 
 final class SchemaFactory
@@ -27,8 +29,8 @@ final class SchemaFactory
 
 	public function addMutationDefinitions(array $mutationDefinitions)
 	{
-		/** @var Query[] $mutationDefinitions */
-		$mutationDefinitions = (function (Query ...$mutationDefinitions) {
+		/** @var Mutation[] $mutationDefinitions */
+		$mutationDefinitions = (function (Mutation ...$mutationDefinitions) {
 			return $mutationDefinitions;
 		})(...$mutationDefinitions);
 
