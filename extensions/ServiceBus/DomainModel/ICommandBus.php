@@ -5,6 +5,6 @@ namespace Adeira\Connector\ServiceBus\DomainModel;
 interface ICommandBus
 {
 
-	public function dispatch(ICommand $command);
+	public function dispatch(ICommand $command): void;
 
 }

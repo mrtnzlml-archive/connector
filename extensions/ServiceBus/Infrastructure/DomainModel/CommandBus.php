@@ -19,7 +19,7 @@ class CommandBus implements ICommandBus
 		$this->dispatchMap = $dispatchMap;
 	}
 
-	public function dispatch(ICommand $aCommand)
+	public function dispatch(ICommand $aCommand): void
 	{
 		$commandClassName = get_class($aCommand);
 		if (array_key_exists($commandClassName, $this->dispatchMap)) {
