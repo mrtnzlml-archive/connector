@@ -13,31 +13,20 @@ final class Humidity
 
 	private $outdoor;
 
-	public function __construct(IHumidityUnit $indoor, IHumidityUnit $outdoor)
+	public function __construct(?IHumidityUnit $indoor, ?IHumidityUnit $outdoor)
 	{
-		$this->indoor = (new RelativeHumidity($indoor))
-			->convertTo(Percentage::class)
-			->value();
-
-		$this->outdoor = (new RelativeHumidity($outdoor))
-			->convertTo(Percentage::class)
-			->value();
+		$this->indoor = $indoor ? new RelativeHumidity($indoor) : NULL;
+		$this->outdoor = $outdoor ? new RelativeHumidity($outdoor) : NULL;
 	}
 
-	/**
-	 * @return float in Percentage
-	 */
-	public function indoor(): float
+	public function indoor(string $unit = Percentage::class): ?float
 	{
-		return $this->indoor;
+		return $this->indoor ? $this->indoor->convertTo($unit)->value() : NULL;
 	}
 
-	/**
-	 * @return float in Percentage
-	 */
-	public function outdoor(): float
+	public function outdoor(string $unit = Percentage::class): ?float
 	{
-		return $this->outdoor;
+		return $this->outdoor ? $this->outdoor->convertTo($unit)->value() : NULL;
 	}
 
 }

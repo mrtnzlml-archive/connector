@@ -15,38 +15,26 @@ final class Wind
 
 	private $gust;
 
-	public function __construct(ISpeedUnit $speed, float $azimuth, ISpeedUnit $gust)
+	public function __construct(?ISpeedUnit $speed, ?float $azimuth, ?ISpeedUnit $gust)
 	{
-		$this->speed = (new Speed($speed))
-			->convertTo(Kmh::class)
-			->value();
-
+		$this->speed = $speed ? new Speed($speed) : NULL;
 		$this->direction = $azimuth; //FIXME: validace nebo ValueObject (0-360°)
-
-		$this->gust = (new Speed($gust))
-			->convertTo(Kmh::class)
-			->value();
+		$this->gust = $gust ? new Speed($gust) : NULL;
 	}
 
-	/**
-	 * @return float in Kmh
-	 */
-	public function speed(): float
+	public function speed(string $unit = Kmh::class): ?float
 	{
-		return $this->speed;
+		return $this->speed ? $this->speed->convertTo($unit)->value() : NULL;
 	}
 
-	public function directionAzimuth(): float
+	public function directionAzimuth(): ?float
 	{
-		return $this->direction;
+		return $this->direction ?? NULL;
 	}
 
-	/**
-	 * @return float in Kmh
-	 */
-	public function gust(): float
+	public function gust(string $unit = Kmh::class): ?float
 	{
-		return $this->gust;
+		return $this->gust ? $this->gust->convertTo($unit)->value() : NULL;
 	}
 
 }

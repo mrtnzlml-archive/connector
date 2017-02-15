@@ -37,6 +37,13 @@ final class PressureTest extends \Adeira\Connector\Tests\TestCase
 		Assert::equal(13332.2368421050, $p->relative()); // Tester\Assert::EPSILON = 1e-10
 	}
 
+	public function testNullability()
+	{
+		$p = new Pressure(NULL, NULL);
+		Assert::null($p->absolute());
+		Assert::null($p->relative());
+	}
+
 }
 
 (new PressureTest)->run();

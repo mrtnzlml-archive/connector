@@ -35,6 +35,13 @@ final class HumidityTest extends \Adeira\Connector\Tests\TestCase
 		Assert::same(33.0, $p->outdoor());
 	}
 
+	public function testNullability()
+	{
+		$p = new Humidity(NULL, NULL);
+		Assert::null($p->indoor());
+		Assert::null($p->outdoor());
+	}
+
 }
 
 (new HumidityTest)->run();

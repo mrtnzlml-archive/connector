@@ -33,6 +33,14 @@ final class WindTest extends \Adeira\Connector\Tests\TestCase
 		Assert::same(360.0, $p->gust());
 	}
 
+	public function testNullability()
+	{
+		$p = new Wind(NULL, NULL, NULL);
+		Assert::null($p->speed());
+		Assert::null($p->directionAzimuth());
+		Assert::null($p->gust());
+	}
+
 }
 
 (new WindTest)->run();

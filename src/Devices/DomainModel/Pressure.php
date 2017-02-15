@@ -14,31 +14,20 @@ final class Pressure
 
 	private $relativePressure;
 
-	public function __construct(IPressureUnit $absolutePressure, IPressureUnit $relativePressure)
+	public function __construct(?IPressureUnit $absolutePressure, ?IPressureUnit $relativePressure)
 	{
-		$this->absolutePressure = (new PressureQuantity($absolutePressure))
-			->convertTo(Pascal::class)
-			->value();
-
-		$this->relativePressure = (new PressureQuantity($relativePressure))
-			->convertTo(Pascal::class)
-			->value();
+		$this->absolutePressure = $absolutePressure ? new PressureQuantity($absolutePressure) : NULL;
+		$this->relativePressure = $relativePressure ? new PressureQuantity($relativePressure) : NULL;
 	}
 
-	/**
-	 * @return float in Pascal
-	 */
-	public function absolute(): float
+	public function absolute(string $unit = Pascal::class): ?float
 	{
-		return $this->absolutePressure;
+		return $this->absolutePressure ? $this->absolutePressure->convertTo($unit)->value() : NULL;
 	}
 
-	/**
-	 * @return float in Pascal
-	 */
-	public function relative(): float
+	public function relative(string $unit = Pascal::class): ?float
 	{
-		return $this->relativePressure;
+		return $this->relativePressure ? $this->relativePressure->convertTo($unit)->value() : NULL;
 	}
 
 }

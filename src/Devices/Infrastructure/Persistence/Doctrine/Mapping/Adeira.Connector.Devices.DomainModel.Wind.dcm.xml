@@ -5,9 +5,9 @@
 							https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
 
 	<embeddable name="Adeira\Connector\Devices\DomainModel\Wind">
-		<field name="speed" column="speed" type="float"/>
-		<field name="direction" column="azimuth" type="float"/>
-		<field name="gust" column="gust" type="float"/>
+		<field name="speed" column="speed" type="float" nullable="true"/>
+		<field name="direction" column="azimuth" type="float" nullable="true"/>
+		<field name="gust" column="gust" type="float" nullable="true"/>
 	</embeddable>
 
 </doctrine-mapping>

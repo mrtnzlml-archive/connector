@@ -14,31 +14,20 @@ final class Temperature
 
 	private $outdoor;
 
-	public function __construct(ITemperatureUnit $indoor, ITemperatureUnit $outdoor)
+	public function __construct(?ITemperatureUnit $indoor, ?ITemperatureUnit $outdoor)
 	{
-		$this->indoor = (new TemperatureQuantity($indoor))
-			->convertTo(Celsius::class)
-			->value();
-
-		$this->outdoor = (new TemperatureQuantity($outdoor))
-			->convertTo(Celsius::class)
-			->value();
+		$this->indoor = $indoor ? new TemperatureQuantity($indoor) : NULL;
+		$this->outdoor = $outdoor ? new TemperatureQuantity($outdoor) : NULL;
 	}
 
-	/**
-	 * @return float in Celsius
-	 */
-	public function indoor(): float
+	public function indoor(string $unit = Celsius::class): ?float
 	{
-		return $this->indoor;
+		return $this->indoor ? $this->indoor->convertTo($unit)->value() : NULL;
 	}
 
-	/**
-	 * @return float in Celsius
-	 */
-	public function outdoor(): float
+	public function outdoor(string $unit = Celsius::class): ?float
 	{
-		return $this->outdoor;
+		return $this->outdoor ? $this->outdoor->convertTo($unit)->value() : NULL;
 	}
 
 }

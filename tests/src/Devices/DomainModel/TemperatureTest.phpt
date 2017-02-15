@@ -37,6 +37,13 @@ final class TemperatureTest extends \Adeira\Connector\Tests\TestCase
 		Assert::equal(-173.15, $p->outdoor()); // Tester\Assert::EPSILON = 1e-10
 	}
 
+	public function testNullability()
+	{
+		$p = new Temperature(NULL, NULL);
+		Assert::null($p->indoor());
+		Assert::null($p->outdoor());
+	}
+
 }
 
 (new TemperatureTest)->run();
