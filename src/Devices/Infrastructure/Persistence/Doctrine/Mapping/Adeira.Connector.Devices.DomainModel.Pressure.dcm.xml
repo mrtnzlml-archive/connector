@@ -5,8 +5,8 @@
 							https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
 
 	<embeddable name="Adeira\Connector\Devices\DomainModel\Pressure">
-		<field name="absolutePressure" column="absolute" type="float" nullable="true"/>
-		<field name="relativePressure" column="relative" type="float" nullable="true"/>
+		<field name="absolutePressure" column="absolute" type="Pressure" nullable="true"/>
+		<field name="relativePressure" column="relative" type="Pressure" nullable="true"/>
 	</embeddable>
 
 </doctrine-mapping>
