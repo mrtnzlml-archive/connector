@@ -1,0 +1,14 @@
+<doctrine-mapping
+		xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+							https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+
+	<embeddable name="Adeira\Connector\Devices\DomainModel\PhysicalQuantities">
+		<embedded name="pressure" column-prefix="pressure_" class="Adeira\Connector\Devices\DomainModel\Pressure"/>
+		<embedded name="temperature" column-prefix="temperature_" class="Adeira\Connector\Devices\DomainModel\Temperature"/>
+		<embedded name="humidity" column-prefix="humidity_" class="Adeira\Connector\Devices\DomainModel\Humidity"/>
+		<embedded name="wind" column-prefix="wind_" class="Adeira\Connector\Devices\DomainModel\Wind"/>
+	</embeddable>
+
+</doctrine-mapping>

@@ -2,6 +2,7 @@
 
 namespace Adeira\Connector\Devices\DomainModel\WeatherStation;
 
+use Adeira\Connector\Devices\DomainModel\PhysicalQuantities;
 use Adeira\Connector\Devices\DomainModel\Pressure;
 
 /**
@@ -23,15 +24,15 @@ final class WeatherStationRecord
 	private $weatherStationId;
 
 	/**
-	 * @var Pressure
+	 * @var \Adeira\Connector\Devices\DomainModel\PhysicalQuantities
 	 */
-	private $pressure;
+	private $physicalQuantities;
 
-	public function __construct(WeatherStationRecordId $recordId, WeatherStationId $weatherStationId, Pressure $pressure)
+	public function __construct(WeatherStationRecordId $recordId, WeatherStationId $weatherStationId, PhysicalQuantities $quantities)
 	{
 		$this->id = $recordId;
 		$this->weatherStationId = $weatherStationId;
-		$this->pressure = $pressure;
+		$this->physicalQuantities = $quantities;
 	}
 
 	public function id(): WeatherStationRecordId
@@ -46,7 +47,7 @@ final class WeatherStationRecord
 
 	public function pressure(): Pressure
 	{
-		return $this->pressure;
+		return $this->physicalQuantities->pressure();
 	}
 
 }

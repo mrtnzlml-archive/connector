@@ -10,8 +10,13 @@
 			<generator strategy="NONE"/>
 		</id>
 
+		<!--<unique-constraints>-->
+			<!-- TODO: unikátní (čas + ID stanice) -->
+			<!--<unique-constraint columns=""></unique-constraint>-->
+		<!--</unique-constraints>-->
+
 		<field name="weatherStationId" column="weather_station_id" type="WeatherStationId"/>
-		<embedded name="pressure" column-prefix="pressure_" class="Adeira\Connector\Devices\DomainModel\Pressure"/>
+		<embedded name="physicalQuantities" use-column-prefix="false" class="Adeira\Connector\Devices\DomainModel\PhysicalQuantities"/>
 
 	</entity>
 

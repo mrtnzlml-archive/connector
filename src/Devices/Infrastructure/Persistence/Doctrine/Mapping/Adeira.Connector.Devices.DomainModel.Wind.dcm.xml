@@ -4,9 +4,10 @@
 		xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
 							https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
 
-	<embeddable name="Adeira\Connector\Devices\DomainModel\Pressure">
-		<field name="absolutePressure" column="absolute" type="float"/>
-		<field name="relativePressure" column="relative" type="float"/>
+	<embeddable name="Adeira\Connector\Devices\DomainModel\Wind">
+		<field name="speed" column="speed" type="float"/>
+		<field name="direction" column="azimuth" type="float"/>
+		<field name="gust" column="gust" type="float"/>
 	</embeddable>
 
 </doctrine-mapping>
