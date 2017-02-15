@@ -3,8 +3,8 @@
 namespace Adeira\Connector\Tests\GraphQL\Type;
 
 use Adeira\Connector\GraphQL\Type\InputValue;
-use Tester\Assert;
 use function Adeira\Connector\GraphQL\string;
+use Tester\Assert;
 
 require getenv('BOOTSTRAP');
 
@@ -16,7 +16,7 @@ final class InputValueTest extends \Adeira\Connector\Tests\TestCase
 
 	public function testStructure()
 	{
-		$structure = (new InputValue('Name', string()))->_buildStructure();
+		$structure = (new InputValue('Name', string()))->buildStructure();
 		Assert::equal([
 			'name' => 'Name',
 			'type' => string(),

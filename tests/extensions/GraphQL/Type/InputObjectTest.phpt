@@ -21,7 +21,7 @@ final class InputObjectTest extends \Adeira\Connector\Tests\TestCase
 			public function fields(): array {
 				return [];
 			}
-		})->_buildStructure();
+		})->buildStructure();
 		Assert::same([
 			'name' => 'Public Name',
 			'description' => NULL,
@@ -39,7 +39,7 @@ final class InputObjectTest extends \Adeira\Connector\Tests\TestCase
 			public function fields(): array {
 				return [];
 			}
-		})->_buildStructure();
+		})->buildStructure();
 		Assert::same([
 			'name' => 'Public Name',
 			'description' => 'Description',
@@ -49,7 +49,7 @@ final class InputObjectTest extends \Adeira\Connector\Tests\TestCase
 	public function testStructureWithoutPublicName()
 	{
 		Assert::exception(function() {
-			(new class extends InputObject {})->_buildStructure();
+			(new class extends InputObject {})->buildStructure();
 		}, \Adeira\Connector\GraphQL\Exception\OverrideException::class, "You MUST override method 'publicName' in '%a%' because it's required.");
 	}
 
@@ -60,7 +60,7 @@ final class InputObjectTest extends \Adeira\Connector\Tests\TestCase
 				public function publicName(): string {
 					return 'Public Name';
 				}
-			})->_buildStructure();
+			})->buildStructure();
 		}, \Adeira\Connector\GraphQL\Exception\OverrideException::class, "You MUST override method 'fields' in '%a%' because it's required.");
 	}
 

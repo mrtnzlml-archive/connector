@@ -2,6 +2,8 @@
 
 namespace Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine;
 
+use Adeira\Connector\Authentication\DomainModel\Owner\Owner;
+use Adeira\Connector\Common\DomainModel\Stub;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\{
 	IAllWeatherStationRecords, WeatherStationId, WeatherStationRecord, WeatherStationRecordId
 };
@@ -23,6 +25,16 @@ final class DoctrineAllWeatherStationRecords implements IAllWeatherStationRecord
 	public function add(WeatherStationRecord $aWeatherStationRecord)
 	{
 		$this->em->persist($aWeatherStationRecord);
+	}
+
+	public function withId(Owner $owner, WeatherStationRecordId $recordId): Stub
+	{
+		//TODO: owner
+
+		$qb = $this->em->createQueryBuilder();
+		$qb->select($dqlAlis = 'wsr')->from(WeatherStationRecord::class, $dqlAlis);
+		$qb->where("$dqlAlis.id = :wid")->setParameter(':wid', $recordId);
+		return Stub::wrap($qb);
 	}
 
 	public function ofWeatherStationId(WeatherStationId $weatherStationId): array

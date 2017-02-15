@@ -2,14 +2,19 @@
 
 namespace Adeira\Connector\Devices\DomainModel\WeatherStation;
 
+use Adeira\Connector\Authentication\DomainModel\Owner\Owner;
+use Adeira\Connector\Common\DomainModel\Stub;
+
 interface IAllWeatherStationRecords
 {
 
 	public function add(WeatherStationRecord $aWeatherStationRecord);
 
-	public function ofWeatherStationId(WeatherStationId $weatherStationId): array;
+	public function withId(Owner $owner, WeatherStationRecordId $recordId): Stub; //TODO: owner!
 
-	public function ofAllWeatherStationIds(array $weatherStationId): array;
+	public function ofWeatherStationId(WeatherStationId $weatherStationId): array; //TODO: owner!
+
+	public function ofAllWeatherStationIds(array $weatherStationId): array; //TODO: owner!
 
 	public function nextIdentity(): WeatherStationRecordId;
 

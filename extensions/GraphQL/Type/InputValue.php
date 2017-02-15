@@ -9,19 +9,22 @@ class InputValue
 
 	private $type;
 
-	public function __construct(string $name, \GraphQL\Type\Definition\Type $type)
+	private $defaultValue;
+
+	public function __construct(string $name, \GraphQL\Type\Definition\Type $type, $defaultValue = NULL)
 	{
 		$this->name = $name;
 		$this->type = $type;
+		$this->defaultValue = $defaultValue;
 	}
 
 	/** @internal */
-	public function _buildStructure(): array
+	public function buildStructure(): array
 	{
 		return [
 			'name' => $this->name,
 			'type' => $this->type,
-			'defaultValue' => NULL, //FIXME: configurable
+			'defaultValue' => $this->defaultValue,
 			'description' => NULL, //FIXME: configurable
 		];
 	}

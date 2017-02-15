@@ -24,8 +24,10 @@ final class TypesTest extends \Adeira\Connector\Tests\TestCase
 		Assert::same([
 			'id',
 			'int',
+			'float',
 			'string',
 			'nullableint',
+			'nullablefloat',
 			'nullablestring',
 			'required',
 			'listof',

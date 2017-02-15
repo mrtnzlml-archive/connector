@@ -4,8 +4,7 @@ namespace Adeira\Connector\Devices\DomainModel\WeatherStation;
 
 use Adeira\Connector\Authentication\DomainModel\Owner\Owner;
 use Adeira\Connector\Authentication\DomainModel\User\UserId;
-use Adeira\Connector\Devices\DomainModel\Pressure;
-use Adeira\Connector\PhysicalUnits\Pressure\Units\IPressureUnit;
+use Adeira\Connector\Devices\DomainModel\PhysicalQuantities;
 
 /**
  * This is entity without mapping. Mapping is infrastructure detail.
@@ -67,12 +66,12 @@ final class WeatherStation
 	 * Weather station records doesn't belong to the same aggregate because there are no true invariants needed to protect.
 	 * Both (weather stations and records) can be handled separately if needed. This is why it's here return instead of collection.
 	 */
-	public function makeWeatherStationRecord(WeatherStationRecordId $weatherStationRecordId, IPressureUnit $pressureUnit): WeatherStationRecord
+	public function makeWeatherStationRecord(WeatherStationRecordId $weatherStationRecordId, PhysicalQuantities $physicalQuantities): WeatherStationRecord
 	{
 		return new WeatherStationRecord(
 			$weatherStationRecordId,
 			$this->id,
-			new Pressure($pressureUnit)
+			$physicalQuantities
 		);
 	}
 

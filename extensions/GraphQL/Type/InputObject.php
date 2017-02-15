@@ -35,7 +35,7 @@ class InputObject
 	}
 
 	/** @internal */
-	public function _buildStructure(): array
+	public function buildStructure(): array
 	{
 		$config = [
 			'name' => $this->publicName(),
@@ -43,7 +43,7 @@ class InputObject
 		];
 
 		foreach ($this->fields() as $field) {
-			$structure = $field->_buildStructure();
+			$structure = $field->buildStructure();
 			$config['fields'][$structure['name']] = $structure; //FIXME: should be 'inputFields' (?)
 		}
 

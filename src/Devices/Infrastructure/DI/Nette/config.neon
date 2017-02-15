@@ -1,6 +1,10 @@
 doctrine.orm:
 	connection:
 		types:
+			Humidity: Adeira\Connector\Devices\Infrastructure\DomainModel\WeatherStation\Doctrine\DoctrineHumidityType
+			Pressure: Adeira\Connector\Devices\Infrastructure\DomainModel\WeatherStation\Doctrine\DoctrinePressureType
+			Speed: Adeira\Connector\Devices\Infrastructure\DomainModel\WeatherStation\Doctrine\DoctrineSpeedType
+			Temperature: Adeira\Connector\Devices\Infrastructure\DomainModel\WeatherStation\Doctrine\DoctrineTemperatureType
 			WeatherStationId: Adeira\Connector\Devices\Infrastructure\DomainModel\WeatherStation\Doctrine\DoctrineWeatherStationIdType
 			WeatherStationRecordId: Adeira\Connector\Devices\Infrastructure\DomainModel\WeatherStation\Doctrine\DoctrineWeatherStationRecordIdType
 			WeatherStationSeriesId: Adeira\Connector\Devices\Infrastructure\DomainModel\WeatherStation\Doctrine\DoctrineWeatherStationSeriesIdType
@@ -13,6 +17,7 @@ services:
 		ViewAllWeatherStations
 		ViewAllWeatherStationSeries
 		ViewSingleWeatherStation
+		ViewSingleWeatherStationRecord
 	)
 	allWeatherStationRecords: Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\DoctrineAllWeatherStationRecords
 	allWeatherStations: Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\DoctrineAllWeatherStations
@@ -22,6 +27,7 @@ services:
 serviceBus:
 	dispatchMap:
 		Adeira\Connector\Devices\Application\Service\WeatherStation\Command\CreateWeatherStation: Adeira\Connector\Devices\Application\Service\WeatherStation\Command\CreateWeatherStationHandler
+		Adeira\Connector\Devices\Application\Service\WeatherStation\Command\CreateWeatherStationRecord: Adeira\Connector\Devices\Application\Service\WeatherStation\Command\CreateWeatherStationRecordHandler
 
 
 symfony.console:
@@ -30,14 +36,10 @@ symfony.console:
 
 
 graphql:
-	queryDefinitions:
-		- Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Query\(
-			AllWeatherStationsQuery
-			WeatherStationQuery
-		)
-	mutationDefinitions:
-		- Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Mutation\CreateWeatherStation
 	types:
+		# INPUT TYPE:
+		- Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Input\PhysicalQuantitiesInput
+		# OUTPUT TYPE:
 		- Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Type\(
 			WeatherStationRecordType
 			WeatherStationsConnectionType
@@ -45,3 +47,11 @@ graphql:
 			WeatherStationSeriesType
 			WeatherStationType
 		)
+		# QUERY TYPE:
+		- Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Query\(
+			AllWeatherStationsQuery
+			WeatherStationQuery
+		)
+		# MUTATION TYPE:
+		- Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Mutation\CreateWeatherStation
+		- Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Mutation\CreateWeatherStationRecord

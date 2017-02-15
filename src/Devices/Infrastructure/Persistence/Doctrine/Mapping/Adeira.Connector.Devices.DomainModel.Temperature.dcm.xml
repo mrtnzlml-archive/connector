@@ -5,8 +5,8 @@
 							https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
 
 	<embeddable name="Adeira\Connector\Devices\DomainModel\Temperature">
-		<field name="indoor" column="indoor" type="float" nullable="true"/>
-		<field name="outdoor" column="outdoor" type="float" nullable="true"/>
+		<field name="indoor" column="indoor" type="Temperature" nullable="true"/>
+		<field name="outdoor" column="outdoor" type="Temperature" nullable="true"/>
 	</embeddable>
 
 </doctrine-mapping>

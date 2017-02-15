@@ -2,8 +2,8 @@
 
 namespace Adeira\Connector\Devices\DomainModel;
 
-use Adeira\Connector\PhysicalUnits\Humidity\Units\IHumidityUnit;
 use Adeira\Connector\PhysicalUnits\Humidity\RelativeHumidity;
+use Adeira\Connector\PhysicalUnits\Humidity\Units\IHumidityUnit;
 use Adeira\Connector\PhysicalUnits\Humidity\Units\Percentage;
 
 final class Humidity
