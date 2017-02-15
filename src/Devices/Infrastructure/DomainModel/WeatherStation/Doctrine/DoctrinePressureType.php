@@ -28,7 +28,7 @@ final class DoctrinePressureType extends \Doctrine\DBAL\Types\Type
 	 */
 	public function convertToPHPValue($value, AbstractPlatform $platform)
 	{
-		return new Pressure(new Pascal($value)); //FIXME: to nemusí být pravda!
+		return new Pressure(new Pascal($value));
 	}
 
 	/**
@@ -37,7 +37,7 @@ final class DoctrinePressureType extends \Doctrine\DBAL\Types\Type
 	public function convertToDatabaseValue($value, AbstractPlatform $platform)
 	{
 		if ($value instanceof IPhysicalQuantity) {
-			return $value->value();
+			return $value->convertTo(Pascal::class)->value();
 		}
 		return NULL;
 	}
