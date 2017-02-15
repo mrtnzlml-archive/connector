@@ -4,5 +4,5 @@ symfony.console:
 
 
 graphql:
-	queryDefinitions:
+	types:
 		- Adeira\Connector\GraphQL\Delivery\API\GraphQL\Query\TestQuery
