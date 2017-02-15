@@ -24,6 +24,10 @@ class CommandBus implements ICommandBus
 		$commandClassName = get_class($aCommand);
 		if (array_key_exists($commandClassName, $this->dispatchMap)) {
 			$this->dispatchMap[$commandClassName]($aCommand);
+		} else {
+			throw new \Adeira\Connector\ServiceBus\DomainModel\Exception\UnknownCommandHandler(
+				"Cannot dispatch command '$commandClassName' because there is not related handler in dispatch map."
+			);
 		}
 	}
 

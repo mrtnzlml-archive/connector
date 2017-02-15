@@ -28,6 +28,18 @@ final class CommandBusTest extends \Adeira\Connector\Tests\TestCase
 		Assert::true($com_1, Command1::class);
 	}
 
+	public function testThatCommandWithoutHandlerThrowsException()
+	{
+		$bus = new CommandBus([]);
+		Assert::throws(
+			function () use ($bus) {
+				$bus->dispatch(new Command1);
+			},
+			\Adeira\Connector\ServiceBus\DomainModel\Exception\UnknownCommandHandler::class,
+			'Cannot dispatch command \'' . Command1::class . '\' because there is not related handler in dispatch map.'
+		);
+	}
+
 }
 
 (new CommandBusTest)->run();
