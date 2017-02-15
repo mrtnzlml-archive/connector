@@ -17,6 +17,11 @@ namespace Adeira\Connector\GraphQL {
 		return required(D\Type::int());
 	}
 
+	function float(): D\NonNull
+	{
+		return required(D\Type::float());
+	}
+
 	function string(): D\NonNull
 	{
 		return required(D\Type::string());
@@ -27,6 +32,11 @@ namespace Adeira\Connector\GraphQL {
 	function nullableInt(): D\Type
 	{
 		return D\Type::getNullableType(int());
+	}
+
+	function nullableFloat(): D\Type
+	{
+		return D\Type::getNullableType(float());
 	}
 
 	function nullableString(): D\Type
