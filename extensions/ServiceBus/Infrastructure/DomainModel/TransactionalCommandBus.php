@@ -3,14 +3,10 @@
 namespace Adeira\Connector\ServiceBus\Infrastructure\DomainModel;
 
 use Adeira\Connector\Common\Application\Service\ITransactionalSession;
-use Adeira\Connector\ServiceBus\DomainModel\{
-	ICommand, ICommandBus
-};
+use Adeira\Connector\ServiceBus\DomainModel\ICommand;
 
-class TransactionalCommandBus implements ICommandBus
+class TransactionalCommandBus extends CommandBus
 {
-
-	private $dispatchMap = [];
 
 	private $transactionalSession;
 
@@ -20,17 +16,14 @@ class TransactionalCommandBus implements ICommandBus
 	public function __construct(ITransactionalSession $transactionalSession, array $dispatchMap)
 	{
 		$this->transactionalSession = $transactionalSession;
-		$this->dispatchMap = $dispatchMap;
+		parent::__construct($dispatchMap);
 	}
 
 	public function dispatch(ICommand $aCommand): void
 	{
-		$commandClassName = get_class($aCommand);
-		if (array_key_exists($commandClassName, $this->dispatchMap)) {
-			$this->transactionalSession->executeAtomically(function() use ($commandClassName, $aCommand) {
-				$this->dispatchMap[$commandClassName]($aCommand);
-			});
-		}
+		$this->transactionalSession->executeAtomically(function() use ($aCommand) {
+			parent::dispatch($aCommand);
+		});
 	}
 
 }
