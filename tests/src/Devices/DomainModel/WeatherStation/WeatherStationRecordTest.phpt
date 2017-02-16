@@ -12,7 +12,7 @@ use Adeira\Connector\Devices\DomainModel\WeatherStation\{
 	WeatherStationRecordId
 };
 use Adeira\Connector\Devices\DomainModel\Wind;
-use Adeira\Connector\PhysicalUnits\Pressure\Units\Pascal;
+use Adeira\Connector\PhysicalUnits\DomainModel\Pressure\Units\Pascal;
 use Ramsey\Uuid\Uuid;
 use Tester\Assert;
 

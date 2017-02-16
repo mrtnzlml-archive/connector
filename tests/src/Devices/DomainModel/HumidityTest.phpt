@@ -3,7 +3,7 @@
 namespace Adeira\Connector\Tests\Devices\DomainModel;
 
 use Adeira\Connector\Devices\DomainModel\Humidity;
-use Adeira\Connector\PhysicalUnits\Humidity\Units\Percentage;
+use Adeira\Connector\PhysicalUnits\DomainModel\Humidity\Units\Percentage;
 use Tester\Assert;
 
 require getenv('BOOTSTRAP');

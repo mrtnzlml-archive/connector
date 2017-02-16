@@ -3,7 +3,7 @@
 namespace Adeira\Connector\Tests\Devices\DomainModel;
 
 use Adeira\Connector\Devices\DomainModel\Temperature;
-use Adeira\Connector\PhysicalUnits\Temperature\Units\{
+use Adeira\Connector\PhysicalUnits\DomainModel\Temperature\Units\{
 	Celsius, Kelvin
 };
 use Tester\Assert;

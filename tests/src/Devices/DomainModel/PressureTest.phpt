@@ -3,7 +3,7 @@
 namespace Adeira\Connector\Tests\Devices\DomainModel;
 
 use Adeira\Connector\Devices\DomainModel\Pressure;
-use Adeira\Connector\PhysicalUnits\Pressure\Units\{
+use Adeira\Connector\PhysicalUnits\DomainModel\Pressure\Units\{
 	Bar, Pascal, Torr
 };
 use Tester\Assert;

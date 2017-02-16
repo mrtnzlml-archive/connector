@@ -3,8 +3,8 @@
 namespace Adeira\Connector\Tests\Devices\DomainModel;
 
 use Adeira\Connector\Devices\DomainModel\Wind;
-use Adeira\Connector\PhysicalUnits\Speed\Units\Kmh;
-use Adeira\Connector\PhysicalUnits\Speed\Units\Ms;
+use Adeira\Connector\PhysicalUnits\DomainModel\Speed\Units\Kmh;
+use Adeira\Connector\PhysicalUnits\DomainModel\Speed\Units\Ms;
 use Tester\Assert;
 
 require getenv('BOOTSTRAP');
