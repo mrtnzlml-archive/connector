@@ -50,4 +50,9 @@ final class WeatherStationRecord
 		return $this->physicalQuantities->pressure();
 	}
 
+	public function temperature()
+	{
+		return $this->physicalQuantities->temperature();
+	}
+
 }

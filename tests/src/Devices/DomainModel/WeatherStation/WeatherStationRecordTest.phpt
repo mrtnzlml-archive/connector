@@ -24,9 +24,12 @@ require getenv('BOOTSTRAP');
 final class WeatherStationRecordTest extends \Adeira\Connector\Tests\TestCase
 {
 
-	public function testThatItIsPossibleToGetAllRequiredAttributes()
+	/** @var WeatherStationRecord */
+	private $record;
+
+	public function setUp()
 	{
-		$record = new WeatherStationRecord(
+		$this->record = new WeatherStationRecord(
 			WeatherStationRecordId::create(Uuid::fromString('71f3f015-1cd3-4b98-ac65-f34c1c661d39')),
 			WeatherStationId::create(Uuid::fromString('846b5741-abfe-45ba-8d9e-d5a78dbe254f')),
 			new PhysicalQuantities(
@@ -36,17 +39,31 @@ final class WeatherStationRecordTest extends \Adeira\Connector\Tests\TestCase
 				new Wind(NULL, NULL, NULL)
 			)
 		);
+	}
 
-		Assert::type(WeatherStationRecordId::class, $record->id());
-		Assert::same('71f3f015-1cd3-4b98-ac65-f34c1c661d39', (string)$record->id());
+	public function testThatItIsPossibleToGetAllRequiredAttributes()
+	{
+		Assert::type(WeatherStationRecordId::class, $this->record->id());
+		Assert::same('71f3f015-1cd3-4b98-ac65-f34c1c661d39', (string)$this->record->id());
 
-		Assert::type(WeatherStationId::class, $record->weatherStationId());
-		Assert::same('846b5741-abfe-45ba-8d9e-d5a78dbe254f', (string)$record->weatherStationId());
+		Assert::type(WeatherStationId::class, $this->record->weatherStationId());
+		Assert::same('846b5741-abfe-45ba-8d9e-d5a78dbe254f', (string)$this->record->weatherStationId());
+	}
 
-		$returnedPressure = $record->pressure();
+	public function testPressure()
+	{
+		$returnedPressure = $this->record->pressure();
 		Assert::type(Pressure::class, $returnedPressure);
 		Assert::same(101325.0, $returnedPressure->absolute());
 		Assert::same(0.0, $returnedPressure->relative());
+	}
+
+	public function testTemperature()
+	{
+		$returnedTemperature = $this->record->temperature();
+		Assert::type(Temperature::class, $returnedTemperature);
+		Assert::null($returnedTemperature->indoor());
+		Assert::null($returnedTemperature->outdoor());
 	}
 
 }
