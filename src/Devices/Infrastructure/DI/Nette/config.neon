@@ -1,10 +1,10 @@
 doctrine.orm:
 	connection:
 		types:
-			Humidity: Adeira\Connector\Devices\Infrastructure\DomainModel\WeatherStation\Doctrine\DoctrineHumidityType
-			Pressure: Adeira\Connector\Devices\Infrastructure\DomainModel\WeatherStation\Doctrine\DoctrinePressureType
-			Speed: Adeira\Connector\Devices\Infrastructure\DomainModel\WeatherStation\Doctrine\DoctrineSpeedType
-			Temperature: Adeira\Connector\Devices\Infrastructure\DomainModel\WeatherStation\Doctrine\DoctrineTemperatureType
+			Humidity: Adeira\Connector\PhysicalUnits\Infrastructure\DomainModel\Doctrine\DoctrineHumidityType
+			Pressure: Adeira\Connector\PhysicalUnits\Infrastructure\DomainModel\Doctrine\DoctrinePressureType
+			Speed: Adeira\Connector\PhysicalUnits\Infrastructure\DomainModel\Doctrine\DoctrineSpeedType
+			Temperature: Adeira\Connector\PhysicalUnits\Infrastructure\DomainModel\Doctrine\DoctrineTemperatureType
 			WeatherStationId: Adeira\Connector\Devices\Infrastructure\DomainModel\WeatherStation\Doctrine\DoctrineWeatherStationIdType
 			WeatherStationRecordId: Adeira\Connector\Devices\Infrastructure\DomainModel\WeatherStation\Doctrine\DoctrineWeatherStationRecordIdType
 			WeatherStationSeriesId: Adeira\Connector\Devices\Infrastructure\DomainModel\WeatherStation\Doctrine\DoctrineWeatherStationSeriesIdType

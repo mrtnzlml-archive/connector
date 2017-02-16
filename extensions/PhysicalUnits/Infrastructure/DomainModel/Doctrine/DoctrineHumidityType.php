@@ -1,18 +1,18 @@
 <?php declare(strict_types = 1);
 
-namespace Adeira\Connector\Devices\Infrastructure\DomainModel\WeatherStation\Doctrine;
+namespace Adeira\Connector\PhysicalUnits\Infrastructure\DomainModel\Doctrine;
 
+use Adeira\Connector\PhysicalUnits\Humidity\RelativeHumidity;
+use Adeira\Connector\PhysicalUnits\Humidity\Units\Percentage;
 use Adeira\Connector\PhysicalUnits\IPhysicalQuantity;
-use Adeira\Connector\PhysicalUnits\Pressure\Pressure;
-use Adeira\Connector\PhysicalUnits\Pressure\Units\Pascal;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 
-final class DoctrinePressureType extends \Doctrine\DBAL\Types\Type
+final class DoctrineHumidityType extends \Doctrine\DBAL\Types\Type
 {
 
 	public function getName(): string
 	{
-		return 'Pressure'; //(DC2Type:Pressure)
+		return 'Humidity'; //(DC2Type:Humidity)
 	}
 
 	/**
@@ -28,7 +28,7 @@ final class DoctrinePressureType extends \Doctrine\DBAL\Types\Type
 	 */
 	public function convertToPHPValue($value, AbstractPlatform $platform)
 	{
-		return new Pressure(new Pascal($value));
+		return new RelativeHumidity(new Percentage($value));
 	}
 
 	/**
@@ -37,7 +37,7 @@ final class DoctrinePressureType extends \Doctrine\DBAL\Types\Type
 	public function convertToDatabaseValue($value, AbstractPlatform $platform)
 	{
 		if ($value instanceof IPhysicalQuantity) {
-			return $value->convertTo(Pascal::class)->value();
+			return $value->convertTo(Percentage::class)->value();
 		}
 		return NULL;
 	}

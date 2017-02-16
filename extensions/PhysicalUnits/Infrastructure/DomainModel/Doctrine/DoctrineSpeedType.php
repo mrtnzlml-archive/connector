@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Adeira\Connector\Devices\Infrastructure\DomainModel\WeatherStation\Doctrine;
+namespace Adeira\Connector\PhysicalUnits\Infrastructure\DomainModel\Doctrine;
 
 use Adeira\Connector\PhysicalUnits\IPhysicalQuantity;
 use Adeira\Connector\PhysicalUnits\Speed\Speed;

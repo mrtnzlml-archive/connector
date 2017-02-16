@@ -1,18 +1,18 @@
 <?php declare(strict_types = 1);
 
-namespace Adeira\Connector\Devices\Infrastructure\DomainModel\WeatherStation\Doctrine;
+namespace Adeira\Connector\PhysicalUnits\Infrastructure\DomainModel\Doctrine;
 
 use Adeira\Connector\PhysicalUnits\IPhysicalQuantity;
-use Adeira\Connector\PhysicalUnits\Temperature\Temperature;
-use Adeira\Connector\PhysicalUnits\Temperature\Units\Celsius;
+use Adeira\Connector\PhysicalUnits\Pressure\Pressure;
+use Adeira\Connector\PhysicalUnits\Pressure\Units\Pascal;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 
-final class DoctrineTemperatureType extends \Doctrine\DBAL\Types\Type
+final class DoctrinePressureType extends \Doctrine\DBAL\Types\Type
 {
 
 	public function getName(): string
 	{
-		return 'Temperature'; //(DC2Type:Temperature)
+		return 'Pressure'; //(DC2Type:Pressure)
 	}
 
 	/**
@@ -28,7 +28,7 @@ final class DoctrineTemperatureType extends \Doctrine\DBAL\Types\Type
 	 */
 	public function convertToPHPValue($value, AbstractPlatform $platform)
 	{
-		return new Temperature(new Celsius($value));
+		return new Pressure(new Pascal($value));
 	}
 
 	/**
@@ -37,7 +37,7 @@ final class DoctrineTemperatureType extends \Doctrine\DBAL\Types\Type
 	public function convertToDatabaseValue($value, AbstractPlatform $platform)
 	{
 		if ($value instanceof IPhysicalQuantity) {
-			return $value->convertTo(Celsius::class)->value();
+			return $value->convertTo(Pascal::class)->value();
 		}
 		return NULL;
 	}
