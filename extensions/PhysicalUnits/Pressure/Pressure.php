@@ -30,7 +30,7 @@ final class Pressure implements IPhysicalQuantity
 		$this->calculator = $calculator ?? new SimpleCalculator;
 	}
 
-	public function value()
+	public function value(): float
 	{
 		return $this->pressureUnit->value();
 	}

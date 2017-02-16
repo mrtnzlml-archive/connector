@@ -25,7 +25,7 @@ final class Speed implements IPhysicalQuantity
 		$this->speedUnit = $speedUnit;
 	}
 
-	public function value()
+	public function value(): float
 	{
 		return $this->speedUnit->value();
 	}

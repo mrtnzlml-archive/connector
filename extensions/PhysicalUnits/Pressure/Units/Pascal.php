@@ -12,9 +12,9 @@ final class Pascal implements IPressureUnit
 		$this->value = $value;
 	}
 
-	public function value()
+	public function value(): float
 	{
-		return $this->value;
+		return (float)$this->value;
 	}
 
 	public function getConversionTable(): array

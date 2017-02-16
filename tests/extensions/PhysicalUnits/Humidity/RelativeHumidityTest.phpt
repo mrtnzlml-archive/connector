@@ -18,7 +18,12 @@ final class RelativeHumidityTest extends \Adeira\Connector\Tests\TestCase
 	{
 		$relative = new RelativeHumidity(new Percentage(42));
 		//Tester\Assert::EPSILON === 1e-10
-		Assert::equal(42, $relative->convertTo(Percentage::class)->value());
+		Assert::equal(42.0, $relative->convertTo(Percentage::class)->value());
+	}
+
+	public function testThatItAlwaysReturnsFloat()
+	{
+		Assert::same(1.0, (new RelativeHumidity(new Percentage('1')))->value());
 	}
 
 }

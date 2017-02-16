@@ -7,7 +7,7 @@ interface IUnit
 
 	public function __construct($value);
 
-	public function value();
+	public function value(): float;
 
 	public function getConversionTable(): array;
 

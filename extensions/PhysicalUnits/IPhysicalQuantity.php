@@ -5,7 +5,7 @@ namespace Adeira\Connector\PhysicalUnits;
 interface IPhysicalQuantity
 {
 
-	public function value();
+	public function value(): float;
 
 	public function unit(): IUnit;
 

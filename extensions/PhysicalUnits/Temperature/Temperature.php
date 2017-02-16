@@ -24,7 +24,7 @@ final class Temperature implements IPhysicalQuantity
 		$this->temperatureUnit = $temperatureUnit;
 	}
 
-	public function value()
+	public function value(): float
 	{
 		return $this->temperatureUnit->value();
 	}
