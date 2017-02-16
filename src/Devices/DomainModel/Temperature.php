@@ -2,8 +2,8 @@
 
 namespace Adeira\Connector\Devices\DomainModel;
 
-use Adeira\Connector\PhysicalUnits\Temperature\Temperature as TemperatureQuantity;
-use Adeira\Connector\PhysicalUnits\Temperature\Units\{
+use Adeira\Connector\PhysicalUnits\DomainModel\Temperature\Temperature as TemperatureQuantity;
+use Adeira\Connector\PhysicalUnits\DomainModel\Temperature\Units\{
 	Celsius, ITemperatureUnit
 };
 

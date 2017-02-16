@@ -2,8 +2,8 @@
 
 namespace Adeira\Connector\Devices\DomainModel;
 
-use Adeira\Connector\PhysicalUnits\Pressure\Pressure as PressureQuantity;
-use Adeira\Connector\PhysicalUnits\Pressure\Units\{
+use Adeira\Connector\PhysicalUnits\DomainModel\Pressure\Pressure as PressureQuantity;
+use Adeira\Connector\PhysicalUnits\DomainModel\Pressure\Units\{
 	IPressureUnit, Pascal
 };
 

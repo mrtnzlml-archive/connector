@@ -2,9 +2,9 @@
 
 namespace Adeira\Connector\PhysicalUnits\Infrastructure\DomainModel\Doctrine;
 
-use Adeira\Connector\PhysicalUnits\IPhysicalQuantity;
-use Adeira\Connector\PhysicalUnits\Temperature\Temperature;
-use Adeira\Connector\PhysicalUnits\Temperature\Units\Celsius;
+use Adeira\Connector\PhysicalUnits\DomainModel\IPhysicalQuantity;
+use Adeira\Connector\PhysicalUnits\DomainModel\Temperature\Temperature;
+use Adeira\Connector\PhysicalUnits\DomainModel\Temperature\Units\Celsius;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 
 final class DoctrineTemperatureType extends \Doctrine\DBAL\Types\Type

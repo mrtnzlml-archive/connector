@@ -2,9 +2,9 @@
 
 namespace Adeira\Connector\Devices\DomainModel;
 
-use Adeira\Connector\PhysicalUnits\Speed\Speed;
-use Adeira\Connector\PhysicalUnits\Speed\Units\ISpeedUnit;
-use Adeira\Connector\PhysicalUnits\Speed\Units\Kmh;
+use Adeira\Connector\PhysicalUnits\DomainModel\Speed\Speed;
+use Adeira\Connector\PhysicalUnits\DomainModel\Speed\Units\ISpeedUnit;
+use Adeira\Connector\PhysicalUnits\DomainModel\Speed\Units\Kmh;
 
 final class Wind
 {

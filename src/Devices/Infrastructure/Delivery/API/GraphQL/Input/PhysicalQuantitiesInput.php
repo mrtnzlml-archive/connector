@@ -3,14 +3,14 @@
 namespace Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Input;
 
 use Adeira\Connector\GraphQL\Type\InputValue;
-use Adeira\Connector\PhysicalUnits\Humidity\Units\Percentage;
-use Adeira\Connector\PhysicalUnits\Pressure\Units\{
+use Adeira\Connector\PhysicalUnits\DomainModel\Humidity\Units\Percentage;
+use Adeira\Connector\PhysicalUnits\DomainModel\Pressure\Units\{
 	Atm, Bar, Pascal, Torr
 };
-use Adeira\Connector\PhysicalUnits\Speed\Units\Kmh;
-use Adeira\Connector\PhysicalUnits\Speed\Units\Mph;
-use Adeira\Connector\PhysicalUnits\Speed\Units\Ms;
-use Adeira\Connector\PhysicalUnits\Temperature\Units\{
+use Adeira\Connector\PhysicalUnits\DomainModel\Speed\Units\Kmh;
+use Adeira\Connector\PhysicalUnits\DomainModel\Speed\Units\Mph;
+use Adeira\Connector\PhysicalUnits\DomainModel\Speed\Units\Ms;
+use Adeira\Connector\PhysicalUnits\DomainModel\Temperature\Units\{
 	Celsius, Fahrenheit, Kelvin
 };
 use function Adeira\Connector\GraphQL\nullableFloat;

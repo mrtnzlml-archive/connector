@@ -2,9 +2,9 @@
 
 namespace Adeira\Connector\PhysicalUnits\Infrastructure\DomainModel\Doctrine;
 
-use Adeira\Connector\PhysicalUnits\Humidity\RelativeHumidity;
-use Adeira\Connector\PhysicalUnits\Humidity\Units\Percentage;
-use Adeira\Connector\PhysicalUnits\IPhysicalQuantity;
+use Adeira\Connector\PhysicalUnits\DomainModel\Humidity\RelativeHumidity;
+use Adeira\Connector\PhysicalUnits\DomainModel\Humidity\Units\Percentage;
+use Adeira\Connector\PhysicalUnits\DomainModel\IPhysicalQuantity;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 
 final class DoctrineHumidityType extends \Doctrine\DBAL\Types\Type

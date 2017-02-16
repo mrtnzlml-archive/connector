@@ -2,9 +2,9 @@
 
 namespace Adeira\Connector\PhysicalUnits\Infrastructure\DomainModel\Doctrine;
 
-use Adeira\Connector\PhysicalUnits\IPhysicalQuantity;
-use Adeira\Connector\PhysicalUnits\Speed\Speed;
-use Adeira\Connector\PhysicalUnits\Speed\Units\Kmh;
+use Adeira\Connector\PhysicalUnits\DomainModel\IPhysicalQuantity;
+use Adeira\Connector\PhysicalUnits\DomainModel\Speed\Speed;
+use Adeira\Connector\PhysicalUnits\DomainModel\Speed\Units\Kmh;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 
 final class DoctrineSpeedType extends \Doctrine\DBAL\Types\Type

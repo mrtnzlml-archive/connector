@@ -2,9 +2,9 @@
 
 namespace Adeira\Connector\PhysicalUnits\Infrastructure\DomainModel\Doctrine;
 
-use Adeira\Connector\PhysicalUnits\IPhysicalQuantity;
-use Adeira\Connector\PhysicalUnits\Pressure\Pressure;
-use Adeira\Connector\PhysicalUnits\Pressure\Units\Pascal;
+use Adeira\Connector\PhysicalUnits\DomainModel\IPhysicalQuantity;
+use Adeira\Connector\PhysicalUnits\DomainModel\Pressure\Pressure;
+use Adeira\Connector\PhysicalUnits\DomainModel\Pressure\Units\Pascal;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 
 final class DoctrinePressureType extends \Doctrine\DBAL\Types\Type
