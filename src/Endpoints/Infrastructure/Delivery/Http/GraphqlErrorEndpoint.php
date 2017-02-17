@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\Endpoints\Infrastructure\Delivery\Http;
 
-use Adeira\Connector\GraphQL\Bridge\Application\Responses\GraphqlErrorResponse;
+use Adeira\Connector\GraphQL\Infrastructure\Delivery\Http\Nette\GraphqlErrorResponse;
 use Nette\Application as NApplication;
 use Nette\Http\IResponse;
 use Tracy\ILogger;

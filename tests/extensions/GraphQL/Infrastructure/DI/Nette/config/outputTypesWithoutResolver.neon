@@ -1,0 +1,5 @@
+graphql:
+    outputTypes:
+        TypeName:
+            fields:
+                totalCount: Int!

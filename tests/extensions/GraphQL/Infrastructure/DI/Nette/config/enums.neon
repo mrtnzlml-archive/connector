@@ -1,0 +1,8 @@
+graphql:
+	enums:
+		EnumName1:
+			key11: value11
+			key12: value12
+		EnumName2:
+			key21: value21
+			key22: value22

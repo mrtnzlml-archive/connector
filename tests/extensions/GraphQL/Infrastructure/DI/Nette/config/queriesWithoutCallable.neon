@@ -1,0 +1,4 @@
+graphql:
+	queries:
+		QueryName:
+			resolver: Adeira\Connector\Tests\GraphQL\Infrastructure\DI\Nette\NotCallableQueryResolver

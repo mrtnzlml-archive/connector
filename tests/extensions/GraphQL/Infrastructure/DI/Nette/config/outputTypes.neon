@@ -1,0 +1,6 @@
+graphql:
+	outputTypes:
+		TypeName:
+			resolver: Adeira\Connector\Tests\GraphQL\Infrastructure\DI\Nette\OutputType
+			fields:
+				totalCount: Int!

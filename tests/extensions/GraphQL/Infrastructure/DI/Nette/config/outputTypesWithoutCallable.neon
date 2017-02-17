@@ -1,0 +1,6 @@
+graphql:
+	outputTypes:
+		TypeName:
+			resolver: ThisIsNotCallable
+			fields:
+				totalCount: Int!

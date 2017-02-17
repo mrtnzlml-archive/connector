@@ -1,0 +1,4 @@
+graphql:
+    mutations:
+        MutationName:
+        	resolver: UnknownResolver

@@ -6,8 +6,8 @@ use Adeira\Connector\Authentication\DomainModel\{
 	User\NullUserId, User\UserId
 };
 use Adeira\Connector\Authentication\Infrastructure\DomainModel\Owner\JwtOwnerService;
-use Adeira\Connector\GraphQL\Bridge\Application\Responses\GraphqlErrorResponse;
 use Adeira\Connector\GraphQL\Context;
+use Adeira\Connector\GraphQL\Infrastructure\Delivery\Http\Nette\GraphqlErrorResponse;
 use Adeira\Connector\GraphQL\SchemaFactory;
 use GraphQL\Validator\DocumentValidator;
 use Nette\Application\Responses\JsonResponse;
@@ -73,8 +73,6 @@ final class GraphqlEndpoint implements \Nette\Application\IPresenter
 				return $this->error('Recieved POST body is not in valid JSON format.');
 			}
 
-			\GraphQL\GraphQL::setDefaultFieldResolver([\Adeira\Connector\GraphQL\Executor::class, 'defaultFieldResolver']);
-
 			/**
 			 * @var \GraphQL\Validator\Rules\QueryComplexity $queryComplexity
 			 * @var \GraphQL\Validator\Rules\QueryDepth $queryDepth
@@ -103,7 +101,6 @@ final class GraphqlEndpoint implements \Nette\Application\IPresenter
 
 			// return JSON response
 			return new JsonResponse(['data' => $graphResponse->data]);
-
 		} elseif ($httpRequest->isMethod(Http\IRequest::OPTIONS)) {
 			return NULL; //terminate
 		} else {

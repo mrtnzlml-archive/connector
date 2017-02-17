@@ -1,0 +1,11 @@
+graphql:
+	inputTypes:
+		PhysicalQuantitiesInput:
+			absolutePressure: Float
+			relativePressure: Float(default: 1.0)
+			pressureUnit: PressureUnit(default: PASCAL)
+
+	enums:
+		PressureUnit:
+			BAR: BarValue
+			PASCAL: PascalValue

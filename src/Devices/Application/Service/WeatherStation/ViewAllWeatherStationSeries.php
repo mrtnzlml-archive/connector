@@ -15,9 +15,9 @@ final class ViewAllWeatherStationSeries
 		$this->seriesRepository = $seriesRepository;
 	}
 
-	public function execute(UserId $userId)
+	public function execute(UserId $userId): array
 	{
-		return $this->seriesRepository->all();
+		return $this->seriesRepository->all()->toArray();
 	}
 
 }

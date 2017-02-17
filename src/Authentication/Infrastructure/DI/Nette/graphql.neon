@@ -1,0 +1,26 @@
+# GraphQL queries are hierarchical and composed, describing a tree of information.
+# While Scalar types describe the leaf values of these hierarchical queries, Objects describe the intermediate levels.
+
+graphql:
+	queries:
+		user:
+			arguments:
+				id: ID!
+			resolver: Adeira\Connector\Authentication\Infrastructure\Delivery\API\GraphQL\Query\SingleUserQuery
+			next: User
+
+	mutations:
+		login:
+			arguments:
+				username: String!
+				password: String!
+			resolver: Adeira\Connector\Authentication\Infrastructure\Delivery\API\GraphQL\Mutation\LoginMutation
+			next: User
+
+	outputTypes:
+		User:
+			resolver: Adeira\Connector\Authentication\Infrastructure\Delivery\API\GraphQL\UserType
+			fields:
+				id: ID!
+				username: String!
+				token: String

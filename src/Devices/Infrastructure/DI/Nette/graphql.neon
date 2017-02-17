@@ -1,0 +1,106 @@
+# GraphQL queries are hierarchical and composed, describing a tree of information.
+# While Scalar types describe the leaf values of these hierarchical queries, Objects describe the intermediate levels.
+
+graphql:
+	queries:
+		allWeatherStations:
+			arguments:
+				first: Int
+				after: String
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\NewGraphQL\AllWeatherStationsQuery
+			next: WeatherStationsConnection
+
+		weatherStation:
+			arguments:
+				id: ID!
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\NewGraphQL\WeatherStationQuery
+			next: WeatherStation
+
+
+	mutations:
+		createWeatherStation:
+			arguments:
+				name: String!
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\NewGraphQL\CreateWeatherStation
+			next: WeatherStation
+
+		createWeatherStationRecord:
+			arguments:
+				id: ID!
+				quantities: PhysicalQuantitiesInput!
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\NewGraphQL\CreateWeatherStationRecord
+			next: WeatherStationRecord
+
+
+	outputTypes:
+		WeatherStationsConnection:
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\NewGraphQL\WeatherStationsConnection
+			fields:
+				edges: [WeatherStationEdge]
+				totalCount: Int!
+				weatherStations: [WeatherStation]
+				series: [WeatherStationSeries]
+
+		WeatherStationEdge:
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\NewGraphQL\WeatherStationsEdge
+			fields:
+				cursor: String!
+				node: WeatherStation
+
+		WeatherStation:
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\NewGraphQL\WeatherStation
+			fields:
+				id: ID!
+				name: String!
+				allRecords: [WeatherStationRecord] #TODO: WeatherStationRecordsConnection
+
+		WeatherStationSeries:
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\NewGraphQL\WeatherStationSeries
+			fields:
+				id: ID!
+				name: String!
+
+		WeatherStationRecord:
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\NewGraphQL\WeatherStationRecord
+			fields:
+				id: ID!
+				indoorTemperature: Float
+				outdoorTemperature: Float
+
+
+	inputTypes:
+		PhysicalQuantitiesInput:
+			absolutePressure: Float
+			relativePressure: Float
+			pressureUnit: PressureUnit(default: PASCAL)
+			indoorTemperature: Float
+			outdoorTemperature: Float
+			temperatureUnit: TemperatureUnit(default: CELSIUS)
+			indoorHumidity: Float
+			outdoorHumidity: Float
+			humidityUnit: HumidityUnit(default: PERCENTAGE)
+			windSpeed: Float
+			windAzimuth: Float
+			windGust: Float
+			windSpeedUnit: WindSpeedUnit(default: KMH)
+
+
+	enums:
+		PressureUnit:
+			ATM: Adeira\Connector\PhysicalUnits\DomainModel\Pressure\Units\Atm
+			BAR: Adeira\Connector\PhysicalUnits\DomainModel\Pressure\Units\Bar
+			PASCAL: Adeira\Connector\PhysicalUnits\DomainModel\Pressure\Units\Pascal
+			TORR: Adeira\Connector\PhysicalUnits\DomainModel\Pressure\Units\Torr
+
+		TemperatureUnit:
+			CELSIUS: Adeira\Connector\PhysicalUnits\DomainModel\Temperature\Units\Celsius
+			FAHRENHEIT: Adeira\Connector\PhysicalUnits\DomainModel\Temperature\Units\Fahrenheit
+			KELVIN: Adeira\Connector\PhysicalUnits\DomainModel\Temperature\Units\Kelvin
+
+		HumidityUnit:
+			PERCENTAGE: Adeira\Connector\PhysicalUnits\DomainModel\Humidity\Units\Percentage
+
+		WindSpeedUnit:
+			KMH: Adeira\Connector\PhysicalUnits\DomainModel\Speed\Units\Kmh
+			MPH: Adeira\Connector\PhysicalUnits\DomainModel\Speed\Units\Mph
+			MS: Adeira\Connector\PhysicalUnits\DomainModel\Speed\Units\Ms

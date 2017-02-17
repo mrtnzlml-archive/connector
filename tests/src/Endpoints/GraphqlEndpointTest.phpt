@@ -2,7 +2,7 @@
 
 namespace Adeira\Connector\Tests\Endpoints;
 
-use Adeira\Connector\GraphQL\Bridge\Application\Responses\GraphqlErrorResponse;
+use Adeira\Connector\GraphQL\Infrastructure\Delivery\Http\Nette\GraphqlErrorResponse;
 use Nette\Application\Responses\JsonResponse;
 use Nette\Http\Response as HttpResponse;
 use Tester\Assert;

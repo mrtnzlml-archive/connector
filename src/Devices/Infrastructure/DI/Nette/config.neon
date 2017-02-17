@@ -1,3 +1,7 @@
+includes:
+	- graphql.neon
+
+
 doctrine.orm:
 	connection:
 		types:
@@ -33,25 +37,3 @@ serviceBus:
 symfony.console:
 	commands:
 		- Adeira\Connector\Devices\Infrastructure\Delivery\Console\Symfony\RecievePacketCommand
-
-
-graphql:
-	types:
-		# INPUT TYPE:
-		- Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Input\PhysicalQuantitiesInput
-		# OUTPUT TYPE:
-		- Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Type\(
-			WeatherStationRecordType
-			WeatherStationsConnectionType
-			WeatherStationsEdgeType
-			WeatherStationSeriesType
-			WeatherStationType
-		)
-		# QUERY TYPE:
-		- Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Query\(
-			AllWeatherStationsQuery
-			WeatherStationQuery
-		)
-		# MUTATION TYPE:
-		- Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Mutation\CreateWeatherStation
-		- Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Mutation\CreateWeatherStationRecord

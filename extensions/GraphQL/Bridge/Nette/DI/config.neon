@@ -1,8 +1,0 @@
-symfony.console:
-	commands:
-		- Adeira\Connector\GraphQL\Console\QueryCommand
-
-
-graphql:
-	types:
-		- Adeira\Connector\GraphQL\Delivery\API\GraphQL\Query\TestQuery

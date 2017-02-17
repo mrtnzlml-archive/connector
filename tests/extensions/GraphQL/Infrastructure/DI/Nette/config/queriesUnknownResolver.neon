@@ -1,0 +1,4 @@
+graphql:
+    queries:
+        QueryName:
+        	resolver: UnknownResolver

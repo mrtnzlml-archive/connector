@@ -1,0 +1,17 @@
+symfony.console:
+	commands:
+		- Adeira\Connector\GraphQL\Infrastructure\Delivery\Console\Symfony\QueryCommand
+
+
+graphql:
+	queries:
+		test:
+			resolver: Adeira\Connector\GraphQL\Infrastructure\Delivery\API\GraphQL\TestQuery
+			next: TestCase
+
+	outputTypes:
+		TestCase:
+			resolver: Adeira\Connector\GraphQL\Infrastructure\Delivery\API\GraphQL\TestCase
+			fields:
+				exception: ID!
+				success: ID!

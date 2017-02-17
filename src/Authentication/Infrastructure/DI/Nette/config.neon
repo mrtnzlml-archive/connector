@@ -1,3 +1,7 @@
+includes:
+	- graphql.neon
+
+
 parameters:
 	authentication:
 		#TODO: neverzovat!
@@ -30,13 +34,3 @@ services:
 symfony.console:
 	commands:
 		- Adeira\Connector\Authentication\Infrastructure\Delivery\Console\Symfony\CreateUserCommand
-
-
-graphql:
-	types:
-		# OUTPUT TYPE:
-		- Adeira\Connector\Authentication\Infrastructure\Delivery\API\GraphQL\UserType
-		# QUERY TYPE:
-		- Adeira\Connector\Authentication\Infrastructure\Delivery\API\GraphQL\Query\SingleUserQuery
-		# MUTATION TYPE:
-		- Adeira\Connector\Authentication\Infrastructure\Delivery\API\GraphQL\Mutation\LoginMutation
