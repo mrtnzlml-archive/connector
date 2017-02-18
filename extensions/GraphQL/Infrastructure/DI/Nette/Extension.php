@@ -19,13 +19,19 @@ final class Extension extends \Adeira\CompilerExtension
 	public function loadConfiguration()
 	{
 		$builder = $this->getContainerBuilder();
-		$config = $this->config;
+		$config = $this->validateConfig([
+			'enums' => [],
+			'outputTypes' => [],
+			'inputTypes' => [],
+			'queries' => [],
+			'mutations' => [],
+		]);
 
-		$enums = $config['enums'] ?? [];
-		$outputTypes = $config['outputTypes'] ?? [];
-		$inputTypes = $config['inputTypes'] ?? [];
-		$queries = $config['queries'] ?? [];
-		$mutations = $config['mutations'] ?? [];
+		$enums = $config['enums'];
+		$outputTypes = $config['outputTypes'];
+		$inputTypes = $config['inputTypes'];
+		$queries = $config['queries'];
+		$mutations = $config['mutations'];
 
 		$this->registerEnums($builder, $enums);
 		$this->registerOutputTypes($builder, $outputTypes);
@@ -46,12 +52,7 @@ final class Extension extends \Adeira\CompilerExtension
 			$builder
 				->addDefinition($this->prefix("enum.$enumName"))
 				->setClass(\GraphQL\Type\Definition\EnumType::class)
-				->setArguments([
-					'config' => [
-						'name' => $enumName,
-						'values' => EnumBuilder::buildEnumValues($enumDetails),
-					],
-				]);
+				->setArguments(EnumBuilder::buildEnumArrayStructure($enumName, $enumDetails));
 		}
 	}
 
@@ -164,7 +165,7 @@ final class Extension extends \Adeira\CompilerExtension
 				);
 			}
 
-			if(!class_exists($queryDetails['resolver'])) {
+			if (!class_exists($queryDetails['resolver'])) {
 				throw new \Adeira\Connector\GraphQL\Infrastructure\DI\Exception\ResolverNotDefined(
 					"Resolver class defined in '{$this->prefix('queries')}.$queryName' does not exist."
 				);
@@ -182,7 +183,7 @@ final class Extension extends \Adeira\CompilerExtension
 
 			$fields[$queryName] = [
 				'type' => $this->getTypeByName($queryDetails['next']),
-				'resolve' => $builder->addDefinition($this->prefix('queryResolver.'.$queryName))->setClass($queryDetails['resolver']),
+				'resolve' => $builder->addDefinition($this->prefix('queryResolver.' . $queryName))->setClass($queryDetails['resolver']),
 			];
 			if (isset($queryDetails['arguments'])) {
 				$fields[$queryName]['args'] = $this->buildArguments($queryDetails['arguments']);
@@ -211,7 +212,7 @@ final class Extension extends \Adeira\CompilerExtension
 				);
 			}
 
-			if(!class_exists($mutationDetails['resolver'])) {
+			if (!class_exists($mutationDetails['resolver'])) {
 				throw new \Adeira\Connector\GraphQL\Infrastructure\DI\Exception\ResolverNotDefined(
 					"Resolver class defined in '{$this->prefix('mutations')}.$mutationName' does not exist."
 				);

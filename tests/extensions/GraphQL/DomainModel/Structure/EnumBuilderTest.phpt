@@ -13,7 +13,18 @@ require getenv('BOOTSTRAP');
 final class EnumBuilderTest extends \Adeira\Connector\Tests\TestCase
 {
 
-	public function testValuesBuild()
+	public function testBuildEnumArrayStructure()
+	{
+		$result = EnumBuilder::buildEnumArrayStructure('EnumName', []);
+		Assert::same([
+			'config' => [
+				'name' => 'EnumName',
+				'values' => [],
+			],
+		], $result);
+	}
+
+	public function testBuildEnumValues()
 	{
 		$result = EnumBuilder::buildEnumValues([
 			'ATM' => 'Value\AtmClass',
