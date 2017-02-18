@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Adeira\Connector\Devices\Infrastructure\Delivery\API\NewGraphQL;
+namespace Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL;
 
 use Adeira\Connector\Devices\Application\Service\WeatherStation\CountAllWeatherStations;
 use Adeira\Connector\Devices\Application\Service\WeatherStation\ViewAllWeatherStationSeries;

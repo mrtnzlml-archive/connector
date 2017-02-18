@@ -7,13 +7,13 @@ graphql:
 			arguments:
 				first: Int
 				after: String
-			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\NewGraphQL\AllWeatherStationsQuery
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\AllWeatherStationsQuery
 			next: WeatherStationsConnection
 
 		weatherStation:
 			arguments:
 				id: ID!
-			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\NewGraphQL\WeatherStationQuery
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStationQuery
 			next: WeatherStation
 
 
@@ -21,20 +21,20 @@ graphql:
 		createWeatherStation:
 			arguments:
 				name: String!
-			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\NewGraphQL\CreateWeatherStation
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\CreateWeatherStation
 			next: WeatherStation
 
 		createWeatherStationRecord:
 			arguments:
 				id: ID!
 				quantities: PhysicalQuantitiesInput!
-			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\NewGraphQL\CreateWeatherStationRecord
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\CreateWeatherStationRecord
 			next: WeatherStationRecord
 
 
 	outputTypes:
 		WeatherStationsConnection:
-			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\NewGraphQL\WeatherStationsConnection
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStationsConnection
 			fields:
 				edges: [WeatherStationEdge]
 				totalCount: Int!
@@ -42,26 +42,26 @@ graphql:
 				series: [WeatherStationSeries]
 
 		WeatherStationEdge:
-			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\NewGraphQL\WeatherStationsEdge
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStationsEdge
 			fields:
 				cursor: String!
 				node: WeatherStation
 
 		WeatherStation:
-			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\NewGraphQL\WeatherStation
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStation
 			fields:
 				id: ID!
 				name: String!
 				allRecords: [WeatherStationRecord] #TODO: WeatherStationRecordsConnection
 
 		WeatherStationSeries:
-			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\NewGraphQL\WeatherStationSeries
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStationSeries
 			fields:
 				id: ID!
 				name: String!
 
 		WeatherStationRecord:
-			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\NewGraphQL\WeatherStationRecord
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStationRecord
 			fields:
 				id: ID!
 				indoorTemperature: Float
