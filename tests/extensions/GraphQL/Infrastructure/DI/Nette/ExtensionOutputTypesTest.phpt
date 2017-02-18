@@ -35,6 +35,34 @@ final class ExtensionOutputTypesTest extends \Adeira\Connector\Tests\TestCase
 		$container = ContainerBuilder::createContainer(__DIR__ . '/config/outputTypes.neon');
 		$outputType = $container->getByType(\Adeira\Connector\Tests\GraphQL\Infrastructure\DI\Nette\OutputType::class);
 		Assert::same(42, $outputType->totalCount());
+
+		/** @var \GraphQL\Type\Definition\ObjectType $inputType */
+		$inputType = $container->getService('graphql.outputType.TypeName');
+		Assert::equal([
+			'name' => 'TypeName',
+			'fields' => [
+				'totalCount' => [
+					'type' => \GraphQL\Type\Definition\Type::listOf(\GraphQL\Type\Definition\Type::nonNull(\GraphQL\Type\Definition\Type::int())),
+					'resolve' => [
+						$container->getService('graphql.outputTypeResolver.TypeName'),
+						'totalCount',
+					],
+				],
+				'allRecords' => [
+					'type' => \GraphQL\Type\Definition\Type::listOf(\GraphQL\Type\Definition\Type::string()),
+					'resolve' => [
+						$container->getService('graphql.outputTypeResolver.TypeName'),
+						'allRecords',
+					],
+					'args' => [
+						'id' => [
+							'type' => \GraphQL\Type\Definition\Type::nonNull(\GraphQL\Type\Definition\Type::id()),
+						],
+						'name' => ['type' => \GraphQL\Type\Definition\Type::string()],
+					],
+				],
+			],
+		], $inputType->config);
 	}
 
 }

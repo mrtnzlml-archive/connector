@@ -10,4 +10,9 @@ final class OutputType
 		return 42;
 	}
 
+	public function allRecords()
+	{
+		//TODO: test
+	}
+
 }

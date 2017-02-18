@@ -46,9 +46,32 @@ final class OutputTypesExtensionStub
 				);
 			}
 
+			if (is_array($fieldDetails) && isset($fieldDetails['next'], $fieldDetails['arguments'])) { // output type with 'arguments' and 'next'
+				$type = $fieldDetails['next'];
+			} else { // simple output type definition
+				$type = $fieldDetails;
+			}
+
 			$output[$fieldName] = [
-				'type' => $extension->resolveGraphQLType($fieldDetails),
+				'type' => $extension->resolveGraphQLType($type),
 				'resolve' => [$resolverDefinition, $fieldName],
+			];
+			if (isset($fieldDetails['arguments'])) {
+				$output[$fieldName]['args'] = $this->buildArguments($extension, $fieldDetails['arguments']);
+			}
+		}
+		return $output;
+	}
+
+	/**
+	 * FIXME: this is just copy-paste!
+	 */
+	private function buildArguments(Extension $extension, array $arguments)
+	{
+		$output = [];
+		foreach ($arguments as $argumentName => $argumentDetails) {
+			$output[$argumentName] = [
+				'type' => $extension->resolveGraphQLType($argumentDetails),
 			];
 		}
 		return $output;
