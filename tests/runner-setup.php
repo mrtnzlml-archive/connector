@@ -19,7 +19,7 @@ $runner->outputHandlers[] = new class ($runner) extends \Tester\Runner\Output\Co
 	{
 		$outputs = [
 			Runner::PASSED => Dumper::color('green', '✔ ' . $testName),
-			Runner::SKIPPED => Dumper::color('olive', 's ' . $testName) . "($message)",
+			Runner::SKIPPED => Dumper::color('olive', 's ' . $testName) . " ($message)",
 			Runner::FAILED => Dumper::color('red', '✖ ' . $testName) . "\n" . $this->indent($message, 3) . "\n",
 		];
 		echo $this->indent($outputs[$result], 2) . PHP_EOL;
