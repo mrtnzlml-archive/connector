@@ -1,6 +1,9 @@
 graphql:
 	queries:
 		QueryName:
+			arguments:
+				first: Int
+				after: String
 			resolver: Adeira\Connector\Tests\GraphQL\Infrastructure\DI\Nette\QueryResolver
 			next: OutputType
 

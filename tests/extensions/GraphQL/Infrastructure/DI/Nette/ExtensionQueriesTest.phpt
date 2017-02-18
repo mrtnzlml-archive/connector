@@ -52,6 +52,22 @@ final class ExtensionQueriesTest extends \Adeira\Connector\Tests\TestCase
 		$container = ContainerBuilder::createContainer(__DIR__ . '/config/queries.neon');
 		$outputType = $container->getByType(\Adeira\Connector\Tests\GraphQL\Infrastructure\DI\Nette\QueryResolver::class);
 		Assert::same('Adeira\Connector\Tests\GraphQL\Infrastructure\DI\Nette\QueryResolver::__invoke', $outputType());
+
+		/** @var \GraphQL\Type\Definition\ObjectType $inputType */
+		$inputType = $container->getService('graphql.query');
+		Assert::same([
+			'name' => 'Query',
+			'fields' => [
+				'QueryName' => [
+					'type' => $container->getService('graphql.outputType.OutputType'),
+					'resolve' => $container->getService('graphql.queryResolver.QueryName'),
+					'args' => [
+						'first' => ['type' => \GraphQL\Type\Definition\Type::int()],
+						'after' => ['type' => \GraphQL\Type\Definition\Type::string()],
+					],
+				],
+			],
+		], $inputType->config);
 	}
 
 }
