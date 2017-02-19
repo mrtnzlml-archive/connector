@@ -3,6 +3,7 @@
 namespace Adeira\Connector\GraphQL\Infrastructure\Delivery\Console\Symfony;
 
 use Adeira\Connector\Authentication\DomainModel\User\UserId;
+use Adeira\Connector\GraphQL\Context;
 use Adeira\Connector\GraphQL\SchemaFactory;
 use Symfony\Component\Console\Input\{
 	InputArgument, InputInterface, InputOption
@@ -49,7 +50,7 @@ GraphQL
 			$this->schemaFactory->build(),
 			$requestString,
 			NULL,
-			UserId::createFromString($input->getArgument('userId'))
+			new Context(UserId::createFromString($input->getArgument('userId')))
 		);
 		$style = new SymfonyStyle($input, $output);
 		$style->block(json_encode($graphResponse, JSON_PRETTY_PRINT));
