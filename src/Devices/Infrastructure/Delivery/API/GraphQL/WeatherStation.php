@@ -28,11 +28,13 @@ final class WeatherStation
 
 	public function allRecords(WS $ws, array $args, Context $context)
 	{
+		$first = $args['first']; // first is required
+
 		$this->allWsRecords->buffer($ws);
 
 		$userId = $context->userId();
-		return new \GraphQL\Deferred(function () use ($userId, $ws) {
-			return $this->allWsRecords->execute($userId, $ws->id());
+		return new \GraphQL\Deferred(function () use ($userId, $ws, $first) {
+			return $this->allWsRecords->execute($userId, $ws->id(), $first);
 		});
 	}
 

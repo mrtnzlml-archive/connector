@@ -35,15 +35,20 @@ final class DoctrineAllWeatherStationRecords implements IAllWeatherStationRecord
 		return Stub::wrap($qb);
 	}
 
-	public function ofWeatherStation(WeatherStation $weatherStation): Stub
+	public function ofWeatherStation(WeatherStation $weatherStation, int $recordsLimit = 1000): Stub
 	{
 		$qb = $this->em->createQueryBuilder();
 		$qb->select($dqlAlias = 'wsr')->from(WeatherStationRecord::class, $dqlAlias);
 		$qb->where("$dqlAlias.weatherStationId = :stationId")->setParameter(':stationId', (string)$weatherStation->id());
+		$qb->setMaxResults($recordsLimit);
 		return Stub::wrap($qb);
 	}
 
-	public function ofAllWeatherStations(array $weatherStations): array
+	/**
+	 * Returns limited number of records for each weather station.
+	 * Output format is array indexed by weather station ID with array of records (limited).
+	 */
+	public function ofAllWeatherStations(array $weatherStations, int $limitForEach = 1000): array
 	{
 		/** @var WeatherStation[] $weatherStations */
 		$weatherStations = (function (WeatherStation ...$weatherStations) {
@@ -55,13 +60,27 @@ final class DoctrineAllWeatherStationRecords implements IAllWeatherStationRecord
 			$weatherStationIds[] = (string)$weatherStation->id();
 		}
 
-		$qb = $this->em->createQueryBuilder();
-		$qb->select($dqlAlias = 'wsr')->from(WeatherStationRecord::class, $dqlAlias);
-		$qb->where($qb->expr()->in('wsr.weatherStationId', $weatherStationIds));
+		$rsmBuilder = new \Doctrine\ORM\Query\ResultSetMappingBuilder($this->em);
+		$rsmBuilder->addRootEntityFromClassMetadata(WeatherStationRecord::class, 'wsr');
+
+		$sql = <<<SQL
+SELECT {$rsmBuilder->generateSelectClause()}
+FROM weather_stations 
+INNER JOIN LATERAL (
+    SELECT * FROM weather_stations_records 
+    WHERE weather_station_id = weather_stations.id 
+    limit :limitForEach
+) wsr ON TRUE
+WHERE weather_stations.id IN (:weatherStationIds)
+SQL;
+
+		$query = $this->em->createNativeQuery($sql, $rsmBuilder);
+		$query->setParameter(':weatherStationIds', $weatherStationIds);
+		$query->setParameter(':limitForEach', $limitForEach);
 
 		$result = [];
 		/** @var WeatherStationRecord $record */
-		foreach ($qb->getQuery()->getResult() as $record) {
+		foreach ($query->getResult() as $record) {
 			$result[(string)$record->weatherStationId()][] = $record;
 		}
 

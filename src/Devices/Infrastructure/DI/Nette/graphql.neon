@@ -52,7 +52,10 @@ graphql:
 			fields:
 				id: ID!
 				name: String!
-				allRecords: [WeatherStationRecord] #TODO: WeatherStationRecordsConnection
+				allRecords:
+					arguments:
+						first: Int!
+					next: [WeatherStationRecord] #TODO: WeatherStationRecordsConnection (?)
 
 		WeatherStationSeries:
 			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStationSeries

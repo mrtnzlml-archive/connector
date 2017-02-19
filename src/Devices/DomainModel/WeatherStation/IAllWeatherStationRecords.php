@@ -11,13 +11,13 @@ interface IAllWeatherStationRecords
 
 	public function withId(WeatherStation $weatherStation, WeatherStationRecordId $recordId): Stub;
 
-	public function ofWeatherStation(WeatherStation $weatherStation): Stub;
+	public function ofWeatherStation(WeatherStation $weatherStation, int $recordsLimit = 1000): Stub;
 
 	/**
 	 * @param WeatherStation[] $weatherStations
 	 * @return WeatherStationRecord[][] indexed by ID of weather station
 	 */
-	public function ofAllWeatherStations(array $weatherStations): array;
+	public function ofAllWeatherStations(array $weatherStations, int $limitForEachStation = 1000): array;
 
 	public function nextIdentity(): WeatherStationRecordId;
 

@@ -61,9 +61,6 @@ final class Stub
 		$this->stubProcessor->after($identifier, $this->orientationKey, $this->orientationDirection);
 	}
 
-	/**
-	 * @return array|int
-	 */
 	public function hydrate($hydrationMode = IStubProcessor::HYDRATE_OBJECT)
 	{
 		return $this->stubProcessor->hydrate($hydrationMode);
