@@ -5,11 +5,16 @@ namespace Adeira\Connector\Devices\Application\Service\WeatherStation;
 use Adeira\Connector\Authentication\DomainModel\User\UserId;
 use Adeira\Connector\Authentication\Infrastructure\DomainModel\Owner\UserIdOwnerService;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\{
-	IAllWeatherStationRecords, WeatherStationRecord, WeatherStationRecordId
+	IAllWeatherStationRecords, IAllWeatherStations, WeatherStationId, WeatherStationRecord, WeatherStationRecordId
 };
 
 final class ViewSingleWeatherStationRecord
 {
+
+	/**
+	 * @var \Adeira\Connector\Devices\DomainModel\WeatherStation\IAllWeatherStations
+	 */
+	private $allWeatherStations;
 
 	/**
 	 * @var \Adeira\Connector\Devices\DomainModel\WeatherStation\IAllWeatherStationRecords
@@ -21,16 +26,23 @@ final class ViewSingleWeatherStationRecord
 	 */
 	private $ownerService;
 
-	public function __construct(IAllWeatherStationRecords $allRecords, UserIdOwnerService $ownerService)
+	public function __construct(IAllWeatherStations $allWeatherStations, IAllWeatherStationRecords $allRecords, UserIdOwnerService $ownerService)
 	{
+		$this->allWeatherStations = $allWeatherStations;
 		$this->allRecords = $allRecords;
 		$this->ownerService = $ownerService;
 	}
 
-	public function execute(UserId $userId, WeatherStationRecordId $recordId): WeatherStationRecord
+	public function execute(UserId $userId, WeatherStationId $weatherStationId, WeatherStationRecordId $recordId): WeatherStationRecord
 	{
 		$owner = $this->ownerService->existingOwner($userId);
-		return $this->allRecords->withId($owner, $recordId)->hydrateOne();
+		$weatherStation = $this->allWeatherStations->withId($owner, $weatherStationId)->hydrateOne();
+
+		if (!$owner->id()->equals($weatherStation->ownerId())) {
+			throw new \InvalidArgumentException('User is not authorized to view this weather station.');
+		}
+
+		return $this->allRecords->withId($weatherStation, $recordId)->hydrateOne();
 	}
 
 }

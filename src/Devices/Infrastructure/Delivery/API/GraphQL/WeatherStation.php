@@ -28,7 +28,7 @@ final class WeatherStation
 
 	public function allRecords(WS $ws, array $args, Context $context)
 	{
-		$this->allWsRecords->buffer($ws->id());
+		$this->allWsRecords->buffer($ws);
 
 		$userId = $context->userId();
 		return new \GraphQL\Deferred(function () use ($userId, $ws) {

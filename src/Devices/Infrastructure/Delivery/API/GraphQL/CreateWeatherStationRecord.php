@@ -59,7 +59,7 @@ final class CreateWeatherStationRecord
 		$wsrId = WeatherStationRecordId::create();
 		$this->commandBus->dispatch(new Command\CreateWeatherStationRecord(
 			$wsrId,
-			WeatherStationId::createFromString($args['id']),
+			$wsId = WeatherStationId::createFromString($args['id']),
 			$context->userId(),
 			new PhysicalQuantities(
 				new Pressure(
@@ -84,6 +84,7 @@ final class CreateWeatherStationRecord
 
 		return $this->singleRecord->execute(
 			$context->userId(),
+			$wsId,
 			$wsrId
 		);
 	}

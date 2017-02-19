@@ -2,10 +2,9 @@
 
 namespace Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine;
 
-use Adeira\Connector\Authentication\DomainModel\Owner\Owner;
 use Adeira\Connector\Common\DomainModel\Stub;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\{
-	IAllWeatherStationRecords, WeatherStationId, WeatherStationRecord, WeatherStationRecordId
+	IAllWeatherStationRecords, WeatherStation, WeatherStationRecord, WeatherStationRecordId
 };
 use Doctrine\ORM;
 
@@ -27,28 +26,37 @@ final class DoctrineAllWeatherStationRecords implements IAllWeatherStationRecord
 		$this->em->persist($aWeatherStationRecord);
 	}
 
-	public function withId(Owner $owner, WeatherStationRecordId $recordId): Stub
+	public function withId(WeatherStation $weatherStation, WeatherStationRecordId $recordId): Stub
 	{
-		//TODO: owner
-
 		$qb = $this->em->createQueryBuilder();
 		$qb->select($dqlAlis = 'wsr')->from(WeatherStationRecord::class, $dqlAlis);
-		$qb->where("$dqlAlis.id = :wid")->setParameter(':wid', $recordId);
+		$qb->where("$dqlAlis.id = :recordId")->setParameter(':recordId', $recordId);
+		$qb->andWhere("$dqlAlis.weatherStationId = :stationId")->setParameter(':stationId', (string)$weatherStation->id());
 		return Stub::wrap($qb);
 	}
 
-	public function ofWeatherStationId(WeatherStationId $weatherStationId): array
+	public function ofWeatherStation(WeatherStation $weatherStation): Stub
 	{
 		$qb = $this->em->createQueryBuilder();
-		$qb->select('wsr')->from(WeatherStationRecord::class, 'wsr');
-		$qb->where('wsr.weatherStationId = :wsid')->setParameter(':wsid', $weatherStationId);
-		return $qb->getQuery()->getResult();
+		$qb->select($dqlAlias = 'wsr')->from(WeatherStationRecord::class, $dqlAlias);
+		$qb->where("$dqlAlias.weatherStationId = :stationId")->setParameter(':stationId', (string)$weatherStation->id());
+		return Stub::wrap($qb);
 	}
 
-	public function ofAllWeatherStationIds(array $weatherStationIds): array
+	public function ofAllWeatherStations(array $weatherStations): array
 	{
+		/** @var WeatherStation[] $weatherStations */
+		$weatherStations = (function (WeatherStation ...$weatherStations) {
+			return $weatherStations;
+		})(...$weatherStations);
+
+		$weatherStationIds = [];
+		foreach ($weatherStations as $weatherStation) {
+			$weatherStationIds[] = (string)$weatherStation->id();
+		}
+
 		$qb = $this->em->createQueryBuilder();
-		$qb->select('wsr')->from(WeatherStationRecord::class, 'wsr'/*, 'wsr.weatherStationId'*/);
+		$qb->select($dqlAlias = 'wsr')->from(WeatherStationRecord::class, $dqlAlias);
 		$qb->where($qb->expr()->in('wsr.weatherStationId', $weatherStationIds));
 
 		$result = [];
