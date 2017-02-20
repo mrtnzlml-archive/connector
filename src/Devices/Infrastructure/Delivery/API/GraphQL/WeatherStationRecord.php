@@ -32,4 +32,14 @@ final class WeatherStationRecord
 		return $wsr->temperature()->outdoor();
 	}
 
+	public function indoorHumidity(Record $wsr): ?float
+	{
+		return $wsr->humidity()->indoor();
+	}
+
+	public function outdoorHumidity(Record $wsr): ?float
+	{
+		return $wsr->humidity()->indoor();
+	}
+
 }

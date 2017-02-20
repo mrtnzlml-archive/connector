@@ -71,6 +71,8 @@ graphql:
 				relativePressure: Float
 				indoorTemperature: Float
 				outdoorTemperature: Float
+				indoorHumidity: Float
+				outdoorHumidity: Float
 
 
 	inputTypes:

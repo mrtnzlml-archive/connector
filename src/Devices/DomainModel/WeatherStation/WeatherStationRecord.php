@@ -2,8 +2,12 @@
 
 namespace Adeira\Connector\Devices\DomainModel\WeatherStation;
 
-use Adeira\Connector\Devices\DomainModel\PhysicalQuantities;
-use Adeira\Connector\Devices\DomainModel\Pressure;
+use Adeira\Connector\Devices\DomainModel\{
+	Humidity,
+	PhysicalQuantities,
+	Pressure,
+	Temperature
+};
 
 /**
  * This is entity without mapping. Mapping is infrastructure detail.
@@ -50,9 +54,14 @@ final class WeatherStationRecord
 		return $this->physicalQuantities->pressure();
 	}
 
-	public function temperature()
+	public function temperature(): Temperature
 	{
 		return $this->physicalQuantities->temperature();
+	}
+
+	public function humidity(): Humidity
+	{
+		return $this->physicalQuantities->humidity();
 	}
 
 }
