@@ -67,6 +67,8 @@ graphql:
 			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStationRecord
 			fields:
 				id: ID!
+				absolutePressure: Float
+				relativePressure: Float
 				indoorTemperature: Float
 				outdoorTemperature: Float
 
