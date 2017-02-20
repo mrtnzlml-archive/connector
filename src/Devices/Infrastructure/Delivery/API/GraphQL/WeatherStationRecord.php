@@ -42,4 +42,19 @@ final class WeatherStationRecord
 		return $wsr->humidity()->indoor();
 	}
 
+	public function windSpeed(Record $wsr): ?float
+	{
+		return $wsr->wind()->speed();
+	}
+
+	public function windAzimuth(Record $wsr): ?float
+	{
+		return $wsr->wind()->directionAzimuth();
+	}
+
+	public function windGust(Record $wsr): ?float
+	{
+		return $wsr->wind()->gust();
+	}
+
 }

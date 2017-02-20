@@ -73,6 +73,9 @@ graphql:
 				outdoorTemperature: Float
 				indoorHumidity: Float
 				outdoorHumidity: Float
+				windSpeed: Float
+				windAzimuth: Float
+				windGust: Float
 
 
 	inputTypes:

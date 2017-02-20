@@ -6,7 +6,8 @@ use Adeira\Connector\Devices\DomainModel\{
 	Humidity,
 	PhysicalQuantities,
 	Pressure,
-	Temperature
+	Temperature,
+	Wind
 };
 
 /**
@@ -62,6 +63,11 @@ final class WeatherStationRecord
 	public function humidity(): Humidity
 	{
 		return $this->physicalQuantities->humidity();
+	}
+
+	public function wind(): Wind
+	{
+		return $this->physicalQuantities->wind();
 	}
 
 }
