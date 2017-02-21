@@ -32,7 +32,7 @@ final class Extension extends \Adeira\CompilerExtension
 		$enums = $config['enums'];
 
 		(new EnumsExtensionStub)->registerEnums($this, $enums);
-		(new OutputTypesExtensionStub)->registerOutputTypes($this, $config['outputTypes']);
+		(new OutputTypesExtensionStub)->registerOutputTypes($this, $config['outputTypes'], $enums);
 		(new InputTypesExtensionStub)->registerInputTypes($this, $config['inputTypes'], $enums);
 		(new QueriesExtensionStub)->registerQueries($this, $config['queries']);
 		(new MutationsExtensionStub)->registerQueries($this, $config['mutations']);

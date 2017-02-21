@@ -57,8 +57,21 @@ final class ExtensionOutputTypesTest extends \Adeira\Connector\Tests\TestCase
 					'args' => [
 						'id' => [
 							'type' => \GraphQL\Type\Definition\Type::nonNull(\GraphQL\Type\Definition\Type::id()),
+							'defaultValue' => NULL,
 						],
-						'name' => ['type' => \GraphQL\Type\Definition\Type::string()],
+						'name' => [
+							'type' => \GraphQL\Type\Definition\Type::string(),
+							'defaultValue' => 'test',
+						],
+						'fromEnum' => [
+							'type' => new \GraphQL\Type\Definition\EnumType([
+								'name' => 'EnumName',
+								'values' => [
+									'key' => 'value',
+								],
+							]),
+							'defaultValue' => 'value',
+						],
 					],
 				],
 			],

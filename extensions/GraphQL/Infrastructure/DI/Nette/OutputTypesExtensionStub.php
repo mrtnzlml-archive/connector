@@ -5,7 +5,7 @@ namespace Adeira\Connector\GraphQL\Infrastructure\DI\Nette;
 final class OutputTypesExtensionStub
 {
 
-	public function registerOutputTypes(Extension $extension, array $outputTypes)
+	public function registerOutputTypes(Extension $extension, array $outputTypes, array $allEnumValues)
 	{
 		$builder = $extension->getContainerBuilder();
 
@@ -29,13 +29,13 @@ final class OutputTypesExtensionStub
 				->setArguments([
 					'config' => [
 						'name' => $typeName,
-						'fields' => $this->buildOutputFields($extension, $typeDetails['fields'], $resolverDefinition),
+						'fields' => $this->buildOutputFields($extension, $typeDetails['fields'], $resolverDefinition, $allEnumValues),
 					],
 				]);
 		}
 	}
 
-	private function buildOutputFields(Extension $extension, array $fields, \Nette\DI\ServiceDefinition $resolverDefinition)
+	private function buildOutputFields(Extension $extension, array $fields, \Nette\DI\ServiceDefinition $resolverDefinition, array $allEnumValues)
 	{
 		$output = [];
 		foreach ($fields as $fieldName => $fieldDetails) {
@@ -57,7 +57,7 @@ final class OutputTypesExtensionStub
 				'resolve' => [$resolverDefinition, $fieldName],
 			];
 			if (isset($fieldDetails['arguments'])) {
-				$output[$fieldName]['args'] = $this->buildArguments($extension, $fieldDetails['arguments']);
+				$output[$fieldName]['args'] = $this->buildArguments($extension, $fieldDetails['arguments'], $allEnumValues);
 			}
 		}
 		return $output;
@@ -66,12 +66,25 @@ final class OutputTypesExtensionStub
 	/**
 	 * FIXME: this is just copy-paste!
 	 */
-	private function buildArguments(Extension $extension, array $arguments)
+	private function buildArguments(Extension $extension, array $arguments, array $allEnumValues)
 	{
 		$output = [];
 		foreach ($arguments as $argumentName => $argumentDetails) {
+
+			$defaultValue = NULL;
+			if ($argumentDetails instanceof \Nette\DI\Statement) {
+				$default = $argumentDetails->arguments['default'];
+				$argumentDetails = $argumentDetails->getEntity();
+				if ($extension->resolveGraphQLType($argumentDetails) instanceof \Nette\DI\Statement) { // It is scalar! ... Float(default: 1.0)
+					$defaultValue = $default;
+				} else { // Ok, it's not scalar - it MUST be enum then! ... PressureUnit(default: PASCAL)
+					$defaultValue = $allEnumValues[$argumentDetails][$default];
+				}
+			}
+
 			$output[$argumentName] = [
 				'type' => $extension->resolveGraphQLType($argumentDetails),
+				'defaultValue' => $defaultValue,
 			];
 		}
 		return $output;

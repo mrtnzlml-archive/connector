@@ -7,5 +7,10 @@ graphql:
 				allRecords:
 					arguments:
 						id: ID!
-						name: String
+						name: String(default: test)
+						fromEnum: EnumName(default: key)
 					next: [String]
+
+	enums:
+		EnumName:
+			key: value
