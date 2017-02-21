@@ -71,7 +71,8 @@ final class WeatherStation
 		return new WeatherStationRecord(
 			$weatherStationRecordId,
 			$this->id,
-			$physicalQuantities
+			$physicalQuantities,
+			new \DateTimeImmutable('now')
 		);
 	}
 

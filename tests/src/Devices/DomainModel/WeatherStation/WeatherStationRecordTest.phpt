@@ -37,7 +37,8 @@ final class WeatherStationRecordTest extends \Adeira\Connector\Tests\TestCase
 				new Temperature(NULL, NULL),
 				new Humidity(NULL, NULL),
 				new Wind(NULL, NULL, NULL)
-			)
+			),
+			new \DateTimeImmutable('now')
 		);
 	}
 

@@ -33,11 +33,21 @@ final class WeatherStationRecord
 	 */
 	private $physicalQuantities;
 
-	public function __construct(WeatherStationRecordId $recordId, WeatherStationId $weatherStationId, PhysicalQuantities $quantities)
-	{
+	/**
+	 * @var \DateTimeImmutable
+	 */
+	private $creationDate;
+
+	public function __construct(
+		WeatherStationRecordId $recordId,
+		WeatherStationId $weatherStationId,
+		PhysicalQuantities $quantities,
+		\DateTimeImmutable $creationDate
+	) {
 		$this->id = $recordId;
 		$this->weatherStationId = $weatherStationId;
 		$this->physicalQuantities = $quantities;
+		$this->creationDate = $creationDate;
 	}
 
 	public function id(): WeatherStationRecordId
@@ -68,6 +78,11 @@ final class WeatherStationRecord
 	public function wind(): Wind
 	{
 		return $this->physicalQuantities->wind();
+	}
+
+	public function creationDate(): \DateTimeImmutable
+	{
+		return $this->creationDate;
 	}
 
 }

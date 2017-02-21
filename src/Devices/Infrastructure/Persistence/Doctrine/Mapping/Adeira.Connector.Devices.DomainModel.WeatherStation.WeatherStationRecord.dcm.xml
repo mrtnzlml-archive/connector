@@ -17,6 +17,7 @@
 
 		<field name="weatherStationId" column="weather_station_id" type="WeatherStationId"/>
 		<embedded name="physicalQuantities" use-column-prefix="false" class="Adeira\Connector\Devices\DomainModel\PhysicalQuantities"/>
+		<field name="creationDate" column="creation_date" type="datetime"/>
 
 	</entity>
 

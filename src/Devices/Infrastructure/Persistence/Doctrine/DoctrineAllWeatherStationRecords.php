@@ -84,9 +84,10 @@ INNER JOIN LATERAL (
   SELECT indexedRecords.*
   FROM (
     -- select every row related to the weather_station_id (with window sequential rowNo):
-    SELECT row_number() OVER(ORDER BY id) AS rowNo, * -- FIXME: order by insertion date + index (weather_station_id?)
+    SELECT row_number() OVER() AS rowNo, *
     FROM weather_stations_records
     WHERE weather_station_id = weather_stations.id
+    ORDER BY creation_date DESC
     LIMIT :initialSelectLimit
   ) indexedRecords
   WHERE (indexedRecords.rowNo % :gapSize = 0)
