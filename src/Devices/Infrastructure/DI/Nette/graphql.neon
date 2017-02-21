@@ -67,15 +67,39 @@ graphql:
 			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStationRecord
 			fields:
 				id: ID!
-				absolutePressure: Float
-				relativePressure: Float
-				indoorTemperature: Float
-				outdoorTemperature: Float
-				indoorHumidity: Float
-				outdoorHumidity: Float
-				windSpeed: Float
+				absolutePressure:
+					arguments:
+						pressureUnit: PressureUnit(default: PASCAL)
+					next: Float
+				relativePressure:
+					arguments:
+						pressureUnit: PressureUnit(default: PASCAL)
+					next: Float
+				indoorTemperature:
+					arguments:
+						temperatureUnit: TemperatureUnit(default: CELSIUS)
+					next: Float
+				outdoorTemperature:
+					arguments:
+						temperatureUnit: TemperatureUnit(default: CELSIUS)
+					next: Float
+				indoorHumidity:
+					arguments:
+						humidityUnit: HumidityUnit(default: PERCENTAGE)
+					next: Float
+				outdoorHumidity:
+					arguments:
+						humidityUnit: HumidityUnit(default: PERCENTAGE)
+					next: Float
+				windSpeed:
+					arguments:
+						windSpeedUnit: WindSpeedUnit(default: KMH)
+					next: Float
 				windAzimuth: Float
-				windGust: Float
+				windGust:
+					arguments:
+						windSpeedUnit: WindSpeedUnit(default: KMH)
+					next: Float
 
 
 	inputTypes:

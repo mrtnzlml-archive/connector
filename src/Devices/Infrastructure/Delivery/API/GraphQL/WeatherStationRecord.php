@@ -12,39 +12,39 @@ final class WeatherStationRecord
 		return $wsr->id();
 	}
 
-	public function absolutePressure(Record $wsr): ?float
+	public function absolutePressure(Record $wsr, array $args): ?float
 	{
-		return $wsr->pressure()->absolute();
+		return $wsr->pressure()->absolute($args['pressureUnit']);
 	}
 
-	public function relativePressure(Record $wsr): ?float
+	public function relativePressure(Record $wsr, array $args): ?float
 	{
-		return $wsr->pressure()->relative();
+		return $wsr->pressure()->relative($args['pressureUnit']);
 	}
 
-	public function indoorTemperature(Record $wsr): ?float
+	public function indoorTemperature(Record $wsr, array $args): ?float
 	{
-		return $wsr->temperature()->indoor();
+		return $wsr->temperature()->indoor($args['temperatureUnit']);
 	}
 
-	public function outdoorTemperature(Record $wsr): ?float
+	public function outdoorTemperature(Record $wsr, array $args): ?float
 	{
-		return $wsr->temperature()->outdoor();
+		return $wsr->temperature()->outdoor($args['temperatureUnit']);
 	}
 
-	public function indoorHumidity(Record $wsr): ?float
+	public function indoorHumidity(Record $wsr, array $args): ?float
 	{
-		return $wsr->humidity()->indoor();
+		return $wsr->humidity()->indoor($args['humidityUnit']);
 	}
 
-	public function outdoorHumidity(Record $wsr): ?float
+	public function outdoorHumidity(Record $wsr, array $args): ?float
 	{
-		return $wsr->humidity()->indoor();
+		return $wsr->humidity()->indoor($args['humidityUnit']);
 	}
 
-	public function windSpeed(Record $wsr): ?float
+	public function windSpeed(Record $wsr, array $args): ?float
 	{
-		return $wsr->wind()->speed();
+		return $wsr->wind()->speed($args['windSpeedUnit']);
 	}
 
 	public function windAzimuth(Record $wsr): ?float
@@ -52,9 +52,9 @@ final class WeatherStationRecord
 		return $wsr->wind()->directionAzimuth();
 	}
 
-	public function windGust(Record $wsr): ?float
+	public function windGust(Record $wsr, array $args): ?float
 	{
-		return $wsr->wind()->gust();
+		return $wsr->wind()->gust($args['windSpeedUnit']);
 	}
 
 }
