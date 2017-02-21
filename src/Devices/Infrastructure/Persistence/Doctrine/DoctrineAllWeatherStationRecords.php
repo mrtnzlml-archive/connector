@@ -69,7 +69,7 @@ FROM weather_stations
 INNER JOIN LATERAL (
     SELECT * FROM weather_stations_records 
     WHERE weather_station_id = weather_stations.id 
-    limit :limitForEach
+    LIMIT :limitForEach
 ) wsr ON TRUE
 WHERE weather_stations.id IN (:weatherStationIds)
 SQL;
