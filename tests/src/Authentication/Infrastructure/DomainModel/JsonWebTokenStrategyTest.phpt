@@ -16,7 +16,7 @@ final class JsonWebTokenStrategyTest extends \Tester\TestCase
 
 	public function testThatGenerateTokenWorks()
 	{
-		$jwts = new JsonWebTokenStrategy('token');
+		$jwts = new JsonWebTokenStrategy('token', 1);
 		$generatedToken = $jwts->generateNewToken(UserId::createFromString('00000000-0000-0000-0000-100000000000'));
 
 		$payload = (array)$jwts->decodeToken($generatedToken);
