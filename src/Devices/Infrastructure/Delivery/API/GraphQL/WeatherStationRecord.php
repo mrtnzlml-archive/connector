@@ -39,7 +39,7 @@ final class WeatherStationRecord
 
 	public function outdoorHumidity(Record $wsr, array $args): ?float
 	{
-		return $wsr->humidity()->indoor($args['humidityUnit']);
+		return $wsr->humidity()->outdoor($args['humidityUnit']);
 	}
 
 	public function windSpeed(Record $wsr, array $args): ?float
