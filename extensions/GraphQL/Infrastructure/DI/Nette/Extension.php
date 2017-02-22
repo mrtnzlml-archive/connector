@@ -22,12 +22,17 @@ final class Extension extends \Adeira\CompilerExtension
 	{
 		$builder = $this->getContainerBuilder();
 		$config = $this->validateConfig([
+			'scalars' => [],
 			'enums' => [],
 			'outputTypes' => [],
 			'inputTypes' => [],
 			'queries' => [],
 			'mutations' => [],
 		]);
+
+		foreach ($config['scalars'] as $scalarName => $scalarClass) {
+			$builder->addDefinition($this->prefix('scalar.' . $scalarName))->setClass($scalarClass);
+		}
 
 		$enums = $config['enums'];
 
@@ -90,13 +95,21 @@ final class Extension extends \Adeira\CompilerExtension
 	public function getTypeDefinition(string $name): \Nette\DI\ServiceDefinition
 	{
 		$builder = $this->getContainerBuilder();
-		if ($builder->hasDefinition($this->prefix('inputType.' . $name))) {
-			return $builder->getDefinition($this->prefix('inputType.' . $name));
-		} elseif ($builder->hasDefinition($this->prefix('outputType.' . $name))) {
-			return $builder->getDefinition($this->prefix('outputType.' . $name));
-		} else {
-			return $builder->getDefinition($this->prefix('enum.' . $name));
+		$definition = NULL;
+		$allowedNamespaces = ['scalar', 'inputType', 'outputType', 'enum'];
+		foreach ($allowedNamespaces as $namespace) {
+			if ($builder->hasDefinition($this->prefix("$namespace.$name"))) {
+				$definition = $builder->getDefinition($this->prefix("$namespace.$name"));
+				break;
+			}
 		}
+
+		if ($definition === NULL) {
+			throw new \Adeira\Connector\GraphQL\Infrastructure\DI\Exception\UnknownTypeDefinition(
+				"Cannot find definition for type '$name'. Did you register it in configuration file?"
+			);
+		}
+		return $definition;
 	}
 
 }

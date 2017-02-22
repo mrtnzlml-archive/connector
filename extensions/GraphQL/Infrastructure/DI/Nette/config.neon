@@ -4,6 +4,9 @@ symfony.console:
 
 
 graphql:
+	scalars:
+		DateTime: Adeira\Connector\GraphQL\DomainModel\DateTimeType
+
 	queries:
 		test:
 			resolver: Adeira\Connector\GraphQL\Infrastructure\Delivery\API\GraphQL\TestQuery
