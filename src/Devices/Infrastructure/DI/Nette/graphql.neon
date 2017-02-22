@@ -68,6 +68,7 @@ graphql:
 			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStationRecord
 			fields:
 				id: ID!
+				creationDate: DateTime
 				absolutePressure:
 					arguments:
 						pressureUnit: PressureUnit(default: PASCAL)

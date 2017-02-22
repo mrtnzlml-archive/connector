@@ -82,6 +82,9 @@ final class WeatherStationRecord
 
 	public function creationDate(): \DateTimeImmutable
 	{
+		if ($this->creationDate instanceof \DateTime) {
+			return \DateTimeImmutable::createFromMutable($this->creationDate);
+		}
 		return $this->creationDate;
 	}
 

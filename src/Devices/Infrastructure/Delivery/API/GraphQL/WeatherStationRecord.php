@@ -12,6 +12,11 @@ final class WeatherStationRecord
 		return $wsr->id();
 	}
 
+	public function creationDate(Record $wsr): \DateTimeImmutable
+	{
+		return $wsr->creationDate();
+	}
+
 	public function absolutePressure(Record $wsr, array $args): ?float
 	{
 		return $wsr->pressure()->absolute($args['pressureUnit']);
