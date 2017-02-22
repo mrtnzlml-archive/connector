@@ -76,9 +76,13 @@ final class ExtensionTest extends \Adeira\Connector\Tests\TestCase
 			$response
 		);
 
-		Assert::exception(function () {
-			$this->extension()->resolveGraphQLType('int'); //lowercase (not native GraphQL type)
-		}, \Nette\DI\MissingServiceException::class, "Service 'graphql.enum.int' not found.");
+		Assert::exception(
+			function () {
+				$this->extension()->resolveGraphQLType('int'); //lowercase (not native GraphQL type)
+			},
+			\Adeira\Connector\GraphQL\Infrastructure\DI\Exception\UnknownTypeDefinition::class,
+			"Cannot find definition for type 'int'. Did you register it in configuration file?"
+		);
 	}
 
 	public function testNonNullScalarResolve()
