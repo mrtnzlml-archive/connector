@@ -4,6 +4,7 @@ namespace Adeira\Connector\Devices\DomainModel\WeatherStation;
 
 use Adeira\Connector\Common;
 use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * This is value object. Value object must be immutable. Object values shouldn’t be able to be altered over their
@@ -21,14 +22,19 @@ use Ramsey\Uuid\Uuid;
 final class WeatherStationSeriesId extends Common\DomainModel\IdentifiableDomainObject
 {
 
-	private function __construct(Uuid $anId = NULL)
+	private function __construct(UuidInterface $anId = NULL)
 	{
 		$this->setId($anId ? $anId->toString() : Uuid::uuid4()->toString());
 	}
 
-	public static function create(Uuid $anId = NULL): self
+	public static function create(UuidInterface $anId = NULL): self
 	{
 		return new self($anId);
+	}
+
+	public static function createFromString(string $anId): self
+	{
+		return new self(Uuid::fromString($anId));
 	}
 
 	public function equals(Common\DomainModel\IdentifiableDomainObject $id): bool
