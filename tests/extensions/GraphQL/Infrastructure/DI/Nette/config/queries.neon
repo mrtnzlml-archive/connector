@@ -5,7 +5,7 @@ graphql:
 				first: Int
 				after: String
 			resolver: Adeira\Connector\Tests\GraphQL\Infrastructure\DI\Nette\QueryResolver
-			next: OutputType
+			next: [OutputType]
 
 	outputTypes:
 		OutputType:

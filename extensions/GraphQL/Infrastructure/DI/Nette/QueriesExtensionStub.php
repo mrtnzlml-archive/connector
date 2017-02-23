@@ -35,7 +35,7 @@ final class QueriesExtensionStub
 			}
 
 			$fields[$queryName] = [
-				'type' => $extension->getTypeDefinition($queryDetails['next']),
+				'type' => $extension->resolveGraphQLType($queryDetails['next']),
 				'resolve' => $builder->addDefinition($extension->prefix('queryResolver.' . $queryName))->setClass($queryDetails['resolver']),
 			];
 			if (isset($queryDetails['arguments'])) {

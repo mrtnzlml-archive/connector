@@ -55,11 +55,11 @@ final class ExtensionQueriesTest extends \Adeira\Connector\Tests\TestCase
 
 		/** @var \GraphQL\Type\Definition\ObjectType $inputType */
 		$inputType = $container->getService('graphql.query');
-		Assert::same([
+		Assert::equal([
 			'name' => 'Query',
 			'fields' => [
 				'QueryName' => [
-					'type' => $container->getService('graphql.outputType.OutputType'),
+					'type' => \GraphQL\Type\Definition\Type::listOf($container->getService('graphql.outputType.OutputType')),
 					'resolve' => $container->getService('graphql.queryResolver.QueryName'),
 					'args' => [
 						'first' => ['type' => \GraphQL\Type\Definition\Type::int()],
