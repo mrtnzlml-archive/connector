@@ -56,7 +56,7 @@ final class ViewAllWeatherStationRecords
 			if ($result === NULL) {
 				$result = $this->allRecords->ofAllWeatherStations(array_values($this->weatherStationsBuffer), $recordsForEachStation);
 			}
-			return $result[$weatherStationId->id()] ?? NULL;
+			return $result[$weatherStationId->toString()] ?? NULL;
 		}
 	}
 

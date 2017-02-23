@@ -10,7 +10,7 @@ abstract class IdentifiableDomainObject
 	 */
 	private $id;
 
-	public function id(): string
+	public function toString(): string
 	{
 		return $this->id;
 	}
@@ -22,7 +22,7 @@ abstract class IdentifiableDomainObject
 
 	public function __toString(): string
 	{
-		return $this->id();
+		return $this->toString();
 	}
 
 	abstract public function equals(IdentifiableDomainObject $id): bool;

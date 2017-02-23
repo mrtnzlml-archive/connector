@@ -33,7 +33,7 @@ final class JsonWebTokenStrategy implements DomainModel\ITokenStrategy
 		$newPayload = [
 			'iat' => time(), // Issued At
 			'exp' => time() + ($this->expireAfterHours * 3600), // Expiration Time (1 hour = 3600 secs)
-			'uuid' => $userId->id(),
+			'uuid' => $userId->toString(),
 		];
 		return \Firebase\JWT\JWT::encode($newPayload, $this->privateJsonWebToken, $this->allowedAlgs);
 	}

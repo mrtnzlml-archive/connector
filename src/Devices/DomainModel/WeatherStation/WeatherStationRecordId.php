@@ -39,7 +39,7 @@ final class WeatherStationRecordId extends Common\DomainModel\IdentifiableDomain
 
 	public function equals(Common\DomainModel\IdentifiableDomainObject $id): bool
 	{
-		return $this->id() === $id->id();
+		return $this->toString() === $id->toString();
 	}
 
 }

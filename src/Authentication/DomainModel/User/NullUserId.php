@@ -32,7 +32,7 @@ final class NullUserId extends UserId
 		return parent::createFromString(self::$NIL);
 	}
 
-	public function id(): string
+	public function toString(): string
 	{
 		return self::$NIL;
 	}

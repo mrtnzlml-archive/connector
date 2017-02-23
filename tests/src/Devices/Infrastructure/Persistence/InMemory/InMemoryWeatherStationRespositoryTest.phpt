@@ -46,7 +46,7 @@ final class InMemoryWeatherStationRespositoryTest extends \Adeira\Connector\Test
 		$repository = new InMemoryAllWeatherStations;
 		$id = $repository->nextIdentity();
 		Assert::type(WeatherStationId::class, $id);
-		Assert::type('string', $id->id());
+		Assert::type('string', $id->toString());
 	}
 
 	private function createWeatherStation(?WeatherStationId $weatherStationId = NULL, ?Owner $owner = NULL)

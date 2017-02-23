@@ -39,7 +39,7 @@ final class InMemoryUserRepositoryTest extends \Tester\TestCase
 		$repository = new InMemoryUserRepository;
 		$id = $repository->nextIdentity();
 		Assert::type(UserId::class, $id);
-		Assert::type('string', $id->id());
+		Assert::type('string', $id->toString());
 	}
 
 }
