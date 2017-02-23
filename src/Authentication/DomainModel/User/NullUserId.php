@@ -20,21 +20,21 @@ use Ramsey\Uuid\UuidInterface;
 final class NullUserId extends UserId
 {
 
-	private static $NIL = \Ramsey\Uuid\Uuid::NIL;
+	private const NIL = \Ramsey\Uuid\Uuid::NIL;
 
 	public static function create(UuidInterface $anId = NULL): UserId
 	{
-		return self::createFromString(self::$NIL);
+		return self::createFromString(self::NIL);
 	}
 
 	public static function createFromString(string $anId): UserId
 	{
-		return parent::createFromString(self::$NIL);
+		return parent::createFromString(self::NIL);
 	}
 
 	public function toString(): string
 	{
-		return self::$NIL;
+		return self::NIL;
 	}
 
 }
