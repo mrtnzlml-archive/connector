@@ -1,0 +1,14 @@
+# GraphQL queries are hierarchical and composed, describing a tree of information.
+# While Scalar types describe the leaf values of these hierarchical queries, Objects describe the intermediate levels.
+
+graphql:
+	queries:
+		allCameras:
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera\AllCamerasResolver
+			next: [Camera]
+
+	outputTypes:
+		Camera:
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera\CameraResolver
+			fields:
+				id: ID!

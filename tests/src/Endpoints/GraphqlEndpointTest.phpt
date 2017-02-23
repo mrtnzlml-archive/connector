@@ -108,6 +108,7 @@ final class GraphqlEndpointTest extends \Adeira\Connector\Tests\TestCase
 				'__type' => [
 					'fields' => [
 						['name' => 'user'],
+						['name' => 'allCameras'],
 						['name' => 'allWeatherStations'],
 						['name' => 'weatherStation'],
 						['name' => 'test'],
