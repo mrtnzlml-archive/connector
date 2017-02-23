@@ -1,5 +1,5 @@
 includes:
-	- graphql.neon
+	- WeatherStationsGraphQL.neon
 
 
 doctrine.orm:
