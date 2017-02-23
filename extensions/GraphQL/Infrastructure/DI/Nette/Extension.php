@@ -92,7 +92,7 @@ final class Extension extends \Adeira\CompilerExtension
 		return $type;
 	}
 
-	public function getTypeDefinition(string $name): \Nette\DI\ServiceDefinition
+	private function getTypeDefinition(string $name): \Nette\DI\ServiceDefinition
 	{
 		$builder = $this->getContainerBuilder();
 		$definition = NULL;

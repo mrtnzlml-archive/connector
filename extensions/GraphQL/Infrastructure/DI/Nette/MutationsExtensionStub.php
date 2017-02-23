@@ -35,7 +35,7 @@ final class MutationsExtensionStub
 			}
 
 			$fields[$mutationName] = [
-				'type' => $extension->getTypeDefinition($mutationDetails['next']),
+				'type' => $extension->resolveGraphQLType($mutationDetails['next']),
 				'resolve' => $builder->addDefinition($extension->prefix($mutationName))->setClass($mutationDetails['resolver']),
 			];
 			if (isset($mutationDetails['arguments'])) {
