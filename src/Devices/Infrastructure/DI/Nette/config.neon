@@ -9,6 +9,8 @@ doctrine.orm:
 			Pressure: Adeira\Connector\PhysicalUnits\Infrastructure\DomainModel\Doctrine\DoctrinePressureType
 			Speed: Adeira\Connector\PhysicalUnits\Infrastructure\DomainModel\Doctrine\DoctrineSpeedType
 			Temperature: Adeira\Connector\PhysicalUnits\Infrastructure\DomainModel\Doctrine\DoctrineTemperatureType
+
+			CameraId: Adeira\Connector\Devices\Infrastructure\DomainModel\Camera\Doctrine\DoctrineCameraIdType
 			WeatherStationId: Adeira\Connector\Devices\Infrastructure\DomainModel\WeatherStation\Doctrine\DoctrineWeatherStationIdType
 			WeatherStationRecordId: Adeira\Connector\Devices\Infrastructure\DomainModel\WeatherStation\Doctrine\DoctrineWeatherStationRecordIdType
 			WeatherStationSeriesId: Adeira\Connector\Devices\Infrastructure\DomainModel\WeatherStation\Doctrine\DoctrineWeatherStationSeriesIdType
