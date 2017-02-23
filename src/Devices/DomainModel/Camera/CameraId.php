@@ -38,9 +38,4 @@ final class CameraId extends Common\DomainModel\IdentifiableDomainObject
 		return new self(Uuid::fromString($anId));
 	}
 
-	public function equals(Common\DomainModel\IdentifiableDomainObject $id): bool
-	{
-		return $this->toString() === $id->toString();
-	}
-
 }

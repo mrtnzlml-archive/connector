@@ -37,9 +37,4 @@ final class WeatherStationRecordId extends Common\DomainModel\IdentifiableDomain
 		return new self(Uuid::fromString($anId));
 	}
 
-	public function equals(Common\DomainModel\IdentifiableDomainObject $id): bool
-	{
-		return $this->toString() === $id->toString();
-	}
-
 }
