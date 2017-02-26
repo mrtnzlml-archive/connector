@@ -69,7 +69,7 @@ final class DateTimeTypeTest extends \Adeira\Connector\Tests\TestCase
 	/**
 	 * Functions parseValue() and parseLiteral() should behave exactly the same!
 	 */
-	public function testPerseValueException()
+	public function testParseValueException()
 	{
 		$message = 'Not a valid ISO 8601 date format.';
 		Assert::exception(function () {
