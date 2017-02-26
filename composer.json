@@ -7,6 +7,7 @@
     "adeira/compiler-extension": "^2.0",
     "boldtrn/jsonb-bundle": "^1.1",
     "doctrine/orm": "^2.5",
+    "dg/composer-cleaner": "^0.3.0",
     "firebase/php-jwt": "^4.0",
     "latte/latte": "^2.4",
     "nette/application": "^v2.4",
