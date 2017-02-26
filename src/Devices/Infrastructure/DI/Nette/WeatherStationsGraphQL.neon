@@ -55,7 +55,8 @@ graphql:
 				allRecords:
 					arguments:
 						first: Int!
-#						gap: Int!(default: 1)
+						gap: Int(default: 1)
+						untilDate: DateTime
 					next: [WeatherStationRecord] #TODO: WeatherStationRecordsConnection (?)
 
 		WeatherStationSeries:

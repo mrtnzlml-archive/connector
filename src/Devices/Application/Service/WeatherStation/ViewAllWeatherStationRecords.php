@@ -40,7 +40,7 @@ final class ViewAllWeatherStationRecords
 	/**
 	 * @return \Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStationRecord[]|null
 	 */
-	public function execute(UserId $userId, WeatherStationId $weatherStationId, int $recordsForEachStation)
+	public function execute(UserId $userId, WeatherStationId $weatherStationId, \DateTimeImmutable $until, int $recordsForEachStation, int $gap)
 	{
 		$owner = $this->ownerService->existingOwner($userId);
 		$weatherStation = $this->allWeatherStations->withId($owner, $weatherStationId)->hydrateOne();
@@ -50,11 +50,11 @@ final class ViewAllWeatherStationRecords
 		}
 
 		if (empty($this->weatherStationsBuffer)) {
-			return $this->allRecords->ofWeatherStation($weatherStation, $recordsForEachStation)->hydrate();
+			return $this->allRecords->ofSingleWeatherStation($weatherStation, $until, $recordsForEachStation, $gap);
 		} else {
 			static $result = NULL; //memoization
 			if ($result === NULL) {
-				$result = $this->allRecords->ofAllWeatherStations(array_values($this->weatherStationsBuffer), $recordsForEachStation);
+				$result = $this->allRecords->ofAllWeatherStations(array_values($this->weatherStationsBuffer), $until, $recordsForEachStation, $gap);
 			}
 			return $result[$weatherStationId->toString()] ?? NULL;
 		}

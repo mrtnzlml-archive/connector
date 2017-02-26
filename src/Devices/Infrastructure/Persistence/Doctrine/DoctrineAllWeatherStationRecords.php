@@ -35,13 +35,10 @@ final class DoctrineAllWeatherStationRecords implements IAllWeatherStationRecord
 		return Stub::wrap($qb);
 	}
 
-	public function ofWeatherStation(WeatherStation $weatherStation, int $recordsLimit = 1000): Stub
+	public function ofSingleWeatherStation(WeatherStation $weatherStation, \DateTimeImmutable $untilDate, int $recordsLimit = 1000, int $gap = 1): ?array
 	{
-		$qb = $this->em->createQueryBuilder();
-		$qb->select($dqlAlias = 'wsr')->from(WeatherStationRecord::class, $dqlAlias);
-		$qb->where("$dqlAlias.weatherStationId = :stationId")->setParameter(':stationId', (string)$weatherStation->id());
-		$qb->setMaxResults($recordsLimit);
-		return Stub::wrap($qb);
+		$resultArray = $this->ofAllWeatherStations([$weatherStation], $untilDate, $recordsLimit, $gap);
+		return $resultArray ? $resultArray[$weatherStation->id()->toString()] : NULL;
 	}
 
 	/**
@@ -60,7 +57,7 @@ final class DoctrineAllWeatherStationRecords implements IAllWeatherStationRecord
 	 *   AND (t.rowNo % 2) = 0
 	 *   AND t.rowNo <= 10;
 	 */
-	public function ofAllWeatherStations(array $weatherStations, int $limitForEach = 1000): array
+	public function ofAllWeatherStations(array $weatherStations, \DateTimeImmutable $untilDate, int $limitForEachStation = 1000, int $gapSize = 1): array
 	{
 		/** @var WeatherStation[] $weatherStations */
 		$weatherStations = (function (WeatherStation ...$weatherStations) {
@@ -86,7 +83,7 @@ INNER JOIN LATERAL (
     -- select every row related to the weather_station_id (with window sequential rowNo):
     SELECT row_number() OVER() AS rowNo, *
     FROM weather_stations_records
-    WHERE weather_station_id = weather_stations.id
+    WHERE weather_station_id = weather_stations.id AND creation_date <= :untilDate
     ORDER BY creation_date DESC
     LIMIT :initialSelectLimit
   ) indexedRecords
@@ -96,12 +93,11 @@ INNER JOIN LATERAL (
 WHERE weather_stations.id IN (:weatherStationIds);
 SQL;
 
-		$gapSize = 1; //FIXME: configurable (internal calculation only? - probably not)
-
 		$query = $this->em->createNativeQuery($sql, $rsmBuilder);
-		$query->setParameter(':recordsPerStation', $limitForEach);
+		$query->setParameter(':untilDate', $untilDate);
+		$query->setParameter(':recordsPerStation', $limitForEachStation);
 		$query->setParameter(':gapSize', $gapSize);
-		$query->setParameter(':initialSelectLimit', $limitForEach * $gapSize); // always must be (recordsPerStation * gapSize)
+		$query->setParameter(':initialSelectLimit', $limitForEachStation * $gapSize); // always must be (recordsPerStation * gapSize)
 		$query->setParameter(':weatherStationIds', $weatherStationIds);
 
 		$result = [];

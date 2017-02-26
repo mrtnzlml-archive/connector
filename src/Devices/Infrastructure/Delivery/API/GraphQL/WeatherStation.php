@@ -29,12 +29,14 @@ final class WeatherStation
 	public function allRecords(WS $ws, array $args, Context $context)
 	{
 		$first = $args['first']; // first is required
+		$gap = $args['gap'] ?? 1;
+		$untilDate = $args['untilDate'] ?? new \DateTimeImmutable;
 
 		$this->allWsRecords->buffer($ws);
 
 		$userId = $context->userId();
-		return new \GraphQL\Deferred(function () use ($userId, $ws, $first) {
-			return $this->allWsRecords->execute($userId, $ws->id(), $first);
+		return new \GraphQL\Deferred(function () use ($userId, $ws, $untilDate, $first, $gap) {
+			return $this->allWsRecords->execute($userId, $ws->id(), $untilDate, $first, $gap);
 		});
 	}
 
