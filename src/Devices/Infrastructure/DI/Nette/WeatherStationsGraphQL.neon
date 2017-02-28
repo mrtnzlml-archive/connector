@@ -38,6 +38,12 @@ graphql:
 			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStation\Mutation\RenameWeatherStation
 			next: WeatherStation
 
+		removeWeatherStation:
+			arguments:
+				stationId: ID!
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStation\Mutation\RemoveWeatherStation
+			next: WeatherStation
+
 	outputTypes:
 		WeatherStationsConnection:
 			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStationsConnection

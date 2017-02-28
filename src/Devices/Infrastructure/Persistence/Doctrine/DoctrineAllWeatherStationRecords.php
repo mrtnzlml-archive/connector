@@ -26,6 +26,13 @@ final class DoctrineAllWeatherStationRecords implements IAllWeatherStationRecord
 		$this->em->persist($aWeatherStationRecord);
 	}
 
+	public function purgeWeatherStation(WeatherStation $aStation)
+	{
+		$qb = $this->em->createQueryBuilder();
+		$qb->delete($dqlAlis = 'wsr')->from(WeatherStationRecord::class, $dqlAlis);
+		$qb->where("$dqlAlis.weatherStationId = :stationId")->setParameter(':stationId', (string)$aStation->id());
+	}
+
 	public function withId(WeatherStation $weatherStation, WeatherStationRecordId $recordId): Stub
 	{
 		$qb = $this->em->createQueryBuilder();

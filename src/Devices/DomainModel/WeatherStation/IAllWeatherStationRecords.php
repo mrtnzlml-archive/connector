@@ -9,6 +9,8 @@ interface IAllWeatherStationRecords
 
 	public function add(WeatherStationRecord $aWeatherStationRecord);
 
+	public function purgeWeatherStation(WeatherStation $aStation);
+
 	public function withId(WeatherStation $weatherStation, WeatherStationRecordId $recordId): Stub;
 
 	public function ofSingleWeatherStation(WeatherStation $weatherStation, \DateTimeImmutable $untilDate, int $recordsLimit = 1000, int $gap = 1): ?array;

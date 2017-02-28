@@ -37,6 +37,7 @@ serviceBus:
 	dispatchMap:
 		Adeira\Connector\Devices\Application\Service\WeatherStation\Command\CreateWeatherStation: Adeira\Connector\Devices\Application\Service\WeatherStation\Command\CreateWeatherStationHandler
 		Adeira\Connector\Devices\Application\Service\WeatherStation\Command\CreateWeatherStationRecord: Adeira\Connector\Devices\Application\Service\WeatherStation\Command\CreateWeatherStationRecordHandler
+		Adeira\Connector\Devices\Application\Service\WeatherStation\Command\RemoveWeatherStation: Adeira\Connector\Devices\Application\Service\WeatherStation\Command\RemoveWeatherStationHandler
 		Adeira\Connector\Devices\Application\Service\WeatherStation\Command\RenameWeatherStation: Adeira\Connector\Devices\Application\Service\WeatherStation\Command\RenameWeatherStationHandler
 
 

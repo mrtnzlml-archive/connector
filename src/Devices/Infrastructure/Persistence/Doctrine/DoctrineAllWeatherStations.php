@@ -5,7 +5,7 @@ namespace Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine;
 use Adeira\Connector\Authentication\DomainModel\Owner\Owner;
 use Adeira\Connector\Common\DomainModel\Stub;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\{
-	IAllWeatherStations, WeatherStation, WeatherStationId
+	IAllWeatherStationRecords, IAllWeatherStations, WeatherStation, WeatherStationId
 };
 use Doctrine\Common\Collections\Expr\Comparison;
 use Doctrine\ORM;
@@ -22,14 +22,26 @@ final class DoctrineAllWeatherStations implements IAllWeatherStations
 	 */
 	private $em;
 
-	public function __construct(ORM\EntityManagerInterface $em)
+	/**
+	 * @var \Adeira\Connector\Devices\DomainModel\WeatherStation\IAllWeatherStationRecords
+	 */
+	private $allRecords;
+
+	public function __construct(ORM\EntityManagerInterface $em, IAllWeatherStationRecords $allRecords)
 	{
 		$this->em = $em;
+		$this->allRecords = $allRecords; //FIXME: je to správně? Neměla by být tedy stanice + záznamy jeden agregát?
 	}
 
 	public function add(WeatherStation $aWeatherStation): void
 	{
 		$this->em->persist($aWeatherStation);
+	}
+
+	public function remove(WeatherStation $aWeatherStation): void
+	{
+		$this->em->remove($aWeatherStation);
+		$this->allRecords->purgeWeatherStation($aWeatherStation);
 	}
 
 	public function withId(Owner $owner, WeatherStationId $weatherStationId): Stub

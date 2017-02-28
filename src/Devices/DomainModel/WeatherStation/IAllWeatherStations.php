@@ -10,6 +10,8 @@ interface IAllWeatherStations
 
 	public function add(WeatherStation $aWeatherStation): void;
 
+	public function remove(WeatherStation $aWeatherStation): void;
+
 	public function withId(Owner $owner, WeatherStationId $weatherStationId): Stub;
 
 	public function belongingTo(Owner $owner): Stub;

@@ -26,6 +26,11 @@ final class InMemoryAllWeatherStations implements IAllWeatherStations
 		$this->memory->set((string)$aWeatherStation->id(), $aWeatherStation);
 	}
 
+	public function remove(WeatherStation $aWeatherStation): void
+	{
+		$this->memory->remove((string)$aWeatherStation->id());
+	}
+
 	public function withId(Owner $owner, WeatherStationId $weatherStationId): Stub
 	{
 		/** @var WeatherStation $weatherStation */
