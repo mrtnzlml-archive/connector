@@ -31,6 +31,12 @@ graphql:
 			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\CreateWeatherStationRecord
 			next: WeatherStationRecord
 
+		renameWeatherStation:
+			arguments:
+				stationId: ID!
+				newName: String!
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStation\Mutation\RenameWeatherStation
+			next: WeatherStation
 
 	outputTypes:
 		WeatherStationsConnection:

@@ -42,6 +42,11 @@ final class WeatherStation
 		$this->creationDate = $creationDate;
 	}
 
+	public function rename(string $newName): void
+	{
+		$this->deviceName = $newName;
+	}
+
 	public function id(): WeatherStationId
 	{
 		return $this->id;
