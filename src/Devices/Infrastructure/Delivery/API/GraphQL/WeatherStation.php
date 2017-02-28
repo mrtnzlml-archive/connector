@@ -29,7 +29,7 @@ final class WeatherStation
 	public function allRecords(WS $ws, array $args, Context $context)
 	{
 		$first = $args['first']; // first is required
-		$gap = $args['gap'] ?? 1;
+		$gap = $args['gap'] ? max(abs($args['gap']), 1) : 1;
 		$untilDate = $args['untilDate'] ?? new \DateTimeImmutable;
 
 		$this->allWsRecords->buffer($ws);
