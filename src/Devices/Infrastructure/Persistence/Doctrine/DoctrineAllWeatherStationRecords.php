@@ -81,13 +81,12 @@ INNER JOIN LATERAL (
   SELECT indexedRecords.*
   FROM (
     -- select every row related to the weather_station_id (with window sequential rowNo):
-    SELECT row_number() OVER() AS rowNo, *
+    SELECT row_number() OVER(ORDER BY creation_date DESC) AS rowNo, *
     FROM weather_stations_records
     WHERE weather_station_id = weather_stations.id AND creation_date <= :untilDate
-    ORDER BY creation_date DESC
     LIMIT :initialSelectLimit
   ) indexedRecords
-  WHERE (indexedRecords.rowNo % :gapSize = 0)
+  WHERE (indexedRecords.rowNo = 1 OR indexedRecords.rowNo % :gapSize = 0)
   LIMIT :recordsPerStation
 ) wsr ON TRUE
 WHERE weather_stations.id IN (:weatherStationIds);
