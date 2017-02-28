@@ -4,7 +4,7 @@ namespace Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine;
 
 use Adeira\Connector\Common\DomainModel\Stub;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\{
-	IAllWeatherStationRecords, WeatherStation, WeatherStationRecord, WeatherStationRecordId
+	IAllWeatherStationRecords, WeatherStation, WeatherStationId, WeatherStationRecord, WeatherStationRecordId
 };
 use Doctrine\ORM;
 
@@ -107,6 +107,14 @@ SQL;
 		}
 
 		return $result;
+	}
+
+	public function totalCount(WeatherStationId $stationId): int
+	{
+		$qb = $this->em->createQueryBuilder();
+		$qb->select('COUNT(wsr.id)')->from(WeatherStationRecord::class, 'wsr');
+		$qb->where('wsr.weatherStationId = :wsId')->setParameter(':wsId', $stationId);
+		return $qb->getQuery()->getSingleScalarResult();
 	}
 
 	public function nextIdentity(): WeatherStationRecordId

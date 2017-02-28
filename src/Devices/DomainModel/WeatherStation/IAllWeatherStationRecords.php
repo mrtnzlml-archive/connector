@@ -19,6 +19,8 @@ interface IAllWeatherStationRecords
 	 */
 	public function ofAllWeatherStations(array $weatherStations, \DateTimeImmutable $untilDate, int $limitForEachStation = 1000, int $gap = 1): array;
 
+	public function totalCount(WeatherStationId $weatherStationId): int;
+
 	public function nextIdentity(): WeatherStationRecordId;
 
 }

@@ -57,7 +57,14 @@ graphql:
 						first: Int!
 						gap: Int(default: 1)
 						untilDate: DateTime
-					next: [WeatherStationRecord] #TODO: WeatherStationRecordsConnection (?)
+					next: WeatherStationRecordsConnection
+
+		WeatherStationRecordsConnection:
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStationRecordsConnection
+			fields:
+				totalCount: Int!
+				returnedCount: Int!
+				records: [WeatherStationRecord]
 
 		WeatherStationSeries:
 			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStationSeries
