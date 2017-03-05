@@ -71,6 +71,6 @@ symfony.console:
 		- Doctrine\ORM\Tools\Console\Command\InfoCommand
 		- Doctrine\ORM\Tools\Console\Command\MappingDescribeCommand
 	helpers:
-#		db: Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper
+		db: Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper # dbal:run-sql
 		question: Symfony\Component\Console\Helper\QuestionHelper # migrations
 		em: Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper # doctrine
