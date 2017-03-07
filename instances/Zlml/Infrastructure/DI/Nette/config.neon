@@ -1,0 +1,11 @@
+# WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+# https://nette.org/security-warning
+
+
+application:
+	scanDirs: no
+	scanComposer: no
+
+
+php:
+	date.timezone: Europe/Prague

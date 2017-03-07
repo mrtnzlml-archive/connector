@@ -38,6 +38,9 @@
         "extensions/",
         "instances/Connector",
         "src/"
+      ],
+      "Adeira\\Zlml\\": [
+        "instances/Zlml"
       ]
     }
   },

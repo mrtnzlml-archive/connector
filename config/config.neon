@@ -24,6 +24,7 @@ extensions:
 	symfony.console: Adeira\Connector\Symfony\Console\DI\Extension
 	# Instances:
 	- Adeira\Connector\Infrastructure\DI\Nette\Extension
+	- Adeira\Zlml\Infrastructure\DI\Nette\Extension
 
 
 migrations:
