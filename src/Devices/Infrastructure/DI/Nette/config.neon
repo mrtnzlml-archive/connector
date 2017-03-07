@@ -21,12 +21,13 @@ services:
 	- Adeira\Connector\Devices\Application\Service\Camera\ViewAllCameras
 	- Adeira\Connector\Devices\Application\Service\WeatherStation\(
 		CountAllWeatherStations
-		ViewAllWeatherStationRecords
+		ViewAggregatedRecords
 		ViewAllWeatherStations
 		ViewAllWeatherStationSeries
 		ViewSingleWeatherStation
 		ViewSingleWeatherStationRecord
 	)
+	aggregatedWeatherStationRecords: Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\DoctrineAggregatedWeatherStationRecords
 	allCameras: Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\DoctrineAllCameras
 	allWeatherStationRecords: Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\DoctrineAllWeatherStationRecords
 	allWeatherStations: Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\DoctrineAllWeatherStations

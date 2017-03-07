@@ -2,7 +2,8 @@
 
 namespace Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL;
 
-use Adeira\Connector\Devices\Application\Service\WeatherStation\ViewAllWeatherStationRecords;
+use Adeira\Connector\Devices\Application\Service\WeatherStation\ViewAggregatedRecords;
+use Adeira\Connector\Devices\DomainModel\WeatherStation\RecordAggregationRange;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStation as WS;
 use Adeira\Connector\GraphQL\Context;
 
@@ -11,7 +12,7 @@ final class WeatherStation
 
 	private $allWsRecords;
 
-	public function __construct(ViewAllWeatherStationRecords $allWsRecords)
+	public function __construct(ViewAggregatedRecords $allWsRecords)
 	{
 		$this->allWsRecords = $allWsRecords;
 	}
@@ -29,15 +30,12 @@ final class WeatherStation
 	public function allRecords(WS $ws, array $args, Context $context)
 	{
 		$first = $args['first']; // first is required
-		$gap = $args['gap'] ? max(abs($args['gap']), 1) : 1;
 		$untilDate = $args['untilDate'] ?? new \DateTimeImmutable;
-
-		$this->allWsRecords->buffer($ws);
+		$aggregation = $args['aggregation'] ?? RecordAggregationRange::HOUR;
+		$aggregationEnum = RecordAggregationRange::get($aggregation);
 
 		$userId = $context->userId();
-		return new \GraphQL\Deferred(function () use ($userId, $ws, $untilDate, $first, $gap) {
-			return $this->allWsRecords->execute($userId, $ws->id(), $untilDate, $first, $gap);
-		});
+		return $this->allWsRecords->execute($userId, $ws->id(), $untilDate, $first, $aggregationEnum);
 	}
 
 }

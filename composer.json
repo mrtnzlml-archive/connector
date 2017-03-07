@@ -6,6 +6,7 @@
     "php": "^7.1",
     "adeira/compiler-extension": "^2.0",
     "boldtrn/jsonb-bundle": "^1.1",
+    "consistence/consistence": "^0.22.0",
     "doctrine/orm": "^2.5",
     "firebase/php-jwt": "^4.0",
     "latte/latte": "^2.4",

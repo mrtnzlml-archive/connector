@@ -67,7 +67,7 @@ graphql:
 				allRecords:
 					arguments:
 						first: Int!
-						gap: Int(default: 1)
+						aggregation: RecordsAggregation(default: hour)
 						untilDate: DateTime
 					next: WeatherStationRecordsConnection
 
@@ -87,8 +87,7 @@ graphql:
 		WeatherStationRecord:
 			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStationRecord
 			fields:
-				id: ID!
-				creationDate: DateTime
+				aggregatedDate: DateTime
 				absolutePressure:
 					arguments:
 						pressureUnit: PressureUnit(default: PASCAL)
@@ -142,6 +141,12 @@ graphql:
 
 
 	enums:
+		RecordsAggregation:
+			hour: hour
+			day: day
+			week: week
+			month: month
+
 		PressureUnit:
 			ATM: Adeira\Connector\PhysicalUnits\DomainModel\Pressure\Units\Atm
 			BAR: Adeira\Connector\PhysicalUnits\DomainModel\Pressure\Units\Bar
