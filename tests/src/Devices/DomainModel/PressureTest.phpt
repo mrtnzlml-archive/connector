@@ -34,7 +34,7 @@ final class PressureTest extends \Adeira\Connector\Tests\TestCase
 	{
 		$p = new Pressure(new Bar(100), new Torr(100));
 		Assert::same(10000000.0, $p->absolute());
-		Assert::equal(13332.2368421050, $p->relative()); // Tester\Assert::EPSILON = 1e-10
+		Assert::equal(13332.24, $p->relative()); // rounded to two decimal points
 	}
 
 	public function testNullability()

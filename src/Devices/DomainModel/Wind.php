@@ -24,7 +24,7 @@ final class Wind
 
 	public function speed(string $unit = Kmh::class): ?float
 	{
-		return $this->speed ? $this->speed->convertTo($unit)->value() : NULL;
+		return $this->nullableFloat($this->speed, $unit);
 	}
 
 	public function directionAzimuth(): ?float
@@ -34,7 +34,12 @@ final class Wind
 
 	public function gust(string $unit = Kmh::class): ?float
 	{
-		return $this->gust ? $this->gust->convertTo($unit)->value() : NULL;
+		return $this->nullableFloat($this->gust, $unit);
+	}
+
+	private function nullableFloat(?Speed $quantity, string $unit)
+	{
+		return $quantity ? round($quantity->convertTo($unit)->value(), 2) : NULL;
 	}
 
 }

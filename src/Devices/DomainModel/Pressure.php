@@ -22,12 +22,17 @@ final class Pressure
 
 	public function absolute(string $unit = Pascal::class): ?float
 	{
-		return $this->absolutePressure ? $this->absolutePressure->convertTo($unit)->value() : NULL;
+		return $this->nullableFloat($this->absolutePressure, $unit);
 	}
 
 	public function relative(string $unit = Pascal::class): ?float
 	{
-		return $this->relativePressure ? $this->relativePressure->convertTo($unit)->value() : NULL;
+		return $this->nullableFloat($this->relativePressure, $unit);
+	}
+
+	private function nullableFloat(?PressureQuantity $quantity, string $unit)
+	{
+		return $quantity ? round($quantity->convertTo($unit)->value(), 2) : NULL;
 	}
 
 }

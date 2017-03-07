@@ -22,12 +22,17 @@ final class Temperature
 
 	public function indoor(string $unit = Celsius::class): ?float
 	{
-		return $this->indoor ? $this->indoor->convertTo($unit)->value() : NULL;
+		return $this->nullableFloat($this->indoor, $unit);
 	}
 
 	public function outdoor(string $unit = Celsius::class): ?float
 	{
-		return $this->outdoor ? $this->outdoor->convertTo($unit)->value() : NULL;
+		return $this->nullableFloat($this->outdoor, $unit);
+	}
+
+	private function nullableFloat(?TemperatureQuantity $quantity, string $unit)
+	{
+		return $quantity ? round($quantity->convertTo($unit)->value(), 2) : NULL;
 	}
 
 }

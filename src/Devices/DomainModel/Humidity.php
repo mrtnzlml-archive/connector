@@ -21,12 +21,17 @@ final class Humidity
 
 	public function indoor(string $unit = Percentage::class): ?float
 	{
-		return $this->indoor ? $this->indoor->convertTo($unit)->value() : NULL;
+		return $this->nullableFloat($this->indoor, $unit);
 	}
 
 	public function outdoor(string $unit = Percentage::class): ?float
 	{
-		return $this->outdoor ? $this->outdoor->convertTo($unit)->value() : NULL;
+		return $this->nullableFloat($this->outdoor, $unit);
+	}
+
+	private function nullableFloat(?RelativeHumidity $quantity, string $unit)
+	{
+		return $quantity ? round($quantity->convertTo($unit)->value(), 2) : NULL;
 	}
 
 }
