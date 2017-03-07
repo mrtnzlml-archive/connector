@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Adeira\Connector\Endpoints\Infrastructure\Delivery\Http;
+namespace Adeira\Connector\Infrastructure\Delivery\Http;
 
 use Adeira\Connector\GraphQL\Infrastructure\Delivery\Http\Nette\GraphqlErrorResponse;
 use Nette\Application as NApplication;
@@ -37,7 +37,7 @@ final class GraphqlErrorEndpoint implements NApplication\IPresenter
 				$previousError = $error->getPrevious();
 				if ($previousError === NULL) {
 					$messages[] = $error;
-				} elseif ($previousError instanceof \Adeira\Connector\Endpoints\Application\Exceptions\BubbleUpGracefullyException) {
+				} elseif ($previousError instanceof \Adeira\Connector\Application\Exceptions\BubbleUpGracefullyException) {
 					return new GraphqlErrorResponse($previousError->getMessage(), $previousError->getCode());
 				} else {
 					return $this->internalServerError($error->getPrevious());
@@ -45,7 +45,7 @@ final class GraphqlErrorEndpoint implements NApplication\IPresenter
 			}
 			return new GraphqlErrorResponse($messages, IResponse::S422_UNPROCESSABLE_ENTITY, FALSE);
 
-		} elseif ($exc instanceof \Adeira\Connector\Endpoints\Application\Exceptions\BubbleUpGracefullyException) {
+		} elseif ($exc instanceof \Adeira\Connector\Application\Exceptions\BubbleUpGracefullyException) {
 
 			return new GraphqlErrorResponse($exc->getMessage(), $exc->getCode());
 

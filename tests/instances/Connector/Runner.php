@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Adeira\Connector\Tests\Endpoints;
+namespace Adeira\Connector\Tests;
 
 use Nette\Application\Application;
 use Nette\Application\IResponse;

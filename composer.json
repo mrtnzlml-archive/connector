@@ -35,6 +35,7 @@
     "psr-4": {
       "Adeira\\Connector\\": [
         "extensions/",
+        "instances/Connector",
         "src/"
       ]
     }

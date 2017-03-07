@@ -1,12 +1,8 @@
 # WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
 # https://nette.org/security-warning
 
-
-application:
-	scanDirs: no
-	errorPresenter: Connector:GraphqlError
-	mapping:
-		Connector: Adeira\Connector\Endpoints\Infrastructure\Delivery\Http\*Endpoint
+# In this file should be only configuration which can be shared accross instances.
+# Instance specific configurations are in each instance extension.
 
 
 doctrine.orm:
@@ -26,6 +22,8 @@ extensions:
 	migrations: Nextras\Migrations\Bridges\NetteDI\MigrationsExtension
 	serviceBus: Adeira\Connector\ServiceBus\Infrastructure\DI\Nette\Extension
 	symfony.console: Adeira\Connector\Symfony\Console\DI\Extension
+	# Instances:
+	- Adeira\Connector\Infrastructure\DI\Nette\Extension
 
 
 migrations:
@@ -38,10 +36,6 @@ migrations:
 
 parameters:
 	srcDir: %appDir%/src
-
-
-php:
-	date.timezone: Europe/Prague
 
 
 services:

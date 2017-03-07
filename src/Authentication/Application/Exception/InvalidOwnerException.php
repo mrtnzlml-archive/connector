@@ -4,7 +4,7 @@ namespace Adeira\Connector\Authentication\Application\Exception;
 
 use Nette\Http\IResponse;
 
-final class InvalidOwnerException extends \Adeira\Connector\Endpoints\Application\Exceptions\BubbleUpGracefullyException
+final class InvalidOwnerException extends \Adeira\Connector\Application\Exceptions\BubbleUpGracefullyException
 {
 
 	public function __construct()

@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Adeira\Connector\Endpoints\Application\Exceptions;
+namespace Adeira\Connector\Application\Exceptions;
 
 use Nette\Http\IResponse;
 

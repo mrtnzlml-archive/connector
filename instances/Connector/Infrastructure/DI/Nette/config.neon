@@ -1,0 +1,13 @@
+# WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+# https://nette.org/security-warning
+
+
+application:
+	scanDirs: no
+	errorPresenter: Connector:GraphqlError
+	mapping:
+		Connector: Adeira\Connector\Infrastructure\Delivery\Http\*Endpoint
+
+
+php:
+	date.timezone: Europe/Prague

@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Adeira\Connector\Tests\Endpoints;
+namespace Adeira\Connector\Tests;
 
 use Adeira\Connector\GraphQL\Infrastructure\Delivery\Http\Nette\GraphqlErrorResponse;
 use Nette\Application\Responses\JsonResponse;

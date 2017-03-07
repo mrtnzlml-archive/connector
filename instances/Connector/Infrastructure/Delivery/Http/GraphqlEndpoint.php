@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Adeira\Connector\Endpoints\Infrastructure\Delivery\Http;
+namespace Adeira\Connector\Infrastructure\Delivery\Http;
 
 use Adeira\Connector\Authentication\DomainModel\{
 	User\NullUserId, User\UserId

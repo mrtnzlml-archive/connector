@@ -28,7 +28,7 @@ final class JwtOwnerService
 			/** @var string $userId */
 			$userId = $payload->uuid;
 		} catch(\UnexpectedValueException $exc) {
-			throw new \Adeira\Connector\Endpoints\Application\Exceptions\BubbleUpGracefullyException(
+			throw new \Adeira\Connector\Application\Exceptions\BubbleUpGracefullyException(
 				$exc->getMessage(),
 				IResponse::S401_UNAUTHORIZED
 			);
