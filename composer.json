@@ -30,6 +30,7 @@
     "mrtnzlml/testbench": "dev-master",
     "nette/tester": "2.0.x-dev as v1.7",
     "phpstan/phpstan": "dev-master",
+    "ramsey/uuid-console": "^1.1",
     "slevomat/coding-standard": "dev-php7"
   },
   "autoload": {

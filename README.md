@@ -37,4 +37,18 @@ And use `-f` option:
 
     bin/console a:g:q f3cd1f41-42eb-4234-95d2-e89933c2552a -f test.graphql
 
+## Working with UUID
+
+    vendor/bin/uuid
+    vendor/bin/uuid generate 4
+    vendor/bin/uuid decode 4b56376a-19f7-4f98-a610-62ded75ea486
+
+## Running tests
+
+    tests/run
+
+Or alternatively with all checks:
+
+    bin/ci
+
 Have fun! :)
