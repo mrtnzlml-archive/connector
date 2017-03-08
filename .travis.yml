@@ -10,7 +10,7 @@ services:
   - postgresql
 
 addons:
-  postgresql: "9.6"
+  postgresql: '9.6'
 
 before_script:
   - travis_retry composer install --prefer-dist
@@ -28,6 +28,4 @@ cache:
 notifications:
   email: false
   slack:
-    secure: jFq4mQkKssPzWlzi8rPqul3PBEWPHU38BgTNRgZLV3q9IvnbQXGNOlZXIoDWgf8Mq7yIysrcJnurdZT0KGb7i21271zl6dYji9vEh3Lecc5CpLeL60r9JY6YxUaxZYgYIXrUxjYpsClGQhZKcnKHyy3Sl32QyeKStvsMsDtRrug+oq0mrlG2GMnCsrLODfMH/OJrq+ZVybivhec8veIbO2nvwNeKW3facvha4S0ZWPmdMZ8Yr3+Yy0Uz8iR/i26qCtqfRoEZYTawRMRVOcvBX2xsFCskuhvpNXjYZIGpVTtw/G7eO77AQXQTK1tWa5XLb93MTyFsbDRimHUJfSlp3qquhwUKdv4KFggIyCJ0CtlJqswJvN39wfzJbyuwxW5ALt/N2EjPH83z/3pVbhL3uztjpnXux75JpnrNrTKUh2pWYBEZv4JHtS5IVq9eaY1zLak7mz9+2uOCULaAaZobRHvrPLZxn++DKU8/JkyfVHcDVX7c/tRT/oslOEt4clYWQCBAO+v1XFvDGlXHT6vF25sQp5FsyLFA+5J4f5dBNwKMYLRgxaOOk2trV6NaxWguCev/JWKEgJRwtZyPZg3voYCL8pdqpFrxS/LjD8El+IsLJR+8DpCHfSna+5vto3cEtPB+1qOUHXSmnMFZQJfTY18ddQRtmTdvOHTt/9D+rY0=
-    on_success: change
-    on_failure: always
+    secure: eI2iukZTyVLnwz0WUGWqTxPW8yQxMZ8L0O/OymASCMuQXLU3o0BqbF8FTRyciapySCn47StwsP5G20VCMnr5tlTtE88H1A5m5vJrGKRGCnE/mG2kv5SrF+6SRY8WP4p88HljyN0F4ir4RyFyQXzZdQWmbaYk9LJhdQ0uqtayJdUinh7SaDqvO4vA/Aop2J5wRp3rojwDICpcVOPCFk+C5ZrFqecvmPRySkwjMm2VxANlSRNkn9e5XhKgoC2Cgzhip9RqMtH5XyCd6Jx9ZGblwyTlDb0Tgs2WOVkIEe5LIWwXqLA/fbHHD01i2MqLI4/F72HHF+jTNbd7xU5DXA/OUN1jramJYZxaJJ03dEYEvcYp44D/Don70ajufE7E3Fbj4DM7koASFoOLsmlkdr2zo8rf4gU6/uuHUt2Ys4tupPUI+JoByNfU80TeNqvVGZgDVCoBTaS6O6o2BpgGGbVAO6KZBY+oB1ycYxBehqKOUcSA4JmNGTFlwltuv52/l0BTkLYpeuQqogSev8zORrBnP0Vd8XPBpgzS/ns++1Kuv5BUHTkRMAfe9/ucu26guhspLmXLFM4XIXblWQ1vimMTnbk/swaE1pJSl7dpDJTQ8pLzPgqZ42qviMMU+rfzfrRXBVs3hOQ0N3/8aptvYKj0/zqqQDQIUZYlVb9IxWos5Qo=
