@@ -76,7 +76,7 @@ graphql:
 			fields:
 				totalCount: Int!
 				returnedCount: Int!
-				records: [WeatherStationRecord]
+				records: [AggregatedWeatherStationRecord]
 
 		WeatherStationSeries:
 			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStationSeries
@@ -86,6 +86,12 @@ graphql:
 
 		WeatherStationRecord:
 			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStationRecord
+			fields:
+				id: ID!
+				creationDate: DateTime!
+
+		AggregatedWeatherStationRecord:
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\AggregatedWeatherStationRecord
 			fields:
 				aggregatedDate: DateTime
 				absolutePressure:
