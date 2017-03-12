@@ -8,6 +8,8 @@ use Adeira\Connector\Common\DomainModel\Stub;
 interface IAllCameras
 {
 
+	public function add(Camera $camera): void;
+
 	/**
 	 * Returns Stub of all cameras belonging to the Owner.
 	 */
