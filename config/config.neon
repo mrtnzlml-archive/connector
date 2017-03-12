@@ -17,6 +17,7 @@ extensions:
 	authentication: Adeira\Connector\Authentication\Infrastructure\DI\Nette\Extension
 	devices: Adeira\Connector\Devices\Infrastructure\DI\Nette\Extension
 	doctrine.orm: Adeira\Connector\Doctrine\ORM\DI\Extension(%debugMode%, %tempDir%/cache)
+	document: Adeira\Connector\Document\Infrastructure\DI\Nette\Extension
 	fakeSession: Kdyby\FakeSession\DI\FakeSessionExtension
 	graphql: Adeira\Connector\GraphQL\Infrastructure\DI\Nette\Extension
 	migrations: Nextras\Migrations\Bridges\NetteDI\MigrationsExtension
