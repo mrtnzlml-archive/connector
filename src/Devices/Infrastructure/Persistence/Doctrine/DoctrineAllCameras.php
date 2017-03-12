@@ -26,6 +26,11 @@ final class DoctrineAllCameras implements IAllCameras
 		$this->em = $em;
 	}
 
+	public function add(Camera $camera): void
+	{
+		$this->em->persist($camera);
+	}
+
 	public function belongingTo(Owner $owner): Stub
 	{
 		$qb = $this->em->createQueryBuilder();
