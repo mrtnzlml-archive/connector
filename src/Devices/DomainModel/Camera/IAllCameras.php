@@ -10,6 +10,8 @@ interface IAllCameras
 
 	public function add(Camera $camera): void;
 
+	public function withId(CameraId $cameraId): ?Camera;
+
 	/**
 	 * Returns Stub of all cameras belonging to the Owner.
 	 */

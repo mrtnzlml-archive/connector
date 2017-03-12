@@ -22,6 +22,11 @@ final class InMemoryAllCameras implements IAllCameras
 		$this->memory[$camera->id()->toString()] = $camera;
 	}
 
+	public function withId(CameraId $cameraId): ?Camera
+	{
+		return $this->memory[$cameraId->toString()] ?? NULL;
+	}
+
 	public function belongingTo(Owner $owner): Stub
 	{
 		$belonging = [];

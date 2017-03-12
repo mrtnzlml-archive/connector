@@ -29,6 +29,15 @@ final class InMemoryAllCamerasTest extends \Adeira\Connector\Tests\TestCase
 		Assert::count(3, $repository->belongingTo($owner)->hydrate());
 	}
 
+	public function test_that_withId_works()
+	{
+		$owner = new Owner(new User(UserId::createFromString('00000000-0000-0000-0000-000000000000'), 'username'));
+		$repository = new InMemoryAllCameras;
+		$repository->add(Camera::create($id = CameraId::create(), $owner, 'Camera 1'));
+		Assert::type(Camera::class, $repository->withId($id));
+		Assert::null($repository->withId(CameraId::create()));
+	}
+
 	public function test_that_belongingTo_works()
 	{
 		$owner1 = new Owner(new User(UserId::createFromString('00000000-0000-0000-0000-000000000001'), 'username1'));
