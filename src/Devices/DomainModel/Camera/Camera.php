@@ -33,12 +33,18 @@ final class Camera
 	 */
 	private $creationDate;
 
-	public function __construct(CameraId $id, Owner $owner, string $cameraName, \DateTimeImmutable $creationDate)
+	private function __construct()
 	{
-		$this->id = $id;
-		$this->ownerId = $owner->id();
-		$this->cameraName = $cameraName;
-		$this->creationDate = $creationDate;
+	}
+
+	public static function create(CameraId $id, Owner $owner, string $cameraName, \DateTimeImmutable $creationDate = NULL)
+	{
+		$camera = new self;
+		$camera->id = $id;
+		$camera->ownerId = $owner->id();
+		$camera->cameraName = $cameraName;
+		$camera->creationDate = $creationDate ?: new \DateTimeImmutable('now');
+		return $camera;
 	}
 
 	public function id(): CameraId
