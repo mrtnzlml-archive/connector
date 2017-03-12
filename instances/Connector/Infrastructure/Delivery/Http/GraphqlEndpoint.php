@@ -68,7 +68,8 @@ final class GraphqlEndpoint implements \Nette\Application\IPresenter
 					return $this->error("Request mush have 'query' field with GraphQL query.");
 				}
 				$requestString = $queryData['query'];
-				$variableValues = $queryData['variables'] ?? [];
+				$variableValues = $queryData['variables'] ?? NULL;
+				$operationName = $queryData['operationName'] ?? NULL;
 			} catch (\Nette\Utils\JsonException $exc) {
 				return $this->error('Recieved POST body is not in valid JSON format.');
 			}
@@ -88,7 +89,8 @@ final class GraphqlEndpoint implements \Nette\Application\IPresenter
 				$requestString,
 				NULL,
 				new Context($userId ? UserId::createFromString($userId) : NullUserId::create()),
-				$variableValues
+				$variableValues,
+				$operationName
 			);
 
 			// forward to the Error presenter
