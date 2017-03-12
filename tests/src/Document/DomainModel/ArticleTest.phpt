@@ -3,6 +3,7 @@
 namespace Adeira\Connector\Tests\Document\DomainModel;
 
 use Adeira\Connector\Document\DomainModel\Article;
+use Ramsey\Uuid\Uuid;
 use Tester\Assert;
 
 require getenv('BOOTSTRAP');
@@ -26,6 +27,13 @@ final class ArticleTest extends \Adeira\Connector\Tests\TestCase
 		$article->publish(new \DateTimeImmutable('2017-03-07'));
 		Assert::true($article->isPublished());
 		Assert::equal(new \DateTimeImmutable('2017-03-07'), $article->publicationDate());
+	}
+
+	public function testThatIdWorks()
+	{
+		$article = Article::prepare('title', 'content');
+		Assert::type(Uuid::class, $article->id());
+		Assert::same(4, $article->id()->getVersion());
 	}
 
 	public function testThatTitleWorks()

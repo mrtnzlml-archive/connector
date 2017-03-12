@@ -2,8 +2,14 @@
 
 namespace Adeira\Connector\Document\DomainModel;
 
+use Ramsey\Uuid\{
+	Uuid, UuidInterface
+};
+
 final class Article
 {
+
+	private $id;
 
 	/**
 	 * @var string
@@ -27,6 +33,7 @@ final class Article
 
 	private function __construct()
 	{
+		$this->id = Uuid::uuid4();
 	}
 
 	public static function prepare(string $title, string $content): self
@@ -41,6 +48,11 @@ final class Article
 	{
 		$this->publicationDate = $dateOfPublication;
 		$this->isPublished = TRUE;
+	}
+
+	public function id(): UuidInterface
+	{
+		return $this->id;
 	}
 
 	public function title(): string
