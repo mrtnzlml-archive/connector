@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Adeira\Connector\Devices\Application\Service\Camera;
+namespace Adeira\Connector\Devices\Application\Service\Camera\Query;
 
 use Adeira\Connector\Authentication\DomainModel\User\UserId;
 use Adeira\Connector\Authentication\Infrastructure\DomainModel\Owner\UserIdOwnerService;

@@ -2,14 +2,14 @@
 
 namespace Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera;
 
-use Adeira\Connector\Devices\Application\Service\Camera\ViewAllCameras;
+use Adeira\Connector\Devices\Application\Service\Camera\Query\ViewAllCameras;
 use Adeira\Connector\GraphQL\Context;
 
 final class AllCamerasResolver
 {
 
 	/**
-	 * @var \Adeira\Connector\Devices\Application\Service\Camera\ViewAllCameras
+	 * @var \Adeira\Connector\Devices\Application\Service\Camera\Query\ViewAllCameras
 	 */
 	private $allCameras;
 
