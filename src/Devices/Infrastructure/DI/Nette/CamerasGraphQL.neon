@@ -20,3 +20,9 @@ graphql:
 				name: String!
 			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera\CreateCamera
 			next: Camera
+
+		removeCamera:
+			arguments:
+				cameraId: ID!
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera\RemoveCameraResolver
+			next: Camera
