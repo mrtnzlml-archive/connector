@@ -12,3 +12,11 @@ graphql:
 			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera\CameraResolver
 			fields:
 				id: ID!
+
+	mutations:
+		createCamera:
+			arguments:
+				streamSource: String!
+				name: String!
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera\CreateCamera
+			next: Camera

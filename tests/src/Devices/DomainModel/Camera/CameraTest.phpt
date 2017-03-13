@@ -25,6 +25,7 @@ final class CameraTest extends \Adeira\Connector\Tests\TestCase
 			CameraId::create(Uuid::fromString('58d200ad-6376-4c01-9b6d-2ea536f1cd2c')),
 			new Owner(new User(UserId::create(), 'User Name')),
 			'Camera Name',
+			'rtsp://a',
 			new \DateTimeImmutable
 		);
 

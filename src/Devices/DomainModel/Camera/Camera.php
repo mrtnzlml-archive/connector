@@ -29,6 +29,11 @@ final class Camera
 	private $cameraName;
 
 	/**
+	 * @var string
+	 */
+	private $streamSource;
+
+	/**
 	 * @var \DateTimeImmutable
 	 */
 	private $creationDate;
@@ -37,12 +42,13 @@ final class Camera
 	{
 	}
 
-	public static function create(CameraId $id, Owner $owner, string $cameraName, \DateTimeImmutable $creationDate = NULL)
+	public static function create(CameraId $id, Owner $owner, string $cameraName, string $streamSource, \DateTimeImmutable $creationDate = NULL)
 	{
 		$camera = new self;
 		$camera->id = $id;
 		$camera->ownerId = $owner->id();
 		$camera->cameraName = $cameraName;
+		$camera->streamSource = $streamSource;
 		$camera->creationDate = $creationDate ?: new \DateTimeImmutable('now');
 		return $camera;
 	}
@@ -62,7 +68,12 @@ final class Camera
 		return $this->cameraName;
 	}
 
-	public function creationDate()
+	public function streamSource(): string
+	{
+		return $this->streamSource;
+	}
+
+	public function creationDate(): \DateTimeImmutable
 	{
 		return $this->creationDate;
 	}

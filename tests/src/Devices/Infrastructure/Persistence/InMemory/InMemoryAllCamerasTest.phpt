@@ -23,9 +23,9 @@ final class InMemoryAllCamerasTest extends \Adeira\Connector\Tests\TestCase
 		$owner = new Owner(new User(UserId::createFromString('00000000-0000-0000-0000-000000000000'), 'username'));
 		$repository = new InMemoryAllCameras;
 		Assert::count(0, $repository->belongingTo($owner)->hydrate());
-		$repository->add(Camera::create(CameraId::create(), $owner, 'Camera 1'));
-		$repository->add(Camera::create(CameraId::create(), $owner, 'Camera 2'));
-		$repository->add(Camera::create(CameraId::create(), $owner, 'Camera 3'));
+		$repository->add(Camera::create(CameraId::create(), $owner, 'Camera 1', 'rtsp://a'));
+		$repository->add(Camera::create(CameraId::create(), $owner, 'Camera 2', 'rtsp://b'));
+		$repository->add(Camera::create(CameraId::create(), $owner, 'Camera 3', 'rtsp://c'));
 		Assert::count(3, $repository->belongingTo($owner)->hydrate());
 	}
 
@@ -33,7 +33,7 @@ final class InMemoryAllCamerasTest extends \Adeira\Connector\Tests\TestCase
 	{
 		$owner = new Owner(new User(UserId::createFromString('00000000-0000-0000-0000-000000000000'), 'username'));
 		$repository = new InMemoryAllCameras;
-		$repository->add(Camera::create($id = CameraId::create(), $owner, 'Camera 1'));
+		$repository->add(Camera::create($id = CameraId::create(), $owner, 'Camera 1', 'rtsp://a'));
 		Assert::type(Camera::class, $repository->withId($id));
 		Assert::null($repository->withId(CameraId::create()));
 	}
@@ -45,9 +45,9 @@ final class InMemoryAllCamerasTest extends \Adeira\Connector\Tests\TestCase
 		$repository = new InMemoryAllCameras;
 		Assert::count(0, $repository->belongingTo($owner1)->hydrate());
 		Assert::count(0, $repository->belongingTo($owner2)->hydrate());
-		$repository->add(Camera::create(CameraId::create(), $owner1, 'Camera 1'));
-		$repository->add(Camera::create(CameraId::create(), $owner2, 'Camera 2'));
-		$repository->add(Camera::create(CameraId::create(), $owner1, 'Camera 3'));
+		$repository->add(Camera::create(CameraId::create(), $owner1, 'Camera 1', 'rtsp://a'));
+		$repository->add(Camera::create(CameraId::create(), $owner2, 'Camera 2', 'rtsp://b'));
+		$repository->add(Camera::create(CameraId::create(), $owner1, 'Camera 3', 'rtsp://c'));
 		Assert::count(2, $repository->belongingTo($owner1)->hydrate());
 		Assert::count(1, $repository->belongingTo($owner2)->hydrate());
 	}
