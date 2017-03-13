@@ -25,6 +25,11 @@ final class InMemoryAllCameras implements IAllCameras
 		$this->memory[$camera->id()->toString()] = $camera;
 	}
 
+	public function remove(Camera $camera): void
+	{
+		unset($this->memory[$camera->id()->toString()]);
+	}
+
 	public function withId(Owner $owner, CameraId $cameraId): ?Camera
 	{
 		if (isset($this->memory[$cameraId->toString()])) {

@@ -29,6 +29,25 @@ final class InMemoryAllCamerasTest extends \Adeira\Connector\Tests\TestCase
 		Assert::count(3, $repository->belongingTo($owner)->hydrate());
 	}
 
+	public function test_that_remove_works()
+	{
+		$owner = new Owner(new User(UserId::createFromString('00000000-0000-0000-0000-000000000000'), 'username'));
+		$repository = new InMemoryAllCameras;
+		$repository->add($cam1 = Camera::create(CameraId::create(), $owner, 'Camera 1', 'rtsp://a'));
+		$repository->add($cam2 = Camera::create(CameraId::create(), $owner, 'Camera 2', 'rtsp://b'));
+		$repository->add($cam3 = Camera::create(CameraId::create(), $owner, 'Camera 3', 'rtsp://c'));
+		Assert::count(3, $repository->belongingTo($owner)->hydrate());
+
+		$repository->remove($cam1);
+		Assert::count(2, $repository->belongingTo($owner)->hydrate());
+		$repository->remove($cam2);
+		Assert::count(1, $repository->belongingTo($owner)->hydrate());
+		$repository->remove($cam3);
+		Assert::count(0, $repository->belongingTo($owner)->hydrate());
+		$repository->remove($cam3);
+		Assert::count(0, $repository->belongingTo($owner)->hydrate());
+	}
+
 	public function test_that_withId_works()
 	{
 		$owner = new Owner(new User(UserId::createFromString('00000000-0000-0000-0000-000000000000'), 'username'));

@@ -8,8 +8,21 @@ use Adeira\Connector\Common\DomainModel\Stub;
 interface IAllCameras
 {
 
+	/**
+	 * Add Camera entity to the repository.
+	 * It's without Owner because it should not be possible to bet Camera without Owner.
+	 */
 	public function add(Camera $camera): void;
 
+	/**
+	 * Remove Camera entity from the repository.
+	 * It's without Owner because it should not be possible to bet Camera without Owner.
+	 */
+	public function remove(Camera $camera): void;
+
+	/**
+	 * Get single Camera by ID or return NULL if doesn't exist.
+	 */
 	public function withId(Owner $owner, CameraId $cameraId): ?Camera;
 
 	/**

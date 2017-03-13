@@ -31,6 +31,11 @@ final class DoctrineAllCameras implements IAllCameras
 		$this->em->persist($camera);
 	}
 
+	public function remove(Camera $camera): void
+	{
+		$this->em->remove($camera);
+	}
+
 	public function withId(Owner $owner, CameraId $cameraId): ?Camera
 	{
 		$qb = $this->em->createQueryBuilder();
