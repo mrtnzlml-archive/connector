@@ -40,7 +40,9 @@ final class DoctrineAllCameras implements IAllCameras
 	{
 		$qb = $this->em->createQueryBuilder();
 		$qb->select($dqlAlias = 'cam')->from(Camera::class, $dqlAlias);
-		$qb->andWhere('cam.ownerId = :ownerId')->setParameter(':ownerId', $owner->id()->toString());
+		$qb->where('cam.ownerId = :ownerId')->setParameter(':ownerId', $owner->id()->toString());
+		$qb->andWhere('cam.id = :id')->setParameter(':id', $cameraId->toString());
+
 		return $qb->getQuery()->getSingleResult();
 	}
 
