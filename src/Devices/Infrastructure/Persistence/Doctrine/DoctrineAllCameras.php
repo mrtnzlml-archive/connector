@@ -31,9 +31,12 @@ final class DoctrineAllCameras implements IAllCameras
 		$this->em->persist($camera);
 	}
 
-	public function withId(CameraId $cameraId): ?Camera
+	public function withId(Owner $owner, CameraId $cameraId): ?Camera
 	{
-		return $this->em->find(Camera::class, $cameraId->toString());
+		$qb = $this->em->createQueryBuilder();
+		$qb->select($dqlAlias = 'cam')->from(Camera::class, $dqlAlias);
+		$qb->andWhere('cam.ownerId = :ownerId')->setParameter(':ownerId', $owner->id()->toString());
+		return $qb->getQuery()->getSingleResult();
 	}
 
 	public function belongingTo(Owner $owner): Stub

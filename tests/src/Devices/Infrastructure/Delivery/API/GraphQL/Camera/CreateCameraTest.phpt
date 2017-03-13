@@ -5,7 +5,10 @@ namespace Adeira\Connector\Tests\Devices\Infrastructure\Delivery\API\GraphQL\Cam
 use Adeira\Connector\Authentication\DomainModel\Owner\Owner;
 use Adeira\Connector\Authentication\DomainModel\User\User;
 use Adeira\Connector\Authentication\DomainModel\User\UserId;
+use Adeira\Connector\Authentication\Infrastructure\DomainModel\Owner\UserIdOwnerService;
+use Adeira\Connector\Authentication\Infrastructure\Persistence\InMemory\InMemoryUserRepository;
 use Adeira\Connector\Devices\Application\Service\Camera\Command\CreateCamera as CreateCameraCommand;
+use Adeira\Connector\Devices\Application\Service\Camera\Query\SingleCamera;
 use Adeira\Connector\Devices\DomainModel\Camera\Camera;
 use Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera\CreateCamera;
 use Adeira\Connector\Devices\Infrastructure\Persistence\InMemory\InMemoryAllCameras;
@@ -23,8 +26,13 @@ final class CreateCameraTest extends \Adeira\Connector\Tests\TestCase
 
 	public function test_that_its_invokable()
 	{
+		$userId = UserId::create();
+		$user = new User($userId, 'username');
 		$repository = new InMemoryAllCameras;
-		$owner = new Owner(new User(UserId::create(), 'username'));
+		$userRepository = new InMemoryUserRepository;
+		$userRepository->add($user);
+		$query = new SingleCamera($repository, new UserIdOwnerService($userRepository));
+		$owner = new Owner($user);
 
 		// FIXME: toto netestuje proti skutečnosti (ale nejde vzít z DIC, protože schovává handler implementaci)
 		$command = new CreateCamera(new CommandBus([
@@ -36,12 +44,12 @@ final class CreateCameraTest extends \Adeira\Connector\Tests\TestCase
 					$aCommand->streamSource()
 				));
 			},
-		]), $repository);
+		]), $query);
 
 		$command(NULL, [ // __invoke
 			'streamSource' => 'rtsp://a',
 			'name' => 'Camera 1',
-		], new Context(UserId::create()));
+		], new Context($userId));
 		Assert::count(1, $repository->belongingTo($owner)->hydrate());
 		Assert::type(Camera::class, $repository->belongingTo($owner)->hydrateOne());
 	}

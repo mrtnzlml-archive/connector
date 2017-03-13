@@ -17,6 +17,7 @@ doctrine.orm:
 
 
 services:
+	- Adeira\Connector\Devices\Application\Service\Camera\Query\SingleCamera
 	- Adeira\Connector\Devices\Application\Service\Camera\ViewAllCameras
 	- Adeira\Connector\Devices\Application\Service\WeatherStation\(
 		CountAllWeatherStations

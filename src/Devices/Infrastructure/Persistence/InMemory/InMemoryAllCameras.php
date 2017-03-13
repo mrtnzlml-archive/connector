@@ -15,6 +15,9 @@ use Adeira\Connector\Devices\DomainModel\Camera\{
 final class InMemoryAllCameras implements IAllCameras
 {
 
+	/**
+	 * @var Camera[]
+	 */
 	private $memory = [];
 
 	public function add(Camera $camera): void
@@ -22,9 +25,15 @@ final class InMemoryAllCameras implements IAllCameras
 		$this->memory[$camera->id()->toString()] = $camera;
 	}
 
-	public function withId(CameraId $cameraId): ?Camera
+	public function withId(Owner $owner, CameraId $cameraId): ?Camera
 	{
-		return $this->memory[$cameraId->toString()] ?? NULL;
+		if (isset($this->memory[$cameraId->toString()])) {
+			$camera = $this->memory[$cameraId->toString()];
+			if ($owner->id()->equals($camera->ownerId())) {
+				return $camera;
+			}
+		}
+		return NULL;
 	}
 
 	public function belongingTo(Owner $owner): Stub
