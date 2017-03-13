@@ -51,7 +51,6 @@ graphql:
 				edges: [WeatherStationEdge]
 				totalCount: Int!
 				weatherStations: [WeatherStation]
-				series: [WeatherStationSeries]
 
 		WeatherStationEdge:
 			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStationsEdge
@@ -77,12 +76,6 @@ graphql:
 				totalCount: Int!
 				returnedCount: Int!
 				records: [AggregatedWeatherStationRecord]
-
-		WeatherStationSeries:
-			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStationSeries
-			fields:
-				id: ID!
-				name: String!
 
 		WeatherStationRecord:
 			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStationRecord

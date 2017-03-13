@@ -14,7 +14,6 @@ doctrine.orm:
 			CameraId: Adeira\Connector\Devices\Infrastructure\DomainModel\Camera\Doctrine\DoctrineCameraIdType
 			WeatherStationId: Adeira\Connector\Devices\Infrastructure\DomainModel\WeatherStation\Doctrine\DoctrineWeatherStationIdType
 			WeatherStationRecordId: Adeira\Connector\Devices\Infrastructure\DomainModel\WeatherStation\Doctrine\DoctrineWeatherStationRecordIdType
-			WeatherStationSeriesId: Adeira\Connector\Devices\Infrastructure\DomainModel\WeatherStation\Doctrine\DoctrineWeatherStationSeriesIdType
 
 
 services:
@@ -23,7 +22,6 @@ services:
 		CountAllWeatherStations
 		ViewAggregatedRecords
 		ViewAllWeatherStations
-		ViewAllWeatherStationSeries
 		ViewSingleWeatherStation
 		ViewSingleWeatherStationRecord
 	)
@@ -31,7 +29,6 @@ services:
 	allCameras: Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\DoctrineAllCameras
 	allWeatherStationRecords: Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\DoctrineAllWeatherStationRecords
 	allWeatherStations: Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\DoctrineAllWeatherStations
-	allWeatherStationSeries: Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\DoctrineAllWeatherStationSeries
 
 
 serviceBus:
