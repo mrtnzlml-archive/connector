@@ -24,7 +24,7 @@ final class Pressure implements IPhysicalQuantity
 	 */
 	private $calculator;
 
-	public function __construct(IPressureUnit $pressureUnit, ICalculator $calculator = NULL)
+	public function __construct(IPressureUnit $pressureUnit, ?ICalculator $calculator = NULL)
 	{
 		$this->pressureUnit = $pressureUnit;
 		$this->calculator = $calculator ?? new SimpleCalculator;

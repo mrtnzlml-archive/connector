@@ -45,16 +45,32 @@
 	<rule ref="PSR2.Namespaces.NamespaceDeclaration"/>
 
 	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Arrays/TrailingArrayCommaSniff.php"/>
+	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Classes/ClassConstantVisibilitySniff.php"/>
 	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Classes/UnusedPrivateElementsSniff.php"/>
+	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Commenting/ForbiddenAnnotationsSniff.php">
+		<property name="forbiddenAnnotations" type="array" value="
+ 			@author,@created,@version,
+ 			@copyright,@license,
+ 			@package,
+ 			@throws
+ 		"/>
+	</rule>
 	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/ControlStructures/AssignmentInConditionSniff.php"/>
+	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/ControlStructures/DisallowEqualOperatorsSniff.php"/>
 	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/ControlStructures/YodaComparisonSniff.php"/>
+	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Exceptions/DeadCatchSniff.php"/>
 	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Exceptions/ReferenceThrowableOnlySniff.php"/>
 	<!--<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Namespaces/AlphabeticallySortedUsesSniff.php"/> (doesn't work very well with grouped uses) -->
 	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Namespaces/FullyQualifiedExceptionsSniff.php"/>
 	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Namespaces/UseDoesNotStartWithBackslashSniff.php"/>
 	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Namespaces/UseFromSameNamespaceSniff.php"/>
-	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Typehints/DeclareStrictTypesSniff.php"/>
-	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Typehints/ReturnTypehintSpacingSniff.php"/>
+	<!--<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Namespaces/UnusedUsesSniff.php"/> (doesn't work very well with grouped uses) -->
+	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Namespaces/UseDoesNotStartWithBackslashSniff.php"/>
+	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/TypeHints/DeclareStrictTypesSniff.php"/>
+	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/TypeHints/LongTypeHintsSniff.php"/>
+	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/TypeHints/NullableTypeForNullDefaultValueSniff.php"/>
+	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/TypeHints/ParameterTypeHintSpacingSniff.php"/>
+	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/TypeHints/ReturnTypeHintSpacingSniff.php"/>
 	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Types/EmptyLinesAroundTypeBracesSniff.php"/>
 
 </ruleset>

@@ -22,7 +22,7 @@ final class NullUserId extends UserId
 
 	private const NIL = \Ramsey\Uuid\Uuid::NIL;
 
-	public static function create(UuidInterface $anId = NULL): UserId
+	public static function create(?UuidInterface $anId = NULL): UserId
 	{
 		return self::createFromString(self::NIL);
 	}

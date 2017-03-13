@@ -5,9 +5,9 @@ namespace Adeira\Connector\Devices\DomainModel\WeatherStation;
 final class RecordAggregationRange extends \Consistence\Enum\Enum
 {
 
-	const HOUR = 'hour';
-	const DAY = 'day';
-	const WEEK = 'week';
-	const MONTH = 'month';
+	public const HOUR = 'hour';
+	public const DAY = 'day';
+	public const WEEK = 'week';
+	public const MONTH = 'month';
 
 }

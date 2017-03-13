@@ -23,12 +23,12 @@ use Ramsey\Uuid\{
 final class WeatherStationId extends Common\DomainModel\IdentifiableDomainObject
 {
 
-	private function __construct(UuidInterface $anId = NULL)
+	private function __construct(?UuidInterface $anId = NULL)
 	{
 		$this->setId($anId ? $anId->toString() : Uuid::uuid4()->toString());
 	}
 
-	public static function create(UuidInterface $anId = NULL): self
+	public static function create(?UuidInterface $anId = NULL): self
 	{
 		return new self($anId);
 	}

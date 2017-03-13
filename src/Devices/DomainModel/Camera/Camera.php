@@ -42,7 +42,7 @@ final class Camera
 	{
 	}
 
-	public static function create(CameraId $id, Owner $owner, string $cameraName, string $streamSource, \DateTimeImmutable $creationDate = NULL)
+	public static function create(CameraId $id, Owner $owner, string $cameraName, string $streamSource, ?\DateTimeImmutable $creationDate = NULL)
 	{
 		$camera = new self;
 		$camera->id = $id;

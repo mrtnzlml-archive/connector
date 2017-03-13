@@ -7,7 +7,7 @@ use Nette;
 final class ContainerBuilder
 {
 
-	public static function createContainer(string $configFilePath = NULL, array $params = []): Nette\DI\Container
+	public static function createContainer(?string $configFilePath = NULL, array $params = []): Nette\DI\Container
 	{
 		$compiler = new Nette\DI\Compiler;
 		$compiler->addExtension('graphql', new \Adeira\Connector\GraphQL\Infrastructure\DI\Nette\Extension);
