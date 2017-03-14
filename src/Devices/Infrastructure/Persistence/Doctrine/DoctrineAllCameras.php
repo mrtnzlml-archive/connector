@@ -43,7 +43,7 @@ final class DoctrineAllCameras implements IAllCameras
 		$qb->where('cam.ownerId = :ownerId')->setParameter(':ownerId', $owner->id()->toString());
 		$qb->andWhere('cam.id = :id')->setParameter(':id', $cameraId->toString());
 
-		return $qb->getQuery()->getSingleResult();
+		return $qb->getQuery()->getOneOrNullResult();
 	}
 
 	public function belongingTo(Owner $owner): Stub

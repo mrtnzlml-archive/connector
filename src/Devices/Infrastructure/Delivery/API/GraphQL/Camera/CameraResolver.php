@@ -2,16 +2,14 @@
 
 namespace Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera;
 
-use Adeira\Connector\Devices\DomainModel\Camera\{
-	Camera, CameraId
-};
+use Adeira\Connector\Devices\DomainModel\Camera\Camera;
 
 final class CameraResolver
 {
 
-	public function id(Camera $camera): CameraId
+	public function id(Camera $camera): string
 	{
-		return $camera->id();
+		return $camera->id()->toString();
 	}
 
 }

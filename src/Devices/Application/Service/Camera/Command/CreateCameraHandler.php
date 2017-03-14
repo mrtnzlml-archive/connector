@@ -5,6 +5,9 @@ namespace Adeira\Connector\Devices\Application\Service\Camera\Command;
 use Adeira\Connector\Authentication\Infrastructure\DomainModel\Owner\UserIdOwnerService;
 use Adeira\Connector\Devices\DomainModel\Camera\Camera;
 use Adeira\Connector\Devices\DomainModel\Camera\IAllCameras;
+use Adeira\Connector\Devices\DomainModel\Camera\Stream;
+use Adeira\Connector\Devices\DomainModel\Camera\StreamService;
+use Ramsey\Uuid\Uuid;
 
 /**
  * Application services should depend on abstraction (interfaces) so we'll make our Application Service immune to
@@ -24,22 +27,30 @@ final class CreateCameraHandler
 	 */
 	private $allCameras;
 
-	public function __construct(UserIdOwnerService $ownerService, IAllCameras $allCameras)
+	/**
+	 * @var \Adeira\Connector\Devices\DomainModel\Camera\StreamService
+	 */
+	private $streamService;
+
+	public function __construct(UserIdOwnerService $ownerService, IAllCameras $allCameras, StreamService $streamService)
 	{
 		$this->ownerService = $ownerService;
 		$this->allCameras = $allCameras;
+		$this->streamService = $streamService;
 	}
 
 	public function __invoke(CreateCamera $aCommand): void
 	{
 		$owner = $this->ownerService->existingOwner($aCommand->userId());
 
+		$streamId = $this->streamService->startStream($aCommand->streamSource());
+
 		$this->allCameras->add(
 			Camera::create(
 				$aCommand->cameraId(),
 				$owner,
 				$aCommand->cameraName(),
-				$aCommand->streamSource()
+				new Stream($aCommand->streamSource(), Uuid::fromString($streamId))
 			)
 		);
 	}

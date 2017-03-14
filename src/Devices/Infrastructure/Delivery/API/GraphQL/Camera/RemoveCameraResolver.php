@@ -28,7 +28,7 @@ final class RemoveCameraResolver
 		$this->singleCamera = $singleCamera;
 	}
 
-	public function __invoke($ancestorValue, $args, Context $context): Camera
+	public function __invoke($ancestorValue, $args, Context $context): ?Camera
 	{
 		$cameraId = CameraId::createFromString($args['cameraId']);
 

@@ -10,10 +10,12 @@ use Adeira\Connector\Authentication\Infrastructure\Persistence\InMemory\InMemory
 use Adeira\Connector\Devices\Application\Service\Camera\Command\CreateCamera as CreateCameraCommand;
 use Adeira\Connector\Devices\Application\Service\Camera\Query\SingleCamera;
 use Adeira\Connector\Devices\DomainModel\Camera\Camera;
+use Adeira\Connector\Devices\DomainModel\Camera\Stream;
 use Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera\CreateCamera;
 use Adeira\Connector\Devices\Infrastructure\Persistence\InMemory\InMemoryAllCameras;
 use Adeira\Connector\GraphQL\Context;
 use Adeira\Connector\ServiceBus\Infrastructure\DomainModel\CommandBus;
+use Ramsey\Uuid\Uuid;
 use Tester\Assert;
 
 require getenv('BOOTSTRAP');
@@ -41,7 +43,7 @@ final class CreateCameraTest extends \Adeira\Connector\Tests\TestCase
 					$aCommand->cameraId(),
 					$owner,
 					$aCommand->cameraName(),
-					$aCommand->streamSource()
+					new Stream($aCommand->streamSource(), Uuid::uuid4())
 				));
 			},
 		]), $query);

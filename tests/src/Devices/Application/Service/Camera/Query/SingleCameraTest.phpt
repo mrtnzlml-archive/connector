@@ -10,7 +10,9 @@ use Adeira\Connector\Authentication\Infrastructure\Persistence\InMemory\InMemory
 use Adeira\Connector\Devices\Application\Service\Camera\Query\SingleCamera;
 use Adeira\Connector\Devices\DomainModel\Camera\Camera;
 use Adeira\Connector\Devices\DomainModel\Camera\CameraId;
+use Adeira\Connector\Devices\DomainModel\Camera\Stream;
 use Adeira\Connector\Devices\Infrastructure\Persistence\InMemory\InMemoryAllCameras;
+use Ramsey\Uuid\Uuid;
 use Tester\Assert;
 
 require getenv('BOOTSTRAP');
@@ -33,7 +35,7 @@ final class SingleCameraTest extends \Adeira\Connector\Tests\TestCase
 			$cameraId = CameraId::create(),
 			new Owner(new User($userId, 'username')),
 			'Camera 1',
-			'rtsp://stream.source'
+			new Stream('rtsp://stream.source', Uuid::uuid4())
 		));
 
 		$query = new SingleCamera($camerasRepository, $ownerService);

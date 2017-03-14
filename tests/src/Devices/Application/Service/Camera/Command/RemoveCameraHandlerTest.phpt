@@ -11,7 +11,10 @@ use Adeira\Connector\Devices\Application\Service\Camera\Command\RemoveCamera;
 use Adeira\Connector\Devices\Application\Service\Camera\Command\RemoveCameraHandler;
 use Adeira\Connector\Devices\DomainModel\Camera\Camera;
 use Adeira\Connector\Devices\DomainModel\Camera\CameraId;
+use Adeira\Connector\Devices\DomainModel\Camera\Stream;
+use Adeira\Connector\Devices\DomainModel\Camera\StreamService;
 use Adeira\Connector\Devices\Infrastructure\Persistence\InMemory\InMemoryAllCameras;
+use Ramsey\Uuid\Uuid;
 use Tester\Assert;
 
 require getenv('BOOTSTRAP');
@@ -34,8 +37,11 @@ final class RemoveCameraHandlerTest extends \Adeira\Connector\Tests\TestCase
 		$cameraId = CameraId::create();
 		$owner = new Owner($user);
 		$allCamerasRepository = new InMemoryAllCameras;
-		$allCamerasRepository->add(Camera::create($cameraId, $owner, 'Camera 1', 'rtsp://stream.source'));
-		$queryHandler = new RemoveCameraHandler($ownerService, $allCamerasRepository);
+		$allCamerasRepository->add(Camera::create($cameraId, $owner, 'Camera 1', new Stream('rtsp://stream.source', Uuid::uuid4())));
+		$httpClient = \Mockery::mock(\GuzzleHttp\ClientInterface::class);
+		$httpClient->shouldReceive('request')->once();
+		$streamService = new StreamService($httpClient);
+		$queryHandler = new RemoveCameraHandler($ownerService, $allCamerasRepository, $streamService);
 		$removeCommand = new RemoveCamera($userId, $cameraId);
 
 		Assert::count(1, $allCamerasRepository->belongingTo($owner)->hydrate());
@@ -51,13 +57,20 @@ final class RemoveCameraHandlerTest extends \Adeira\Connector\Tests\TestCase
 		$userRepository->add($user);
 		$ownerService = new UserIdOwnerService($userRepository);
 		$allCamerasRepository = new InMemoryAllCameras;
-		$queryHandler = new RemoveCameraHandler($ownerService, $allCamerasRepository);
+		$httpClient = \Mockery::mock(\GuzzleHttp\ClientInterface::class);
+		$streamService = new StreamService($httpClient);
+		$queryHandler = new RemoveCameraHandler($ownerService, $allCamerasRepository, $streamService);
 		$cameraId = CameraId::create();
 		$removeCommand = new RemoveCamera($userId, $cameraId);
 
 		Assert::noError(function () use ($queryHandler, $removeCommand) {
 			$queryHandler($removeCommand);
 		});
+	}
+
+	public function tearDown()
+	{
+		\Mockery::close();
 	}
 
 }

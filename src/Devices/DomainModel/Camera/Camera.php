@@ -29,9 +29,9 @@ final class Camera
 	private $cameraName;
 
 	/**
-	 * @var string
+	 * @var \Adeira\Connector\Devices\DomainModel\Camera\Stream
 	 */
-	private $streamSource;
+	private $stream;
 
 	/**
 	 * @var \DateTimeImmutable
@@ -42,13 +42,13 @@ final class Camera
 	{
 	}
 
-	public static function create(CameraId $id, Owner $owner, string $cameraName, string $streamSource, ?\DateTimeImmutable $creationDate = NULL)
+	public static function create(CameraId $id, Owner $owner, string $cameraName, Stream $stream, ?\DateTimeImmutable $creationDate = NULL)
 	{
 		$camera = new self;
 		$camera->id = $id;
 		$camera->ownerId = $owner->id();
 		$camera->cameraName = $cameraName;
-		$camera->streamSource = $streamSource;
+		$camera->stream = $stream;
 		$camera->creationDate = $creationDate ?: new \DateTimeImmutable('now');
 		return $camera;
 	}
@@ -68,9 +68,9 @@ final class Camera
 		return $this->cameraName;
 	}
 
-	public function streamSource(): string
+	public function stream(): Stream
 	{
-		return $this->streamSource;
+		return $this->stream;
 	}
 
 	public function creationDate(): \DateTimeImmutable

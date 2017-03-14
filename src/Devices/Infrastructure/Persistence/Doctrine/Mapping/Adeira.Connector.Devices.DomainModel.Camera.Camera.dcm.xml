@@ -12,7 +12,7 @@
 
 		<field name="ownerId" column="owner_uuid" type="UserId"/>
 		<field name="cameraName" column="camera_name" type="string"/>
-		<field name="streamSource" column="stream_source" type="text"/>
+		<embedded name="stream" class="Adeira\Connector\Devices\DomainModel\Camera\Stream"/>
 		<field name="creationDate" column="creation_date" type="datetime"/>
 
 	</entity>
