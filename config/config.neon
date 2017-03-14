@@ -40,6 +40,8 @@ migrations:
 
 parameters:
 	srcDir: %appDir%/src
+	adeira:
+		streamService: //adeira.connector.stream/
 
 
 services:
