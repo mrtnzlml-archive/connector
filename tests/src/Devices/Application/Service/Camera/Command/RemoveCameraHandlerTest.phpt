@@ -37,7 +37,7 @@ final class RemoveCameraHandlerTest extends \Adeira\Connector\Tests\TestCase
 		$cameraId = CameraId::create();
 		$owner = new Owner($user);
 		$allCamerasRepository = new InMemoryAllCameras;
-		$allCamerasRepository->add(Camera::create($cameraId, $owner, 'Camera 1', new Stream('rtsp://stream.source', Uuid::uuid4())));
+		$allCamerasRepository->add(Camera::create($cameraId, $owner, 'Camera 1', Stream::create('rtsp://stream.source', Uuid::uuid4(), 'hls')));
 		$httpClient = \Mockery::mock(\GuzzleHttp\ClientInterface::class);
 		$httpClient->shouldReceive('request')->once();
 		$streamService = new StreamService($httpClient);

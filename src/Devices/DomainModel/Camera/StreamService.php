@@ -2,6 +2,7 @@
 
 namespace Adeira\Connector\Devices\DomainModel\Camera;
 
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 final class StreamService
@@ -17,10 +18,7 @@ final class StreamService
 		$this->client = $client;
 	}
 
-	/**
-	 * @return string New stream identifier.
-	 */
-	public function startStream(string $streamSource): string
+	public function startStream(string $streamSource): Stream
 	{
 		//TODO: handle exceptions (?)
 		$response = $this->client->request('POST', 'startStream', [
@@ -28,7 +26,8 @@ final class StreamService
 				'source' => $streamSource,
 			],
 		]);
-		return json_decode($response->getBody()->getContents(), TRUE)['data']['id'];
+		$data = json_decode($response->getBody()->getContents(), TRUE)['data'];
+		return Stream::create($streamSource, Uuid::fromString($data['id']), $data['hls']);
 	}
 
 	public function stopStream(UuidInterface $streamIdentifier): void

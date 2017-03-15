@@ -43,7 +43,7 @@ final class CreateCameraTest extends \Adeira\Connector\Tests\TestCase
 					$aCommand->cameraId(),
 					$owner,
 					$aCommand->cameraName(),
-					new Stream($aCommand->streamSource(), Uuid::uuid4())
+					Stream::create($aCommand->streamSource(), Uuid::uuid4(), 'hls')
 				));
 			},
 		]), $query);

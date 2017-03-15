@@ -16,14 +16,14 @@ final class StreamTest extends \Adeira\Connector\Tests\TestCase
 
 	public function test_source()
 	{
-		$stream = new Stream('rtsp://a', Uuid::uuid4());
+		$stream = Stream::create('rtsp://a', Uuid::uuid4(), 'hls');
 		Assert::same('rtsp://a', $stream->source());
 	}
 
 	public function test_identifier()
 	{
 		$uuid = Uuid::uuid4();
-		$stream = new Stream('rtsp://a', $uuid);
+		$stream = Stream::create('rtsp://a', $uuid, 'hls');
 		Assert::same($uuid, $stream->identifier());
 	}
 

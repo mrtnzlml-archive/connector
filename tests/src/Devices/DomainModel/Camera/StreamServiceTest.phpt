@@ -2,6 +2,7 @@
 
 namespace Adeira\Connector\Tests\Devices\DomainModel\Camera;
 
+use Adeira\Connector\Devices\DomainModel\Camera\Stream;
 use Adeira\Connector\Devices\DomainModel\Camera\StreamService;
 use Ramsey\Uuid\Uuid;
 use Tester\Assert;
@@ -25,10 +26,13 @@ final class StreamServiceTest extends \Adeira\Connector\Tests\TestCase
 					'source' => 'rtps://stream.source',
 				],
 			],
-		])->andReturn(new \GuzzleHttp\Psr7\Response(200, [], '{"data":{"id":"1"}}'));
+		])->andReturn(new \GuzzleHttp\Psr7\Response(200, [], '{"data":{"id":"00000000-0000-0000-0000-000000000000","hls":"aaa"}}'));
 
-		$response = (new StreamService($httpClient))->startStream('rtps://stream.source');
-		Assert::same('1', $response);
+		/** @var Stream $response */
+		$stream = (new StreamService($httpClient))->startStream('rtps://stream.source');
+		Assert::type(Stream::class, $stream);
+		Assert::same('00000000-0000-0000-0000-000000000000', $stream->identifier()->toString());
+		Assert::same('aaa', $stream->hlsPlaylist());
 	}
 
 	public function test_that_stopStream_works()

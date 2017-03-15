@@ -17,10 +17,22 @@ final class Stream
 	 */
 	private $identifier;
 
-	public function __construct(string $streamSource, UuidInterface $streamIdentifier)
+	/**
+	 * @var string
+	 */
+	private $hlsPlaylist;
+
+	private function __construct()
 	{
-		$this->source = $streamSource;
-		$this->identifier = $streamIdentifier;
+	}
+
+	public static function create(string $streamSource, UuidInterface $streamIdentifier, string $hlsPlaylist): self
+	{
+		$stream = new self;
+		$stream->source = $streamSource;
+		$stream->identifier = $streamIdentifier;
+		$stream->hlsPlaylist = $hlsPlaylist;
+		return $stream;
 	}
 
 	public function source(): string
@@ -31,6 +43,11 @@ final class Stream
 	public function identifier(): UuidInterface
 	{
 		return $this->identifier;
+	}
+
+	public function hlsPlaylist(): string
+	{
+		return $this->hlsPlaylist;
 	}
 
 }

@@ -35,7 +35,7 @@ final class SingleCameraTest extends \Adeira\Connector\Tests\TestCase
 			$cameraId = CameraId::create(),
 			new Owner(new User($userId, 'username')),
 			'Camera 1',
-			new Stream('rtsp://stream.source', Uuid::uuid4())
+			Stream::create('rtsp://stream.source', Uuid::uuid4(), 'hls')
 		));
 
 		$query = new SingleCamera($camerasRepository, $ownerService);

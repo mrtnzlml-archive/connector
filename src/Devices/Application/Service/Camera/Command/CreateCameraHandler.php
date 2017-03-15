@@ -43,14 +43,14 @@ final class CreateCameraHandler
 	{
 		$owner = $this->ownerService->existingOwner($aCommand->userId());
 
-		$streamId = $this->streamService->startStream($aCommand->streamSource());
+		$stream = $this->streamService->startStream($aCommand->streamSource());
 
 		$this->allCameras->add(
 			Camera::create(
 				$aCommand->cameraId(),
 				$owner,
 				$aCommand->cameraName(),
-				new Stream($aCommand->streamSource(), Uuid::fromString($streamId))
+				$stream
 			)
 		);
 	}

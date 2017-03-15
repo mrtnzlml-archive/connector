@@ -3,6 +3,7 @@
 	<embeddable name="Adeira\Connector\Devices\DomainModel\Camera\Stream">
 		<field name="source" column="source" type="text" nullable="false"/>
 		<field name="identifier" column="identifier" type="uuid" nullable="false"/>
+		<field name="hlsPlaylist" column="hls" type="text" nullable="false"/>
 	</embeddable>
 
 </doctrine-mapping>
