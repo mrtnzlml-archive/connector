@@ -5,6 +5,10 @@ namespace Adeira\Connector\Tests\GraphQL\Infrastructure\DI\Nette;
 final class OutputType
 {
 
+	public function __construct(string $parameter)
+	{
+	}
+
 	public function totalCount()
 	{
 		return 42;

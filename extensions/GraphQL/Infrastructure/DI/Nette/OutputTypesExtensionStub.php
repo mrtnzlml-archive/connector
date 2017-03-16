@@ -23,13 +23,26 @@ final class OutputTypesExtensionStub
 					"You must define 'resolver' in '{$extension->prefix('outputType')}.$typeName'."
 				);
 			}
-			$resolverDefinition = $builder->addDefinition($extension->prefix('outputTypeResolver.' . $typeName))->setClass($typeDetails['resolver']);
+
+			$resolverDefinition = $builder->addDefinition($extension->prefix('outputTypeResolver.' . $typeName));
+			if($typeDetails['resolver'] instanceof \Nette\DI\Statement) {
+				$class = $typeDetails['resolver']->getEntity();
+				$resolverDefinition->setClass($class, $typeDetails['resolver']->arguments);
+			} else {
+				$resolverDefinition->setClass($typeDetails['resolver']);
+			}
+
 			$builder
 				->getDefinition($extension->prefix("outputType.$typeName"))
 				->setArguments([
 					'config' => [
 						'name' => $typeName,
-						'fields' => $this->buildOutputFields($extension, $typeDetails['fields'], $resolverDefinition, $allEnumValues),
+						'fields' => $this->buildOutputFields(
+							$extension,
+							$typeDetails['fields'],
+							$resolverDefinition,
+							$allEnumValues
+						),
 					],
 				]);
 		}

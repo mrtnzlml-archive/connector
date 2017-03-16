@@ -1,7 +1,7 @@
 graphql:
 	outputTypes:
 		TypeName:
-			resolver: Adeira\Connector\Tests\GraphQL\Infrastructure\DI\Nette\OutputType
+			resolver: Adeira\Connector\Tests\GraphQL\Infrastructure\DI\Nette\OutputType(parameter: 'parameter')
 			fields:
 				totalCount: [Int!]
 				allRecords:
