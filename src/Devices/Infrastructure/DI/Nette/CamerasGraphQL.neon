@@ -12,6 +12,15 @@ graphql:
 			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera\CameraResolver
 			fields:
 				id: ID!
+				name: String!
+				stream: Stream!
+
+		Stream:
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera\StreamResolver(
+				Nette\Http\Url(%adeira.streamService.public%)
+			)
+			fields:
+				hls: String!
 
 	mutations:
 		createCamera:

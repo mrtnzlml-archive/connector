@@ -33,7 +33,7 @@ services:
 	allWeatherStationRecords: Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\DoctrineAllWeatherStationRecords
 	allWeatherStations: Adeira\Connector\Devices\Infrastructure\Persistence\Doctrine\DoctrineAllWeatherStations
 	- Adeira\Connector\Devices\DomainModel\Camera\StreamService(GuzzleHttp\Client([
-		base_uri: %adeira.streamService%
+		base_uri: %adeira.streamService.internal%
 	]))
 
 

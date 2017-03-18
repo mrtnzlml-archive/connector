@@ -41,7 +41,9 @@ migrations:
 parameters:
 	srcDir: %appDir%/src
 	adeira:
-		streamService: //adeira.connector.stream/
+		streamService:
+			public: //stream.adeira.loc:81 # public Docker address (how to hadle addresses better?)
+			internal: //adeira.connector.stream # Docker network address - FIXME
 
 
 services:

@@ -12,4 +12,14 @@ final class CameraResolver
 		return $camera->id()->toString();
 	}
 
+	public function name(Camera $camera): string
+	{
+		return $camera->cameraName();
+	}
+
+	public function stream(Camera $camera)
+	{
+		return $camera->stream();
+	}
+
 }
