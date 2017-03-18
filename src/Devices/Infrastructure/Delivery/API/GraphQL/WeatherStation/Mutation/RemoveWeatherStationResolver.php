@@ -2,13 +2,13 @@
 
 namespace Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStation\Mutation;
 
-use Adeira\Connector\Devices\Application\Service\WeatherStation\Command\RenameWeatherStation as RenameCommand;
+use Adeira\Connector\Devices\Application\Service\WeatherStation\Command\RemoveWeatherStation as RemoveCommand;
 use Adeira\Connector\Devices\Application\Service\WeatherStation\ViewSingleWeatherStation;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStationId;
 use Adeira\Connector\GraphQL\Context;
 use Adeira\Connector\ServiceBus\DomainModel\ICommandBus;
 
-final class RenameWeatherStation
+final class RemoveWeatherStationResolver
 {
 
 	/**
@@ -29,13 +29,15 @@ final class RenameWeatherStation
 
 	public function __invoke($ancestorValue, $args, Context $context)
 	{
-		$this->commandBus->dispatch(new RenameCommand(
+		$stationId = WeatherStationId::createFromString($args['stationId']);
+		$originalStation = $this->singleWeatherStation->execute($context->userId(), $stationId);
+
+		$this->commandBus->dispatch(new RemoveCommand(
 			$context->userId(),
-			$stationId = WeatherStationId::createFromString($args['stationId']),
-			$args['newName']
+			$stationId
 		));
 
-		return $this->singleWeatherStation->execute($context->userId(), $stationId);
+		return $originalStation;
 	}
 
 }

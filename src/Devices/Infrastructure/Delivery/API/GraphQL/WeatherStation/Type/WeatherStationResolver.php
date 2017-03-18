@@ -1,13 +1,13 @@
 <?php declare(strict_types = 1);
 
-namespace Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL;
+namespace Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStation\Type;
 
 use Adeira\Connector\Devices\Application\Service\WeatherStation\ViewAggregatedRecords;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\RecordAggregationRange;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStation as WS;
 use Adeira\Connector\GraphQL\Context;
 
-final class WeatherStation
+final class WeatherStationResolver
 {
 
 	private $allWsRecords;

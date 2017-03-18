@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL;
+namespace Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStation\Mutation;
 
 use Adeira\Connector\Devices\Application\Service\WeatherStation\Command;
 use Adeira\Connector\Devices\Application\Service\WeatherStation\ViewSingleWeatherStationRecord;
@@ -14,7 +14,7 @@ use Adeira\Connector\Devices\DomainModel\Wind;
 use Adeira\Connector\GraphQL\Context;
 use Adeira\Connector\ServiceBus\DomainModel\ICommandBus;
 
-final class CreateWeatherStationRecord
+final class CreateWeatherStationRecordResolver
 {
 
 	/**

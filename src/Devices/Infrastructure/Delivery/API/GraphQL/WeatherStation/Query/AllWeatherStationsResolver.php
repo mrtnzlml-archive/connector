@@ -1,11 +1,11 @@
 <?php declare(strict_types = 1);
 
-namespace Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL;
+namespace Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStation\Query;
 
 use Adeira\Connector\Devices\Application\Service\WeatherStation\ViewAllWeatherStations;
 use Adeira\Connector\Devices\DomainModel\WeatherStation\WeatherStationId;
 
-final class AllWeatherStationsQuery
+final class AllWeatherStationsResolver
 {
 
 	/**

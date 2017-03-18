@@ -7,13 +7,13 @@ graphql:
 			arguments:
 				first: Int
 				after: String
-			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\AllWeatherStationsQuery
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStation\Query\AllWeatherStationsResolver
 			next: WeatherStationsConnection
 
 		weatherStation:
 			arguments:
 				id: ID!
-			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStationQuery
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStation\Query\WeatherStationResolver
 			next: WeatherStation
 
 
@@ -21,70 +21,33 @@ graphql:
 		createWeatherStation:
 			arguments:
 				name: String!
-			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\CreateWeatherStation
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStation\Mutation\CreateWeatherStationResolver
 			next: WeatherStation
 
 		createWeatherStationRecord:
 			arguments:
 				id: ID!
 				quantities: PhysicalQuantitiesInput!
-			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\CreateWeatherStationRecord
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStation\Mutation\CreateWeatherStationRecordResolver
 			next: WeatherStationRecord
+
+		removeWeatherStation:
+			arguments:
+				stationId: ID!
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStation\Mutation\RemoveWeatherStationResolver
+			next: WeatherStation
 
 		renameWeatherStation:
 			arguments:
 				stationId: ID!
 				newName: String!
-			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStation\Mutation\RenameWeatherStation
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStation\Mutation\RenameWeatherStationResolver
 			next: WeatherStation
 
-		removeWeatherStation:
-			arguments:
-				stationId: ID!
-			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStation\Mutation\RemoveWeatherStation
-			next: WeatherStation
 
 	outputTypes:
-		WeatherStationsConnection:
-			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStationsConnection
-			fields:
-				edges: [WeatherStationEdge]
-				totalCount: Int!
-				weatherStations: [WeatherStation]
-
-		WeatherStationEdge:
-			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStationsEdge
-			fields:
-				cursor: String!
-				node: WeatherStation
-
-		WeatherStation:
-			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStation
-			fields:
-				id: ID!
-				name: String!
-				allRecords:
-					arguments:
-						first: Int!
-						aggregation: RecordsAggregation(default: hour)
-						untilDate: DateTime
-					next: WeatherStationRecordsConnection
-
-		WeatherStationRecordsConnection:
-			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStationRecordsConnection
-			fields:
-				totalCount: Int!
-				returnedCount: Int!
-				records: [AggregatedWeatherStationRecord]
-
-		WeatherStationRecord:
-			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStationRecord
-			fields:
-				id: ID!
-				creationDate: DateTime!
-
 		AggregatedWeatherStationRecord:
-			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\AggregatedWeatherStationRecord
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStation\Type\AggregatedWeatherStationRecordResolver
 			fields:
 				aggregatedDate: DateTime
 				absolutePressure:
@@ -120,6 +83,44 @@ graphql:
 					arguments:
 						windSpeedUnit: WindSpeedUnit(default: KMH)
 					next: Float
+
+		WeatherStation:
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStation\Type\WeatherStationResolver
+			fields:
+				id: ID!
+				name: String!
+				allRecords:
+					arguments:
+						first: Int!
+						aggregation: RecordsAggregation(default: hour)
+						untilDate: DateTime
+					next: WeatherStationRecordsConnection
+
+		WeatherStationRecord:
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStation\Type\WeatherStationRecordResolver
+			fields:
+				id: ID!
+				creationDate: DateTime!
+
+		WeatherStationRecordsConnection:
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStation\Type\WeatherStationRecordsConnectionResolver
+			fields:
+				totalCount: Int!
+				returnedCount: Int!
+				records: [AggregatedWeatherStationRecord]
+
+		WeatherStationsConnection:
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStation\Type\WeatherStationsConnectionResolver
+			fields:
+				edges: [WeatherStationEdge]
+				totalCount: Int!
+				weatherStations: [WeatherStation]
+
+		WeatherStationEdge:
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\WeatherStation\Type\WeatherStationsEdgeResolver
+			fields:
+				cursor: String!
+				node: WeatherStation
 
 
 	inputTypes:
