@@ -11,7 +11,7 @@ use Adeira\Connector\Devices\Application\Service\Camera\Command\CreateCamera as 
 use Adeira\Connector\Devices\Application\Service\Camera\Query\SingleCamera;
 use Adeira\Connector\Devices\DomainModel\Camera\Camera;
 use Adeira\Connector\Devices\DomainModel\Camera\Stream;
-use Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera\CreateCameraResolver;
+use Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera\Mutation\CreateCameraResolver;
 use Adeira\Connector\Devices\Infrastructure\Persistence\InMemory\InMemoryAllCameras;
 use Adeira\Connector\GraphQL\Context;
 use Adeira\Connector\ServiceBus\Infrastructure\DomainModel\CommandBus;
@@ -23,7 +23,7 @@ require getenv('BOOTSTRAP');
 /**
  * @testCase
  */
-final class CreateCameraTest extends \Adeira\Connector\Tests\TestCase
+final class CreateCameraResolverTest extends \Adeira\Connector\Tests\TestCase
 {
 
 	public function test_that_its_invokable()
@@ -59,4 +59,4 @@ final class CreateCameraTest extends \Adeira\Connector\Tests\TestCase
 
 }
 
-(new CreateCameraTest)->run();
+(new CreateCameraResolverTest)->run();

@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera;
+namespace Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera\Mutation;
 
 use Adeira\Connector\Devices\Application\Service\Camera\Command\CreateCamera as CreateCameraCommand;
 use Adeira\Connector\Devices\Application\Service\Camera\Query\SingleCamera;

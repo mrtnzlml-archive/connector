@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera;
+namespace Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera\Query;
 
 use Adeira\Connector\Devices\Application\Service\Camera\Query\ViewAllCameras;
 use Adeira\Connector\GraphQL\Context;

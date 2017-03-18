@@ -4,19 +4,19 @@
 graphql:
 	queries:
 		allCameras:
-			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera\AllCamerasResolver
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera\Query\AllCamerasResolver
 			next: [Camera]
 
 	outputTypes:
 		Camera:
-			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera\CameraResolver
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera\Type\CameraResolver
 			fields:
 				id: ID!
 				name: String!
 				stream: Stream!
 
 		Stream:
-			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera\StreamResolver(
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera\Type\StreamResolver(
 				Nette\Http\Url(%adeira.streamService.public%)
 			)
 			fields:
@@ -27,11 +27,11 @@ graphql:
 			arguments:
 				streamSource: String!
 				name: String!
-			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera\CreateCameraResolver
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera\Mutation\CreateCameraResolver
 			next: Camera
 
 		removeCamera:
 			arguments:
 				cameraId: ID!
-			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera\RemoveCameraResolver
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera\Mutation\RemoveCameraResolver
 			next: Camera
