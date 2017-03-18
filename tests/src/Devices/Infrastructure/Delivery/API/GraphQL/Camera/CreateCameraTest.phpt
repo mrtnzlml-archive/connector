@@ -11,7 +11,7 @@ use Adeira\Connector\Devices\Application\Service\Camera\Command\CreateCamera as 
 use Adeira\Connector\Devices\Application\Service\Camera\Query\SingleCamera;
 use Adeira\Connector\Devices\DomainModel\Camera\Camera;
 use Adeira\Connector\Devices\DomainModel\Camera\Stream;
-use Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera\CreateCamera;
+use Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera\CreateCameraResolver;
 use Adeira\Connector\Devices\Infrastructure\Persistence\InMemory\InMemoryAllCameras;
 use Adeira\Connector\GraphQL\Context;
 use Adeira\Connector\ServiceBus\Infrastructure\DomainModel\CommandBus;
@@ -37,7 +37,7 @@ final class CreateCameraTest extends \Adeira\Connector\Tests\TestCase
 		$owner = new Owner($user);
 
 		// FIXME: toto netestuje proti skutečnosti (ale nejde vzít z DIC, protože schovává handler implementaci)
-		$command = new CreateCamera(new CommandBus([
+		$resolver = new CreateCameraResolver(new CommandBus([
 			CreateCameraCommand::class => function (CreateCameraCommand $aCommand) use (&$repository, $owner) {
 				$repository->add(Camera::create(
 					$aCommand->cameraId(),
@@ -48,10 +48,11 @@ final class CreateCameraTest extends \Adeira\Connector\Tests\TestCase
 			},
 		]), $query);
 
-		$command(NULL, [ // __invoke
+		$resolver(NULL, [ // __invoke
 			'streamSource' => 'rtsp://a',
 			'name' => 'Camera 1',
 		], new Context($userId));
+
 		Assert::count(1, $repository->belongingTo($owner)->hydrate());
 		Assert::type(Camera::class, $repository->belongingTo($owner)->hydrateOne());
 	}

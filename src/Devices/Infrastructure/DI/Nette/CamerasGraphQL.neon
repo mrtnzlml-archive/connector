@@ -27,7 +27,7 @@ graphql:
 			arguments:
 				streamSource: String!
 				name: String!
-			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera\CreateCamera
+			resolver: Adeira\Connector\Devices\Infrastructure\Delivery\API\GraphQL\Camera\CreateCameraResolver
 			next: Camera
 
 		removeCamera:

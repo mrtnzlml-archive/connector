@@ -9,7 +9,7 @@ use Adeira\Connector\Devices\DomainModel\Camera\CameraId;
 use Adeira\Connector\GraphQL\Context;
 use Adeira\Connector\ServiceBus\DomainModel\ICommandBus;
 
-final class CreateCamera
+final class CreateCameraResolver
 {
 
 	/**
