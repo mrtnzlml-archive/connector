@@ -27,7 +27,8 @@ final class OutputTypesExtensionStub
 			$resolverDefinition = $builder->addDefinition($extension->prefix('outputTypeResolver.' . $typeName));
 			if($typeDetails['resolver'] instanceof \Nette\DI\Statement) {
 				$class = $typeDetails['resolver']->getEntity();
-				$resolverDefinition->setClass($class, $typeDetails['resolver']->arguments);
+				$args = \Nette\DI\Helpers::expand($typeDetails['resolver']->arguments, $builder->parameters);
+				$resolverDefinition->setClass($class, $args);
 			} else {
 				$resolverDefinition->setClass($typeDetails['resolver']);
 			}
