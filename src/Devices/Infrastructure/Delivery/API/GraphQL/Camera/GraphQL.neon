@@ -20,6 +20,7 @@ graphql:
 				Nette\Http\Url(%adeira.streamService.public%)
 			)
 			fields:
+				source: String!
 				hls: String!
 
 	mutations:

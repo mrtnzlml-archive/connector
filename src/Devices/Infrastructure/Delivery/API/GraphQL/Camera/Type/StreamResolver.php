@@ -18,10 +18,15 @@ final class StreamResolver
 		$this->streamServerUrl = $streamServerUrl;
 	}
 
-	public function hls(Stream $camera)
+	public function source(Stream $stream): string
+	{
+		return $stream->source();
+	}
+
+	public function hls(Stream $stream): string
 	{
 		$url = $this->streamServerUrl;
-		$url->setPath($camera->hlsPlaylist());
+		$url->setPath($stream->hlsPlaylist());
 		return $url->getAbsoluteUrl();
 	}
 
