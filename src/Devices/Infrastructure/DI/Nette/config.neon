@@ -1,6 +1,6 @@
 includes:
-	- CamerasGraphQL.neon
-	- WeatherStationsGraphQL.neon
+	- ../../Delivery/API/GraphQL/Camera/GraphQL.neon
+	- ../../Delivery/API/GraphQL/WeatherStation/GraphQL.neon
 
 
 doctrine.orm:
