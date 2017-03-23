@@ -912,16 +912,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.4.1",
+            "version": "1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "0d6c7ca039329247e4f0f8f8f6506810e8248855"
+                "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/0d6c7ca039329247e4f0f8f8f6506810e8248855",
-                "reference": "0d6c7ca039329247e4f0f8f8f6506810e8248855",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
+                "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
                 "shasum": ""
             },
             "require": {
@@ -973,7 +973,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2017-02-27T10:51:17+00:00"
+            "time": "2017-03-20T17:10:46+00:00"
         },
         {
             "name": "latte/latte",
@@ -1551,21 +1551,21 @@
         },
         {
             "name": "nette/php-generator",
-            "version": "v2.6.1",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/php-generator.git",
-                "reference": "361f671c269e389c078da9cd2cd6a80164d9813d"
+                "reference": "8605fd18857a4beef4aa0afc19eb9a7f876237e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/php-generator/zipball/361f671c269e389c078da9cd2cd6a80164d9813d",
-                "reference": "361f671c269e389c078da9cd2cd6a80164d9813d",
+                "url": "https://api.github.com/repos/nette/php-generator/zipball/8605fd18857a4beef4aa0afc19eb9a7f876237e8",
+                "reference": "8605fd18857a4beef4aa0afc19eb9a7f876237e8",
                 "shasum": ""
             },
             "require": {
                 "nette/utils": "^2.4.2 || ~3.0.0",
-                "php": ">=5.6.0"
+                "php": ">=7.0"
             },
             "conflict": {
                 "nette/nette": "<2.2"
@@ -1577,7 +1577,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.6-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
@@ -1601,9 +1601,15 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "Nette PHP Generator",
+            "description": "🐘 Generates neat PHP code for you. Supports new PHP 7.1 features.",
             "homepage": "https://nette.org",
-            "time": "2017-03-14T15:50:04+00:00"
+            "keywords": [
+                "code",
+                "nette",
+                "php",
+                "scaffolding"
+            ],
+            "time": "2017-03-18T15:20:10+00:00"
         },
         {
             "name": "nette/reflection",
@@ -2011,21 +2017,21 @@
         },
         {
             "name": "ramsey/uuid",
-            "version": "3.5.2",
+            "version": "3.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "5677cfe02397dd6b58c861870dfaa5d9007d3954"
+                "reference": "0b7bdfb180e72c8d76e75a649ced67e392201458"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/5677cfe02397dd6b58c861870dfaa5d9007d3954",
-                "reference": "5677cfe02397dd6b58c861870dfaa5d9007d3954",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/0b7bdfb180e72c8d76e75a649ced67e392201458",
+                "reference": "0b7bdfb180e72c8d76e75a649ced67e392201458",
                 "shasum": ""
             },
             "require": {
                 "paragonie/random_compat": "^1.0|^2.0",
-                "php": ">=5.4"
+                "php": "^5.4 || ^7.0"
             },
             "replace": {
                 "rhumsaa/uuid": "self.version"
@@ -2089,7 +2095,7 @@
                 "identifier",
                 "uuid"
             ],
-            "time": "2016-11-22T19:21:44+00:00"
+            "time": "2017-03-18T15:38:09+00:00"
         },
         {
             "name": "ramsey/uuid-doctrine",
@@ -2894,7 +2900,7 @@
                 }
             ],
             "description": "Simple integration testing tool for Nette Framework applications",
-            "time": "2017-02-06T13:39:41+00:00"
+            "time": "2017-02-06 13:39:41"
         },
         {
             "name": "nette/robot-loader",
@@ -3076,7 +3082,7 @@
                 "testing",
                 "unit"
             ],
-            "time": "2017-02-09T19:50:19+00:00"
+            "time": "2017-02-09 19:50:19"
         },
         {
             "name": "nikic/php-parser",
@@ -3135,12 +3141,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "e108e96d94fd48ac217dc23fa951a186cbcff8c0"
+                "reference": "bb0fb9e119bba1673a6c0da868708328fe010136"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e108e96d94fd48ac217dc23fa951a186cbcff8c0",
-                "reference": "e108e96d94fd48ac217dc23fa951a186cbcff8c0",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/bb0fb9e119bba1673a6c0da868708328fe010136",
+                "reference": "bb0fb9e119bba1673a6c0da868708328fe010136",
                 "shasum": ""
             },
             "require": {
@@ -3181,7 +3187,7 @@
                 "MIT"
             ],
             "description": "PHPStan - PHP Static Analysis Tool",
-            "time": "2017-03-14T17:49:58+00:00"
+            "time": "2017-03-21T05:43:17+00:00"
         },
         {
             "name": "ramsey/uuid-console",
@@ -3242,16 +3248,16 @@
         },
         {
             "name": "slevomat/coding-standard",
-            "version": "2.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/slevomat/coding-standard.git",
-                "reference": "49c6c1c42b7f6e927007f10808fd209266925ca1"
+                "reference": "2b8274dd35b90866fc628fd43779a11c27792a1c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slevomat/coding-standard/zipball/49c6c1c42b7f6e927007f10808fd209266925ca1",
-                "reference": "49c6c1c42b7f6e927007f10808fd209266925ca1",
+                "url": "https://api.github.com/repos/slevomat/coding-standard/zipball/2b8274dd35b90866fc628fd43779a11c27792a1c",
+                "reference": "2b8274dd35b90866fc628fd43779a11c27792a1c",
                 "shasum": ""
             },
             "require": {
@@ -3277,7 +3283,7 @@
                 "MIT"
             ],
             "description": "Slevomat Coding Standard for PHP_CodeSniffer extends Consistence Coding Standard by providing sniffs with additional checks.",
-            "time": "2017-03-10T13:15:57+00:00"
+            "time": "2017-03-20T13:58:26+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
