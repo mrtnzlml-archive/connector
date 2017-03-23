@@ -1,5 +1,6 @@
 {
   "name": "adeira/connector",
+  "description": "GraphQL API backend writen with DDD in mind",
   "type": "project",
   "license": "MIT",
   "require": {
