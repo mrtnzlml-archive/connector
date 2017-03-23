@@ -51,6 +51,9 @@
       "tests/utils/TestCase.php"
     ]
   },
+  "config": {
+    "sort-packages": true
+  },
   "scripts": {
     "adeira-connector-scripts": [
       "chmod +x bin/ci",
